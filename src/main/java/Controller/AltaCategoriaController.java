@@ -35,6 +35,8 @@ public class AltaCategoriaController implements Serializable{
         categoria.setNombre("categoria por defecto");
     }
     
+    
+    //Prueba de comentario para ver si se crea la rama develop
     public void insertarCategoria(){
         try{
             categoriaEJB.create(categoria);
