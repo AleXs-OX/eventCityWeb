@@ -11,32 +11,36 @@
     </h:head>
    
     <h:body>
-        <p> Universidad de leön </p>
+        <p> Universidad de León </p>
         
         <h:form>
             <p:fieldset legend="Datos personales" >
                 <p:panelGrid columns="3">
+                     <p:outputLabel value="Introduzca una categoria"/>        
+            <p:inputText value="#{altaCategoriaController.categoria.nombre}"></p:inputText>
+            <p:commandButton value="Insertar" actionListener="#{altaCategoriaController.insertarCategoria()}"/>
+                    
                     <p:outputLabel for="nombre" value="Nombre:"/>
-                    <p:inputText id="nombre" value = "#usuarioController.persona.nombre" required="true"/>
+                    <p:inputText id="nombre" value = "#{usuarioController.persona.nombre}" requiredMessage="Debe introducir un nombre de usuario"/>
                     <p:messages for="nombre"/>
                     
                     <p:outputLabel for="primerAp" value="Primer Apellido:"/>
-                    <p:inputText id="primerAp" value = "#usuarioController.persona.apellido1" required="true"/>
+                    <p:inputText id="primerAp" value = "#{usuarioController.persona.apellido1}" required="true"/>
                     <p:messages for="primerAp"/>
                     
                     <p:outputLabel for="segundoAp" value="Segundo Apellido:"/>
-                    <p:inputText id="segundoAp" value = "#usuarioController.persona.apellido2" required="true"></p:inputText>
+                    <p:inputText id="segundoAp" value = "#{usuarioController.persona.apellido2}" required="true"></p:inputText>
                     <p:messages for="segundoAp"/>
                     
                     <p:outputLabel for="sexo" id="sexo"  value="Sexo:"/>
-                    <p:selectOneButton id="sexo" value = "#usuarioController.persona.sexo">
+                    <p:selectOneButton id="sexo" value = "#{usuarioController.persona.sexo}">
                         <f:selectItem itemLabel="Masculino" itemValue="M"/>
                         <f:selectItem itemLabel="Femenino" itemValue="F"/>
                     </p:selectOneButton>
                     <p:messages for="sexo"/>
                     
                     <p:outputLabel value="Fecha de nacimiento"  />
-                    <p:calendar id="fechaNacimiento" required="true" value = "#usuarioController.persona.fechanacimiento" locale = "es" navigator ="true" showOn="button" pattern="dd/MM/yyyy"/>
+                    <p:calendar id="fechaNacimiento" required="true" value = "#{usuarioController.persona.fechanacimiento}" locale = "es" navigator ="true" showOn="button" pattern="dd/MM/yyyy"/>
                     <p:messages for="fechaNacimiento"/>
 
                 </p:panelGrid>
@@ -44,13 +48,13 @@
             <p:fieldset legend="Datos de acceso">
                 <p:panelGrid columns="2">
                     <p:outputLabel value="Rol: "/>
-                    <p:selectOneMenu id="seleccionarRol" value="#{usuarioController.categoria.nombre}"
+                    <p:selectOneMenu id="seleccionarRol" value="#{usuarioController.categoria}"
                                 hideNoSelectionOption="#{not empty selectOneMenuView.hideNoSelectOption}">
                     <p:ajax update="@this" process="@this"/>
-                    <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true"/>
-                    <f:selectItem itemLabel="Profesor" itemValue="Option1"/>
-                    <f:selectItem itemLabel="Alumno" itemValue="Option2"/>
-                    <f:selectItem itemLabel="Superusuario" itemValue="Option3"/>
+                    <f:selectItem itemLabel="Selecciona uno" itemValue="#{null}" noSelectionOption="true"/>
+                    <f:selectItems value="#{usuarioController.listaCategorias}" var="cat" itemLabel="#{cat.nombre}" itemValue="#{cat}"/>
+                    
+                    
                     </p:selectOneMenu><p:outputLabel value="Nombre de usuario:   *"/>
                     <p:inputText required="true"></p:inputText>
                    
@@ -67,10 +71,9 @@
             </p:fieldset>
             <p:commandButton value="Registrar" actionListener="#{usuarioController.insertarUsuario()}" />
             
-            <!--<p:outputLabel value="Introduzca una categoria"/>        
-            <p:inputText value="#{altaCategoriaController.categoria.nombre}"></p:inputText>
-            <p:commandButton value="Insertar" actionListener="#{altaCategoriaController.insertarCategoria()}"/> 
-            -->
+           
+            
+            
         </h:form>
         
     </h:body>

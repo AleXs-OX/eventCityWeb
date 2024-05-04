@@ -6,9 +6,11 @@
 package Controller;
 
 import EJB.CategoriaFacadeLocal;
-import EJB.RolFacade;
+import EJB.RolFacadeLocal;
 import EJB.UsuarioFacadeLocal;
 import java.io.Serializable;
+import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -27,13 +29,28 @@ public class usuarioController implements Serializable {
     private Categoria categoria;
     private Persona persona;
     private Rol rol;
+    private List<Categoria> listaCategorias;
     private Usuario usuario;
     @EJB
     private CategoriaFacadeLocal categoriaEJB;
     @EJB
     private UsuarioFacadeLocal usuarioEJB;
     @EJB
-    private RolFacade rolEJB;
+    private RolFacadeLocal rolEJB;
+    
+    @PostConstruct
+    public void init(){
+        usuario = new Usuario();
+        persona = new Persona();
+        cargarCategorias();
+        
+        persona.setNombre("Introduce tu nombre");
+        
+    }
+    
+    public void cargarCategorias(){
+        listaCategorias = categoriaEJB.findAll();
+    }
     
     public void insertarUsuario(){
         try{
@@ -55,9 +72,16 @@ public class usuarioController implements Serializable {
     public Rol obtenerRolSeleccionado(int idRol) {
         return rolEJB.find(idRol);
     }
-
     
+    public List<Categoria> getListaCategorias() {
+        return listaCategorias;
+    }
+
     //GETTERS Y SETTERS ********************************************************
+    public void setListaCategorias(List<Categoria> listaCategorias) {    
+        this.listaCategorias = listaCategorias;
+    }
+
     public Categoria getCategoria() {
         return categoria;
     }
@@ -106,11 +130,11 @@ public class usuarioController implements Serializable {
         this.usuarioEJB = usuarioEJB;
     }
 
-    public RolFacade getRolEJB() {
+    public RolFacadeLocal getRolEJB() {
         return rolEJB;
     }
 
-    public void setRolEJB(RolFacade rolEJB) {
+    public void setRolEJB(RolFacadeLocal rolEJB) {
         this.rolEJB = rolEJB;
     }
     
