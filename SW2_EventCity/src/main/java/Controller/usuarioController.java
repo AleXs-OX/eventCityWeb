@@ -6,7 +6,7 @@
 package Controller;
 
 import EJB.CategoriaFacadeLocal;
-import EJB.RolFacade;
+import EJB.RolFacadeLocal;
 import EJB.UsuarioFacadeLocal;
 import java.io.Serializable;
 import javax.ejb.EJB;
@@ -33,7 +33,7 @@ public class usuarioController implements Serializable {
     @EJB
     private UsuarioFacadeLocal usuarioEJB;
     @EJB
-    private RolFacade rolEJB;
+    private RolFacadeLocal rolEJB;
     
     public void insertarUsuario(){
         try{
@@ -44,7 +44,7 @@ public class usuarioController implements Serializable {
             
             usuarioEJB.create(usuario);
 
-            persona.setNombre(usuario.getUsuario());
+            persona.setNombre("");
             //persona.setApellido1();
             
             usuarioEJB.create(usuario);
@@ -52,9 +52,9 @@ public class usuarioController implements Serializable {
             System.out.println("Error al insertar al usuario en la base de datos" + e.getMessage());
         }
     }
-    public Rol obtenerRolSeleccionado(int idRol) {
+    /*public Rol obtenerRolSeleccionado(int idRol) {
         return rolEJB.find(idRol);
-    }
+    }*/
 
     
     //GETTERS Y SETTERS ********************************************************
@@ -106,11 +106,11 @@ public class usuarioController implements Serializable {
         this.usuarioEJB = usuarioEJB;
     }
 
-    public RolFacade getRolEJB() {
+    public RolFacadeLocal getRolEJB() {
         return rolEJB;
     }
 
-    public void setRolEJB(RolFacade rolEJB) {
+    public void setRolEJB(RolFacadeLocal rolEJB) {
         this.rolEJB = rolEJB;
     }
     

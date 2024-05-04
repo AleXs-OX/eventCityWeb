@@ -7,25 +7,25 @@
     <!-- Definición cambio de idioma a español-->
     <h:outputScript library="js" name="calendar_es.js" />
     <h:head>
-        <title>Facelet Title</title>
+        <title>EventCityWeb</title>
     </h:head>
    
     <h:body>
-        <p> Universidad de leön </p>
+        <p> Universidad de león </p>
         
         <h:form>
             <p:fieldset legend="Datos personales" >
                 <p:panelGrid columns="3">
                     <p:outputLabel for="nombre" value="Nombre:"/>
-                    <p:inputText id="nombre" value = "#usuarioController.persona.nombre" required="true"/>
+                    <p:inputText id="nombre" value = "#{usuarioController.persona.nombre}" required="true"/>
                     <p:messages for="nombre"/>
                     
                     <p:outputLabel for="primerAp" value="Primer Apellido:"/>
-                    <p:inputText id="primerAp" value = "#usuarioController.persona.apellido1" required="true"/>
+                    <p:inputText id="primerAp" value = "#{usuarioController.persona.apellido1}" required="true"/>
                     <p:messages for="primerAp"/>
                     
                     <p:outputLabel for="segundoAp" value="Segundo Apellido:"/>
-                    <p:inputText id="segundoAp" value = "#usuarioController.persona.apellido2" required="true"></p:inputText>
+                    <p:inputText id="segundoAp" value = "#{usuarioController.persona.apellido2}" required="true"></p:inputText>
                     <p:messages for="segundoAp"/>
                     
                     <p:outputLabel for="sexo" id="sexo"  value="Sexo:"/>
