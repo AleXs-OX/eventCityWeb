@@ -17,26 +17,26 @@
             <p:fieldset legend="Datos personales" >
                 <p:panelGrid columns="3">
                     <p:outputLabel for="nombre" value="Nombre:"/>
-                    <p:inputText id="nombre" required="true"/>
+                    <p:inputText id="nombre" value = "#usuarioController.persona.nombre" required="true"/>
                     <p:messages for="nombre"/>
                     
                     <p:outputLabel for="primerAp" value="Primer Apellido:"/>
-                    <p:inputText id="primerAp" required="true"/>
+                    <p:inputText id="primerAp" value = "#usuarioController.persona.apellido1" required="true"/>
                     <p:messages for="primerAp"/>
                     
                     <p:outputLabel for="segundoAp" value="Segundo Apellido:"/>
-                    <p:inputText id="segundoAp" required="true"></p:inputText>
+                    <p:inputText id="segundoAp" value = "#usuarioController.persona.apellido2" required="true"></p:inputText>
                     <p:messages for="segundoAp"/>
                     
-                    <p:outputLabel id="sexo" value="Sexo:"/>
-                    <p:selectOneButton>
-                        <f:selectItem itemLabel="Masculino" itemValue="Masculino"/>
-                        <f:selectItem itemLabel="Femenino" itemValue="Femenino"/>
+                    <p:outputLabel for="sexo" id="sexo"  value="Sexo:"/>
+                    <p:selectOneButton id="sexo" value = "#usuarioController.persona.sexo">
+                        <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                        <f:selectItem itemLabel="Femenino" itemValue="F"/>
                     </p:selectOneButton>
                     <p:messages for="sexo"/>
                     
                     <p:outputLabel value="Fecha de nacimiento"  />
-                    <p:calendar id="fechaNacimiento" required="true" value="" locale = "es" navigator ="true" showOn="button" pattern="dd/MM/yyyy"/>
+                    <p:calendar id="fechaNacimiento" required="true" value = "#usuarioController.persona.fechanacimiento" locale = "es" navigator ="true" showOn="button" pattern="dd/MM/yyyy"/>
                     <p:messages for="fechaNacimiento"/>
 
                 </p:panelGrid>
@@ -51,11 +51,11 @@
                     <f:selectItem itemLabel="Profesor" itemValue="Option1"/>
                     <f:selectItem itemLabel="Alumno" itemValue="Option2"/>
                     <f:selectItem itemLabel="Superusuario" itemValue="Option3"/>
-                    </p:selectOneMenu>
-                    
-                    <p:outputLabel value="Nombre de usuario:   *"/>
+                    </p:selectOneMenu><p:outputLabel value="Nombre de usuario:   *"/>
                     <p:inputText required="true"></p:inputText>
                    
+                    
+                    
                     <p:outputLabel for="pwd1" value="Contraseña"/>
                     <p:password id="pwd1" value="#{passwordView.password3}" feedback="true" promptLabel="Contraseña" weakLabel="Débil" goodLabel="Buena" strongLabel="Fuerte"/>                    
 
