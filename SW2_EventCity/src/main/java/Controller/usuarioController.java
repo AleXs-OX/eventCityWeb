@@ -9,6 +9,8 @@ import EJB.CategoriaFacadeLocal;
 import EJB.RolFacadeLocal;
 import EJB.UsuarioFacadeLocal;
 import java.io.Serializable;
+import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -27,6 +29,7 @@ public class usuarioController implements Serializable {
     private Categoria categoria;
     private Persona persona;
     private Rol rol;
+    private List<Categoria> listaCategorias;
     private Usuario usuario;
     @EJB
     private CategoriaFacadeLocal categoriaEJB;
@@ -34,6 +37,20 @@ public class usuarioController implements Serializable {
     private UsuarioFacadeLocal usuarioEJB;
     @EJB
     private RolFacadeLocal rolEJB;
+    
+    @PostConstruct
+    public void init(){
+        usuario = new Usuario();
+        persona = new Persona();
+        cargarCategorias();
+        
+        persona.setNombre("Introduce tu nombre");
+        
+    }
+    
+    public void cargarCategorias(){
+        listaCategorias = categoriaEJB.findAll();
+    }
     
     public void insertarUsuario(){
         try{
@@ -44,7 +61,7 @@ public class usuarioController implements Serializable {
             
             usuarioEJB.create(usuario);
 
-            persona.setNombre("");
+            persona.setNombre(usuario.getUsuario());
             //persona.setApellido1();
             
             usuarioEJB.create(usuario);
@@ -52,12 +69,19 @@ public class usuarioController implements Serializable {
             System.out.println("Error al insertar al usuario en la base de datos" + e.getMessage());
         }
     }
-    /*public Rol obtenerRolSeleccionado(int idRol) {
+    public Rol obtenerRolSeleccionado(int idRol) {
         return rolEJB.find(idRol);
-    }*/
-
+    }
     
+    public List<Categoria> getListaCategorias() {
+        return listaCategorias;
+    }
+
     //GETTERS Y SETTERS ********************************************************
+    public void setListaCategorias(List<Categoria> listaCategorias) {    
+        this.listaCategorias = listaCategorias;
+    }
+
     public Categoria getCategoria() {
         return categoria;
     }
