@@ -32,7 +32,7 @@ public class AltaCategoriaController implements Serializable{
     public void init(){
         //Reservar memoria de categoria
         categoria = new Categoria();
-        categoria.setNombre("categoria por defecto");
+        //categoria.setNombre("categoria por defecto");
     }
     
     public void insertarCategoria(){
