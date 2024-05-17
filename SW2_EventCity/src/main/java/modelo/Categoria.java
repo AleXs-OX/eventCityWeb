@@ -14,10 +14,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- *
- * @author Beatriz
- */
 @Entity
 @Table(name="categorias")
 //REGLAS: Contructor vacio, atributos privados y getter y setter de todos los atributos
