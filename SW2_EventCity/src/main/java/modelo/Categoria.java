@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package modelo;
-
+//Prueba de git
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
