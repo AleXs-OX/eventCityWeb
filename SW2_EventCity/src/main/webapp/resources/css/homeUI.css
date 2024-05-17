@@ -1,10 +1,10 @@
 .ui-tabs .ui-tabs-nav {
             text-align: center;
     }
-    .prueba{
+    .tabViewClass{
         text-align: center;
         justify-content: center;
-        float: none !important;
+        float: top;
     }
 .ui-tabs .ui-tabs-nav li {
             
