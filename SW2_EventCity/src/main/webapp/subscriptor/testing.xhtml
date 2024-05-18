@@ -10,43 +10,64 @@
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
-   <body>
-        <h:form id="dealersForm">
+   <h:body>
+       
+    <h:form id="dealersForm">
 
-            <p:commandButton value="Cerrar sesión" icon="pi pi-fw pi-sign-out" styleClass="ui-button-info" style="position: fixed; top: 0; right: 0; margin-top: 0.5%; margin-right: 1%"/>
+    <p:dataTable value="" var="carta">
+        <p:column headerText="Contenido">
+            <p:card style="width: 20em">
+                <f:facet name="header">
+                </f:facet>
+                <f:facet name="title">
+                    Concierto de Rock
+                </f:facet>
+                <f:facet name="subtitle">
+                    Género: Rock
+                </f:facet>
+                <p>¡No te pierdas este emocionante concierto de rock en vivo! Disfruta de las mejores bandas de rock del momento.</p>
+                <f:facet name="footer">
+                    <p:commandButton icon="pi pi-check" value="Asistir"/>
+                    <p:commandButton icon="pi pi-info" value="Descripción" styleClass="ui-button-secondary" style="margin-left: .5em"/>
+                </f:facet>
+                </p:card>
+        </p:column>
+        <p:column headerText="Prueba">
+            <p:card style="width: 20em">
+                <f:facet name="header">
+                </f:facet>
+                <f:facet name="title">
+                    Concierto de Rock
+                </f:facet>
+                <f:facet name="subtitle">
+                    Género: Rock
+                </f:facet>
+                <p>¡No te pierdas este emocionante concierto de rock en vivo! Disfruta de las mejores bandas de rock del momento.</p>
+                <f:facet name="footer">
+                    <p:commandButton icon="pi pi-check" value="Asistir"/>
+                    <p:commandButton icon="pi pi-info" value="Descripción" styleClass="ui-button-secondary" style="margin-left: .5em"/>
+                </f:facet>
+                </p:card>
+        </p:column>
+        <p:column headerText="Columna">
+            <p:card style="width: 20em">
+                <f:facet name="header">
+                </f:facet>
+                <f:facet name="title">
+                    Concierto de Rock
+                </f:facet>
+                <f:facet name="subtitle">
+                    Género: Rock
+                </f:facet>
+                <p>¡No te pierdas este emocionante concierto de rock en vivo! Disfruta de las mejores bandas de rock del momento.</p>
+                <f:facet name="footer">
+                    <p:commandButton icon="pi pi-check" value="Asistir"/>
+                    <p:commandButton icon="pi pi-info" value="Descripción" styleClass="ui-button-secondary" style="margin-left: .5em"/>
+                </f:facet>
+                </p:card>
+        </p:column>
+    </p:dataTable>
 
-            <p:messages id="messages" closable="true"> <p:autoUpdate/> </p:messages>
-
-            <p:card>
-                <p:dataTable id="packages" var="rPackage" value="" rowKey=""
-                             rows="3" paginator="true"
-                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                             currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords} paquetes"
-                             rowsPerPageTemplate="3,6,{ShowAll|'Todos'}" paginatorPosition="bottom"
-                             allowUnsorting="true" sortMode="single"
-                             style="height: 100%;"
-                             >
-                    <f:facet name="header">
-                        <h2 style="text-align: center">Paquetes asignados al vehículo </h2>
-                    </f:facet>
-                    <p:column headerText="Paquetes" filterBy="" style="text-align: center; align-items: center; width: 100%;">
-                        <p:card style="width: 100%">
-                            <f:facet name="title">
-                                <img alt="package header" src="" style="width: 100px;" />
-                            </f:facet>
-                            <h1>Paquete </h1>
-                            <h3>Cliente asociado: </h3>
-                            <h3>Pick-up point asociado: </h3>
-                            <h3>
-                                paquetesss
-                            </h3>
-                            <f:facet name="footer">
-                                <p:commandButton value="Entrega" style="margin-top: 0.1px; font-size: 1.4em" update="packages" />  
-                            </f:facet>
-                        </p:card>
-                    </p:column>
-                </p:dataTable>
-            </p:card>
         </h:form>
-    </body>
+    </h:body>
 </html>
