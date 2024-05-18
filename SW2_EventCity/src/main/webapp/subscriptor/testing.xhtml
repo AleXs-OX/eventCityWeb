@@ -19,13 +19,13 @@
         <div class="eventos">   
             <h:form>
                 <p:dataTable id="t_eventos" var="evento" value="#{suscriptorController.getEventos()}"
-                             rowKey="evento.idEvento" paginator="true"
+                             rowKey="evento.idEvento" paginator="true" rows="12"
                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                              currentPageReportTemplate="Mostrando {startRecord}-{endRecord} de {totalRecords} eventos"
                              rowsPerPageTemplate="3,6,{ShowAll|'Todos'}" paginatorPosition="bottom"
                              allowUnsorting="false"
                              style="height: 100%;">
-                    <p:column headerText="Contenido">
+                    <p:column>
                         <p:card style="width: 20em">
                             <f:facet name="header">
                             </f:facet>
@@ -42,7 +42,7 @@
                             </f:facet>
                          </p:card>
                     </p:column>
-                    <p:column headerText="Prueba">
+                    <!--- <p:column headerText="Prueba">
                         <p:card style="width: 20em">
                             <f:facet name="header">
                             </f:facet>
@@ -58,7 +58,7 @@
                                 <p:commandButton icon="pi pi-info" value="Descripción" styleClass="ui-button-secondary" style="margin-left: .5em"/>
                             </f:facet>
                             </p:card>
-                    </p:column>
+                    </p:column> -->
     </p:dataTable>
         <!--           
         <p:card style="width: 20em">

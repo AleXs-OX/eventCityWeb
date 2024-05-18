@@ -6,11 +6,12 @@
 }
 
 .eventos-container {
-    display: flex;
+    /*display: flex;
     justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
-    height: 100vh; /* Altura completa de la ventana */
+    /*align-items: center; /* Centra verticalmente */
+    /*height: 100vh; /* Altura completa de la ventana */
+    
 }
 .eventos {
-    text-align: center;
+    
 }
