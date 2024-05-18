@@ -19,6 +19,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/subscriptor/testing.xhtml</welcome-file>
+        <welcome-file>faces/subscriptor/homeUI.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>

@@ -18,20 +18,87 @@
     <h:body>
         <div class="eventos">   
             <h:form>
-                <p:panelGrid columns="6" layout="grid" styleClass="showcase-text-align-center"
-                             columnClasses="ui-g-12 ui-md-6 ui-lg-2, ui-g-12 ui-md-6 ui-lg-2, ui-g-12 ui-md-6 ui-lg-2, ui-g-12 ui-md-6 ui-lg-2, ui-g-12 ui-md-6 ui-lg-2, ui-g-12 ui-md-6 ui-lg-2">
-            <p:commandButton value="Evento 1" style="width: 210px; height: 260px; background-color: #585656; font-size: 1.2em; border: 2px solid #ddd; border-radius: 10px; box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);" />
-            <p:commandButton value="Evento 2" style="width: 210px; height: 260px; background-color: #585656; font-size: 1.2em; border: 2px solid #ddd; border-radius: 10px; box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);" />
-            <p:commandButton value="Evento 3" style="width: 210px; height: 260px; background-color: #585656; font-size: 1.2em; border: 2px solid #ddd; border-radius: 10px; box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);" />
-            <p:commandButton value="Evento 4" style="width: 210px; height: 260px; background-color: #585656; font-size: 1.2em; border: 2px solid #ddd; border-radius: 10px; box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);" />
-            <p:commandButton value="Evento 5" style="width: 210px; height: 260px; background-color: #585656; font-size: 1.2em; border: 2px solid #ddd; border-radius: 10px; box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);" />
-            <p:commandButton value="Evento 6" style="width: 210px; height: 260px; background-color: #585656; font-size: 1.2em; border: 2px solid #ddd; border-radius: 10px; box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);" />
-            <p:commandButton value="Evento 7" style="width: 210px; height: 260px; background-color: #585656; font-size: 1.2em; border: 2px solid #ddd; border-radius: 10px; box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);" />
-            <p:commandButton value="Evento 8" style="width: 210px; height: 260px; background-color: #585656; font-size: 1.2em; border: 2px solid #ddd; border-radius: 10px; box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);" />
-            <p:commandButton value="Evento 9" style="width: 210px; height: 260px; background-color: #585656; font-size: 1.2em; border: 2px solid #ddd; border-radius: 10px; box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);" />
-            <p:commandButton value="Evento 10" style="width: 210px; height: 260px; background-color: #585656; font-size: 1.2em; border: 2px solid #ddd; border-radius: 10px; box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);" />
-            <p:commandButton value="Evento 11" style="width: 210px; height: 260px; background-color: #585656; font-size: 1.2em; border: 2px solid #ddd; border-radius: 10px; box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);" />
-            <p:commandButton value="Evento 12" style="width: 210px; height: 260px; background-color: #585656; font-size: 1.2em; border: 2px solid #ddd; border-radius: 10px; box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);" />
+               <p:panelGrid class="grid" columns="3" layout="grid" styleClass="showcase-text-align-center"
+                            >
+               <p:card style="width: 20em">
+                    <f:facet name="header">
+                    </f:facet>
+                    <f:facet name="title">
+                        Advanced Card
+                    </f:facet>
+                    <f:facet name="subtitle">
+                        Card subtitle
+                    </f:facet>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt</p>
+                    <f:facet name="footer">
+                        <p:commandButton icon="pi pi-check" value="Save"/>
+                        <p:commandButton icon="pi pi-times" value="Cancel" styleClass="ui-button-secondary" style="margin-left: .5em"/>
+                    </f:facet>
+                </p:card>
+                    <p:card style="width: 20em">
+                    <f:facet name="header">
+                    </f:facet>
+                    <f:facet name="title">
+                        Advanced Card
+                    </f:facet>
+                    <f:facet name="subtitle">
+                        Card subtitle
+                    </f:facet>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
+                        </p>
+                    <f:facet name="footer">
+                        <p:commandButton icon="pi pi-check" value="Save"/>
+                        <p:commandButton icon="pi pi-times" value="Cancel" styleClass="ui-button-secondary" style="margin-left: .5em"/>
+                    </f:facet>
+                </p:card>
+                    <p:card style="width: 20em">
+                    <f:facet name="header">
+                    </f:facet>
+                    <f:facet name="title">
+                        Advanced Card
+                    </f:facet>
+                    <f:facet name="subtitle">
+                        Card subtitle
+                    </f:facet>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
+                        </p>
+                    <f:facet name="footer">
+                        <p:commandButton icon="pi pi-check" value="Save"/>
+                        <p:commandButton icon="pi pi-times" value="Cancel" styleClass="ui-button-secondary" style="margin-left: .5em"/>
+                    </f:facet>
+                </p:card>
+                    <p:card style="width: 20em">
+                    <f:facet name="header">
+                    </f:facet>
+                    <f:facet name="title">
+                        Advanced Card
+                    </f:facet>
+                    <f:facet name="subtitle">
+                        Card subtitle
+                    </f:facet>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
+                        </p>
+                    <f:facet name="footer">
+                        <p:commandButton icon="pi pi-check" value="Save"/>
+                        <p:commandButton icon="pi pi-times" value="Cancel" styleClass="ui-button-secondary" style="margin-left: .3em"/>
+                    </f:facet>
+                </p:card>
+                    <p:card style="width: 20em">
+                    <f:facet name="header">
+                    </f:facet>
+                    <f:facet name="title">
+                        Advanced Card
+                    </f:facet>
+                    <f:facet name="subtitle">
+                        Card subtitle
+                    </f:facet>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
+                        </p>
+                    <f:facet name="footer">
+                        <p:commandButton icon="pi pi-check" value="Save"/>
+                        <p:commandButton icon="pi pi-times" value="Cancel" styleClass="ui-button-secondary" style="margin-left: .5em"/>
+                    </f:facet>
+                </p:card>
                 </p:panelGrid>
             </h:form>
         </div>

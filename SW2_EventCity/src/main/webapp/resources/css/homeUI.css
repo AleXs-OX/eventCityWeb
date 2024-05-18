@@ -1,11 +1,31 @@
-.ui-tabs .ui-tabs-nav {
-            text-align: center;
-    }
-    .tabViewClass{
-        text-align: center;
-        justify-content: center;
-        float: top;
-    }
-.ui-tabs .ui-tabs-nav li {
-            
-    }
+.container {
+    display: flex;
+    /*height: 100vh; /* Altura completa de la ventana */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Sección del tabView */
+.tabView-container {
+    flex: 3; /* Toma más espacio */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Sección del calendario */
+.calendar-container {
+    flex: 1; /* Toma menos espacio */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 20px; /* Espaciado entre las dos secciones */
+    box-sizing: border-box;
+}
+
+/* Estilos opcionales para el calendario */
+.calendar-container .ui-schedule {
+    width: 100%;
+    height: 100%;
+}

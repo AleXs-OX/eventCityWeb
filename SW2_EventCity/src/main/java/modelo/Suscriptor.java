@@ -5,11 +5,17 @@
  */
 package modelo;
 
+import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="suscriptor")
-public class Suscriptor {
+public class Suscriptor implements Serializable{
     
+    @Id
+    @Column(name="idSuscriptor")
+    private int idSuscriptor;
 }
