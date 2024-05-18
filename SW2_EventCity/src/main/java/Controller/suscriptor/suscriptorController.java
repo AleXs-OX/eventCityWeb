@@ -27,15 +27,14 @@ public class suscriptorController implements Serializable{
     //Interaccion con los metodos para hacer querys con la tabla Evento
     @EJB
     private EventoFacadeLocal eventoEJB;
-    
-    
-    
+
     /*
     Obtener todos los eventos de la base de datos y mostrarlos
     */
     public List<Evento> getEventos(){
-        
-        return eventos;
+        System.out.println("test");     
+        System.out.println(eventoEJB.findAll());
+        return eventoEJB.findAll();
     }
     /*
     Obtener todos los eventos a los que esta suscrito el suscriptor y mostrarlos

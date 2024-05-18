@@ -4,38 +4,39 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     
     <h:outputStylesheet library="css" name="eventosUI.css"/>
         
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <div class="text">
-            <h4>Pagina principal de eventos</h4>
+            <!--<h4>Pagina principal de eventos</h4>-->
         </div>
     </h:head>
 
     <h:body>
         <div class="eventos">   
             <h:form>
-               <p:panelGrid class="grid" columns="3" layout="grid" styleClass="showcase-text-align-center"
-                            >
-               <p:card style="width: 20em">
-                <f:facet name="header">
-                </f:facet>
-                <f:facet name="title">
-                    Concierto de Rock
-                </f:facet>
-                <f:facet name="subtitle">
-                    Género: Rock
-                </f:facet>
-                <p>¡No te pierdas este emocionante concierto de rock en vivo! Disfruta de las mejores bandas de rock del momento.</p>
-                <f:facet name="footer">
-                    <p:commandButton icon="pi pi-check" value="Asistir"/>
-                    <p:commandButton icon="pi pi-info" value="Descripción" styleClass="ui-button-secondary" style="margin-left: .5em"/>
-                </f:facet>
+            <p:dataGrid value="#{suscriptorController.getEventos()}" var="evento" columns="4"
+                        >
+                <p:card style="width: 250px;">
+                    <f:facet name="header">
+                    </f:facet>
+                    <f:facet name="title">
+                       <p style="font-size: 1.2em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">#{evento.nombre}</p>
+                    </f:facet>
+                    <f:facet name="subtitle">
+                        <p>#{evento.descripcion}</p>
+                    </f:facet>
+                    <f:facet name="footer">
+                        <p:commandButton icon="pi pi-check" value="Asistir"/>
+                        <p:commandButton icon="pi pi-info" value="Descripción" styleClass="ui-button-secondary" style="margin-left: .5em"/>
+                    </f:facet>
                 </p:card>
-                </p:panelGrid>
+            </p:dataGrid>
+
         <!--           
         <p:card style="width: 20em">
             <f:facet name="header">
