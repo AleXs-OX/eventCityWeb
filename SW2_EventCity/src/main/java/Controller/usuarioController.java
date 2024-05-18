@@ -69,6 +69,7 @@ public class usuarioController implements Serializable {
             System.out.println("Error al insertar al usuario en la base de datos" + e.getMessage());
         }
     }
+    
     public Rol obtenerRolSeleccionado(int idRol) {
         return rolEJB.find(idRol);
     }

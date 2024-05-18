@@ -19,6 +19,14 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/subscriptor/homeUI.xhtml</welcome-file>
+        <welcome-file>faces/loginUsuario.xhtml</welcome-file>
     </welcome-file-list>
+    <mime-mapping>
+        <extension>ttf</extension>
+        <mime-type>application/x-font-ttf</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>woff2</extension>
+        <mime-type>application/font-woff2</mime-type>
+    </mime-mapping>
 </web-app>
