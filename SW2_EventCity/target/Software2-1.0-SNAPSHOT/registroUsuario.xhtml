@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <!-- Definición cambio de idioma a español-->
+    <h:outputScript library="js" name="calendar_es.js" />
+    <h:head>
+        <title> Registro de usuario </title>
+    <h:body>
+        <p> Universidad de León </p>
+        
+        <h:form>
+            <p:fieldset legend="Datos personales" >
+                <p:panelGrid columns="3">
+                     <p:outputLabel value="Introduzca una categoria"/>        
+            <p:inputText value="#{altaCategoriaController.categoria.nombre}"></p:inputText>
+            <p:commandButton value="Insertar" actionListener="#{altaCategoriaController.insertarCategoria()}"/>
+                    
+                    <p:outputLabel for="nombre" value="Nombre:"/>
+                    <p:inputText id="nombre" value = "#{usuarioController.persona.nombre}" requiredMessage="Debe introducir un nombre de usuario"/>
+                    <p:messages for="nombre"/>
+                    
+                    <p:outputLabel for="primerAp" value="Primer Apellido:"/>
+                    <p:inputText id="primerAp" value = "#{usuarioController.persona.apellido1}" required="true"/>
+                    <p:messages for="primerAp"/>
+                    
+                    <p:outputLabel for="segundoAp" value="Segundo Apellido:"/>
+                    <p:inputText id="segundoAp" value = "#{usuarioController.persona.apellido2}" required="true"></p:inputText>
+                    <p:messages for="segundoAp"/>
+                    
+                    <p:outputLabel for="sexo" id="sexo"  value="Sexo:"/>
+                    <p:selectOneButton id="sexo" value = "#{usuarioController.persona.sexo}">
+                        <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                        <f:selectItem itemLabel="Femenino" itemValue="F"/>
+                    </p:selectOneButton>
+                    <p:messages for="sexo"/>
+                    
+                    <p:outputLabel value="Fecha de nacimiento"  />
+                    <p:calendar id="fechaNacimiento" required="true" value = "#{usuarioController.persona.fechanacimiento}" locale = "es" navigator ="true" showOn="button" pattern="dd/MM/yyyy"/>
+                    <p:messages for="fechaNacimiento"/>
+
+                </p:panelGrid>
+            </p:fieldset>
+            <p:fieldset legend="Datos de acceso">
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Rol: "/>
+                    <p:selectOneMenu id="seleccionarRol" value="#{usuarioController.categoria}"
+                                hideNoSelectionOption="#{not empty selectOneMenuView.hideNoSelectOption}">
+                    <p:ajax update="@this" process="@this"/>
+                    <f:selectItem itemLabel="Selecciona uno" itemValue="#{null}" noSelectionOption="true"/>
+                    <f:selectItems value="#{usuarioController.listaCategorias}" var="cat" itemLabel="#{cat.nombre}" itemValue="#{cat}"/>
+                    
+                    
+                    </p:selectOneMenu><p:outputLabel value="Nombre de usuario:   *"/>
+                    <p:inputText required="true"></p:inputText>
+                   
+                    
+                    
+                    <p:outputLabel for="pwd1" value="Contraseña"/>
+                    <p:password id="pwd1" value="#{passwordView.password3}" feedback="true" promptLabel="Contraseña" weakLabel="Débil" goodLabel="Buena" strongLabel="Fuerte"/>                    
+
+                    <p:outputLabel for="pwd2" value="Repite la contraseña"/>
+                    <p:password id="pwd2" value="#{passwordView.password5}" label="Password 2" required="true"/>
+
+                    
+                </p:panelGrid>
+            </p:fieldset>
+            <p:commandButton value="Registrar" actionListener="#{usuarioController.insertarUsuario()}" />
+            
+           
+            
+            
+        </h:form>
+        
+    </h:body>
+</html>
+
