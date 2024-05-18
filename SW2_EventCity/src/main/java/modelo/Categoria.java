@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package modelo;
-
+//Prueba de git
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -14,10 +14,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- *
- * @author Beatriz
- */
 @Entity
 @Table(name="categorias")
 //REGLAS: Contructor vacio, atributos privados y getter y setter de todos los atributos
