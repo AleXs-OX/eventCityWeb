@@ -20,11 +20,12 @@ public class Evento implements Serializable{
     @Id
     @Column (name="idEvento")
     private int idEvento;
-    
     @Column (name="titulo")
     private String nombre;
     @Column (name="descripcion")
     private String descripcion;
+    
+    /*
     @Column (name="fechaAlta")
     private LocalDate fechaAlta;
     @Column (name="fechaEvento")
@@ -37,6 +38,7 @@ public class Evento implements Serializable{
     private int precio ;
     @Column (name="capacidad")
     private int capacidad ;
+*/
  //Faltan las foreing keys de Publicador,Categoria,Localizacion,Reseña
     
     
@@ -67,7 +69,7 @@ public class Evento implements Serializable{
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
+    /*
     // Getter y Setter para fechaAlta
     public LocalDate getFechaAlta() {
         return fechaAlta;
@@ -121,4 +123,5 @@ public class Evento implements Serializable{
     public void setCapacidad(int capacidad) {
         this.capacidad = capacidad;
     }
+    */
 }
