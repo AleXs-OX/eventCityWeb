@@ -2,7 +2,7 @@
     text-align: center
 }
 .grid{
-    text-align: center
+    text-align: left
 }
 
 .eventos-container {
@@ -12,6 +12,13 @@
     /*height: 100vh; /* Altura completa de la ventana */
     
 }
-.eventos {
-    
+.grid-container {
+    display: flex;
+    justify-content: space-between; /* Espacio entre las tablas */
+}
+
+.data-table {
+    flex: 1; /* Permite que las tablas crezcan uniformemente */
+    min-width: 350px; /* Ancho mínimo de cada tabla */
+    margin-right: 0px;
 }

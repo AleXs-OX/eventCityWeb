@@ -36,6 +36,9 @@ public class suscriptorController implements Serializable{
         System.out.println(eventoEJB.findAll());
         return eventoEJB.findAll();
     }
+    public List<Evento> getEventoConciertos(){
+        return eventos;
+    }
     /*
     Obtener todos los eventos a los que esta suscrito el suscriptor y mostrarlos
     */
