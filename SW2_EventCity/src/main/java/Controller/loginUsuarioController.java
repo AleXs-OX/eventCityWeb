@@ -10,6 +10,7 @@ import EJB.UsuarioFacadeLocal;
 import Exception.NoUserException;
 import java.io.IOException;
 import java.io.Serializable;
+import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -19,7 +20,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.Usuario;
-import org.omnifaces.util.Faces;
 
 /**
  *
@@ -28,7 +28,6 @@ import org.omnifaces.util.Faces;
 
 @Named //Porque es una clase que se va a enlazar con una vista
 @ViewScoped //Este es el ámbito que tiene
-
 public class loginUsuarioController implements Serializable{
     
     private String username;
@@ -40,15 +39,26 @@ public class loginUsuarioController implements Serializable{
     
     @PostConstruct //Dice que es el primer metodo que se ejecuta
     public void init(){
-        //Reservar memoria de categoria
-        System.out.println("Hola");
+        
         //categoria.setNombre("categoria por defecto");
-        
-        
-        
+         
     }
     
+    public void redirectToRegister() throws Exception {
+        //ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+        //ec.redirect(ec.getRequestContextPath() + "/registroUsuario.xhtml");
+        //FacesContext.getCurrentInstance().getExternalContext().redirect("/registro/registroUsuario.xhtml");
+        System.out.println("HOLAAAAAAAAAAA");
+        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+        ec.redirect(ec.getRequestContextPath() + "/registroUsuario.xhtml");
+        System.out.println(ec.getRequestContextPath() + "/faces/registroUsuario.xhtml");
+        /*String url = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "../SW2_EventCity/registroUsuario.xhtml";
+        System.out.println("Redirigiendo a: " + url);
+        FacesContext.getCurrentInstance().getExternalContext().redirect(url);*/
+    } 
+    
     public void tryLogin() throws IOException{
+        System.out.println("*********");
         //Estas dos lineas no se si son necesarias
         FacesContext context = FacesContext.getCurrentInstance();
         ExternalContext ec = context.getExternalContext();
@@ -69,15 +79,10 @@ public class loginUsuarioController implements Serializable{
         
         
     }
-    public void redirectToRegister() throws IOException {
-        //ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-        //ec.redirect(ec.getRequestContextPath() + "/registroUsuario.xhtml");
-        FacesContext.getCurrentInstance().getExternalContext().redirect("registroUsuario.xhtml");
-
-        /*String url = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "../SW2_EventCity/registroUsuario.xhtml";
-        System.out.println("Redirigiendo a: " + url);
-        FacesContext.getCurrentInstance().getExternalContext().redirect(url);*/
-    }
+ 
+    
+    
+    
     
     public UsuarioFacadeLocal getUsuarioEJB() {
         return usuarioEJB;

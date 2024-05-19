@@ -29,7 +29,11 @@
                 <p:commandButton class="loginButton" value="Iniciar Sesión" action="#{loginUsuarioController.tryLogin}" />
                 
                 <div style="height: 10px;"></div>
+                
                 <p:commandButton class="registerButton" value="Registrarse" action="#{loginUsuarioController.redirectToRegister}" />
+                
+                <p:commandLink action="registroUsuario?faces-redirect=true" value="Registrarse" />
+
             </h:form>
         </div>
     </div>
