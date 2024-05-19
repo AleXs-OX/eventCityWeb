@@ -19,6 +19,17 @@
 
 .data-table {
     flex: 1; /* Permite que las tablas crezcan uniformemente */
-    min-width: 350px; /* Ancho mínimo de cada tabla */
+    min-width: 340px; /* Ancho mínimo de cada tabla */
     margin-right: 0px;
+    
+}
+.ui-datatable th.ui-state-default {
+    text-align: center; /* Alinea el texto al centro */
+}
+
+.colorTable{
+    /*background-color: #ededf3 !important;*/
+}
+.ui-card {
+    background-color: #e3f0f0 !important;
 }

@@ -19,8 +19,8 @@
         <div class="eventos">   
             <h:form>
                 <div class="grid-container">
-                    <p:dataTable  styleClass="data-table" id="t_eventos" value="#{suscriptorController.getEventos()}" var="evento">
-                        <p:column headerText="Columna 1">
+                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_eventos" value="#{suscriptorController.getEventos()}" var="evento">
+                        <p:column headerText="Conciertos">
                                 <p:card style="width: 20em">
                                     <f:facet name="header">
                                     </f:facet>
@@ -40,7 +40,7 @@
                         <!-- más columnas -->
                     </p:dataTable>
 
-                    <p:dataTable  styleClass="data-table" id="table2" value="#{suscriptorController.getEventos()}" var="evento">
+                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="table2" value="#{suscriptorController.getEventos()}" var="evento">
                         <p:column headerText="Columna 2">
                             <p:card style="width: 20em">
                                     <f:facet name="header">
@@ -61,7 +61,7 @@
                         <!-- más columnas -->
                     </p:dataTable>
 
-                    <p:dataTable  styleClass="data-table" id="table3" value="#{suscriptorController.getEventos()}" var="evento">
+                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="table3" value="#{suscriptorController.getEventos()}" var="evento">
                         <p:column headerText="Columna 3">
                             <p:card style="width: 20em">
                                     <f:facet name="header">
@@ -81,8 +81,8 @@
                         </p:column>
                         <!-- más columnas -->
                     </p:dataTable>
-                    <p:dataTable  styleClass="data-table" id="table4" value="#{suscriptorController.getEventos()}" var="evento">
-                        <p:column headerText="Columna 4">
+                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="table4" value="#{suscriptorController.getEventos()}" var="evento">
+                        <p:column headerText="Misceláneo">
                             <p:card style="width: 20em">
                                     <f:facet name="header">
                                     </f:facet>
