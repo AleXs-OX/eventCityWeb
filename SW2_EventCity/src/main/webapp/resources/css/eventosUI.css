@@ -4,7 +4,9 @@
 .grid{
     text-align: left
 }
-
+.eventos{
+    width: 500px;
+}
 .eventos-container {
     /*display: flex;
     justify-content: center; /* Centra horizontalmente */
@@ -14,12 +16,14 @@
 }
 .grid-container {
     display: flex;
-    justify-content: space-between; /* Espacio entre las tablas */
+    justify-content: space-between;
+    max-width: 70%; /* Establece un ancho máximo del 70% de la pantalla */
+    
 }
 
 .data-table {
     flex: 1; /* Permite que las tablas crezcan uniformemente */
-    min-width: 340px; /* Ancho mínimo de cada tabla */
+    min-width: 280px; /* Ancho mínimo de cada tabla */
     margin-right: 0px;
     
 }
