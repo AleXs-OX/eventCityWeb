@@ -40,13 +40,15 @@
         <!-- Seccion del calendario -->
         
             <h:form>  
-                <div class="calendar-container">
-                <p:commandButton value="Perfil" style="position: fixed; top: 9.5%; right: 0; margin-top: 0.5%; margin-right: 12.5%; font-size: 1em;" />
-                <p:commandButton value="Cerrar sesión" styleClass="ui-button-info" style="position: fixed; top: 9.5%; right: 0; margin-top: 0.5%; margin-right: 3.5%; font-size: 1em;" />
+                <div class="botones">
+                <p:commandButton value="Perfil" style="position: fixed; top: 10.5%; right: 0; margin-top: 0.5%; margin-right: 12.5%; font-size: 1em;" />
+                <p:commandButton value="Cerrar sesión" styleClass="ui-button-info" style="position: fixed; top: 10.5%; right: 0; margin-top: 0.5%; margin-right: 3.5%; font-size: 1em;" />
                 </div>
+                <aside class="aside">
                 <div class="calendar">
                 <p:calendar  mode="inline" id="calendario" locale = "es" navigator ="true" showOn="button" pattern="dd/MM/yyyy"/>
                 </div> 
+                </aside>
             </h:form>
         
     </div>

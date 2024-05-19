@@ -6,30 +6,28 @@
 }
 /* Sección del tabView */
 .tabView-container {
-    flex: 1; /* Toma más espacio */
+    flex: 1; 
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
     align-self: flex-start;
 }
-.calendar-container {
+.botones {
     padding-left: 20px;
     padding-right: 20px;
     box-sizing: border-box;
     margin-top: 60px;
     margin-top: 100px;
-    max-width: 500px;
-    max-height: 500px;
+
 }
 .calendar{
     transform: scale(0.85); /* Reducir el tamaño */
-    margin-left: auto; /* Empujar el calendario hacia la derecha */
-    margin-right: -25px;
-}
+    position: fixed; /* Para mantener el calendario fijo en la pantalla */
+    top: 125px; /* Posición vertical desde la parte superior */
+    right: -13px; /* Posición horizontal desde la derecha */
 
 .aside{
-    
 }
 .btn{
     top: 4%;
