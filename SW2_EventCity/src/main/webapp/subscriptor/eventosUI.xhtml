@@ -38,11 +38,27 @@
                                         </p:overlayPanel>
                                         <p:commandButton id="btn-info" icon="pi pi-info" value="Información" styleClass="ui-button-secondary btn_card" style="margin-left: .5em"/>
                                         <p:overlayPanel for="btn-info">
-                                            <p>#{evento.descripcion}</p>
                                             <p:card>
                                                 <f:facet name="title">
-                                                    <p> #{evento.nombre}</p>
+                                                    <p style ="text-align: center">¿Localización y día?</p>                                   
                                                 </f:facet>
+                                                <f:facet name="subtitle">
+                                                    <p style="font-weight: bold; font-style: italic; color: gray;">
+                                                        El evento tendrá lugar en: (lugar) el día: (dia)</p>
+                                                </f:facet>
+                                                <p>Hora: 00:00</p>
+                                                <p:dataList  var="resena" type="ordered">
+                                                    <f:facet name="resenas">
+                                                        <div class="resena_image">
+                                                            <div class="resena_lista">
+                                                                <div class="resena_nombre"><p>Nombre</p></div>
+                                                                <div class="resena_desc"><p>Descripcion</p></div>
+                                                                <p:rating readonly="true" value="3"/>
+                                                            </div>
+                                                        </div>
+                                                    </f:facet>
+                                                    
+                                                </p:dataList>
                                             </p:card>
                                         </p:overlayPanel>
                                     </f:facet>
