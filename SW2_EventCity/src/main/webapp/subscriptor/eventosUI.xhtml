@@ -17,7 +17,6 @@
 
     <h:body>
         <div class="eventos">   
-            <h:form>
                 <div class="grid-container">
                     <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_eventos" value="#{suscriptorController.getEventos()}" var="evento">
                         <p:column headerText="Conciertos">
@@ -32,12 +31,13 @@
                                     </f:facet>
                                         <p>#{evento.descripcion}</p>
                                     <f:facet name="footer">
-                                        <p:commandButton id="btn_asistir" icon="pi pi-check" value="Asistir" styleClass="btn_card"/>
+                                        <p:commandButton id="btn_asistir" icon="pi pi-check" value="Asistir" styleClass="ui-button-raised btn_card"/>
                                         <p:overlayPanel for="btn_asistir">
                                             <p>Acabas de suscribirte al evento #{evento.nombre}</p>
                                         </p:overlayPanel>
-                                        <p:commandButton id="btn-info" icon="pi pi-info" value="Información" styleClass="ui-button-secondary btn_card" style="margin-left: .5em"/>
-                                        <p:overlayPanel for="btn-info">
+                                        <p:commandButton id="btn-info" icon="pi pi-star-fill" value="Información" styleClass="ui-button-raised btn_card" style="margin-left: .5em"/>
+                                        <p:overlayPanel for="btn-info" dismissable="true" showCloseIcon="true">
+                                            <p>prueba</p>
                                             <p:card>
                                                 <f:facet name="title">
                                                     <p style ="text-align: center">¿Localización y día?</p>                                   
@@ -47,7 +47,7 @@
                                                         El evento tendrá lugar en: (lugar) el día: (dia)</p>
                                                 </f:facet>
                                                 <p>Hora: 00:00</p>
-                                                <p:dataList  var="resena" type="ordered">
+                                                <p:dataList var="resena" type="ordered">
                                                     <f:facet name="resenas">
                                                         <div class="resena_image">
                                                             <div class="resena_lista">
@@ -130,8 +130,6 @@
                     </p:dataTable>
                     
                 </div>
-                
-            </h:form>
         </div>
     </h:body>
 </html>
