@@ -34,8 +34,11 @@
 .colorTable{
     /*background-color: #ededf3 !important;*/
 }
-.ui-card {
+.card_evento {
     background-color: #e3f0f0 !important;
+}
+.card_resena{
+    background-color: #e4f3fa !important;
 }
 .btn_card{
     font-size: 15.5px !important;

@@ -7,6 +7,7 @@ package Controller.suscriptor;
 import EJB.EventoFacadeLocal;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
@@ -27,7 +28,14 @@ public class suscriptorController implements Serializable{
     //Interaccion con los metodos para hacer querys con la tabla Evento
     @EJB
     private EventoFacadeLocal eventoEJB;
+    
+    private Date diaSeleccionado;
+    private Date diaActual;
 
+    public suscriptorController(){
+        this.diaActual = new Date();
+        this.diaSeleccionado = new Date();
+    }
     /*
     Obtener todos los eventos de la base de datos y mostrarlos
     */
@@ -46,6 +54,15 @@ public class suscriptorController implements Serializable{
         
         return eventos;
     }
+    
+    public void setDateSeleccionada(Date date){
+        this.diaSeleccionado = date;
+    }
+    
+    public Date getDateSeleccionada(){
+        return this.diaSeleccionado;
+    }
+    
     
 }
 
