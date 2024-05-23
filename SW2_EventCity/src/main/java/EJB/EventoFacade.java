@@ -5,6 +5,8 @@
  */
 package EJB;
 
+import java.util.Date;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,5 +30,10 @@ public class EventoFacade extends AbstractFacade<Evento> implements EventoFacade
     public EventoFacade() {
         super(Evento.class);
     }
+    
+    //@Override
+    /*public List<Evento> findAllWDate(Date date){
+        return date;
+    }*/
     
 }

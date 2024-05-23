@@ -5,6 +5,7 @@
  */
 package EJB;
 
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 import modelo.Evento;
@@ -25,6 +26,8 @@ public interface EventoFacadeLocal {
     Evento find(Object id);
 
     List<Evento> findAll();
+    
+    //List<Evento> findAllWDate(Date date);
 
     List<Evento> findRange(int[] range);
 
