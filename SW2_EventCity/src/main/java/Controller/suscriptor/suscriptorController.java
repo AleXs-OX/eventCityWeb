@@ -78,10 +78,12 @@ public class suscriptorController implements Serializable{
     }   
     
     public void showResena(SelectEvent<String> event){
-        
         String prueba = event.toString();
         System.out.println("prueba");
     }
     
+    public void test(){
+        System.out.println("detecto el boton reseña");
+    }
 }
 
