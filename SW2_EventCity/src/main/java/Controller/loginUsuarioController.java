@@ -57,6 +57,11 @@ public class loginUsuarioController implements Serializable{
         FacesContext.getCurrentInstance().getExternalContext().redirect(url);*/
     } 
     
+    public String irRegistro(){
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        return "registroUsuario?faces-redirect=true";
+    }
+    
     public void tryLogin() throws IOException{
         System.out.println("*********");
         //Estas dos lineas no se si son necesarias
@@ -68,8 +73,10 @@ public class loginUsuarioController implements Serializable{
         //Si todo es correcto
         usuarioLogeado.setPassword(null);//se elimina la contraseña por seguridad
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", usuarioLogeado); // Guardar usuario en la sesión
+        System.out.println("*********************");
         ec.getSessionMap().put("user",usuarioLogeado);
         //MIRAR PATH
+       
         ec.redirect(ec.getRequestContextPath() + "/subscriptor/" + usuarioLogeado.getIdRol() + "/homeUI.xhtml");
         /**}
          * catch(NoUserException e){

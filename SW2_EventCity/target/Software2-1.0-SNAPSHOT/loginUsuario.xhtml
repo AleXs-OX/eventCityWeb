@@ -6,7 +6,6 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <!--Iniciar payara server con comando en payara5/bin -> asadmin start-domain domain1 -->
     <!-- Definición cambio de idioma a español-->
-    <h:outputScript library="js" name="calendar_es.js" />
     <h:head>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -30,7 +29,7 @@
                 
                 <div style="height: 10px;"></div>
                 
-                <p:commandButton class="registerButton" value="Registrarse" action="#{loginUsuarioController.redirectToRegister}" />
+                <p:commandButton id="registro" class="registerButton" value="Registrarse" action="#{loginUsuarioController.irRegistro()}" />
                 
                 <p:commandLink action="registroUsuario?faces-redirect=true" value="Registrarse" />
 
