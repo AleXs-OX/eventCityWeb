@@ -21,10 +21,3 @@
     margin-top: 100px;
 
 }
-.calendar{
-    transform: scale(0.85); /* Reducir el tamaño */
-    position: fixed; /* Para mantener el calendario fijo en la pantalla */
-    top: 125px; /* Posición vertical desde la parte superior */
-    right: -13px; /* Posición horizontal desde la derecha */
-
-}
