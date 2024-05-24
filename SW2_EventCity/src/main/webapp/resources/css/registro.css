@@ -1,0 +1,40 @@
+#register-page {
+    height: 100vh; /* Toma toda la altura de la ventana */
+    display: flex;
+    flex-direction: column; /* Crea espacio entre elementos verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    background-image: url("#{resource['images/fondoLogin.jpg']}");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    gap: 20px; /* Crea espacio entre elementos */
+}
+
+#register-card {
+    background: rgba(255, 255, 255, 0.8); /* Fondo blanco con transparencia */
+    padding: 200px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 500px;
+    display: flex; /* Usamos Flexbox para centrar el contenido */
+    flex-direction: column; /* Alineamos verticalmente */
+    justify-content: center; /* Centra el contenido verticalmente */
+    align-items: center; /* Centra el contenido horizontalmente */
+    text-align: center; /* Centra texto y elementos inline */
+}
+
+.registerButton {
+    width: 50%; /* El botón de registro es más pequeño */
+    background: rgba(255, 193, 7, 0.7); /* Color amarillo con transparencia */
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+    transition: background 0.3s;
+    margin-top: 10px; /* Asegura espacio entre los botones */
+}
+
+.registerButton:hover {
+    background-color: #e0a800; /* Color más oscuro al pasar el ratón por encima */
+}
