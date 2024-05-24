@@ -11,10 +11,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.Evento;
+import modelo.Resena;
 import modelo.Suscriptor;
+import org.primefaces.event.SelectEvent;
 
 /*Hara falta dos metodos uno que guarde y devuelva una lista con todos los eventos que hay y otro metodo
 * con todos los eventos a los que esta suscrito el usuario
@@ -70,7 +73,15 @@ public class suscriptorController implements Serializable{
         System.out.println(this.diaSeleccionado);
     }
    
-    public 
+    public List<Resena> getResenas(){
+        return resenaEJB.findAll();
+    }   
+    
+    public void showResena(SelectEvent<String> event){
+        
+        String prueba = event.toString();
+        System.out.println("prueba");
+    }
     
 }
 

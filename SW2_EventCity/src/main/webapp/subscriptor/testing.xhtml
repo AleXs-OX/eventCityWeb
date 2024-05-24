@@ -47,22 +47,23 @@
                                                         El evento tendrá lugar en: (lugar) el día: (dia)</p>
                                                 </f:facet>
                                                 <p>Hora: 00:00</p>
-                                                <div style="display: flex; align-items: center">
-                                                    <p style="margin-right: 20px;">Evaluación:</p>
-                                                    <p:rating readonly="false" value="3"/>
+                                                <div style="display: flex; align-items: center; margin-top: 3em;">
+                                                    <div style="position: relative;">               
+                                                        <p:rating readonly="false" value="3"/>
+                                                        <p:inputTextarea  style="margin-top: 1em;" rows="4" cols="27" maxlength="100" autoResize="true"/>
+                                                        <p:commandButton id="btn-resena" icon="pi pi-star-fill" value="Reseñar" styleClass="ui-button-raised ui-button-secondary btn_card" 
+                                                                         style="margin-left: 1em; margin-top: 2.5em"/>
+                                                    </div>
                                                 </div>
                                                 <p></p>
-                                                <p:dataList  var="resena" type="ordered">
-                                                    <f:facet name="resenas">
+                                                <p:dataList value="#{suscriptorController.getResenas()}" var="resena" type="definition">  
                                                         <div class="resena_image">
                                                             <div class="resena_lista">
-                                                                <div class="resena_nombre"><p>Nombre</p></div>
-                                                                <div class="resena_desc"><p>Descripcion</p></div>
-                                                                <p:rating readonly="true" value="3"/>
+                                                                <div class="resena_nombre">#{resena.idResena}</div>
+                                                                <div class="resena_desc">#{resena.comentario}</div>
+                                                                <p:rating readonly="true" value="#{resena.valoracion}"/>
                                                             </div>
-                                                        </div>
-                                                    </f:facet>
-                                                    
+                                                        </div>                           
                                                 </p:dataList>
                                             </p:card>
                                         </p:overlayPanel>

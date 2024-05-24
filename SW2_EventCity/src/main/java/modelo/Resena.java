@@ -20,6 +20,8 @@ public class Resena implements Serializable{
     private int idResena;
     @Column (name="comentario")
     private String comentario;
+    @Column (name="valoracion")
+    private int valoracion;
 
     
     // Getter y Setter para idEvento
@@ -32,11 +34,19 @@ public class Resena implements Serializable{
     }
 
     // Getter y Setter para nombre
-    public String getcomentario() {
+    public String getComentario() {
         return comentario;
     }
 
-    public void setcomentario(String comentario) {
+    public void setComentario(String comentario) {
         this.comentario = comentario;
+    }
+    
+    public void setValoracion(int valoracion){
+        this.valoracion = valoracion;
+    }
+    
+    public int getValoracion(){
+        return this.valoracion;
     }
 }
