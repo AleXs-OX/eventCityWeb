@@ -5,6 +5,7 @@
  */
 package Controller.suscriptor;
 import EJB.EventoFacadeLocal;
+import EJB.ResenaFacadeLocal;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,6 +29,9 @@ public class suscriptorController implements Serializable{
     //Interaccion con los metodos para hacer querys con la tabla Evento
     @EJB
     private EventoFacadeLocal eventoEJB;
+    
+    @EJB
+    private ResenaFacadeLocal resenaEJB;
     
     private Date diaSeleccionado;
     private Date diaActual;
@@ -65,6 +69,8 @@ public class suscriptorController implements Serializable{
         System.out.println("estoy detectando el boton");
         System.out.println(this.diaSeleccionado);
     }
+   
+    public 
     
 }
 
