@@ -50,16 +50,16 @@ public class loginUsuarioController implements Serializable{
         //FacesContext.getCurrentInstance().getExternalContext().redirect("/registro/registroUsuario.xhtml");
         System.out.println("HOLAAAAAAAAAAA");
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-        ec.redirect(ec.getRequestContextPath() + "/registroUsuario.xhtml");
+        ec.redirect(ec.getRequestContextPath() + "/loginUsuario.xhtml");
         System.out.println(ec.getRequestContextPath() + "/faces/registroUsuario.xhtml");
+        System.out.println("Cambie");
         /*String url = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "../SW2_EventCity/registroUsuario.xhtml";
         System.out.println("Redirigiendo a: " + url);
         FacesContext.getCurrentInstance().getExternalContext().redirect(url);*/
     } 
     
-    public String irRegistro(){
+    public void test(){
         System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-        return "registroUsuario?faces-redirect=true";
     }
     
     public void tryLogin() throws IOException{

@@ -69,7 +69,14 @@
         
 
     </dependencies>
-    
+    <repositories>
+    <repository>
+        <id>prime-repo</id>
+        <name>PrimeFaces Maven Repository</name>
+        <url>https://repository.primefaces.org</url>
+    </repository>
+</repositories>
+
      <build>
         <plugins>
             <plugin>

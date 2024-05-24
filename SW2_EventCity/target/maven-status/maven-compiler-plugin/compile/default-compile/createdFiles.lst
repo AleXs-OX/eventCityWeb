@@ -1,8 +1,11 @@
 EJB\PersonaFacadeLocal.class
 Controller\AltaCategoriaController.class
 EJB\AbstractFacade.class
-EJB\UsuarioFacadeLocal.class
 EJB\CategoriaFacadeLocal.class
+EJB\RolFacade.class
+EJB\PersonaFacade.class
+com\mycompany\sw2_eventcity\resources\JavaEE8Resource.class
+EJB\UsuarioFacadeLocal.class
 modelo\Rol.class
 Controller\usuarioController.class
 EJB\RolFacadeLocal.class
@@ -10,8 +13,5 @@ modelo\Categoria.class
 com\mycompany\sw2_eventcity\JAXRSConfiguration.class
 EJB\CategoriaFacade.class
 EJB\UsuarioFacade.class
-EJB\RolFacade.class
 modelo\Persona.class
-EJB\PersonaFacade.class
-com\mycompany\sw2_eventcity\resources\JavaEE8Resource.class
 modelo\Usuario.class

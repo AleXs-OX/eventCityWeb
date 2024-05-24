@@ -31,7 +31,9 @@ public class registroUsuarioController implements Serializable {
     
     @PostConstruct //Dice que es el primer metodo que se ejecuta
     public void init(){
-        
-         
+
+    }
+    public void test(){
+        System.out.println("botonnn");
     }
 }

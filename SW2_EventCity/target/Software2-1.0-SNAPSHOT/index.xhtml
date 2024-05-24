@@ -19,16 +19,7 @@
         <div id="login-card">  <!-- Tarjeta en el centro -->
             <h:form id="login-form">
                 
-                <p:outputLabel for="username" value="Nombre de usuario" />
-                <p:inputText id="username" required="true" value="#{loginController.usuario.nombre}" requiredMessage="Debes introducir un nombre de usuario" />                   
-
-                <p:outputLabel for="password" value="Contraseña" />
-                <p:password id="password" required="true" value="#{loginController.usuario.password}" requiredMessage="Debes introducir una contraseña" redisplay="true" />
                 
-                <div style="height: 10px;"></div>
-                <p:commandButton class="loginButton" value="Iniciar Sesión" action="#{loginController.tryLogin}" />
-                
-                <div style="height: 10px;"></div>
                 <p:commandButton class="registerButton" value="Registrarse" action="#{registerController.registrarUsuario}" />
             </h:form>
         </div>
