@@ -18,7 +18,8 @@
     <h:body>
         <div class="eventos">   
                 <div class="grid-container">
-                    <h:form>
+                    <!--<h:form>-->
+                    
                     <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_eventos1" value="#{suscriptorController.getEventos()}" var="evento">
                         <p:column headerText="Conciertos">
                                 <p:card class="card_evento" style="width: 16.6em">
@@ -31,12 +32,12 @@
                                         <p>#{evento.descripcion}</p>
                                         <p style="font-style: italic">Hora 00:00</p>
                                     <f:facet name="footer">
-                                        <p:commandButton id="btn_asistir" icon="pi pi-check" value="Asistir" styleClass="ui-button-raised btn_card"/>
-                                        <p:overlayPanel for="btn_asistir">
+                                        <p:commandButton id="btn_asistir_1" icon="pi pi-check" value="Asistir" styleClass="ui-button-raised btn_card"/>
+                                        <p:overlayPanel for="btn_asistir_1">
                                             <p>Acabas de suscribirte al evento #{evento.nombre}</p>
                                         </p:overlayPanel>
-                                        <p:commandButton id="btn-info" icon="pi pi-star-fill" value="Información" styleClass="ui-button-raised ui-button-secondary btn_card" style="margin-left: .5em"/>
-                                        <p:overlayPanel for="btn-info" showCloseIcon="true">
+                                        <p:commandButton id="btn-info_1" icon="pi pi-star-fill" value="Información" styleClass="ui-button-raised ui-button-secondary btn_card" style="margin-left: .5em"/>
+                                        <p:overlayPanel for="btn-info_1" showCloseIcon="true">
                                             <p:card class="card_resena">
                                                 <f:facet name="title">
                                                     <p style ="text-align: center">¿Localización y día?</p>                                   
@@ -84,12 +85,12 @@
                                     </f:facet>
                                         <p>#{evento.descripcion}</p>
                                     <f:facet name="footer">
-                                        <p:commandButton id="btn_asistir" icon="pi pi-check" value="Asistir" styleClass="ui-button-raised btn_card"/>
-                                        <p:overlayPanel for="btn_asistir">
+                                        <p:commandButton id="btn_asistir_2" icon="pi pi-check" value="Asistir" styleClass="ui-button-raised btn_card"/>
+                                        <p:overlayPanel for="btn_asistir_2">
                                             <p>Acabas de suscribirte al evento #{evento.nombre}</p>
                                         </p:overlayPanel>
-                                        <p:commandButton id="btn-info" icon="pi pi-star-fill" value="Información" styleClass="ui-button-raised ui-button-secondary btn_card" style="margin-left: .5em"/>
-                                        <p:overlayPanel for="btn-info" showCloseIcon="true">
+                                        <p:commandButton id="btn-info_2" icon="pi pi-star-fill" value="Información" styleClass="ui-button-raised ui-button-secondary btn_card" style="margin-left: .5em"/>
+                                        <p:overlayPanel for="btn-info_2" showCloseIcon="true">
                                             <p:card class="card_resena">
                                                 <f:facet name="title">
                                                     <p style ="text-align: center">¿Localización y día?</p>                                   
@@ -144,7 +145,7 @@
                         </p:column>
                         <!-- más columnas -->
                     </p:dataTable>
-                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_eventos4" value="#{suscriptorController.getEventos()}" var="evento">
+                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" var="evento" id="t_eventos4" value="#{suscriptorController.getEventos()}" >
                         <p:column headerText="Misceláneo">
                             <p:card class="card_evento" style="width: 16.6em">
                                     <f:facet name="header">
@@ -164,15 +165,16 @@
                         </p:column>
                         <!-- update=":eventosUI:t_eventos1 :eventosUI:t_eventos2 :eventosUI:t_eventos3 :eventosUI:t_eventos4" -->
                     </p:dataTable>
-                    </h:form>
-                    <h:form>
+                
+                    <!--</h:form>-->
+                    
                     <div class="calendar">
                         <p:calendar mode="inline" id="calendario" value="#{suscriptorController.dateSeleccionada}" locale = "es" navigator ="true" showOn="button" pattern="dd/MM/yyyy">
                             <p:ajax event="dateSelect" listener="#{suscriptorController.doTest()}"
                                     />
                         </p:calendar>
                     </div> 
-                    </h:form>
+                    
                 </div>
         </div>
     </h:body>
