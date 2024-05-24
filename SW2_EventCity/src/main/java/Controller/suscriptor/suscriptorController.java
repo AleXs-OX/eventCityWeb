@@ -63,6 +63,10 @@ public class suscriptorController implements Serializable{
         return this.diaSeleccionado;
     }
     
+    public void doTest(){
+        System.out.println("estoy detectando el boton");
+        System.out.println(this.diaSeleccionado);
+    }
     
 }
 
