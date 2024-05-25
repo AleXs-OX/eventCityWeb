@@ -27,10 +27,9 @@
                                         <p> #{evento.nombre}</p>
                                     </f:facet>
                                     <f:facet name="subtitle">
-                                        Género: Rock
-                                    </f:facet>
                                         <p>#{evento.descripcion}</p>
-                                        <p style="font-style: italic">Hora #{evento.fechaEvento}</p>
+                                        <p style="font-style: italic; color: black">Hora #{evento.fechaEvento}</p>
+                                    </f:facet>
                                     <f:facet name="footer">
                                         <p:commandButton id="btn_asistir_1" icon="pi pi-check" value="Asistir" styleClass="ui-button-raised btn_card"/>
                                         <p:overlayPanel for="btn_asistir_1">
