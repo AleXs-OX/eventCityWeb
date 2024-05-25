@@ -39,6 +39,11 @@ public class suscriptorController implements Serializable{
     private Date diaSeleccionado;
     private Date diaActual;
     private int usuarioActual = 1;
+    
+    private int concierto=1;
+    private int c2=2;
+    private int c3=3;
+    private int miscelaneo=4;
 
     public suscriptorController(){
         this.diaActual = new Date();
@@ -47,12 +52,24 @@ public class suscriptorController implements Serializable{
     /*
     Obtener todos los eventos de la base de datos y mostrarlos
     */
-    public List<Evento> getEventos(){
+    /*public List<Evento> getAllEventos(){
         return eventoEJB.findAll();
-    }
+    }*/
+    
+    
     public List<Evento> getEventoConciertos(){
-        return eventos;
+        return eventoEJB.findEventoByCategoria(this.concierto);
     }
+    public List<Evento> getEventoC2(){
+        return eventoEJB.findEventoByCategoria(this.c2);
+    }
+    public List<Evento> getEventoC3(){
+        return eventoEJB.findEventoByCategoria(this.c3);
+    }
+    public List<Evento> getEventoMiscelaneo(){
+        return eventoEJB.findEventoByCategoria(this.miscelaneo);
+    }
+    
     /*
     Obtener todos los eventos a los que esta suscrito el suscriptor y mostrarlos
     */
@@ -74,8 +91,8 @@ public class suscriptorController implements Serializable{
         System.out.println(this.diaSeleccionado);
     }
    
-    public List<Resena> getResenas(){
-        return resenaEJB.findAll();
+    public List<Resena> getResenasByEvento(int idEvento){
+        return resenaEJB.findResenasByIdEvento(idEvento);
     }   
     
     public void showResena(SelectEvent<String> event){

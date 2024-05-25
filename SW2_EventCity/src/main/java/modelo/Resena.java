@@ -9,6 +9,8 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
@@ -16,13 +18,26 @@ import javax.persistence.Id;
 public class Resena implements Serializable{
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name="idResena")
     private int idResena;
+    
     @Column (name="comentario")
     private String comentario;
+    
     @Column (name="valoracion")
     private int valoracion;
+    
+    @Column (name="idEvento")
+    private int idEvento;
 
+    
+    public void setIdEvento(int idEvento){
+        this.idEvento = idEvento;
+    }
+    public int getIdEvento(){
+        return this.idEvento;
+    }
     
     // Getter y Setter para idEvento
     public int getIdResena() {

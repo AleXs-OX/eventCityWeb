@@ -20,7 +20,7 @@
                 <div class="grid-container">
                     <!--<h:form>-->
                     
-                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_eventos1" value="#{suscriptorController.getEventos()}" var="evento">
+                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_eventos1" value="#{suscriptorController.getEventoConciertos()}" var="evento">
                         <p:column headerText="Conciertos">
                                 <p:card class="card_evento" style="width: 16.6em">
                                     <f:facet name="title">
@@ -30,7 +30,7 @@
                                         Género: Rock
                                     </f:facet>
                                         <p>#{evento.descripcion}</p>
-                                        <p style="font-style: italic">Hora 00:00</p>
+                                        <p style="font-style: italic">Hora #{evento.fechaEvento}</p>
                                     <f:facet name="footer">
                                         <p:commandButton id="btn_asistir_1" icon="pi pi-check" value="Asistir" styleClass="ui-button-raised btn_card"/>
                                         <p:overlayPanel for="btn_asistir_1">
@@ -46,7 +46,7 @@
                                                     <p style="font-weight: bold; font-style: italic; color: gray;">
                                                         El evento tendrá lugar en: (lugar) el día: (dia)</p>
                                                 </f:facet>
-                                                <p>Hora: 00:00</p>
+                                                <p>Hora: #{evento.fechaEvento}</p>
                                                 <div style="display: flex; align-items: center; margin-top: 3em;">
                                                     <div style="position: relative;">               
                                                         <p:rating readonly="false" value="3"/>
@@ -56,7 +56,7 @@
                                                     </div>
                                                 </div>
                                                 <p></p>
-                                                <p:dataList value="#{suscriptorController.getResenas()}" var="resena" type="definition">  
+                                                <p:dataList value="#{suscriptorController.getResenasByEvento(evento.idEvento)}" var="resena" type="definition">  
                                                         <div class="resena_image">
                                                             <div class="resena_lista">
                                                                 <div class="resena_nombre">#{resena.idResena}</div>
@@ -73,7 +73,7 @@
                         <!-- más columnas -->
                     </p:dataTable>
 
-                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_eventos2" value="#{suscriptorController.getEventos()}" var="evento">
+                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_eventos2" value="#{suscriptorController.getEventoC2()}" var="evento">
                         <p:column headerText="Columna 2">
                             <p:card class="card_evento" style="width: 16.6em">
                                     <f:facet name="header">
@@ -126,7 +126,7 @@
                         <!-- más columnas -->
                     </p:dataTable>
 
-                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_eventos3" value="#{suscriptorController.getEventos()}" var="evento">
+                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_eventos3" value="#{suscriptorController.getEventoC3()}" var="evento">
                         <p:column headerText="Columna 3">
                             <p:card class="card_evento" style="width: 16.6em">
                                     <f:facet name="header">
@@ -146,7 +146,7 @@
                         </p:column>
                         <!-- más columnas -->
                     </p:dataTable>
-                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" var="evento" id="t_eventos4" value="#{suscriptorController.getEventos()}" >
+                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" var="evento" id="t_eventos4" value="#{suscriptorController.getEventoMiscelaneo()}" >
                         <p:column headerText="Misceláneo">
                             <p:card class="card_evento" style="width: 16.6em">
                                     <f:facet name="header">

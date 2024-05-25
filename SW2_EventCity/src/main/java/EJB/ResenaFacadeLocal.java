@@ -30,4 +30,6 @@ public interface ResenaFacadeLocal {
 
     int count();
     
+    List<Resena> findResenasByIdEvento(Integer idEvento);
+    
 }

@@ -6,11 +6,14 @@
 package modelo;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.sql.Date;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
@@ -31,7 +34,10 @@ public class Evento implements Serializable{
     private String descripcion;
     
     @Column (name="fechaAlta")
-    private LocalDate fechaAlta;
+    private Date fechaAlta;
+    
+    @Column (name="fechaEvento")
+    private Timestamp  fechaEvento;
 
     @Column (name="idCategoria")
     private int idCategoria ;
@@ -76,25 +82,25 @@ public class Evento implements Serializable{
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    /*
-    // Getter y Setter para fechaAlta
-    public LocalDate getFechaAlta() {
-        return fechaAlta;
-    }
-
-    public void setFechaAlta(LocalDate fechaAlta) {
-        this.fechaAlta = fechaAlta;
-    }
-
-    // Getter y Setter para fechaEvento
-    public LocalDate getFechaEvento() {
+    //Getter y Setter para fechaEvento
+    public Timestamp  getFechaEvento() {
         return fechaEvento;
     }
 
-    public void setFechaEvento(LocalDate fechaEvento) {
+    public void setFechaEvento(Timestamp  fechaEvento) {
         this.fechaEvento = fechaEvento;
     }
+    
+    // Getter y Setter para fechaAlta
+    public Date getFechaAlta() {
+        return fechaAlta;
+    }
 
+    public void setFechaAlta(Date fechaAlta) {
+        this.fechaAlta = fechaAlta;
+    }
+
+    /*
     // Getter y Setter para idPuntuacion
     public int getIdPuntuacion() {
         return idPuntuacion;

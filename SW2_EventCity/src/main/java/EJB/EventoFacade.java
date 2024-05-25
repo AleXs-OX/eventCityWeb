@@ -34,7 +34,7 @@ public class EventoFacade extends AbstractFacade<Evento> implements EventoFacade
     /*public List<Evento> findAllWDate(Date date){
         return date;
     }*/
-    //@Override
+    @Override
     public List<Evento> findEventoByCategoria(Integer idCategoria){
        return em.createQuery("SELECT e FROM Evento e WHERE e.idCategoria = :idCategoria", Evento.class)
                  .setParameter("idCategoria", idCategoria)
