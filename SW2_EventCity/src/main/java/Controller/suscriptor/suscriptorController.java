@@ -38,6 +38,7 @@ public class suscriptorController implements Serializable{
     
     private Date diaSeleccionado;
     private Date diaActual;
+    private int usuarioActual = 1;
 
     public suscriptorController(){
         this.diaActual = new Date();
@@ -85,5 +86,8 @@ public class suscriptorController implements Serializable{
     public void test(){
         System.out.println("detecto el boton reseña");
     }
+    /*
+    En la tabla Resenas deberia de ir la puntuacion?
+    */
 }
 

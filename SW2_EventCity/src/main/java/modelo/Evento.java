@@ -11,6 +11,8 @@ import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import java.time.LocalDate;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 
 @Entity
@@ -18,27 +20,32 @@ import java.time.LocalDate;
 public class Evento implements Serializable{
     
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name="idEvento")
     private int idEvento;
+    
     @Column (name="titulo")
     private String nombre;
+    
     @Column (name="descripcion")
     private String descripcion;
     
-    /*
     @Column (name="fechaAlta")
     private LocalDate fechaAlta;
-    @Column (name="fechaEvento")
-    private LocalDate fechaEvento;    
-    @Column (name="idPuntuacion")
-    private int idPuntuacion ;
-    @Column (name="activo")
-    private boolean activo ;
+
+    @Column (name="idCategoria")
+    private int idCategoria ;
+        
     @Column (name="precio")
-    private int precio ;
-    @Column (name="capacidad")
-    private int capacidad ;
-*/
+    private boolean precio;
+
+    @Column (name="activo")
+    private int activo;
+    
+    @Column (name="capacidadActual")
+    private int capacidadActual;
+
+
  //Faltan las foreing keys de Publicador,Categoria,Localizacion,Reseña
     
     
