@@ -6,7 +6,6 @@
 package modelo;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Column;
@@ -35,7 +34,7 @@ public class Evento implements Serializable{
     private Date fechaAlta;
     
     @Column (name="fechaEvento")
-    private Timestamp  fechaEvento;
+    private Date  fechaEvento;
 
     @Column (name="idCategoria")
     private int idCategoria ;
@@ -81,11 +80,11 @@ public class Evento implements Serializable{
         this.descripcion = descripcion;
     }
     //Getter y Setter para fechaEvento
-    public Timestamp  getFechaEvento() {
+    public Date  getFechaEvento() {
         return fechaEvento;
     }
 
-    public void setFechaEvento(Timestamp  fechaEvento) {
+    public void setFechaEvento(Date  fechaEvento) {
         this.fechaEvento = fechaEvento;
     }
     

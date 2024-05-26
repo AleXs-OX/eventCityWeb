@@ -48,17 +48,12 @@ public class suscriptorController implements Serializable{
     public suscriptorController(){
         this.diaActual = new Date();
         this.diaSeleccionado = new Date();
+        System.out.println(new java.sql.Date(this.diaSeleccionado.getTime()));
     }
-    /*
-    Obtener todos los eventos de la base de datos y mostrarlos
-    */
-    /*public List<Evento> getAllEventos(){
-        return eventoEJB.findAll();
-    }*/
     
     
     public List<Evento> getEventoConciertos(){
-        return eventoEJB.findEventoByCategoria(this.concierto);
+        return eventoEJB.findEventosByCategoriaAndFecha(this.concierto,this.diaSeleccionado);
     }
     public List<Evento> getEventoC2(){
         return eventoEJB.findEventoByCategoria(this.c2);
