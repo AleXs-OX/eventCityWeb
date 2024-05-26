@@ -29,7 +29,5 @@ public interface UsuarioFacadeLocal {
     List<Usuario> findRange(int[] range);
 
     int count();
-
-    public Usuario tryLogin(String username, String password);
     
 }
