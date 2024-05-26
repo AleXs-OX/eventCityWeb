@@ -10,8 +10,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import modelo.Resena;
 
+/**
+ *
+ * @author Beatriz
+ */
 @Stateless
-public class ResenaFacade extends AbstractFacade<Resena> implements ResenaFacadeLocal {
+public class ResenaFacade extends AbstractFacade<Resena> {
 
     @PersistenceContext(unitName = "PublicacionesPU")
     private EntityManager em;

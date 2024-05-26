@@ -19,13 +19,13 @@
             <h:form id="login-form">
                 
                 <p:outputLabel for="username" value="Nombre de usuario" />
-                <p:inputText id="username" requiredMessage="Debes introducir un nombre de usuario" />                   
+                <p:inputText id="username" value ="#{loginUsuarioController.username}" requiredMessage="Debes introducir un nombre de usuario" />                   
 
                 <p:outputLabel for="password" value="Contraseña" />
-                <p:password id="password" required="false" requiredMessage="Debes introducir una contraseña" redisplay="true" />
+                <p:password id="password" value ="#{loginUsuarioController.password}" required="false" requiredMessage="Debes introducir una contraseña" redisplay="true" />
                 
                 <div style="height: 10px;"></div>
-                <p:commandButton class="loginButton" value="Iniciar Sesión" action="#{loginUsuarioController.tryLogin}" />
+                <p:commandButton class="loginButton" value="Iniciar Sesión" action="#{loginUsuarioController.login}" />
                 
                 <div style="height: 10px;"></div>
                 
