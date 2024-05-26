@@ -23,7 +23,13 @@ modelo\SuscripcionId.class
 EJB\PuntuacionFacade.class
 EJB\UsuarioFacadeLocal.class
 EJB\ResenaFacade.class
+<<<<<<< HEAD
 EJB\PublicadorFacadeLocal.class
+=======
+modelo\ResenaId.class
+EJB\PublicadorFacadeLocal.class
+EJB\ResenaFacadeLocal.class
+>>>>>>> developAlex
 Controller\usuarioController.class
 modelo\Categoria.class
 EJB\LugarFacade.class
@@ -37,6 +43,10 @@ EJB\SuscriptorFacade.class
 Exception\WrongPasswordException.class
 Controller\registroUsuarioController.class
 EJB\SuscriptorFacadeLocal.class
+<<<<<<< HEAD
+=======
+modelo\Persona.class
+>>>>>>> developAlex
 modelo\Localizacion.class
 modelo\Suscripcion.class
 EJB\AdminFacade.class

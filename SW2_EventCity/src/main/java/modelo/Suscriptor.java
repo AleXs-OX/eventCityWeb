@@ -5,13 +5,14 @@
  */
 package modelo;
 
+import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "suscriptores")
-public class Suscriptor {
+public class Suscriptor implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

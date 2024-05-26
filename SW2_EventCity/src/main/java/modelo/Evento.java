@@ -117,18 +117,6 @@ public class Evento implements Serializable{
         this.fechaEvento = fechaEvento;
     }
 
-    /*
-    // Getter y Setter para idPuntuacion
-    public int getIdPuntuacion() {
-        return idPuntuacion;
-    }
-
-    public void setIdPuntuacion(int idPuntuacion) {
-        this.idPuntuacion = idPuntuacion;
-    }
-
-    // Getter y Setter para activo
->>>>>>> developAlex
     public boolean isActivo() {
         return activo;
     }
@@ -172,7 +160,6 @@ public class Evento implements Serializable{
     public int getCapacidadActual() {
         return capacidadActual;
     }
-<<<<<<< HEAD
 
     public void setCapacidadActual(int capacidadActual) {
         this.capacidadActual = capacidadActual;
@@ -287,6 +274,6 @@ public class Evento implements Serializable{
             return false;
         }
         return true;
-    }*/
+    }
 
 }

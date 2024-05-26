@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+
 @Entity
 @Table(name="categorias")
 //REGLAS: Contructor vacio, atributos privados y getter y setter de todos los atributos

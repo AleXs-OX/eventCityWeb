@@ -52,8 +52,6 @@ public class Resena implements Serializable {
         this.evento = evento;
     }
 
-
-
     public String getComentario() {
         return comentario;
     }
