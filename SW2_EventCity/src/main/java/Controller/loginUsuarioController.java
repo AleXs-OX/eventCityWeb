@@ -65,13 +65,14 @@ public class loginUsuarioController implements Serializable{
     } 
     
     public String login() {
-        
-        System.out.println("He entrado en el login");
-        
+        System.out.println("Intentando iniciar sesión con: " + username + " / " + password);
         usuario = usuarioEJB.findByCredentials(username, password);
         if (usuario != null) {
-            return "homeUI?faces-redirect=true"; // Redirige a la página principal o dashboard
+           
+            System.out.println("Inicio de sesión exitoso para usuario: " + usuario.getNombreusuario());
+            return "/subscriptor/homeUI?faces-redirect=true"; // Redirige a la página principal o dashboard
         } else {
+            System.out.println("Error de inicio de sesión para usuario: " + username);
             FacesContext.getCurrentInstance().addMessage(null, 
                 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario o contraseña incorrectos", null));
             return "login";
@@ -80,7 +81,7 @@ public class loginUsuarioController implements Serializable{
 
     public String logout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "login?faces-redirect=true";
+        return "loginUsuario?faces-redirect=true";
     }
     
     public String irRegistro(){

@@ -21,16 +21,21 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
     @PersistenceContext(unitName = "PublicacionesPU")
     private EntityManager em;
 
-    public Usuario findByCredentials(String username, String password){
+    public Usuario findByCredentials(String username, String password) {
+        System.out.println("Entro en findByCredentials");
         try {
             TypedQuery<Usuario> query = em.createQuery(
-                "SELECT u FROM Usuario u WHERE u.nombreusuario = :nombreUsuario AND u.contrasena = :contrasena",
+                "SELECT u FROM Usuario u WHERE u.nombreusuario = :username AND u.contrasena = :password",
                 Usuario.class
             );
-            query.setParameter("nombreUsuario", username);
-            query.setParameter("contrasena", password);
+            query.setParameter("username", username);
+            query.setParameter("password", password);
+            System.out.println(username + " - Imprimo username");
+            System.out.println(password + " - Imprimo password");
             return query.getSingleResult();
         } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Entro en la excepcion");
             return null;
         }
     }
