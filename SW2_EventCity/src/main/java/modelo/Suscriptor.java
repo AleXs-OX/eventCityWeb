@@ -115,9 +115,6 @@ public class Suscriptor {
         this.resenas = resenas;
     }
 
-    
-    
-    
     @Override
     public int hashCode() {
         int hash = 7;
@@ -174,6 +171,5 @@ public class Suscriptor {
         }
         return true;
     }
-    
     
 }

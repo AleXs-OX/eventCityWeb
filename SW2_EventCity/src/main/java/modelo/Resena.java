@@ -52,6 +52,8 @@ public class Resena implements Serializable {
         this.evento = evento;
     }
 
+
+
     public String getComentario() {
         return comentario;
     }
@@ -59,6 +61,7 @@ public class Resena implements Serializable {
     public void setComentario(String comentario) {
         this.comentario = comentario;
     }
+
 
     public Date getFecha() {
         return fecha;

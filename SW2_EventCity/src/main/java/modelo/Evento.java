@@ -11,6 +11,13 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import java.sql.Date;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 
 @Entity
@@ -19,6 +26,7 @@ public class Evento implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Column(name = "idEvento")
     private int idEvento;
     
@@ -91,6 +99,10 @@ public class Evento implements Serializable{
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+    //Getter y Setter para fechaEvento
+    public Date  getFechaEvento() {
+        return fechaEvento;
+    }
 
     public Date getFechaAlta() {
         return fechaAlta;
@@ -100,14 +112,23 @@ public class Evento implements Serializable{
         this.fechaAlta = fechaAlta;
     }
 
-    public Date getFechaEvento() {
-        return fechaEvento;
-    }
 
     public void setFechaEvento(Date fechaEvento) {
         this.fechaEvento = fechaEvento;
     }
 
+    /*
+    // Getter y Setter para idPuntuacion
+    public int getIdPuntuacion() {
+        return idPuntuacion;
+    }
+
+    public void setIdPuntuacion(int idPuntuacion) {
+        this.idPuntuacion = idPuntuacion;
+    }
+
+    // Getter y Setter para activo
+>>>>>>> developAlex
     public boolean isActivo() {
         return activo;
     }
@@ -151,6 +172,7 @@ public class Evento implements Serializable{
     public int getCapacidadActual() {
         return capacidadActual;
     }
+<<<<<<< HEAD
 
     public void setCapacidadActual(int capacidadActual) {
         this.capacidadActual = capacidadActual;
@@ -265,9 +287,6 @@ public class Evento implements Serializable{
             return false;
         }
         return true;
-    }
-    
-    
-    
-   
+    }*/
+
 }

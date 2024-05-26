@@ -5,6 +5,7 @@
  */
 package EJB;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -29,4 +30,10 @@ public class ResenaFacade extends AbstractFacade<Resena> {
         super(Resena.class);
     }
     
+    public List<Resena> findResenasByIdEvento(Integer idEvento) {
+    return em.createQuery("SELECT r FROM Resena r WHERE r.idEvento = :idEvento", Resena.class)
+             .setParameter("idEvento", idEvento)
+             .getResultList();
+    }
+
 }
