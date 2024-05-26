@@ -170,7 +170,7 @@
                     
                     <div class="calendar">
                         <p:calendar mode="inline" id="calendario" value="#{suscriptorController.dateSeleccionada}" locale = "es" navigator ="true" showOn="button" pattern="dd/MM/yyyy">
-                            <p:ajax event="dateSelect" listener="#{suscriptorController.setDay}"
+                            <p:ajax event="dateSelect" update="t_eventos1"
                                     />
                         </p:calendar>
                     </div> 
