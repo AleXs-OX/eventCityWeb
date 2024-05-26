@@ -7,11 +7,11 @@ package Controller.suscriptor;
 import EJB.EventoFacadeLocal;
 import EJB.ResenaFacadeLocal;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.Evento;
@@ -100,11 +100,11 @@ public class suscriptorController implements Serializable{
         System.out.println("prueba");
     }
     
-    public void test(){
-        System.out.println("detecto el boton reseña");
+    public void setDay(SelectEvent<Date> event){
+        this.diaSeleccionado = event.getObject();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String formattedDate = dateFormat.format(this.diaSeleccionado);
+        System.out.println("Fecha seleccionada: " + formattedDate);
     }
-    /*
-    En la tabla Resenas deberia de ir la puntuacion?
-    */
 }
 

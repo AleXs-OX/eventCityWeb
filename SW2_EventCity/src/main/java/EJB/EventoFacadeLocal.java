@@ -34,5 +34,7 @@ public interface EventoFacadeLocal {
     int count();
     
    List<Evento> findEventoByCategoria(Integer idCategoria);
+   
+   List<Evento> findEventosByCategoriaAndFecha(Integer idCategoria,Date fecha);
     
 }

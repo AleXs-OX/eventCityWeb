@@ -11,8 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.Id;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.sql.Date;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
