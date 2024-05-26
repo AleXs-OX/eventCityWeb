@@ -1,16 +1,20 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package modelo;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
-@Table(name = "resenas")
-public class Resena {
+@Table(name = "suscripciones")
+public class Suscripcion {
     
     @EmbeddedId
-    private ResenaId id;
+    private SuscripcionId id;
 
     @ManyToOne
     @MapsId("idSuscriptor")
@@ -21,19 +25,18 @@ public class Resena {
     @MapsId("idEvento")
     @JoinColumn(name = "idEvento")
     private Evento evento;
+    
+    @Column(name = "fechaSus")
+    private Date fechaSus;
+    
+    @Column(name = "estado")
+    private boolean estado;
 
-    @Column(name = "comentario")
-    private String comentario;
-
-    @Column(name = "fecha")
-    private Date fecha;
-
-    // Getters and Setters
-    public ResenaId getId() {
+    public SuscripcionId getId() {
         return id;
     }
 
-    public void setId(ResenaId id) {
+    public void setId(SuscripcionId id) {
         this.id = id;
     }
 
@@ -53,29 +56,30 @@ public class Resena {
         this.evento = evento;
     }
 
-    public String getComentario() {
-        return comentario;
+    public Date getFechaSus() {
+        return fechaSus;
     }
 
-    public void setComentario(String comentario) {
-        this.comentario = comentario;
+    public void setFechaSus(Date fechaSus) {
+        this.fechaSus = fechaSus;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public boolean isEstado() {
+        return estado;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
+    
+   
 }
 
 @Embeddable
-class ResenaId implements Serializable {
+class SuscripcionId implements Serializable {
     private int idSuscriptor;
     private int idEvento;
 
-    // Getters and Setters
     public int getIdSuscriptor() {
         return idSuscriptor;
     }
@@ -92,11 +96,13 @@ class ResenaId implements Serializable {
         this.idEvento = idEvento;
     }
 
+    
+    
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 31 * hash + this.idSuscriptor;
-        hash = 31 * hash + this.idEvento;
+        hash = 97 * hash + this.idSuscriptor;
+        hash = 97 * hash + this.idEvento;
         return hash;
     }
 
@@ -111,7 +117,7 @@ class ResenaId implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final ResenaId other = (ResenaId) obj;
+        final SuscripcionId other = (SuscripcionId) obj;
         if (this.idSuscriptor != other.idSuscriptor) {
             return false;
         }
@@ -120,4 +126,6 @@ class ResenaId implements Serializable {
         }
         return true;
     }
+
+    
 }

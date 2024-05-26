@@ -6,11 +6,11 @@
 package modelo;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Column;
-import javax.persistence.Id;
-import java.time.LocalDate;
+import java.sql.Time;
+import javax.persistence.*;
+import java.sql.Date;
+import java.util.List;
+import java.util.Objects;
 
 
 @Entity
@@ -18,30 +18,56 @@ import java.time.LocalDate;
 public class Evento implements Serializable{
     
     @Id
-    @Column (name="idEvento")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idEvento")
     private int idEvento;
     
-    @Column (name="titulo")
-    private String nombre;
-    @Column (name="descripcion")
+    @Column(name = "titulo", nullable = false)
+    private String titulo;
+    
+    @Column(name = "descripcion", nullable = false)
     private String descripcion;
-    @Column (name="fechaAlta")
-    private LocalDate fechaAlta;
-    @Column (name="fechaEvento")
-    private LocalDate fechaEvento;    
-    @Column (name="idPuntuacion")
-    private int idPuntuacion ;
-    @Column (name="activo")
-    private boolean activo ;
-    @Column (name="precio")
-    private int precio ;
-    @Column (name="capacidad")
-    private int capacidad ;
+    
+    @Column(name = "fechaAlta")
+    private Date fechaAlta;
+    
+    @Column(name = "fechaEvento")
+    private Date fechaEvento;
+    
+    @Column (name="horaEvento")
+    private Time horaEvento;
+    
+    @Column(name = "activo")
+    private boolean activo;
+    
+    @Column(name = "precio", nullable = false, columnDefinition = "FLOAT DEFAULT 0.0")
+    private float precio;
+    
+    @ManyToOne
+    @JoinColumn(name = "idPublicador")
+    private Publicador publicador;
+    
+    @ManyToOne
+    @JoinColumn(name = "idCategoria")
+    private Categoria categoria;
+    
+    @ManyToOne
+    @JoinColumn(name = "idLocalizacion")
+    private Localizacion localizacion;
+    
+    @Column(name = "capacidadActual", columnDefinition = "INT DEFAULT 1")
+    private int capacidadActual;
+
+    @OneToMany(mappedBy = "evento")
+    private List<Suscripcion> suscripciones;
+
+    @OneToMany(mappedBy = "evento")
+    private List<Puntuacion> puntuaciones;
+
+    @OneToMany(mappedBy = "evento")
+    private List<Resena> resenas;
  //Faltan las foreing keys de Publicador,Categoria,Localizacion,Reseña
-    
-    
-    
-    // Getter y Setter para idEvento
+
     public int getIdEvento() {
         return idEvento;
     }
@@ -50,16 +76,14 @@ public class Evento implements Serializable{
         this.idEvento = idEvento;
     }
 
-    // Getter y Setter para nombre
-    public String getNombre() {
-        return nombre;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
-    // Getter y Setter para descripcion
     public String getDescripcion() {
         return descripcion;
     }
@@ -68,34 +92,22 @@ public class Evento implements Serializable{
         this.descripcion = descripcion;
     }
 
-    // Getter y Setter para fechaAlta
-    public LocalDate getFechaAlta() {
+    public Date getFechaAlta() {
         return fechaAlta;
     }
 
-    public void setFechaAlta(LocalDate fechaAlta) {
+    public void setFechaAlta(Date fechaAlta) {
         this.fechaAlta = fechaAlta;
     }
 
-    // Getter y Setter para fechaEvento
-    public LocalDate getFechaEvento() {
+    public Date getFechaEvento() {
         return fechaEvento;
     }
 
-    public void setFechaEvento(LocalDate fechaEvento) {
+    public void setFechaEvento(Date fechaEvento) {
         this.fechaEvento = fechaEvento;
     }
 
-    // Getter y Setter para idPuntuacion
-    public int getIdPuntuacion() {
-        return idPuntuacion;
-    }
-
-    public void setIdPuntuacion(int idPuntuacion) {
-        this.idPuntuacion = idPuntuacion;
-    }
-
-    // Getter y Setter para activo
     public boolean isActivo() {
         return activo;
     }
@@ -104,21 +116,158 @@ public class Evento implements Serializable{
         this.activo = activo;
     }
 
-    // Getter y Setter para precio
-    public int getPrecio() {
+    public float getPrecio() {
         return precio;
     }
 
-    public void setPrecio(int precio) {
+    public void setPrecio(float precio) {
         this.precio = precio;
     }
 
-    // Getter y Setter para capacidad
-    public int getCapacidad() {
-        return capacidad;
+    public Publicador getPublicador() {
+        return publicador;
     }
 
-    public void setCapacidad(int capacidad) {
-        this.capacidad = capacidad;
+    public void setPublicador(Publicador publicador) {
+        this.publicador = publicador;
     }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public Localizacion getLocalizacion() {
+        return localizacion;
+    }
+
+    public void setLocalizacion(Localizacion localizacion) {
+        this.localizacion = localizacion;
+    }
+
+    public int getCapacidadActual() {
+        return capacidadActual;
+    }
+
+    public void setCapacidadActual(int capacidadActual) {
+        this.capacidadActual = capacidadActual;
+    }
+
+    public List<Suscripcion> getSuscripciones() {
+        return suscripciones;
+    }
+
+    public void setSuscripciones(List<Suscripcion> suscripciones) {
+        this.suscripciones = suscripciones;
+    }
+
+    public List<Puntuacion> getPuntuaciones() {
+        return puntuaciones;
+    }
+
+    public void setPuntuaciones(List<Puntuacion> puntuaciones) {
+        this.puntuaciones = puntuaciones;
+    }
+
+    public List<Resena> getResenas() {
+        return resenas;
+    }
+
+    public void setResenas(List<Resena> resenas) {
+        this.resenas = resenas;
+    }
+
+    public Time getHoraEvento() {
+        return horaEvento;
+    }
+
+    public void setHoraEvento(Time horaEvento) {
+        this.horaEvento = horaEvento;
+    }
+
+    
+    
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 31 * hash + this.idEvento;
+        hash = 31 * hash + Objects.hashCode(this.titulo);
+        hash = 31 * hash + Objects.hashCode(this.descripcion);
+        hash = 31 * hash + Objects.hashCode(this.fechaAlta);
+        hash = 31 * hash + Objects.hashCode(this.fechaEvento);
+        hash = 31 * hash + (this.activo ? 1 : 0);
+        hash = 31 * hash + Float.floatToIntBits(this.precio);
+        hash = 31 * hash + Objects.hashCode(this.publicador);
+        hash = 31 * hash + Objects.hashCode(this.categoria);
+        hash = 31 * hash + Objects.hashCode(this.localizacion);
+        hash = 31 * hash + this.capacidadActual;
+        hash = 31 * hash + Objects.hashCode(this.suscripciones);
+        hash = 31 * hash + Objects.hashCode(this.puntuaciones);
+        hash = 31 * hash + Objects.hashCode(this.resenas);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Evento other = (Evento) obj;
+        if (this.idEvento != other.idEvento) {
+            return false;
+        }
+        if (this.activo != other.activo) {
+            return false;
+        }
+        if (Float.floatToIntBits(this.precio) != Float.floatToIntBits(other.precio)) {
+            return false;
+        }
+        if (this.capacidadActual != other.capacidadActual) {
+            return false;
+        }
+        if (!Objects.equals(this.titulo, other.titulo)) {
+            return false;
+        }
+        if (!Objects.equals(this.descripcion, other.descripcion)) {
+            return false;
+        }
+        if (!Objects.equals(this.fechaAlta, other.fechaAlta)) {
+            return false;
+        }
+        if (!Objects.equals(this.fechaEvento, other.fechaEvento)) {
+            return false;
+        }
+        if (!Objects.equals(this.publicador, other.publicador)) {
+            return false;
+        }
+        if (!Objects.equals(this.categoria, other.categoria)) {
+            return false;
+        }
+        if (!Objects.equals(this.localizacion, other.localizacion)) {
+            return false;
+        }
+        if (!Objects.equals(this.suscripciones, other.suscripciones)) {
+            return false;
+        }
+        if (!Objects.equals(this.puntuaciones, other.puntuaciones)) {
+            return false;
+        }
+        if (!Objects.equals(this.resenas, other.resenas)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
+    
+   
 }

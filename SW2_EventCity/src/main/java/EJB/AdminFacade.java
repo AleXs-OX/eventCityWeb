@@ -8,10 +8,14 @@ package EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import modelo.Resena;
+import modelo.Admin;
 
+/**
+ *
+ * @author Beatriz
+ */
 @Stateless
-public class ResenaFacade extends AbstractFacade<Resena> implements ResenaFacadeLocal {
+public class AdminFacade extends AbstractFacade<Admin> implements AdminFacadeLocal {
 
     @PersistenceContext(unitName = "PublicacionesPU")
     private EntityManager em;
@@ -21,8 +25,8 @@ public class ResenaFacade extends AbstractFacade<Resena> implements ResenaFacade
         return em;
     }
 
-    public ResenaFacade() {
-        super(Resena.class);
+    public AdminFacade() {
+        super(Admin.class);
     }
     
 }

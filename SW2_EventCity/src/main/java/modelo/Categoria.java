@@ -6,27 +6,34 @@
 package modelo;
 //Prueba de git
 import java.io.Serializable;
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 import java.util.Objects;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 @Entity
 @Table(name="categorias")
 //REGLAS: Contructor vacio, atributos privados y getter y setter de todos los atributos
 public class Categoria implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //Valor autogenerado
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idCategoria")
     private int idCategoria;
     
-    @Column(name="nombre")
+    @Column(name = "nombre")
     private String nombre;
+
+    @OneToMany(mappedBy = "categoria")
+    private List<Evento> eventos;
+
     
-    @Column(name="estado")
-    private boolean estado;
+    
+    public List<Evento> getEventos() {
+        return eventos;
+    }
+
+    public void setEventos(List<Evento> eventos) {
+        this.eventos = eventos;
+    }
 
     @Override
     public int hashCode() {
@@ -49,9 +56,6 @@ public class Categoria implements Serializable {
         }
         final Categoria other = (Categoria) obj;
         if (this.idCategoria != other.idCategoria) {
-            return false;
-        }
-        if (this.estado != other.estado) {
             return false;
         }
         if (!Objects.equals(this.nombre, other.nombre)) {
@@ -78,13 +82,6 @@ public class Categoria implements Serializable {
         this.nombre = nombre;
     }
 
-    public boolean isEstado() {
-        return estado;
-    }
-
-    public void setEstado(boolean estado) {
-        this.estado = estado;
-    }
     
     
     

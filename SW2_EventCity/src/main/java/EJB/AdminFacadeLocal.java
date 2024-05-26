@@ -7,22 +7,26 @@ package EJB;
 
 import java.util.List;
 import javax.ejb.Local;
-import modelo.Resena;
+import modelo.Admin;
 
+/**
+ *
+ * @author Beatriz
+ */
 @Local
-public interface ResenaFacadeLocal {
+public interface AdminFacadeLocal {
 
-    void create(Resena resena);
+    void create(Admin admin);
 
-    void edit(Resena resena);
+    void edit(Admin admin);
 
-    void remove(Resena resena);
+    void remove(Admin admin);
 
-    Resena find(Object id);
+    Admin find(Object id);
 
-    List<Resena> findAll();
+    List<Admin> findAll();
 
-    List<Resena> findRange(int[] range);
+    List<Admin> findRange(int[] range);
 
     int count();
     

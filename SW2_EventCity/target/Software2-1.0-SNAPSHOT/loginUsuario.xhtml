@@ -17,8 +17,19 @@
     <div id="login-page">
         <div id="login-card">  <!-- Tarjeta en el centro -->
             <h:form id="login-form">
+                
+                <p:outputLabel for="username" value="Nombre de usuario" />
+                <p:inputText id="username" requiredMessage="Debes introducir un nombre de usuario" />                   
 
-                <p:commandButton id="registro" class="registerButton" value="Registrarse" action="#{loginUsuarioController.redirectToRegister()}" />
+                <p:outputLabel for="password" value="Contraseña" />
+                <p:password id="password" required="false" requiredMessage="Debes introducir una contraseña" redisplay="true" />
+                
+                <div style="height: 10px;"></div>
+                <p:commandButton class="loginButton" value="Iniciar Sesión" action="#{loginUsuarioController.tryLogin}" />
+                
+                <div style="height: 10px;"></div>
+                
+                <p:commandButton id="registro" class="registerButton" value="Registrarse" action="#{loginUsuarioController.irRegistro()}" />
                 
                 <p:commandLink action="registroUsuario?faces-redirect=true" value="Registrarse" />
 

@@ -1,16 +1,19 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package modelo;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.sql.Date;
 
 @Entity
-@Table(name = "resenas")
-public class Resena {
+@Table(name = "puntuaciones")
+public class Puntuacion{
     
     @EmbeddedId
-    private ResenaId id;
+    private PuntuacionId id;
 
     @ManyToOne
     @MapsId("idSuscriptor")
@@ -18,22 +21,23 @@ public class Resena {
     private Suscriptor suscriptor;
 
     @ManyToOne
+    @MapsId("idUsuario")
+    @JoinColumn(name = "idUsuario")
+    private Usuario usuario;
+
+    @ManyToOne
     @MapsId("idEvento")
     @JoinColumn(name = "idEvento")
     private Evento evento;
+    
+    @Column(name = "puntuacion")
+    private int puntuacion;
 
-    @Column(name = "comentario")
-    private String comentario;
-
-    @Column(name = "fecha")
-    private Date fecha;
-
-    // Getters and Setters
-    public ResenaId getId() {
+    public PuntuacionId getId() {
         return id;
     }
 
-    public void setId(ResenaId id) {
+    public void setId(PuntuacionId id) {
         this.id = id;
     }
 
@@ -45,6 +49,14 @@ public class Resena {
         this.suscriptor = suscriptor;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     public Evento getEvento() {
         return evento;
     }
@@ -53,35 +65,38 @@ public class Resena {
         this.evento = evento;
     }
 
-    public String getComentario() {
-        return comentario;
+    public int getPuntuacion() {
+        return puntuacion;
     }
 
-    public void setComentario(String comentario) {
-        this.comentario = comentario;
+    public void setPuntuacion(int puntuacion) {
+        this.puntuacion = puntuacion;
     }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
+    
+    
+   
 }
 
 @Embeddable
-class ResenaId implements Serializable {
+class PuntuacionId implements Serializable {
     private int idSuscriptor;
+    private int idUsuario;
     private int idEvento;
 
-    // Getters and Setters
     public int getIdSuscriptor() {
         return idSuscriptor;
     }
 
     public void setIdSuscriptor(int idSuscriptor) {
         this.idSuscriptor = idSuscriptor;
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public int getIdEvento() {
@@ -92,11 +107,14 @@ class ResenaId implements Serializable {
         this.idEvento = idEvento;
     }
 
+    
+    
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 31 * hash + this.idSuscriptor;
-        hash = 31 * hash + this.idEvento;
+        int hash = 5;
+        hash = 13 * hash + this.idSuscriptor;
+        hash = 13 * hash + this.idUsuario;
+        hash = 13 * hash + this.idEvento;
         return hash;
     }
 
@@ -111,8 +129,11 @@ class ResenaId implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final ResenaId other = (ResenaId) obj;
+        final PuntuacionId other = (PuntuacionId) obj;
         if (this.idSuscriptor != other.idSuscriptor) {
+            return false;
+        }
+        if (this.idUsuario != other.idUsuario) {
             return false;
         }
         if (this.idEvento != other.idEvento) {
@@ -120,4 +141,7 @@ class ResenaId implements Serializable {
         }
         return true;
     }
+    
+    
 }
+

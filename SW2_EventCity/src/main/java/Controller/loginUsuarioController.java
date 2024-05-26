@@ -30,6 +30,8 @@ import modelo.Usuario;
 @ViewScoped //Este es el ámbito que tiene
 public class loginUsuarioController implements Serializable{
     
+    //private static final long serialVersionUID = 7186752730965960966L;
+    
     private String username;
     
     private String password;
@@ -63,34 +65,14 @@ public class loginUsuarioController implements Serializable{
     }
     
     public void tryLogin() throws IOException{
-        System.out.println("*********");
-        //Estas dos lineas no se si son necesarias
-        FacesContext context = FacesContext.getCurrentInstance();
-        ExternalContext ec = context.getExternalContext();
-        //Verificación de usuario y contraseña
-        //try{
-            Usuario usuarioLogeado = usuarioEJB.tryLogin(username, password);
-        //Si todo es correcto
-        usuarioLogeado.setPassword(null);//se elimina la contraseña por seguridad
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", usuarioLogeado); // Guardar usuario en la sesión
-        System.out.println("*********************");
-        ec.getSessionMap().put("user",usuarioLogeado);
-        //MIRAR PATH
        
-        ec.redirect(ec.getRequestContextPath() + "/subscriptor/" + usuarioLogeado.getIdRol() + "/homeUI.xhtml");
-        /**}
-         * catch(NoUserException e){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error de inicio de sesión", "Usuario no encontrado"));
-            
-        }* */
-        
         
     }
- 
+
     
     
     
-    
+    /*
     public UsuarioFacadeLocal getUsuarioEJB() {
         return usuarioEJB;
     }
@@ -115,6 +97,6 @@ public class loginUsuarioController implements Serializable{
         this.password = password;
     }
     
-
+    */
 
 }
