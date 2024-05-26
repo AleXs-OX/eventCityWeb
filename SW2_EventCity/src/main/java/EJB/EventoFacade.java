@@ -5,15 +5,14 @@
  */
 package EJB;
 
+import java.util.Date;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import modelo.Evento;
 
-/**
- *
- * @author Beatriz
- */
+
 @Stateless
 public class EventoFacade extends AbstractFacade<Evento> implements EventoFacadeLocal {
 
@@ -27,6 +26,22 @@ public class EventoFacade extends AbstractFacade<Evento> implements EventoFacade
 
     public EventoFacade() {
         super(Evento.class);
+    }
+
+    @Override
+    public List<Evento> findEventoByCategoria(Integer idCategoria){
+       return em.createQuery("SELECT e FROM Evento e WHERE e.idCategoria = :idCategoria", Evento.class)
+                 .setParameter("idCategoria", idCategoria)
+                 .getResultList();
+    }
+    
+    @Override
+    public List<Evento> findEventosByCategoriaAndFecha(Integer idCategoria, Date fecha) {
+        java.sql.Date sqlDate = new java.sql.Date(fecha.getTime());
+        return em.createQuery("SELECT e FROM Evento e WHERE e.idCategoria = :idCategoria AND e.fechaEvento = :fechaEvento", Evento.class)
+                 .setParameter("idCategoria", idCategoria)
+                 .setParameter("fechaEvento", sqlDate)
+                 .getResultList();
     }
     
 }

@@ -53,6 +53,8 @@ public class Resena {
         this.evento = evento;
     }
 
+
+
     public String getComentario() {
         return comentario;
     }
@@ -60,6 +62,7 @@ public class Resena {
     public void setComentario(String comentario) {
         this.comentario = comentario;
     }
+
 
     public Date getFecha() {
         return fecha;

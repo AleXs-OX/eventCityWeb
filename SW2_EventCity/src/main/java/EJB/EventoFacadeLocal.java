@@ -5,14 +5,12 @@
  */
 package EJB;
 
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 import modelo.Evento;
 
-/**
- *
- * @author Beatriz
- */
+
 @Local
 public interface EventoFacadeLocal {
 
@@ -29,5 +27,9 @@ public interface EventoFacadeLocal {
     List<Evento> findRange(int[] range);
 
     int count();
+
+   List<Evento> findEventoByCategoria(Integer idCategoria);
+   
+   List<Evento> findEventosByCategoriaAndFecha(Integer idCategoria,Date fecha);
     
 }
