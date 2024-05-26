@@ -28,9 +28,8 @@ public class ResenaFacade extends AbstractFacade<Resena> implements ResenaFacade
     
     @Override
     public List<Resena> findResenasByIdEvento(Integer idEvento) {
-    return em.createQuery("SELECT r FROM Resena r WHERE r.idEvento = :idEvento", Resena.class)
+    return em.createQuery("SELECT r FROM Resena r WHERE r.evento.idEvento = :idEvento", Resena.class)
              .setParameter("idEvento", idEvento)
              .getResultList();
     }
-
 }

@@ -53,8 +53,6 @@ public class Resena {
         this.evento = evento;
     }
 
-
-
     public String getComentario() {
         return comentario;
     }

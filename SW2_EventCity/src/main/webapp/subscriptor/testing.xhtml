@@ -24,7 +24,7 @@
                         <p:column headerText="Conciertos">
                                 <p:card class="card_evento" style="width: 16.6em">
                                     <f:facet name="title">
-                                        <p> #{evento.nombre}</p>
+                                        <p> #{evento.titulo}</p>
                                     </f:facet>
                                     <f:facet name="subtitle">
                                         <p>#{evento.descripcion}</p>
@@ -33,7 +33,7 @@
                                     <f:facet name="footer">
                                         <p:commandButton id="btn_asistir_1" icon="pi pi-check" value="Asistir" styleClass="ui-button-raised btn_card"/>
                                         <p:overlayPanel for="btn_asistir_1">
-                                            <p>Acabas de suscribirte al evento #{evento.nombre}</p>
+                                            <p>Acabas de suscribirte al evento #{evento.titulo}</p>
                                         </p:overlayPanel>
                                         <p:commandButton id="btn-info_1" icon="pi pi-star-fill" value="Información" styleClass="ui-button-raised ui-button-secondary btn_card" style="margin-left: .5em"/>
                                         <p:overlayPanel for="btn-info_1" showCloseIcon="true">
@@ -51,16 +51,16 @@
                                                         <p:rating readonly="false" value="3"/>
                                                         <p:inputTextarea  style="margin-top: 1em;" rows="4" cols="27" maxlength="100" autoResize="true"/>
                                                         <p:commandButton id="btn-resena" icon="pi pi-star-fill" value="Reseñar" styleClass="ui-button-raised ui-button-secondary btn_card" 
-                                                                         style="margin-left: 1em; margin-top: 2.5em" action="#{suscriptorController.test()}"/>   
+                                                                         style="margin-left: 1em; margin-top: 2.5em" action="#{suscriptorController.doTest()}"/>   
                                                     </div>
                                                 </div>
                                                 <p></p>
                                                 <p:dataList value="#{suscriptorController.getResenasByEvento(evento.idEvento)}" var="resena" type="definition">  
                                                         <div class="resena_image">
                                                             <div class="resena_lista">
-                                                                <div class="resena_nombre">#{resena.idResena}</div>
+                                                                <div class="resena_nombre">#{resena.suscriptor.usuario.nombre}</div>
                                                                 <div class="resena_desc">#{resena.comentario}</div>
-                                                                <p:rating readonly="true" value="#{resena.valoracion}"/>
+                                                                <p:rating readonly="true" value="#{suscriptorController.getPuntuacionByIdSuscriptorAndIdEvento(resena.suscriptor.idSubscriptor, evento.idEvento)}"/>
                                                             </div>
                                                         </div>                           
                                                 </p:dataList>
@@ -78,7 +78,7 @@
                                     <f:facet name="header">
                                     </f:facet>
                                     <f:facet name="title">
-                                        <p> #{evento.nombre}</p>
+                                        <p> #{evento.titulo}</p>
                                     </f:facet>
                                     <f:facet name="subtitle">
                                         Género: Rock
@@ -87,7 +87,7 @@
                                     <f:facet name="footer">
                                         <p:commandButton id="btn_asistir_2" icon="pi pi-check" value="Asistir" styleClass="ui-button-raised btn_card"/>
                                         <p:overlayPanel for="btn_asistir_2">
-                                            <p>Acabas de suscribirte al evento #{evento.nombre}</p>
+                                            <p>Acabas de suscribirte al evento #{evento.titulo}</p>
                                         </p:overlayPanel>
                                         <p:commandButton id="btn-info_2" icon="pi pi-star-fill" value="Información" styleClass="ui-button-raised ui-button-secondary btn_card" style="margin-left: .5em"/>
                                         <p:overlayPanel for="btn-info_2" showCloseIcon="true">
@@ -131,7 +131,7 @@
                                     <f:facet name="header">
                                     </f:facet>
                                     <f:facet name="title">
-                                        <p> #{evento.nombre}</p>
+                                        <p> #{evento.titulo}</p>
                                     </f:facet>
                                     <f:facet name="subtitle">
                                         Género: Rock
@@ -151,7 +151,7 @@
                                     <f:facet name="header">
                                     </f:facet>
                                     <f:facet name="title">
-                                        <p> #{evento.nombre}</p>
+                                        <p> #{evento.titulo}</p>
                                     </f:facet>
                                     <f:facet name="subtitle">
                                         Género: Rock

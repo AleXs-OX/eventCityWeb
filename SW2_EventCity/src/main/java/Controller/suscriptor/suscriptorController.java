@@ -5,6 +5,7 @@
  */
 package Controller.suscriptor;
 import EJB.EventoFacadeLocal;
+import EJB.PuntuacionFacadeLocal;
 import EJB.ResenaFacadeLocal;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -15,6 +16,7 @@ import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.Evento;
+import modelo.Puntuacion;
 import modelo.Resena;
 import modelo.Suscriptor;
 import org.primefaces.event.SelectEvent;
@@ -35,6 +37,9 @@ public class suscriptorController implements Serializable{
     
     @EJB
     private ResenaFacadeLocal resenaEJB;
+    
+    @EJB
+    private PuntuacionFacadeLocal puntuacionEJB;
     
     private Date diaSeleccionado;
     private Date diaActual;
@@ -83,12 +88,15 @@ public class suscriptorController implements Serializable{
     
     public void doTest(){
         System.out.println("estoy detectando el boton");
-        System.out.println(this.diaSeleccionado);
     }
    
     public List<Resena> getResenasByEvento(int idEvento){
         return resenaEJB.findResenasByIdEvento(idEvento);
     }   
+    
+    public int getPuntuacionByIdSuscriptorAndIdEvento(int idSuscriptor, int idEvento){
+        return puntuacionEJB.findPuntuacionByIdSuscriptorAndIdEvento(idSuscriptor, idEvento).getPuntuacion();
+    }
     
     public void showResena(SelectEvent<String> event){
         String prueba = event.toString();
