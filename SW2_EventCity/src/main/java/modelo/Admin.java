@@ -23,12 +23,13 @@ public class Admin implements Serializable {
     @Column(name="idUsuario") //Valor autogenerado
     private int idUsuario;
     
-    @Column
+    @Column(name="rol")
     private String rol;
     
     @OneToOne
     @MapsId
     @JoinColumn(name = "idUsuario")
+    private Usuario usuario;
     
     @Override
     public int hashCode() {
