@@ -5,6 +5,7 @@
  */
 package Controller.suscriptor;
 import EJB.EventoFacadeLocal;
+import EJB.PuntuacionFacadeLocal;
 import EJB.ResenaFacadeLocal;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -15,6 +16,7 @@ import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.Evento;
+import modelo.Puntuacion;
 import modelo.Resena;
 import modelo.Suscriptor;
 import org.primefaces.event.SelectEvent;
@@ -36,13 +38,16 @@ public class suscriptorController implements Serializable{
     @EJB
     private ResenaFacadeLocal resenaEJB;
     
+    @EJB
+    private PuntuacionFacadeLocal puntuacionEJB;
+    
     private Date diaSeleccionado;
     private Date diaActual;
     private int usuarioActual = 1;
     
     private int concierto=1;
-    private int c2=2;
-    private int c3=3;
+    private int talleresClases=2;
+    private int competicionesTorneos=3;
     private int miscelaneo=4;
 
     public suscriptorController(){
@@ -55,14 +60,14 @@ public class suscriptorController implements Serializable{
     public List<Evento> getEventoConciertos(){
         return eventoEJB.findEventosByCategoriaAndFecha(this.concierto,this.diaSeleccionado);
     }
-    public List<Evento> getEventoC2(){
-        return eventoEJB.findEventoByCategoria(this.c2);
+    public List<Evento> getEventoTalleresyClases(){
+        return eventoEJB.findEventosByCategoriaAndFecha(this.talleresClases,this.diaSeleccionado);
     }
-    public List<Evento> getEventoC3(){
-        return eventoEJB.findEventoByCategoria(this.c3);
+    public List<Evento> getEventoCompeticionesyTorneos(){
+        return eventoEJB.findEventosByCategoriaAndFecha(this.competicionesTorneos,this.diaSeleccionado);
     }
     public List<Evento> getEventoMiscelaneo(){
-        return eventoEJB.findEventoByCategoria(this.miscelaneo);
+        return eventoEJB.findEventosByCategoriaAndFecha(this.miscelaneo,this.diaSeleccionado);
     }
     
     /*
@@ -83,12 +88,21 @@ public class suscriptorController implements Serializable{
     
     public void doTest(){
         System.out.println("estoy detectando el boton");
-        System.out.println(this.diaSeleccionado);
     }
    
     public List<Resena> getResenasByEvento(int idEvento){
         return resenaEJB.findResenasByIdEvento(idEvento);
     }   
+    
+    public int getPuntuacionByIdSuscriptorAndIdEvento(int idSuscriptor, int idEvento){
+        Puntuacion puntuacion = puntuacionEJB.findPuntuacionByIdSuscriptorAndIdEvento(idSuscriptor, idEvento);
+        
+        if (puntuacion == null)
+            return 0;
+        
+        return puntuacion.getPuntuacion();
+        
+    }
     
     public void showResena(SelectEvent<String> event){
         String prueba = event.toString();

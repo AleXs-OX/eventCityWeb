@@ -30,4 +30,6 @@ public interface PuntuacionFacadeLocal {
 
     int count();
     
+    Puntuacion findPuntuacionByIdSuscriptorAndIdEvento(Integer idSuscriptor, Integer idEvento);
+    
 }

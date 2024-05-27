@@ -30,6 +30,4 @@ public interface UsuarioFacadeLocal {
 
     int count();
     
-    Usuario findByCredentials(String username, String password);
-    
 }

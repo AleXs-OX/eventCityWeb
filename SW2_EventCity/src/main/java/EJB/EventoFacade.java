@@ -30,7 +30,7 @@ public class EventoFacade extends AbstractFacade<Evento> implements EventoFacade
 
     @Override
     public List<Evento> findEventoByCategoria(Integer idCategoria){
-       return em.createQuery("SELECT e FROM Evento e WHERE e.idCategoria = :idCategoria", Evento.class)
+       return em.createQuery("SELECT e FROM Evento e WHERE e.categoria.idCategoria = :idCategoria", Evento.class)
                  .setParameter("idCategoria", idCategoria)
                  .getResultList();
     }
@@ -38,7 +38,7 @@ public class EventoFacade extends AbstractFacade<Evento> implements EventoFacade
     @Override
     public List<Evento> findEventosByCategoriaAndFecha(Integer idCategoria, Date fecha) {
         java.sql.Date sqlDate = new java.sql.Date(fecha.getTime());
-        return em.createQuery("SELECT e FROM Evento e WHERE e.idCategoria = :idCategoria AND e.fechaEvento = :fechaEvento", Evento.class)
+        return em.createQuery("SELECT e FROM Evento e WHERE e.categoria.idCategoria = :idCategoria AND e.fechaEvento = :fechaEvento", Evento.class)
                  .setParameter("idCategoria", idCategoria)
                  .setParameter("fechaEvento", sqlDate)
                  .getResultList();
