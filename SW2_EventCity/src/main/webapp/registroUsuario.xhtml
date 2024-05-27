@@ -7,59 +7,60 @@
     <!-- Definición cambio de idioma a español-->
     <h:outputScript library="js" name="calendar_es.js" />
     <h:head>
-        <title> Registro de usuario </title>
+        <title>Registro de usuario</title>
     </h:head>
     
     <h:body id="register-page">
-    <h:outputStylesheet library="css" name="registro.css"/>
-    
+        <h:outputStylesheet library="css" name="registro.css"/>
     
         <h:form id="register-form">
             <div id="register-card" class="register-card-container">
-                <div class="form-section"> <!-- Div del transparente de las tarjetas -->
-                    <p:fieldset legend="Datos personales"  id="personal-data">
-                        <p:panelGrid columns="2" >
+                <div class="form-section">
+                    <p:fieldset legend="Datos personales" id="personal-data">
+                        <p:panelGrid columns="2">
                             <p:outputLabel value="Nombre:" for="nombre" />
-                            <p:inputText id="nombre" value="" required="true" />
+                            <p:inputText id="nombre" value="#{registroUsuarioController.nombre}" required="true" />
 
-                            <p:outputLabel value="Primer Apellido:" for="primerAp" />
-                            <p:inputText id="primerAp" value="" required="true" />
+                            <p:outputLabel value="Apellidos:" />
+                            <p:inputText id="apellidos" value="#{registroUsuarioController.apellidos}" required="true" />
 
-                            <p:outputLabel value="Segundo Apellido:" for="segundoAp" />
-                            <p:inputText id="segundoAp" value="" required="true" />
+                            <p:outputLabel value="Telefono:" />
+                            <p:inputText id="telefono" value="#{registroUsuarioController.telefono}" required="false" />
 
-                            <p:outputLabel value="Sexo:" for="sexo" />
-                            <p:selectOneButton id="sexo" value="">
-                                <f:selectItem itemLabel="Masculino" itemValue="M" />
-                                <f:selectItem itemLabel="Femenino" itemValue="F" />
-                            </p:selectOneButton>
+                            <p:outputLabel value="Email:" />
+                            <p:inputText id="email" value="#{registroUsuarioController.email}" required="true" />
 
                             <p:outputLabel value="Fecha de nacimiento:" for="fechaNacimiento" />
-                            <p:calendar id="fechaNacimiento" value="" locale="es" navigator="true"
+                            <p:calendar id="fechaNacimiento" value="#{registroUsuarioController.fechaNacimiento}" locale="es" navigator="true"
                                         showOn="button" pattern="dd/MM/yyyy" required="true" />
                         </p:panelGrid>
                     </p:fieldset>
                 </div>
                 <div class="form-section">
                     <p:fieldset legend="Datos de acceso" class="form-section" id="access-data">
-                        <p:panelGrid columns="2" >
+                        <p:panelGrid columns="2">
                             <p:outputLabel value="Nombre de usuario:" for="username" />
-                            <p:inputText id="username" required="true" />
+                            <p:inputText id="username" value="#{registroUsuarioController.username}" required="true" />
 
                             <p:outputLabel value="Contraseña:" for="pwd1" />
-                            <p:password id="pwd1" value="" feedback="true" promptLabel="Contraseña"
-                                        weakLabel="Débil" goodLabel="Buena" strongLabel="Fuerte" />
+                            <p:password id="pwd1" value="#{registroUsuarioController.password}" feedback="true" promptLabel="Contraseña"
+                                        weakLabel="Débil" goodLabel="Buena" strongLabel="Fuerte" required="true" />
 
                             <p:outputLabel value="Repite la contraseña:" for="pwd2" />
-                            <p:password id="pwd2" value="" />
+                            <p:password id="pwd2" value="#{registroUsuarioController.confirmPassword}" required="true" />
                         </p:panelGrid>
                     </p:fieldset>
                 </div>
             </div>
-            <p:commandButton value="Registrar" styleClass="registerButton" />
+            <p:commandButton value="Registrar" action="#{registroUsuarioController.registro}" styleClass="registerButton" />
         </h:form>
-   
-</h:body>
 
-
+        <!-- Dialogo para mensaje de error -->
+        <p:dialog header="Error" widgetVar="fechaNacimientoDialog" modal="true" closable="false" resizable="false">
+            <h:outputText value="La fecha de nacimiento debe ser anterior a la fecha actual." />
+            <p:commandButton value="Aceptar" onclick="PF('fechaNacimientoDialog').hide();" type="button" />
+        </p:dialog>
+    </h:body>
 </html>
+
+
