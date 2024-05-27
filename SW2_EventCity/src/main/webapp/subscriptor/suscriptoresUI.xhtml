@@ -20,7 +20,7 @@
                 <div class="grid-container">
                     <!--<h:form>-->
                     
-                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_eventos1" value="#{suscriptorController.getEventoConciertos()}" var="evento">
+                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_eventosSus1" value="#{suscriptorController.getEventoConciertos()}" var="evento">
                         <p:column headerText="Conciertos">
                                 <p:card class="card_evento" style="width: 16.6em">
                                     <f:facet name="title">
@@ -49,6 +49,14 @@
                                                 </f:facet>
                                                 <p>Hora: #{evento.horaEvento}</p>
                                                 <p>Precio: #{evento.precio}€</p>
+                                                <div style="display: flex; align-items: center; margin-top: 3em;">
+                                                    <div style="position: relative;">               
+                                                        <p:rating readonly="false" value="3"/>
+                                                        <p:inputTextarea  style="margin-top: 1em;" rows="4" cols="27" maxlength="100" autoResize="true"/>
+                                                        <p:commandButton id="btn-resena" icon="pi pi-star-fill" value="Reseñar" styleClass="ui-button-raised ui-button-secondary btn_card" 
+                                                                         style="margin-left: 1em; margin-top: 2.5em" action="#{suscriptorController.doTest()}"/>   
+                                                    </div>
+                                                </div>
                                                 <p></p>
                                                 <p:dataList value="#{suscriptorController.getResenasByEvento(evento.idEvento)}" var="resena" type="definition">  
                                                         <div class="resena_image">
@@ -67,7 +75,7 @@
                         <!-- más columnas -->
                     </p:dataTable>
 
-                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_eventos2" value="#{suscriptorController.getEventoTalleresyClases()}" var="evento">
+                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_eventosSus2" value="#{suscriptorController.getEventoTalleresyClases()}" var="evento">
                         <p:column headerText="Talleres y Clases">
                             <p:card class="card_evento" style="width: 16.6em">
                                     <f:facet name="title">
@@ -95,6 +103,14 @@
                                                 </f:facet>
                                                 <p>Hora: #{evento.horaEvento}</p>
                                                 <p>Precio: #{evento.precio}€</p>
+                                                <div style="display: flex; align-items: center; margin-top: 3em;">
+                                                    <div style="position: relative;">               
+                                                        <p:rating readonly="false" value="3"/>
+                                                        <p:inputTextarea  style="margin-top: 1em;" rows="4" cols="27" maxlength="100" autoResize="true"/>
+                                                        <p:commandButton id="btn-resena" icon="pi pi-star-fill" value="Reseñar" styleClass="ui-button-raised ui-button-secondary btn_card" 
+                                                                         style="margin-left: 1em; margin-top: 2.5em" action="#{suscriptorController.doTest()}"/>   
+                                                    </div>
+                                                </div>
                                                 <p></p>
                                                 <p:dataList value="#{suscriptorController.getResenasByEvento(evento.idEvento)}" var="resena" type="definition">  
                                                         <div class="resena_image">
@@ -113,7 +129,7 @@
                         <!-- más columnas -->
                     </p:dataTable>
 
-                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_eventos3" value="#{suscriptorController.getEventoCompeticionesyTorneos()}" var="evento">
+                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_eventosSus3" value="#{suscriptorController.getEventoCompeticionesyTorneos()}" var="evento">
                         <p:column headerText="Competiciones y Torneos">
                             <p:card class="card_evento" style="width: 16.6em">
                                     <f:facet name="title">
@@ -142,6 +158,12 @@
                                                 <p>Hora: #{evento.horaEvento}</p>
                                                 <p>Precio: #{evento.precio}€</p>
                                                 <div style="display: flex; align-items: center; margin-top: 3em;">
+                                                    <div style="position: relative;">               
+                                                        <p:rating readonly="false" value="3"/>
+                                                        <p:inputTextarea  style="margin-top: 1em;" rows="4" cols="27" maxlength="100" autoResize="true"/>
+                                                        <p:commandButton id="btn-resena" icon="pi pi-star-fill" value="Reseñar" styleClass="ui-button-raised ui-button-secondary btn_card" 
+                                                                         style="margin-left: 1em; margin-top: 2.5em" action="#{suscriptorController.doTest()}"/>   
+                                                    </div>
                                                 </div>
                                                 <p></p>
                                                 <p:dataList value="#{suscriptorController.getResenasByEvento(evento.idEvento)}" var="resena" type="definition">  
@@ -160,7 +182,7 @@
                         </p:column>
                         <!-- más columnas -->
                     </p:dataTable>
-                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" var="evento" id="t_eventos4" value="#{suscriptorController.getEventoMiscelaneo()}" >
+                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" var="evento" id="t_eventosSus4" value="#{suscriptorController.getEventoMiscelaneo()}" >
                         <p:column headerText="Misceláneo">
                             <p:column headerText="Conciertos">
                                 <p:card class="card_evento" style="width: 16.6em">
@@ -189,6 +211,14 @@
                                                 </f:facet>
                                                 <p>Hora: #{evento.horaEvento}</p>
                                                 <p>Precio: #{evento.precio}€</p>
+                                                <div style="display: flex; align-items: center; margin-top: 3em;">
+                                                    <div style="position: relative;">               
+                                                        <p:rating readonly="false" value="3"/>
+                                                        <p:inputTextarea  style="margin-top: 1em;" rows="4" cols="27" maxlength="100" autoResize="true"/>
+                                                        <p:commandButton id="btn-resena" icon="pi pi-star-fill" value="Reseñar" styleClass="ui-button-raised ui-button-secondary btn_card" 
+                                                                         style="margin-left: 1em; margin-top: 2.5em" action="#{suscriptorController.doTest()}"/>   
+                                                    </div>
+                                                </div>
                                                 <p></p>
                                                 <p:dataList value="#{suscriptorController.getResenasByEvento(evento.idEvento)}" var="resena" type="definition">  
                                                         <div class="resena_image">
@@ -211,8 +241,8 @@
                     <!--</h:form>-->
                     
                     <div class="calendar">
-                        <p:calendar mode="inline" id="calendario" value="#{suscriptorController.dateSeleccionada}" locale = "es" navigator ="true" showOn="button" pattern="dd/MM/yyyy">
-                            <p:ajax event="dateSelect" update="t_eventos1 t_eventos2 t_eventos3 t_eventos4"
+                        <p:calendar mode="inline" id="calendarioSus" value="#{suscriptorController.dateSeleccionada}" locale = "es" navigator ="true" showOn="button" pattern="dd/MM/yyyy">
+                            <p:ajax event="dateSelect" update="t_eventosSus1 t_eventosSus2 t_eventosSus3 t_eventosSus4"
                                     />
                         </p:calendar>
                     </div> 
