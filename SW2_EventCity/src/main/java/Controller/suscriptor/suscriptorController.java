@@ -95,7 +95,9 @@ public class suscriptorController implements Serializable{
     }   
     
     public int getPuntuacionByIdSuscriptorAndIdEvento(int idSuscriptor, int idEvento){
-        return puntuacionEJB.findPuntuacionByIdSuscriptorAndIdEvento(idSuscriptor, idEvento).getPuntuacion();
+        int num = puntuacionEJB.findPuntuacionByIdSuscriptorAndIdEvento(idSuscriptor, idEvento).getPuntuacion();
+        return num;
+        
     }
     
     public void showResena(SelectEvent<String> event){
