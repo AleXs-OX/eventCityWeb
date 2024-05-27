@@ -64,7 +64,7 @@ public class suscriptorController implements Serializable{
         
         /*Setea al suscriptor de prueba un id ya creado en bdd*/
         
-        this.suscriptorActual.setIdSubscriptor(1);
+        this.suscriptorActual.setIdSubscriptor(5);
         
         System.out.println(new java.sql.Date(this.diaSeleccionado.getTime()));
     }
