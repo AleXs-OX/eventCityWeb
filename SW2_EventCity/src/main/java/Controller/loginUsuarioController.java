@@ -20,6 +20,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.Usuario;
+import javax.inject.Named;
+
 
 /**
  *
@@ -27,7 +29,7 @@ import modelo.Usuario;
  */
 
 @Named //Porque es una clase que se va a enlazar con una vista
-@ViewScoped //Este es el ámbito que tiene
+@SessionScoped //Este es el ámbito que tiene
 public class loginUsuarioController implements Serializable{
     
     //private static final long serialVersionUID = 7186752730965960966L;
@@ -35,6 +37,8 @@ public class loginUsuarioController implements Serializable{
     private String username;
     
     private String password;
+    
+    private Usuario usuario;
     
     @EJB
     private UsuarioFacadeLocal usuarioEJB;
@@ -60,19 +64,34 @@ public class loginUsuarioController implements Serializable{
         FacesContext.getCurrentInstance().getExternalContext().redirect(url);*/
     } 
     
-    public void test(){
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-    }
-    
-    public void tryLogin() throws IOException{
-       
-        
+    public String login() {
+        System.out.println("Intentando iniciar sesión con: " + username + " / " + password);
+        usuario = usuarioEJB.findByCredentials(username, password);
+        if (usuario != null) {
+           
+            System.out.println("Inicio de sesión exitoso para usuario: " + usuario.getNombreusuario());
+            return "/subscriptor/homeUI?faces-redirect=true"; // Redirige a la página principal o dashboard
+        } else {
+            System.out.println("Error de inicio de sesión para usuario: " + username);
+            FacesContext.getCurrentInstance().addMessage(null, 
+                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario o contraseña incorrectos", null));
+            return "login";
+        }
     }
 
+    public String logout() {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "loginUsuario?faces-redirect=true";
+    }
+    
+    public String irRegistro(){
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        return "registroUsuario?faces-redirect=true";
+    }
     
     
     
-    /*
+    
     public UsuarioFacadeLocal getUsuarioEJB() {
         return usuarioEJB;
     }
@@ -97,6 +116,6 @@ public class loginUsuarioController implements Serializable{
         this.password = password;
     }
     
-    */
+    
 
 }
