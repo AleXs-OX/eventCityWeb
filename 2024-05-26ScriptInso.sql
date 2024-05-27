@@ -148,7 +148,7 @@ INSERT INTO `publicadores` (`idUsuario`, `fechaAlta`, `numEventos`, `descripcion
 
 -- Volcando estructura para tabla publicaciones.puntuaciones
 CREATE TABLE IF NOT EXISTS `puntuaciones` (
-  `idSubscriptor` int NOT NULL,
+  `idSuscriptor` int NOT NULL,
   `idUsuario` int NOT NULL,
   `puntuacion` int DEFAULT NULL,
   `idEvento` int NOT NULL,
