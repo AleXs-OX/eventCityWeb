@@ -88,22 +88,22 @@ public class suscriptorController implements Serializable{
     */    
     public List<Suscripcion> getSuscripcionesConciertos(){
         return this.suscripcionEJB.findSuscripcionesByIdSuscriptor
-        (this.suscriptorActual.getIdSubscriptor(),this.concierto);
+        (this.suscriptorActual.getIdSubscriptor(),this.concierto,this.diaSeleccionado);
     }
     public List<Suscripcion> getSuscripcionesTalleresyClases(){
         
         return this.suscripcionEJB.findSuscripcionesByIdSuscriptor
-        (this.suscriptorActual.getIdSubscriptor(),this.talleresClases);
+        (this.suscriptorActual.getIdSubscriptor(),this.talleresClases,this.diaSeleccionado);
     }    
     public List<Suscripcion> getSuscripcionesCompeticionesyTorneos(){
         
         return this.suscripcionEJB.findSuscripcionesByIdSuscriptor
-        (this.suscriptorActual.getIdSubscriptor(),this.competicionesTorneos);
+        (this.suscriptorActual.getIdSubscriptor(),this.competicionesTorneos,this.diaSeleccionado);
     }
     public List<Suscripcion> getSuscripcionesMiscelaneo(){
         
         return this.suscripcionEJB.findSuscripcionesByIdSuscriptor
-        (this.suscriptorActual.getIdSubscriptor(),this.miscelaneo);
+        (this.suscriptorActual.getIdSubscriptor(),this.miscelaneo,this.diaSeleccionado);
     }
     public void setDateSeleccionada(Date date){
         this.diaSeleccionado = date;

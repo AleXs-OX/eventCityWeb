@@ -5,6 +5,7 @@
  */
 package EJB;
 
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 import modelo.Suscripcion;
@@ -30,6 +31,6 @@ public interface SuscripcionFacadeLocal {
 
     int count();
     
-    List<Suscripcion> findSuscripcionesByIdSuscriptor(Integer idSuscriptor, Integer idCategoria);
+    List<Suscripcion> findSuscripcionesByIdSuscriptor(Integer idSuscriptor, Integer idCategoria, Date fecha);
     
 }

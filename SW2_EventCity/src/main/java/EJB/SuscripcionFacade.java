@@ -5,6 +5,7 @@
  */
 package EJB;
 
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -31,10 +32,12 @@ public class SuscripcionFacade extends AbstractFacade<Suscripcion> implements Su
     }
     
     @Override
-    public List<Suscripcion> findSuscripcionesByIdSuscriptor(Integer idSuscriptor, Integer idCategoria){
-        return em.createQuery("SELECT e FROM Suscripcion e WHERE e.suscriptor.idSubscriptor = :idSuscriptor AND e.evento.categoria.idCategoria = :idCategoria", Suscripcion.class)
+    public List<Suscripcion> findSuscripcionesByIdSuscriptor(Integer idSuscriptor, Integer idCategoria, Date fecha){
+        java.sql.Date sqlDate = new java.sql.Date(fecha.getTime());
+        return em.createQuery("SELECT e FROM Suscripcion e WHERE e.suscriptor.idSubscriptor = :idSuscriptor AND e.evento.categoria.idCategoria = :idCategoria AND e.evento.fechaEvento = :fechaEvento", Suscripcion.class)
                  .setParameter("idSuscriptor", idSuscriptor)
                  .setParameter("idCategoria", idCategoria)
+                 .setParameter("fechaEvento", sqlDate)
                  .getResultList();
     }
 }
