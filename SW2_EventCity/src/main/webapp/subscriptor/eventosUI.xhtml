@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+    
+    <h:outputStylesheet library="css" name="eventosUI.css"/>
+        
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <div class="text">
+            <!--<h4>Pagina principal de eventos</h4>-->
+        </div>
+    </h:head>
+
+    <h:body>
+        <div class="eventos">   
+                <div class="grid-container">
+                    <h:form>
+                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_eventos1" value="#{suscriptorController.getEventos()}" var="evento">
+                        <p:column headerText="Conciertos">
+                                <p:card class="card_evento" style="width: 16.6em">
+                                    <f:facet name="title">
+                                        <p> #{evento.nombre}</p>
+                                    </f:facet>
+                                    <f:facet name="subtitle">
+                                        Género: Rock
+                                    </f:facet>
+                                        <p>#{evento.descripcion}</p>
+                                        <p style="font-style: italic">Hora 00:00</p>
+                                    <f:facet name="footer">
+                                        <p:commandButton id="btn_asistir" icon="pi pi-check" value="Asistir" styleClass="ui-button-raised btn_card"/>
+                                        <p:overlayPanel for="btn_asistir">
+                                            <p>Acabas de suscribirte al evento #{evento.nombre}</p>
+                                        </p:overlayPanel>
+                                        <p:commandButton id="btn-info" icon="pi pi-star-fill" value="Información" styleClass="ui-button-raised ui-button-secondary btn_card" style="margin-left: .5em"/>
+                                        <p:overlayPanel for="btn-info" showCloseIcon="true">
+                                            <p:card class="card_resena">
+                                                <f:facet name="title">
+                                                    <p style ="text-align: center">¿Localización y día?</p>                                   
+                                                </f:facet>
+                                                <f:facet name="subtitle">
+                                                    <p style="font-weight: bold; font-style: italic; color: gray;">
+                                                        El evento tendrá lugar en: (lugar) el día: (dia)</p>
+                                                </f:facet>
+                                                <p>Hora: 00:00</p>
+                                                <div style="display: flex; align-items: center">
+                                                    <p style="margin-right: 20px;">Evaluación:</p>
+                                                    <p:rating readonly="false" value="3"/>
+                                                </div>
+                                                <p></p>
+                                                <p:dataList  value="#{suscriptorController.}" var="resena" type="ordered">
+                                                    <f:facet name="resenas">
+                                                        <div class="resena_image">
+                                                            <div class="resena_lista">
+                                                                <div class="resena_nombre"><p>Nombre</p></div>
+                                                                <div class="resena_desc"><p>Descripcion</p></div>
+                                                                <p:rating readonly="true" value="3"/>
+                                                            </div>
+                                                        </div>
+                                                    </f:facet>
+                                                    
+                                                </p:dataList>
+                                            </p:card>
+                                        </p:overlayPanel>
+                                    </f:facet>
+                                </p:card>
+                            </p:column>
+                        <!-- más columnas -->
+                    </p:dataTable>
+
+                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_eventos2" value="#{suscriptorController.getEventos()}" var="evento">
+                        <p:column headerText="Columna 2">
+                            <p:card class="card_evento" style="width: 16.6em">
+                                    <f:facet name="header">
+                                    </f:facet>
+                                    <f:facet name="title">
+                                        <p> #{evento.nombre}</p>
+                                    </f:facet>
+                                    <f:facet name="subtitle">
+                                        Género: Rock
+                                    </f:facet>
+                                        <p>#{evento.descripcion}</p>
+                                    <f:facet name="footer">
+                                        <p:commandButton id="btn_asistir" icon="pi pi-check" value="Asistir" styleClass="ui-button-raised btn_card"/>
+                                        <p:overlayPanel for="btn_asistir">
+                                            <p>Acabas de suscribirte al evento #{evento.nombre}</p>
+                                        </p:overlayPanel>
+                                        <p:commandButton id="btn-info" icon="pi pi-star-fill" value="Información" styleClass="ui-button-raised ui-button-secondary btn_card" style="margin-left: .5em"/>
+                                        <p:overlayPanel for="btn-info" showCloseIcon="true">
+                                            <p:card class="card_resena">
+                                                <f:facet name="title">
+                                                    <p style ="text-align: center">¿Localización y día?</p>                                   
+                                                </f:facet>
+                                                <f:facet name="subtitle">
+                                                    <p style="font-weight: bold; font-style: italic; color: gray;">
+                                                        El evento tendrá lugar en: (lugar) el día: (dia)</p>
+                                                </f:facet>
+                                                <p>Hora: 00:00</p>
+                                                <div style="display: flex; align-items: center">
+                                                    <p style="margin-right: 20px;">Evaluación:</p>
+                                                    <p:rating readonly="false" value="3"/>
+                                                </div>
+                                                <p></p>
+                                                <p:dataList  var="resena" type="ordered">
+                                                    <f:facet name="resenas">
+                                                        <div class="resena_image">
+                                                            <div class="resena_lista">
+                                                                <div class="resena_nombre"><p>Nombre</p></div>
+                                                                <div class="resena_desc"><p>Descripcion</p></div>
+                                                                <p:rating readonly="true" value="3"/>
+                                                            </div>
+                                                        </div>
+                                                    </f:facet>
+                                                    
+                                                </p:dataList>
+                                            </p:card>
+                                        </p:overlayPanel>
+                                    </f:facet>
+                                </p:card>
+                        </p:column>
+                        <!-- más columnas -->
+                    </p:dataTable>
+
+                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_eventos3" value="#{suscriptorController.getEventos()}" var="evento">
+                        <p:column headerText="Columna 3">
+                            <p:card class="card_evento" style="width: 16.6em">
+                                    <f:facet name="header">
+                                    </f:facet>
+                                    <f:facet name="title">
+                                        <p> #{evento.nombre}</p>
+                                    </f:facet>
+                                    <f:facet name="subtitle">
+                                        Género: Rock
+                                    </f:facet>
+                                        <p>#{evento.descripcion}</p>
+                                    <f:facet name="footer">
+                                        <p:commandButton icon="pi pi-check" value="Asistir" styleClass="btn_card"/>
+                                        <p:commandButton icon="pi pi-info" value="Información" styleClass="ui-button-secondary btn_card" style="margin-left: .5em"/>
+                                    </f:facet>
+                            </p:card>
+                        </p:column>
+                        <!-- más columnas -->
+                    </p:dataTable>
+                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_eventos4" value="#{suscriptorController.getEventos()}" var="evento">
+                        <p:column headerText="Misceláneo">
+                            <p:card class="card_evento" style="width: 16.6em">
+                                    <f:facet name="header">
+                                    </f:facet>
+                                    <f:facet name="title">
+                                        <p> #{evento.nombre}</p>
+                                    </f:facet>
+                                    <f:facet name="subtitle">
+                                        Género: Rock
+                                    </f:facet>
+                                        <p>#{evento.descripcion}</p>
+                                    <f:facet name="footer">
+                                        <p:commandButton icon="pi pi-check" value="Asistir" styleClass="btn_card"/>
+                                        <p:commandButton icon="pi pi-info" value="Información" styleClass="ui-button-secondary btn_card" style="margin-left: .5em"/>
+                                    </f:facet>
+                            </p:card>
+                        </p:column>
+                        <!-- más columnas -->
+                    </p:dataTable>
+                    </h:form>
+                </div>
+        </div>
+    </h:body>
+</html>
