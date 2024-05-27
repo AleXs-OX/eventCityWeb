@@ -152,11 +152,11 @@ CREATE TABLE IF NOT EXISTS `puntuaciones` (
   `idUsuario` int NOT NULL,
   `puntuacion` int DEFAULT NULL,
   `idEvento` int NOT NULL,
-  PRIMARY KEY (`idSubscriptor`,`idUsuario`,`idEvento`),
+  PRIMARY KEY (`idSuscriptor`,`idUsuario`,`idEvento`),
   KEY `fk_puntuaciones_usuarios` (`idUsuario`),
   KEY `fk_puntuaciones_eventos` (`idEvento`),
   CONSTRAINT `fk_puntuaciones_eventos` FOREIGN KEY (`idEvento`) REFERENCES `eventos` (`idEvento`),
-  CONSTRAINT `fk_puntuaciones_suscriptores` FOREIGN KEY (`idSubscriptor`) REFERENCES `suscriptores` (`idSubscriptor`),
+  CONSTRAINT `fk_puntuaciones_suscriptores` FOREIGN KEY (`idSuscriptor`) REFERENCES `suscriptores` (`idSubscriptor`),
   CONSTRAINT `fk_puntuaciones_usuarios` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`idUsuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
