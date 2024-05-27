@@ -41,8 +41,10 @@ CREATE TABLE IF NOT EXISTS `categorias` (
 
 -- Volcando datos para la tabla publicaciones.categorias: ~2 rows (aproximadamente)
 INSERT INTO `categorias` (`idCategoria`, `nombre`) VALUES
-	(1, 'Categoría 1'),
-	(2, 'Categoría 2');
+  (1, 'Conciertos'),
+  (2, 'Talleres y Clases'),
+  (3, 'Competiciones y Torneos'),
+  (4, 'Misceláneo');
 
 -- Volcando estructura para tabla publicaciones.eventos
 CREATE TABLE IF NOT EXISTS `eventos` (
@@ -69,8 +71,36 @@ CREATE TABLE IF NOT EXISTS `eventos` (
 
 -- Volcando datos para la tabla publicaciones.eventos: ~2 rows (aproximadamente)
 INSERT INTO `eventos` (`idEvento`, `titulo`, `descripcion`, `fechaAlta`, `fechaEvento`, `horaEvento`, `activo`, `precio`, `idPublicador`, `idCategoria`, `idLocalizacion`, `capacidadActual`) VALUES
-	(1, 'Evento 1', 'Descripción del evento 1', '2023-01-01', '2023-06-01', NULL, 1, 50, 1, 1, 1, 50),
-	(2, 'Evento 2', 'Descripción del evento 2', '2023-01-02', '2023-06-02', NULL, 0, 75, 2, 2, 2, 75);
+  (1, 'Concierto de Jazz', 'Una noche de jazz con artistas locales.', '2024-05-26', '2024-05-28', '20:00:00', 1, 30, 1, 1, 1, 80),
+  (2, 'Clase de Yoga', 'Clase de yoga para principiantes.', '2024-05-26', '2024-05-28', '10:00:00', 1, 15, 2, 2, 2, 20),
+  (3, 'Torneo de Ajedrez', 'Competencia de ajedrez para todos los niveles.', '2024-05-27', '2024-05-29', '16:00:00', 1, 10, 1, 3, 3, 30),
+  (4, 'Feria de Arte', 'Exposición de arte local y ventas.', '2024-05-27', '2024-05-28', '14:00:00', 1, 5, 2, 4, 4, 50),
+  (5, 'Concierto de Rock', 'Bandas de rock en vivo.', '2024-05-26', '2024-05-27', '21:00:00', 1, 40, 1, 1, 1, 100),
+  (6, 'Taller de Pintura', 'Aprende técnicas básicas de pintura.', '2024-05-26', '2024-05-28', '11:00:00', 1, 20, 2, 2, 2, 25),
+  (7, 'Competencia de Baile', 'Competencia de baile para aficionados.', '2024-05-27', '2024-05-30', '18:00:00', 1, 25, 1, 3, 3, 40),
+  (8, 'Mercado de Pulgas', 'Venta de productos de segunda mano.', '2024-05-27', '2024-05-29', '09:00:00', 1, 0, 2, 4, 4, 70),
+  (9, 'Concierto Acústico', 'Música acústica en vivo.', '2024-05-26', '2024-05-28', '19:00:00', 1, 20, 1, 1, 1, 60),
+  (10, 'Clase de Cocina', 'Aprende a cocinar platos locales.', '2024-05-26', '2024-05-27', '15:00:00', 1, 35, 2, 2, 2, 15),
+  (11, 'Torneo de Videojuegos', 'Competencia de videojuegos en grupo.', '2024-05-27', '2024-05-30', '17:00:00', 1, 10, 2, 3, 3, 50),
+  (12, 'Feria Gastronómica', 'Degustación de platos típicos.', '2024-05-27', '2024-05-28', '12:00:00', 1, 10, 1, 4, 4, 100),
+  (13, 'Concierto de Pop', 'Concierto con las mejores bandas de pop.', '2024-05-26', '2024-05-28', '20:00:00', 1, 50, 2, 1, 1, 120),
+  (14, 'Taller de Fotografía', 'Curso básico de fotografía digital.', '2024-05-26', '2024-05-28', '13:00:00', 1, 25, 1, 2, 2, 20),
+  (15, 'Torneo de Póker', 'Competencia de póker con premios.', '2024-05-27', '2024-05-29', '19:00:00', 1, 15, 2, 3, 3, 40),
+  (16, 'Subasta de Arte', 'Subasta de obras de arte locales.', '2024-05-27', '2024-05-28', '16:00:00', 1, 5, 1, 4, 4, 30),
+  (17, 'Concierto de Blues', 'Noche de blues con músicos reconocidos.', '2024-05-26', '2024-05-28', '21:00:00', 1, 35, 2, 1, 1, 90),
+  (18, 'Clase de Cerámica', 'Aprende a crear piezas de cerámica.', '2024-05-26', '2024-05-28', '10:00:00', 1, 20, 1, 2, 2, 15),
+  (19, 'Competencia de Fotografía', 'Concurso de fotografía con temas locales.', '2024-05-27', '2024-05-29', '14:00:00', 1, 10, 2, 3, 3, 30),
+  (20, 'Festival de Cine', 'Proyección de cortometrajes locales.', '2024-05-27', '2024-05-28', '18:00:00', 1, 10, 1, 4, 4, 80),
+  (21, 'Concierto de Música Clásica', 'Recital de música clásica.', '2024-05-26', '2024-05-28', '20:00:00', 1, 30, 2, 1, 1, 70),
+  (22, 'Taller de Escritura Creativa', 'Curso de escritura para principiantes.', '2024-05-26', '2024-05-27', '11:00:00', 1, 15, 1, 2, 2, 10),
+  (23, 'Competencia de Canto', 'Concurso de canto para aficionados.', '2024-05-27', '2024-05-30', '19:00:00', 1, 20, 2, 3, 3, 50),
+  (24, 'Exposición Fotográfica', 'Muestra de fotografías artísticas.', '2024-05-27', '2024-05-29', '17:00:00', 1, 5, 1, 4, 4, 60),
+  (25, 'Concierto de Hip-Hop', 'Presentación de artistas de hip-hop.', '2024-05-26', '2024-05-27', '21:00:00', 1, 45, 2, 1, 1, 110),
+  (26, 'Clase de Danza', 'Clase de danza moderna para principiantes.', '2024-05-26', '2024-05-28', '12:00:00', 1, 20, 1, 2, 2, 25),
+  (27, 'Torneo de Tenis de Mesa', 'Competencia de ping pong.', '2024-05-27', '2024-05-30', '15:00:00', 1, 10, 2, 3, 3, 35),
+  (28, 'Mercadillo Artesanal', 'Venta de productos artesanales.', '2024-05-27', '2024-05-29', '09:00:00', 1, 0, 1, 4, 4, 50),
+  (29, 'Concierto de Música Electrónica', 'DJ en vivo con música electrónica.', '2024-05-26', '2024-05-28', '22:00:00', 1, 40, 2, 1, 1, 130),
+  (30, 'Taller de Teatro', 'Introducción al teatro y la actuación.', '2024-05-26', '2024-05-28', '14:00:00', 1, 25, 1, 2, 2, 20);
 
 -- Volcando estructura para tabla publicaciones.localizaciones
 CREATE TABLE IF NOT EXISTS `localizaciones` (
@@ -100,18 +130,6 @@ INSERT INTO `lugares` (`idLugar`, `tipo`) VALUES
 	(1, 'Tipo 1'),
 	(2, 'Tipo 2');
 
--- Volcando estructura para tabla publicaciones.personas
-CREATE TABLE IF NOT EXISTS `personas` (
-  `IDPERSONA` int NOT NULL AUTO_INCREMENT,
-  `apellido1` varchar(255) DEFAULT NULL,
-  `apellido2` varchar(255) DEFAULT NULL,
-  `fechanacimiento` date DEFAULT NULL,
-  `nombre` varchar(255) DEFAULT NULL,
-  `sexo` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`IDPERSONA`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
--- Volcando datos para la tabla publicaciones.personas: ~0 rows (aproximadamente)
 
 -- Volcando estructura para tabla publicaciones.publicadores
 CREATE TABLE IF NOT EXISTS `publicadores` (
@@ -143,9 +161,37 @@ CREATE TABLE IF NOT EXISTS `puntuaciones` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Volcando datos para la tabla publicaciones.puntuaciones: ~2 rows (aproximadamente)
-INSERT INTO `puntuaciones` (`idSubscriptor`, `idUsuario`, `puntuacion`, `idEvento`) VALUES
-	(1, 1, 5, 1),
-	(2, 2, 4, 2);
+INSERT INTO `puntuaciones` (`idSuscriptor`, `idUsuario`, `puntuacion`, `idEvento`) VALUES
+  (1, 3, 5, 1),
+  (1, 3, 4, 5),
+  (1, 3, 4, 9),
+  (1, 3, 5, 13),
+  (1, 3, 5, 17),
+  (1, 3, 5, 21),
+  (1, 3, 5, 25),
+  (1, 3, 5, 29),
+  (2, 4, 4, 2),
+  (2, 4, 5, 6),
+  (2, 4, 5, 10),
+  (2, 4, 4, 14),
+  (2, 4, 4, 18),
+  (2, 4, 4, 22),
+  (2, 4, 4, 26),
+  (2, 4, 4, 30),
+  (3, 5, 3, 3),
+  (3, 5, 4, 7),
+  (3, 5, 2, 11),
+  (3, 5, 3, 15),
+  (3, 5, 5, 19),
+  (3, 5, 4, 23),
+  (3, 5, 3, 27),
+  (4, 6, 5, 4),
+  (4, 6, 3, 8),
+  (4, 6, 4, 12),
+  (4, 6, 4, 16),
+  (4, 6, 4, 20),
+  (4, 6, 3, 24),
+  (4, 6, 4, 28);
 
 -- Volcando estructura para tabla publicaciones.resenas
 CREATE TABLE IF NOT EXISTS `resenas` (
@@ -161,18 +207,37 @@ CREATE TABLE IF NOT EXISTS `resenas` (
 
 -- Volcando datos para la tabla publicaciones.resenas: ~2 rows (aproximadamente)
 INSERT INTO `resenas` (`comentario`, `idSuscriptor`, `idEvento`, `fecha`) VALUES
-	('Comentario del evento 1 por suscriptor 1', 1, 1, '2023-05-01'),
-	('Comentario del evento 2 por suscriptor 2', 2, 2, '2023-05-02');
+  ('Una noche increíble con excelente música.', 1, 1, '2024-05-28'),
+  ('Buen ambiente y buena música, pero muy ruidoso.', 1, 5, '2024-05-27'),
+  ('Música hermosa en un ambiente acogedor.', 1, 9, '2024-05-28'),
+  ('Una noche increíble con bandas talentosas.', 1, 13, '2024-05-28'),
+  ('Blues en vivo, una experiencia única.', 1, 17, '2024-05-28'),
+  ('Música clásica en un entorno perfecto.', 1, 21, '2024-05-28'),
+  ('Hip-hop en su mejor versión en vivo.', 1, 25, '2024-05-27'),
+  ('La mejor música electrónica en vivo.', 1, 29, '2024-05-28'),
+  ('Clase muy relajante y bien organizada.', 2, 2, '2024-05-28'),
+  ('Me encantó aprender a pintar, muy instructivo.', 2, 6, '2024-05-28'),
+  ('Excelente clase de cocina, aprendí mucho.', 2, 10, '2024-05-27'),
+  ('Buen taller, aprendí nuevas técnicas.', 2, 14, '2024-05-28'),
+  ('Divertido y educativo taller de cerámica.', 2, 18, '2024-05-28'),
+  ('Inspirador taller de escritura.', 2, 22, '2024-05-27'),
+  ('Clase de danza muy divertida.', 2, 26, '2024-05-28'),
+  ('Taller de teatro muy interactivo y educativo.', 2, 30, '2024-05-28'),
+  ('Interesante, pero esperaba más competencia.', 3, 3, '2024-05-29'),
+  ('Competencia divertida y bien organizada.', 3, 7, '2024-05-30'),
+  ('La organización fue pobre, esperaba más.', 3, 11, '2024-05-30'),
+  ('Competencia emocionante, pero muy larga.', 3, 15, '2024-05-29'),
+  ('Gran concurso, me encantaron las fotos.', 3, 19, '2024-05-29'),
+  ('Gran ambiente para cantar y competir.', 3, 23, '2024-05-30'),
+  ('Competencia intensa, muy emocionante.', 3, 27, '2024-05-30'),
+  ('Gran evento con mucha variedad de arte.', 4, 4, '2024-05-28'),
+  ('Un buen lugar para encontrar cosas únicas.', 4, 8, '2024-05-29'),
+  ('Deliciosa comida y buena compañía.', 4, 12, '2024-05-28'),
+  ('Interesante variedad de arte en subasta.', 4, 16, '2024-05-28'),
+  ('Buenas proyecciones, me encantó el cine.', 4, 20, '2024-05-28'),
+  ('Exposición interesante, pero algo pequeña.', 4, 24, '2024-05-29'),
+  ('Buenos productos artesanales disponibles.', 4, 28, '2024-05-29');
 
--- Volcando estructura para tabla publicaciones.roles
-CREATE TABLE IF NOT EXISTS `roles` (
-  `IDROL` int NOT NULL AUTO_INCREMENT,
-  `descripcion` varchar(255) DEFAULT NULL,
-  `tipousuario` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`IDROL`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
--- Volcando datos para la tabla publicaciones.roles: ~0 rows (aproximadamente)
 
 -- Volcando estructura para tabla publicaciones.suscripciones
 CREATE TABLE IF NOT EXISTS `suscripciones` (
@@ -206,8 +271,10 @@ CREATE TABLE IF NOT EXISTS `suscriptores` (
 
 -- Volcando datos para la tabla publicaciones.suscriptores: ~2 rows (aproximadamente)
 INSERT INTO `suscriptores` (`idSubscriptor`, `idUsuario`, `numSuscripciones`, `direccion`, `ciudad`, `pais`) VALUES
-	(1, 1, '5', 'Dirección 1', 'Ciudad 1', 'País 1'),
-	(2, 2, '3', 'Dirección 2', 'Ciudad 2', 'País 2');
+  (1, 3, '5', 'Calle Mayor, 10', 'Madrid', 'España'),
+  (2, 4, '3', 'Carrer de Provença, 20', 'Barcelona', 'España'),
+  (3, 5, '7', 'Avenida de la Constitución, 15', 'Sevilla', 'España'),
+  (4, 6, '4', 'Calle Real, 5', 'Valencia', 'España');
 
 -- Volcando estructura para tabla publicaciones.usuarios
 CREATE TABLE IF NOT EXISTS `usuarios` (
@@ -223,17 +290,17 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 
 -- Volcando datos para la tabla publicaciones.usuarios: ~2 rows (aproximadamente)
 INSERT INTO `usuarios` (`idUsuario`, `nombreusuario`, `contrasena`, `nombre`, `apellidos`, `telefono`, `email`) VALUES
-	(1, 'usuario1', 'pass1', 'Nombre1', 'Apellido1', 123456789, 'usuario1@example.com'),
-	(2, 'usuario2', 'pass2', 'Nombre2', 'Apellido2', 987654321, 'usuario2@example.com'),
-	(3, 'usuario1', 'pass1', 'Nombre1', 'Apellido1', 123456789, 'usuario1@example.com'),
-	(4, 'usuario2', 'pass2', 'Nombre2', 'Apellido2', 987654321, 'usuario2@example.com'),
-	(5, 'usuario1', 'pass1', 'Nombre1', 'Apellido1', 123456789, 'usuario1@example.com'),
-	(6, 'usuario2', 'pass2', 'Nombre2', 'Apellido2', 987654321, 'usuario2@example.com'),
-	(7, 'usuario1', 'pass1', 'Nombre1', 'Apellido1', 123456789, 'usuario1@example.com'),
-	(8, 'usuario2', 'pass2', 'Nombre2', 'Apellido2', 987654321, 'usuario2@example.com'),
-	(9, 'usuario3', 'pass3', 'Nombre3', 'Apellido3', 192837465, 'usuario3@example.com'),
-	(10, 'usuario4', 'pass4', 'Nombre4', 'Apellido4', 564738291, 'usuario4@example.com'),
-	(11, 'usuario5', 'pass5', 'Nombre5', 'Apellido5', 182736459, 'usuario5@example.com');
+  (1, 'lauragarcia', 'password1', 'Laura', 'García Pérez', 612345678, 'lauragarcia@example.com'),
+  (2, 'miguelhernandez', 'password1', 'Miguel', 'Hernández Martínez', 655432198, 'miguelhernandez@example.com'),
+  (3, 'anaisabel', 'password1', 'Ana', 'Isabel Rodríguez', 678901234, 'anaisabel@example.com'),
+  (4, 'davidlopez', 'password1', 'David', 'López Sánchez', 612345678, 'davidlopez@example.com'),
+  (5, 'sarasanz', 'password2', 'Sara', 'Sanz Gómez', 654321987, 'sarasanz@example.com'),
+  (6, 'pablogonzalez', 'password2', 'Pablo', 'González Martín', 689076543, 'pablogonzalez@example.com'),
+  (7, 'elenarodriguez', 'password2', 'Elena', 'Rodríguez Pérez', 623456789, 'elenarodriguez@example.com'),
+  (8, 'sergioalvarez', 'password2', 'Sergio', 'Álvarez García', 645678901, 'sergioalvarez@example.com'),
+  (9, 'carlotafernandez', 'password3', 'Carlota', 'Fernández López', 679012345, 'carlotafernandez@example.com'),
+  (10, 'javiermartin', 'password3', 'Javier', 'Martín Sánchez', 645678901, 'javiermartin@example.com'),
+  (11, 'luciamoreno', 'password3', 'Lucía', 'Moreno Rodríguez', 612345678, 'luciamoreno@example.com');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
