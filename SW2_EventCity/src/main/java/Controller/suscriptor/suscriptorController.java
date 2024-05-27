@@ -46,8 +46,8 @@ public class suscriptorController implements Serializable{
     private int usuarioActual = 1;
     
     private int concierto=1;
-    private int c2=2;
-    private int c3=3;
+    private int talleresClases=2;
+    private int competicionesTorneos=3;
     private int miscelaneo=4;
 
     public suscriptorController(){
@@ -60,14 +60,14 @@ public class suscriptorController implements Serializable{
     public List<Evento> getEventoConciertos(){
         return eventoEJB.findEventosByCategoriaAndFecha(this.concierto,this.diaSeleccionado);
     }
-    public List<Evento> getEventoC2(){
-        return eventoEJB.findEventoByCategoria(this.c2);
+    public List<Evento> getEventoTalleresyClases(){
+        return eventoEJB.findEventosByCategoriaAndFecha(this.talleresClases,this.diaSeleccionado);
     }
-    public List<Evento> getEventoC3(){
-        return eventoEJB.findEventoByCategoria(this.c3);
+    public List<Evento> getEventoCompeticionesyTorneos(){
+        return eventoEJB.findEventosByCategoriaAndFecha(this.competicionesTorneos,this.diaSeleccionado);
     }
     public List<Evento> getEventoMiscelaneo(){
-        return eventoEJB.findEventoByCategoria(this.miscelaneo);
+        return eventoEJB.findEventosByCategoriaAndFecha(this.miscelaneo,this.diaSeleccionado);
     }
     
     /*
@@ -95,8 +95,12 @@ public class suscriptorController implements Serializable{
     }   
     
     public int getPuntuacionByIdSuscriptorAndIdEvento(int idSuscriptor, int idEvento){
-        int num = puntuacionEJB.findPuntuacionByIdSuscriptorAndIdEvento(idSuscriptor, idEvento).getPuntuacion();
-        return num;
+        Puntuacion puntuacion = puntuacionEJB.findPuntuacionByIdSuscriptorAndIdEvento(idSuscriptor, idEvento);
+        
+        if (puntuacion == null)
+            return 0;
+        
+        return puntuacion.getPuntuacion();
         
     }
     
