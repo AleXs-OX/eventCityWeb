@@ -5,6 +5,7 @@
  */
 package EJB;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -29,4 +30,11 @@ public class SuscripcionFacade extends AbstractFacade<Suscripcion> implements Su
         super(Suscripcion.class);
     }
     
+    @Override
+    public List<Suscripcion> findSuscripcionesByIdSuscriptor(Integer idSuscriptor, Integer idCategoria){
+        return em.createQuery("SELECT e FROM Suscripcion e WHERE e.suscriptor.idSubscriptor = :idSuscriptor AND e.evento.categoria.idCategoria = :idCategoria", Suscripcion.class)
+                 .setParameter("idSuscriptor", idSuscriptor)
+                 .setParameter("idCategoria", idCategoria)
+                 .getResultList();
+    }
 }

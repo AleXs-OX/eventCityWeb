@@ -30,4 +30,6 @@ public interface SuscripcionFacadeLocal {
 
     int count();
     
+    List<Suscripcion> findSuscripcionesByIdSuscriptor(Integer idSuscriptor, Integer idCategoria);
+    
 }

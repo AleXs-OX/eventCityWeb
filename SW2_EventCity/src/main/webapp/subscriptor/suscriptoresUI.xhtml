@@ -1,7 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html">
@@ -20,20 +19,20 @@
                 <div class="grid-container">
                     <!--<h:form>-->
                     
-                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_eventosSus1" value="#{suscriptorController.getEventoConciertos()}" var="evento">
+                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_eventosSus1" value="#{suscriptorController.suscripcionesConciertos}" var="evento">
                         <p:column headerText="Conciertos">
                                 <p:card class="card_evento" style="width: 16.6em">
                                     <f:facet name="title">
-                                        <p> #{evento.titulo}</p>
+                                        <p> #{evento.evento.titulo}</p>
                                     </f:facet>
                                     <f:facet name="subtitle">
-                                        <p>#{evento.descripcion}</p>
-                                        <p style="font-style: italic; color: black">Hora #{evento.horaEvento}</p>
+                                        <p>#{evento.evento.descripcion}</p>
+                                        <p style="font-style: italic; color: black">Hora #{evento.evento.horaEvento}</p>
                                     </f:facet>
                                     <f:facet name="footer">
                                         <p:commandButton id="btn_asistir_1" icon="pi pi-check" value="Asistir" styleClass="ui-button-raised btn_card"/>
                                         <p:overlayPanel for="btn_asistir_1">
-                                            <p>Acabas de suscribirte al evento #{evento.titulo}</p>
+                                            <p>Acabas de suscribirte al evento #{evento.evento.titulo}</p>
                                         </p:overlayPanel>
                                         <p:commandButton id="btn-info_1" icon="pi pi-star-fill" value="Información" styleClass="ui-button-raised ui-button-secondary btn_card" style="margin-left: .5em"/>
                                         <p:overlayPanel for="btn-info_1" showCloseIcon="true">
@@ -43,12 +42,12 @@
                                                 </f:facet>
                                                 <f:facet name="subtitle">
                                                     <p style="font-weight: bold; font-style: italic; color: gray;">
-                                                        El evento #{evento.titulo} tendrá lugar en:<br></br>
-                                                        #{evento.localizacion.idLocalizacion} el día: #{evento.fechaEvento}</p>
+                                                        El evento #{evento.evento.titulo} tendrá lugar en:<br></br>
+                                                        #{evento.evento.localizacion.idLocalizacion} el día: #{evento.evento.fechaEvento}</p>
                                                         
                                                 </f:facet>
-                                                <p>Hora: #{evento.horaEvento}</p>
-                                                <p>Precio: #{evento.precio}€</p>
+                                                <p>Hora: #{evento.evento.horaEvento}</p>
+                                                <p>Precio: #{evento.evento.precio}€</p>
                                                 <div style="display: flex; align-items: center; margin-top: 3em;">
                                                     <div style="position: relative;">               
                                                         <p:rating readonly="false" value="3"/>
@@ -58,12 +57,12 @@
                                                     </div>
                                                 </div>
                                                 <p></p>
-                                                <p:dataList value="#{suscriptorController.getResenasByEvento(evento.idEvento)}" var="resena" type="definition">  
+                                                <p:dataList value="#{suscriptorController.getResenasByEvento(evento.evento.idEvento)}" var="resena" type="definition">  
                                                         <div class="resena_image">
                                                             <div class="resena_lista">
                                                                 <div class="resena_nombre">#{resena.suscriptor.usuario.nombreCompleto}</div>
                                                                 <div class="resena_desc">#{resena.comentario}</div>
-                                                                <p:rating readonly="true" value="#{suscriptorController.getPuntuacionByIdSuscriptorAndIdEvento(resena.suscriptor.idSubscriptor, evento.idEvento)}"/>
+                                                                <p:rating readonly="true" value="#{suscriptorController.getPuntuacionByIdSuscriptorAndIdEvento(resena.suscriptor.idSubscriptor, evento.evento.idEvento)}"/>
                                                             </div>
                                                         </div>                           
                                                 </p:dataList>
