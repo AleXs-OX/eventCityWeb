@@ -11,12 +11,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import modelo.Resena;
 
-/**
- *
- * @author Beatriz
- */
 @Stateless
-public class ResenaFacade extends AbstractFacade<Resena> {
+public class ResenaFacade extends AbstractFacade<Resena> implements ResenaFacadeLocal {
 
     @PersistenceContext(unitName = "PublicacionesPU")
     private EntityManager em;
@@ -30,6 +26,7 @@ public class ResenaFacade extends AbstractFacade<Resena> {
         super(Resena.class);
     }
     
+    @Override
     public List<Resena> findResenasByIdEvento(Integer idEvento) {
     return em.createQuery("SELECT r FROM Resena r WHERE r.evento.idEvento = :idEvento", Resena.class)
              .setParameter("idEvento", idEvento)

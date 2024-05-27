@@ -8,7 +8,6 @@ package EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import modelo.Usuario;
 
 /**
@@ -21,20 +20,6 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
     @PersistenceContext(unitName = "PublicacionesPU")
     private EntityManager em;
 
-    public Usuario findByCredentials(String username, String password){
-        try {
-            TypedQuery<Usuario> query = em.createQuery(
-                "SELECT u FROM Usuario u WHERE u.nombreusuario = :nombreUsuario AND u.contrasena = :contrasena",
-                Usuario.class
-            );
-            query.setParameter("nombreUsuario", username);
-            query.setParameter("contrasena", password);
-            return query.getSingleResult();
-        } catch (Exception e) {
-            return null;
-        }
-    }
-    
     @Override
     protected EntityManager getEntityManager() {
         return em;

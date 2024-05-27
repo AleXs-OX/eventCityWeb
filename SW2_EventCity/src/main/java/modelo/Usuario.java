@@ -120,6 +120,10 @@ public class Usuario implements Serializable{
     public void setSuscriptores(List<Suscriptor> suscriptores) {
         this.suscriptores = suscriptores;
     }
+    
+    public String getNombreCompleto(){
+        return (this.nombre+" "+this.apellidos);
+    }
 
     @Override
     public int hashCode() {

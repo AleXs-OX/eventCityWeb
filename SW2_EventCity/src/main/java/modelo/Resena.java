@@ -1,3 +1,4 @@
+
 package modelo;
 
 import java.io.Serializable;
@@ -6,19 +7,19 @@ import java.sql.Date;
 
 @Entity
 @Table(name = "resenas")
-public class Resena implements Serializable {
-    private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Resena {
+    
+    @EmbeddedId
+    private ResenaId id;
 
     @ManyToOne
-    @JoinColumn(name = "idSuscriptor", nullable = false)
+    @MapsId("idSuscriptor")
+    @JoinColumn(name = "idSuscriptor")
     private Suscriptor suscriptor;
 
     @ManyToOne
-    @JoinColumn(name = "idEvento", nullable = false)
+    @MapsId("idEvento")
+    @JoinColumn(name = "idEvento")
     private Evento evento;
 
     @Column(name = "comentario")
@@ -28,11 +29,11 @@ public class Resena implements Serializable {
     private Date fecha;
 
     // Getters and Setters
-    public Long getId() {
+    public ResenaId getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(ResenaId id) {
         this.id = id;
     }
 
@@ -67,5 +68,57 @@ public class Resena implements Serializable {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+}
+
+@Embeddable
+class ResenaId implements Serializable {
+    private int idSuscriptor;
+    private int idEvento;
+
+    // Getters and Setters
+    public int getIdSuscriptor() {
+        return idSuscriptor;
+    }
+
+    public void setIdSuscriptor(int idSuscriptor) {
+        this.idSuscriptor = idSuscriptor;
+    }
+
+    public int getIdEvento() {
+        return idEvento;
+    }
+
+    public void setIdEvento(int idEvento) {
+        this.idEvento = idEvento;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 31 * hash + this.idSuscriptor;
+        hash = 31 * hash + this.idEvento;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ResenaId other = (ResenaId) obj;
+        if (this.idSuscriptor != other.idSuscriptor) {
+            return false;
+        }
+        if (this.idEvento != other.idEvento) {
+            return false;
+        }
+        return true;
     }
 }
