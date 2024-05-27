@@ -43,7 +43,9 @@
                                                 </f:facet>
                                                 <f:facet name="subtitle">
                                                     <p style="font-weight: bold; font-style: italic; color: gray;">
-                                                        El evento tendrá lugar en: #{evento.localizacion.idLocalizacion} el día: #{evento.fechaEvento}</p>
+                                                        El evento #{evento.titulo} tendrá lugar en:<br></br>
+                                                        #{evento.localizacion.idLocalizacion} el día: #{evento.fechaEvento}</p>
+                                                        
                                                 </f:facet>
                                                 <p>Hora: #{evento.horaEvento}</p>
                                                 <p>Precio: #{evento.precio}€</p>
@@ -59,7 +61,7 @@
                                                 <p:dataList value="#{suscriptorController.getResenasByEvento(evento.idEvento)}" var="resena" type="definition">  
                                                         <div class="resena_image">
                                                             <div class="resena_lista">
-                                                                <div class="resena_nombre">#{resena.suscriptor.usuario.nombre}</div>
+                                                                <div class="resena_nombre">#{resena.suscriptor.usuario.nombreCompleto}</div>
                                                                 <div class="resena_desc">#{resena.comentario}</div>
                                                                 <p:rating readonly="true" value="#{suscriptorController.getPuntuacionByIdSuscriptorAndIdEvento(resena.suscriptor.idSubscriptor, evento.idEvento)}"/>
                                                             </div>
@@ -96,7 +98,8 @@
                                                 </f:facet>
                                                 <f:facet name="subtitle">
                                                     <p style="font-weight: bold; font-style: italic; color: gray;">
-                                                        El evento tendrá lugar en: #{evento.localizacion.idLocalizacion} el día: #{evento.fechaEvento}</p>
+                                                        El evento #{evento.titulo} tendrá lugar en:<br></br>
+                                                        #{evento.localizacion.idLocalizacion} el día: #{evento.fechaEvento}</p>
                                                 </f:facet>
                                                 <p>Hora: #{evento.horaEvento}</p>
                                                 <p>Precio: #{evento.precio}€</p>
@@ -112,7 +115,7 @@
                                                 <p:dataList value="#{suscriptorController.getResenasByEvento(evento.idEvento)}" var="resena" type="definition">  
                                                         <div class="resena_image">
                                                             <div class="resena_lista">
-                                                                <div class="resena_nombre">#{resena.suscriptor.usuario.nombre}</div>
+                                                                <div class="resena_nombre">#{resena.suscriptor.usuario.nombreCompleto}</div>
                                                                 <div class="resena_desc">#{resena.comentario}</div>
                                                                 <p:rating readonly="true" value="#{suscriptorController.getPuntuacionByIdSuscriptorAndIdEvento(resena.suscriptor.idSubscriptor, evento.idEvento)}"/>
                                                             </div>
@@ -149,7 +152,8 @@
                                                 </f:facet>
                                                 <f:facet name="subtitle">
                                                     <p style="font-weight: bold; font-style: italic; color: gray;">
-                                                        El evento tendrá lugar en: #{evento.localizacion.idLocalizacion} el día: #{evento.fechaEvento}</p>
+                                                        El evento #{evento.titulo} tendrá lugar en:<br></br>
+                                                        #{evento.localizacion.idLocalizacion} el día: #{evento.fechaEvento}</p>
                                                 </f:facet>
                                                 <p>Hora: #{evento.horaEvento}</p>
                                                 <p>Precio: #{evento.precio}€</p>
@@ -165,7 +169,7 @@
                                                 <p:dataList value="#{suscriptorController.getResenasByEvento(evento.idEvento)}" var="resena" type="definition">  
                                                         <div class="resena_image">
                                                             <div class="resena_lista">
-                                                                <div class="resena_nombre">#{resena.suscriptor.usuario.nombre}</div>
+                                                                <div class="resena_nombre">#{resena.suscriptor.usuario.nombreCompleto}</div>
                                                                 <div class="resena_desc">#{resena.comentario}</div>
                                                                 <p:rating readonly="true" value="#{suscriptorController.getPuntuacionByIdSuscriptorAndIdEvento(resena.suscriptor.idSubscriptor, evento.idEvento)}"/>
                                                             </div>
@@ -202,7 +206,8 @@
                                                 </f:facet>
                                                 <f:facet name="subtitle">
                                                     <p style="font-weight: bold; font-style: italic; color: gray;">
-                                                        El evento tendrá lugar en: #{evento.localizacion.idLocalizacion} el día: #{evento.fechaEvento}</p>
+                                                        El evento #{evento.titulo} tendrá lugar en:<br></br>
+                                                        #{evento.localizacion.idLocalizacion} el día: #{evento.fechaEvento}</p>
                                                 </f:facet>
                                                 <p>Hora: #{evento.horaEvento}</p>
                                                 <p>Precio: #{evento.precio}€</p>
@@ -218,7 +223,7 @@
                                                 <p:dataList value="#{suscriptorController.getResenasByEvento(evento.idEvento)}" var="resena" type="definition">  
                                                         <div class="resena_image">
                                                             <div class="resena_lista">
-                                                                <div class="resena_nombre">#{resena.suscriptor.usuario.nombre}</div>
+                                                                <div class="resena_nombre">#{resena.suscriptor.usuario.nombreCompleto}</div>
                                                                 <div class="resena_desc">#{resena.comentario}</div>
                                                                 <p:rating readonly="true" value="#{suscriptorController.getPuntuacionByIdSuscriptorAndIdEvento(resena.suscriptor.idSubscriptor, evento.idEvento)}"/>
                                                             </div>
