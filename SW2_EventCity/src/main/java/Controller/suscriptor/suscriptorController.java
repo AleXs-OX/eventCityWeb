@@ -44,11 +44,12 @@ public class suscriptorController implements Serializable{
     private Date diaSeleccionado;
     private Date diaActual;
     private int usuarioActual = 1;
+    private Suscriptor suscriptorActual;
     
-    private int concierto=1;
-    private int talleresClases=2;
-    private int competicionesTorneos=3;
-    private int miscelaneo=4;
+    private final int concierto=1;
+    private final int talleresClases=2;
+    private final int competicionesTorneos=3;
+    private final int miscelaneo=4;
 
     public suscriptorController(){
         this.diaActual = new Date();
@@ -73,7 +74,7 @@ public class suscriptorController implements Serializable{
     /*
     Obtener todos los eventos a los que esta suscrito el suscriptor y mostrarlos
     */
-    public List<Evento> getEventosSuscriptor(Suscriptor suscriptor){
+    public List<Evento> getEventosSuscriptorConciertos(){
         
         return eventos;
     }

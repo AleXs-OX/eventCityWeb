@@ -156,7 +156,7 @@ CREATE TABLE IF NOT EXISTS `puntuaciones` (
   KEY `fk_puntuaciones_usuarios` (`idUsuario`),
   KEY `fk_puntuaciones_eventos` (`idEvento`),
   CONSTRAINT `fk_puntuaciones_eventos` FOREIGN KEY (`idEvento`) REFERENCES `eventos` (`idEvento`),
-  CONSTRAINT `fk_puntuaciones_suscriptores` FOREIGN KEY (`idSuscriptor`) REFERENCES `suscriptores` (`idSubscriptor`),
+  CONSTRAINT `fk_puntuaciones_suscriptores` FOREIGN KEY (`idSuscriptor`) REFERENCES `suscriptores` (`idSuscriptor`),
   CONSTRAINT `fk_puntuaciones_usuarios` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`idUsuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -202,7 +202,7 @@ CREATE TABLE IF NOT EXISTS `resenas` (
   PRIMARY KEY (`idSuscriptor`,`idEvento`),
   KEY `fk_resenas_eventos` (`idEvento`),
   CONSTRAINT `fk_resenas_eventos` FOREIGN KEY (`idEvento`) REFERENCES `eventos` (`idEvento`),
-  CONSTRAINT `fk_resenas_suscriptores` FOREIGN KEY (`idSuscriptor`) REFERENCES `suscriptores` (`idSubscriptor`)
+  CONSTRAINT `fk_resenas_suscriptores` FOREIGN KEY (`idSuscriptor`) REFERENCES `suscriptores` (`idSuscriptor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Volcando datos para la tabla publicaciones.resenas: ~2 rows (aproximadamente)
@@ -248,7 +248,7 @@ CREATE TABLE IF NOT EXISTS `suscripciones` (
   PRIMARY KEY (`idSuscriptor`,`idEvento`),
   KEY `fk_suscripciones_eventos` (`idEvento`),
   CONSTRAINT `fk_suscripciones_eventos` FOREIGN KEY (`idEvento`) REFERENCES `eventos` (`idEvento`),
-  CONSTRAINT `fk_suscripciones_suscriptores` FOREIGN KEY (`idSuscriptor`) REFERENCES `suscriptores` (`idSubscriptor`)
+  CONSTRAINT `fk_suscripciones_suscriptores` FOREIGN KEY (`idSuscriptor`) REFERENCES `suscriptores` (`idSuscriptor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Volcando datos para la tabla publicaciones.suscripciones: ~2 rows (aproximadamente)
@@ -258,19 +258,19 @@ INSERT INTO `suscripciones` (`idSuscriptor`, `idEvento`, `fechaSus`, `estado`) V
 
 -- Volcando estructura para tabla publicaciones.suscriptores
 CREATE TABLE IF NOT EXISTS `suscriptores` (
-  `idSubscriptor` int NOT NULL AUTO_INCREMENT,
+  `idSuscriptor` int NOT NULL AUTO_INCREMENT,
   `idUsuario` int DEFAULT NULL,
   `numSuscripciones` varchar(100) DEFAULT NULL,
   `direccion` varchar(100) DEFAULT NULL,
   `ciudad` varchar(100) DEFAULT NULL,
   `pais` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`idSubscriptor`),
+  PRIMARY KEY (`idSuscriptor`),
   KEY `fk_suscriptores_usuarios` (`idUsuario`),
   CONSTRAINT `fk_suscriptores_usuarios` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`idUsuario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Volcando datos para la tabla publicaciones.suscriptores: ~2 rows (aproximadamente)
-INSERT INTO `suscriptores` (`idSubscriptor`, `idUsuario`, `numSuscripciones`, `direccion`, `ciudad`, `pais`) VALUES
+INSERT INTO `suscriptores` (`idSuscriptor`, `idUsuario`, `numSuscripciones`, `direccion`, `ciudad`, `pais`) VALUES
   (1, 3, '5', 'Calle Mayor, 10', 'Madrid', 'España'),
   (2, 4, '3', 'Carrer de Provença, 20', 'Barcelona', 'España'),
   (3, 5, '7', 'Avenida de la Constitución, 15', 'Sevilla', 'España'),
