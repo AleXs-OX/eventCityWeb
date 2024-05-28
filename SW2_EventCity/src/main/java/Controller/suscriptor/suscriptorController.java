@@ -7,6 +7,7 @@ package Controller.suscriptor;
 import EJB.EventoFacadeLocal;
 import EJB.PuntuacionFacadeLocal;
 import EJB.ResenaFacadeLocal;
+import EJB.SuscripcionFacadeLocal;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import javax.inject.Named;
 import modelo.Evento;
 import modelo.Puntuacion;
 import modelo.Resena;
+import modelo.Suscripcion;
 import modelo.Suscriptor;
 import org.primefaces.event.SelectEvent;
 
@@ -41,19 +43,31 @@ public class suscriptorController implements Serializable{
     @EJB
     private PuntuacionFacadeLocal puntuacionEJB;
     
+    @EJB
+    private SuscripcionFacadeLocal suscripcionEJB;
+    
     private Date diaSeleccionado;
     private Date diaActual;
+
     private int usuarioActual = 1;
-    private Suscriptor suscriptorActual;
     
     private final int concierto=1;
     private final int talleresClases=2;
     private final int competicionesTorneos=3;
     private final int miscelaneo=4;
 
+    Suscriptor suscriptorActual = new Suscriptor();
+    Suscripcion suscripcionesUsuario;
+
+    
     public suscriptorController(){
         this.diaActual = new Date();
         this.diaSeleccionado = new Date();
+        
+        /*Setea al suscriptor de prueba un id ya creado en bdd*/
+        
+        this.suscriptorActual.setIdSubscriptor(5);
+        
         System.out.println(new java.sql.Date(this.diaSeleccionado.getTime()));
     }
     
@@ -73,12 +87,28 @@ public class suscriptorController implements Serializable{
     
     /*
     Obtener todos los eventos a los que esta suscrito el suscriptor y mostrarlos
+
     */
-    public List<Evento> getEventosSuscriptorConciertos(){
-        
-        return eventos;
+ 
+    public List<Suscripcion> getSuscripcionesConciertos(){
+        return this.suscripcionEJB.findSuscripcionesByIdSuscriptor
+        (this.suscriptorActual.getIdSubscriptor(),this.concierto,this.diaSeleccionado);
     }
-    
+    public List<Suscripcion> getSuscripcionesTalleresyClases(){
+        
+        return this.suscripcionEJB.findSuscripcionesByIdSuscriptor
+        (this.suscriptorActual.getIdSubscriptor(),this.talleresClases,this.diaSeleccionado);
+    }    
+    public List<Suscripcion> getSuscripcionesCompeticionesyTorneos(){
+        
+        return this.suscripcionEJB.findSuscripcionesByIdSuscriptor
+        (this.suscriptorActual.getIdSubscriptor(),this.competicionesTorneos,this.diaSeleccionado);
+    }
+    public List<Suscripcion> getSuscripcionesMiscelaneo(){
+        
+        return this.suscripcionEJB.findSuscripcionesByIdSuscriptor
+        (this.suscriptorActual.getIdSubscriptor(),this.miscelaneo,this.diaSeleccionado);
+    }
     public void setDateSeleccionada(Date date){
         this.diaSeleccionado = date;
     }

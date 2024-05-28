@@ -16,7 +16,7 @@ public class Suscriptor implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idSubscriptor")
+    @Column(name = "idSuscriptor")
     private int idSubscriptor;
     
     @ManyToOne
