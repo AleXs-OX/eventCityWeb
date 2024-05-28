@@ -90,21 +90,22 @@ public class suscriptorController implements Serializable{
         return this.suscripcionEJB.findSuscripcionesByIdSuscriptor
         (this.suscriptorActual.getIdSubscriptor(),this.concierto,this.diaSeleccionado);
     }
+    
     public List<Suscripcion> getSuscripcionesTalleresyClases(){
-        
         return this.suscripcionEJB.findSuscripcionesByIdSuscriptor
         (this.suscriptorActual.getIdSubscriptor(),this.talleresClases,this.diaSeleccionado);
     }    
+    
     public List<Suscripcion> getSuscripcionesCompeticionesyTorneos(){
-        
         return this.suscripcionEJB.findSuscripcionesByIdSuscriptor
         (this.suscriptorActual.getIdSubscriptor(),this.competicionesTorneos,this.diaSeleccionado);
     }
+    
     public List<Suscripcion> getSuscripcionesMiscelaneo(){
-        
         return this.suscripcionEJB.findSuscripcionesByIdSuscriptor
         (this.suscriptorActual.getIdSubscriptor(),this.miscelaneo,this.diaSeleccionado);
     }
+    
     public void setDateSeleccionada(Date date){
         this.diaSeleccionado = date;
     }
@@ -141,6 +142,19 @@ public class suscriptorController implements Serializable{
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String formattedDate = dateFormat.format(this.diaSeleccionado);
         System.out.println("Fecha seleccionada: " + formattedDate);
+    }
+    
+    public void suscribirseAEvento(Evento evento){
+        /*Crea la suscripcion a un evento*/
+        Suscripcion suscripcion = new Suscripcion();
+        
+        suscripcion.setEstado(true);
+        suscripcion.setSuscriptor(this.suscriptorActual);
+        suscripcion.setEvento(evento);
+        suscripcion.setFechaSus(this.diaActual);
+        
+        suscripcionEJB.create(suscripcion);
+        System.out.println("suscrito con exito");
     }
 }
 
