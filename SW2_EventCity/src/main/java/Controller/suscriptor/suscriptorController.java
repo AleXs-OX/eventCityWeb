@@ -46,7 +46,7 @@ public class suscriptorController implements Serializable{
     @EJB
     private SuscripcionFacadeLocal suscripcionEJB;
     
-    private Date diaSeleccionado;
+    private Date diaSeleccionado = new Date();;
     private Date diaActual;
     Suscriptor suscriptorActual = new Suscriptor();
     Suscripcion suscripcionesUsuario;
@@ -62,13 +62,13 @@ public class suscriptorController implements Serializable{
 
     public suscriptorController(){
         this.diaActual = new Date();
-        this.diaSeleccionado = new Date();
+        //this.diaSeleccionado;
         
         /*Setea al suscriptor de prueba un id ya creado en bdd*/
         
         this.suscriptorActual.setIdSubscriptor(5);
         
-        System.out.println(new java.sql.Date(this.diaSeleccionado.getTime()));
+        //System.out.println(new java.sql.Date(this.diaSeleccionado.getTime()));
     }
     
     
@@ -160,6 +160,7 @@ public class suscriptorController implements Serializable{
             System.out.println("suscrito con exito");
             this.estadoSuscripcion = "Acabas de suscribirte al evento ";
             return "homeUI.xhtml?faces-redirect=true";
+            //return "";
         }
         else{
             this.estadoSuscripcion = "Ya estas suscrito al evento ";
@@ -168,10 +169,11 @@ public class suscriptorController implements Serializable{
         }
     }
     
-    public void desuscribirseAEvento(Evento evento){
+    public String desuscribirseAEvento(Evento evento){
         Suscripcion suscripcion = this.suscripcionEJB.findByIds(this.suscriptorActual.getIdSubscriptor(), evento.getIdEvento());
         this.suscripcionEJB.remove(suscripcion);
         System.out.println("Suscripcion eliminada con exito");
+        return "homeUI.xhtml?faces-redirect=true";
     }
     
     public String estadoDeSuscripcion(){

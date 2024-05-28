@@ -29,9 +29,10 @@
                                     <f:facet name="subtitle">
                                         <p>#{evento.descripcion}</p>
                                         <p style="font-style: italic; color: black">Hora #{evento.horaEvento}</p>
+                                        <p style="font-style: italic; color: black">Dia #{evento.fechaEvento}</p>
                                     </f:facet>
                                     <f:facet name="footer">
-                                        <p:commandButton id="btn_asistir_1" icon="pi pi-check" value="Asistir" action="#{suscriptorController.suscribirseAEvento(evento)}" styleClass="#{suscriptorController.compruebaColorBotonEventos(evento)}"></p:commandButton>    
+                                        <p:commandButton id="btn_asistir_1" icon="pi pi-check" value="Asistir" action="#{suscriptorController.suscribirseAEvento(evento)}" update="t_eventos1" styleClass="#{suscriptorController.compruebaColorBotonEventos(evento)}"></p:commandButton>    
                                         <p:overlayPanel for="btn_asistir_1">
                                             <p>#{suscriptorController.estadoDeSuscripcion()}</p>
                                         </p:overlayPanel>
