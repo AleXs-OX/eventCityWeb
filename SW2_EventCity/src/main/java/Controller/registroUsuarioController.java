@@ -162,12 +162,12 @@ public class registroUsuarioController implements Serializable {
             return;
         }
 
-        /*if (usuarioEJB.findByUsername(username)) {
+        if (!usuarioEJB.findByUsername(username)) {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "El nombre de usuario ya existe. Por favor, elija otro.");
             FacesContext.getCurrentInstance().addMessage(null, message);
             PrimeFaces.current().executeScript("PF('usernameDialog').show();");
             return;
-        }*/
+        }
 
         try {
             // Encriptar la contraseña usando SHA-256
@@ -184,10 +184,17 @@ public class registroUsuarioController implements Serializable {
             usuarioEJB.create(newUser);
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Usuario registrado con éxito.");
             FacesContext.getCurrentInstance().addMessage(null, message);
+            //Vuelve al login
+            volverLogin();
+            
+            
         } catch (Exception e) {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Error al registrar el usuario: " + e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
+    }
+    public String volverLogin() {
+        return "loginUsuario.xhtml?faces-redirect=true";
     }
 
     private String getSecurePassword(String password) {
