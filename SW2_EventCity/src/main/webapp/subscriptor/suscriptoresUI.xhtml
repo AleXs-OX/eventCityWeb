@@ -30,7 +30,8 @@
                                         <p style="font-style: italic; color: black">Hora #{evento.evento.horaEvento}</p>
                                     </f:facet>
                                     <f:facet name="footer">
-                                        <p:commandButton id="btn_asistir_1" icon="pi pi-check" value="Anular" action="#{suscriptorController.desuscribirseAEvento(evento.evento)}" styleClass="ui-button-raised btn_card"/>
+                                        <p:commandButton id="btn_asistir_1" icon="pi pi-times" value="Anular" action="#{suscriptorController.desuscribirseAEvento(evento.evento)}"
+                                                         update="t_eventosSus1" styleClass="ui-button-raised btn_card"/>
                                         <p:overlayPanel for="btn_asistir_1">
                                             <p>Acabas de suscribirte al evento #{evento.evento.titulo}</p>
                                         </p:overlayPanel>

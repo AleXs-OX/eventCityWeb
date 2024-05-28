@@ -177,5 +177,13 @@ public class suscriptorController implements Serializable{
     public String estadoDeSuscripcion(){
          return this.estadoSuscripcion;
     }
+    
+    public String compruebaColorBotonEventos(Evento evento){
+        //return "ui-button-raised btn_card";
+        if(!this.suscripcionEJB.existeSuscripcion(this.suscriptorActual.getIdSubscriptor(), evento.getIdEvento())){
+            return "ui-button-raised ui-button-success btn_card";
+        }
+        return "ui-button-raised btn_card";
+    }
 }
 
