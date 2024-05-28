@@ -33,4 +33,6 @@ public interface UsuarioFacadeLocal {
     
     Usuario findByCredentials(String username, String password);
     
+    public Usuario findByUsername(String username);
+    
 }

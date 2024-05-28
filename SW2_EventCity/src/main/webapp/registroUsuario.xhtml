@@ -24,8 +24,17 @@
                             <p:outputLabel value="Apellidos:" />
                             <p:inputText id="apellidos" value="#{registroUsuarioController.apellidos}" required="true" />
 
-                            <p:outputLabel value="Telefono:" />
-                            <p:inputText id="telefono" value="#{registroUsuarioController.telefono}" required="false" />
+                            <p:outputLabel value="Prefijo:" for="prefijo" />
+                            <p:selectOneMenu id="prefijo" value="#{registroUsuarioController.prefijo}" required="true">
+                                <f:selectItem itemLabel="Seleccione" itemValue="" />
+                                <f:selectItem itemLabel="+34 España" itemValue="+34" />
+                                <f:selectItem itemLabel="+1 USA" itemValue="+1" />
+                                <f:selectItem itemLabel="+44 UK" itemValue="+44" />
+                                <!-- Añadir más prefijos según sea necesario -->
+                            </p:selectOneMenu>
+
+                            <p:outputLabel value="Telefono:" for="telefono" />
+                            <p:inputText id="telefono" value="#{registroUsuarioController.telefono}" required="true" />
 
                             <p:outputLabel value="Email:" />
                             <p:inputText id="email" value="#{registroUsuarioController.email}" required="true" />
@@ -55,12 +64,28 @@
             <p:commandButton value="Registrar" action="#{registroUsuarioController.registro}" styleClass="registerButton" />
         </h:form>
 
-        <!-- Dialogo para mensaje de error -->
+        <!-- Dialogo para mensaje de error de fecha de nacimiento -->
         <p:dialog header="Error" widgetVar="fechaNacimientoDialog" modal="true" closable="false" resizable="false">
             <h:outputText value="La fecha de nacimiento debe ser anterior a la fecha actual." />
             <p:commandButton value="Aceptar" onclick="PF('fechaNacimientoDialog').hide();" type="button" />
         </p:dialog>
+
+        <!-- Dialogo para mensaje de error de teléfono -->
+        <p:dialog header="Error" widgetVar="telefonoDialog" modal="true" closable="false" resizable="false">
+            <h:outputText value="El número de teléfono debe tener 9 dígitos y solo contener números." />
+            <p:commandButton value="Aceptar" onclick="PF('telefonoDialog').hide();" type="button" />
+        </p:dialog>
+
+        <!-- Dialogo para mensaje de error de nombre de usuario -->
+        <p:dialog header="Error" widgetVar="usernameDialog" modal="true" closable="false" resizable="false">
+            <h:outputText value="El nombre de usuario ya existe. Por favor, elija otro." />
+            <p:commandButton value="Aceptar" onclick="PF('usernameDialog').hide();" type="button" />
+        </p:dialog>
+
+        <!-- Dialogo para mensaje de error de contraseñas -->
+        <p:dialog header="Error" widgetVar="passwordDialog" modal="true" closable="false" resizable="false">
+            <h:outputText value="La contraseña debe tener al menos 8 caracteres, contener al menos un número y coincidir con la confirmación." />
+            <p:commandButton value="Aceptar" onclick="PF('passwordDialog').hide();" type="button" />
+        </p:dialog>
     </h:body>
 </html>
-
-

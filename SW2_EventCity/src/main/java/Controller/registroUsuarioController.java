@@ -24,16 +24,17 @@ import org.primefaces.PrimeFaces;
 @Named
 @ViewScoped
 public class registroUsuarioController implements Serializable {
-    
+
     private String username;
     private String password;
     private String confirmPassword;
     private String nombre;
     private String apellidos;
-    private Integer telefono;
+    private String prefijo;
+    private String telefono;
     private String email;
     private Date fechaNacimiento;
-    
+
     @EJB
     private UsuarioFacadeLocal usuarioEJB;
 
@@ -84,11 +85,19 @@ public class registroUsuarioController implements Serializable {
         this.apellidos = apellidos;
     }
 
-    public Integer getTelefono() {
+    public String getPrefijo() {
+        return prefijo;
+    }
+
+    public void setPrefijo(String prefijo) {
+        this.prefijo = prefijo;
+    }
+
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(Integer telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
@@ -118,6 +127,21 @@ public class registroUsuarioController implements Serializable {
         if (!password.equals(confirmPassword)) {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Las contraseñas no coinciden.");
             FacesContext.getCurrentInstance().addMessage(null, message);
+            PrimeFaces.current().executeScript("PF('passwordDialog').show();");
+            return;
+        }
+
+        if (password.length() < 8) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "La contraseña debe tener al menos 8 caracteres.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            PrimeFaces.current().executeScript("PF('passwordDialog').show();");
+            return;
+        }
+
+        if (!password.matches(".*\\d.*")) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "La contraseña debe contener al menos un número.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            PrimeFaces.current().executeScript("PF('passwordDialog').show();");
             return;
         }
 
@@ -129,23 +153,46 @@ public class registroUsuarioController implements Serializable {
             return;
         }
 
+        if (telefono == null || telefono.length() != 9 || !telefono.matches("\\d{9}")) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "El número de teléfono debe tener 9 dígitos y solo contener números.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            PrimeFaces.current().executeScript("PF('telefonoDialog').show();");
+            return;
+        }
+
+        /*Usuario existingUser = usuarioEJB.findByUsername(username);
+        System.out.println("He salido del findByUsername");
+        System.out.println("existingUser.getNombreusuario()" + existingUser.getNombreusuario());
+        if (existingUser.getNombreusuario().equals(username)) {
+            System.out.println("Entro en el else");
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "El nombre de usuario ya existe. Por favor, elija otro.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            PrimeFaces.current().executeScript("PF('usernameDialog').show();");
+            return;
+            
+        }*/
+
         try {
             Usuario newUser = new Usuario();
             newUser.setNombreusuario(username);
             newUser.setContrasena(password); // Asegúrate de encriptar la contraseña antes de guardarla
             newUser.setNombre(nombre);
             newUser.setApellidos(apellidos);
-            newUser.setTelefono(telefono);
+            newUser.setTelefono(Integer.parseInt(telefono));
+            
+            System.out.println("Llego aqui");
             newUser.setEmail(email);
-
             usuarioEJB.create(newUser);
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Usuario registrado con éxito.");
             FacesContext.getCurrentInstance().addMessage(null, message);
+            System.out.println("Me he registrado");
         } catch (Exception e) {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Error al registrar el usuario: " + e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
 }
+
+
 
 
