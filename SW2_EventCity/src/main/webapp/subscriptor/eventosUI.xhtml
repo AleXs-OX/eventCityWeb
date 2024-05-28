@@ -21,6 +21,7 @@
                     <!--<h:form>-->
                     
                     <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_eventos1" value="#{suscriptorController.getEventoConciertos()}" var="evento">
+                        <p:remoteCommand name="remoteReloadEventos" update=":t_eventos1"/>
                         <p:column headerText="Conciertos">
                                 <p:card class="card_evento" style="width: 16.6em">
                                     <f:facet name="title">
@@ -32,7 +33,8 @@
                                         <p style="font-style: italic; color: black">Dia #{evento.fechaEvento}</p>
                                     </f:facet>
                                     <f:facet name="footer">
-                                        <p:commandButton id="btn_asistir_1" icon="pi pi-check" value="Asistir" action="#{suscriptorController.suscribirseAEvento(evento)}" update="t_eventos1" styleClass="#{suscriptorController.compruebaColorBotonEventos(evento)}"></p:commandButton>    
+                                        <p:commandButton id="btn_asistir_1" icon="pi pi-check" value="Asistir" action="#{suscriptorController.suscribirseAEvento(evento)}" 
+                                                         onclick="remoteReloadSus()" update="t_eventos1" styleClass="#{suscriptorController.compruebaColorBotonEventos(evento)}"></p:commandButton>    
                                         <p:overlayPanel for="btn_asistir_1">
                                             <p>#{suscriptorController.estadoDeSuscripcion()}</p>
                                         </p:overlayPanel>
@@ -212,7 +214,7 @@
                     <!--</h:form>-->
                     
                     <div class="calendar">
-                        <p:calendar mode="inline" id="calendario" value="#{suscriptorController.dateSeleccionada}" locale = "es" navigator ="true" showOn="button" pattern="dd/MM/yyyy">
+                        <p:calendar mode="inline" id="calendario" value="#{suscriptorController.dateSeleccionadaEventos}" locale = "es" navigator ="true" showOn="button" pattern="dd/MM/yyyy">
                             <p:ajax event="dateSelect" update="t_eventos1 t_eventos2 t_eventos3 t_eventos4"
                                     />
                         </p:calendar>

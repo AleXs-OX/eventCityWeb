@@ -15,11 +15,13 @@
     </h:head>
 
     <h:body>
+        
         <div class="eventos">   
                 <div class="grid-container">
                     <!--<h:form>-->
                     
                     <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_eventosSus1" value="#{suscriptorController.suscripcionesConciertos}" var="evento">
+                        <p:remoteCommand name="remoteReloadSus" update=":t_eventosSus1"/>
                         <p:column headerText="Conciertos">
                                 <p:card class="card_evento" style="width: 16.6em">
                                     <f:facet name="title">
@@ -31,7 +33,7 @@
                                     </f:facet>
                                     <f:facet name="footer">
                                         <p:commandButton id="btn_asistir_1" icon="pi pi-times" value="Anular" action="#{suscriptorController.desuscribirseAEvento(evento.evento)}"
-                                                         update="t_eventosSus1" styleClass="ui-button-raised btn_card"/>
+                                                         update="t_eventosSus1" onclick="remoteReloadEventos()" styleClass="ui-button-raised btn_card"/>
                                         <p:overlayPanel for="btn_asistir_1">
                                             <p>Acabas de suscribirte al evento #{evento.evento.titulo}</p>
                                         </p:overlayPanel>
@@ -244,7 +246,7 @@
                     <!--</h:form>-->
                     
                     <div class="calendar">
-                        <p:calendar mode="inline" id="calendarioSus" value="#{suscriptorController.dateSeleccionada}" locale = "es" navigator ="true" showOn="button" pattern="dd/MM/yyyy">
+                        <p:calendar mode="inline" id="calendarioSus" value="#{suscriptorController.dateSeleccionadaSus}" locale = "es" navigator ="true" showOn="button" pattern="dd/MM/yyyy">
                             <p:ajax event="dateSelect" update="t_eventosSus1 t_eventosSus2 t_eventosSus3 t_eventosSus4"
                                     />
                         </p:calendar>
@@ -252,5 +254,6 @@
                     
                 </div>
         </div>
+        
     </h:body>
 </html>
