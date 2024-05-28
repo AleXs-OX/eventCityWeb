@@ -31,9 +31,9 @@
                                         <p style="font-style: italic; color: black">Hora #{evento.horaEvento}</p>
                                     </f:facet>
                                     <f:facet name="footer">
-                                            <p:commandButton id="btn_asistir_1" icon="pi pi-check" value="Asistir" action="#{suscriptorController.suscribirseAEvento(evento)}" styleClass="ui-button-raised btn_card"/>
+                                        <p:commandButton id="btn_asistir_1" icon="pi pi-check" value="Asistir" action="#{suscriptorController.suscribirseAEvento(evento)}" styleClass="ui-button-raised btn_card"></p:commandButton>    
                                         <p:overlayPanel for="btn_asistir_1">
-                                            <p>Acabas de suscribirte al evento #{evento.titulo}</p>
+                                            <p>#{suscriptorController.estadoDeSuscripcion()}</p>
                                         </p:overlayPanel>
                                         <p:commandButton id="btn-info_1" icon="pi pi-star-fill" value="Información" styleClass="ui-button-raised ui-button-secondary btn_card" style="margin-left: .5em"/>
                                         <p:overlayPanel for="btn-info_1" showCloseIcon="true">

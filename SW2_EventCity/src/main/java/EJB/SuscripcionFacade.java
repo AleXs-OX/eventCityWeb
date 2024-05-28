@@ -10,6 +10,8 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import modelo.Suscripcion;
 
 /**
@@ -39,5 +41,31 @@ public class SuscripcionFacade extends AbstractFacade<Suscripcion> implements Su
                  .setParameter("idCategoria", idCategoria)
                  .setParameter("fechaEvento", sqlDate)
                  .getResultList();
+    }
+    
+    @Override
+    public boolean existeSuscripcion(Integer idSuscriptor, Integer idEvento) {
+        TypedQuery<Suscripcion> query = em.createQuery(
+            "SELECT e FROM Suscripcion e WHERE e.suscriptor.idSubscriptor = :idSuscriptor AND e.evento.idEvento = :idEvento", 
+            Suscripcion.class
+        );
+        query.setParameter("idSuscriptor", idSuscriptor);
+        query.setParameter("idEvento", idEvento);
+
+        List<Suscripcion> suscripciones = query.getResultList();
+        return suscripciones.isEmpty();
+    }
+    
+    @Override
+    public Suscripcion findByIds(Integer idSuscriptor, Integer idEvento){
+        TypedQuery<Suscripcion> query = em.createQuery(
+            "SELECT e FROM Suscripcion e WHERE e.suscriptor.idSubscriptor = :idSuscriptor AND e.evento.idEvento = :idEvento", 
+            Suscripcion.class
+        );
+        query.setParameter("idSuscriptor", idSuscriptor);
+        query.setParameter("idEvento", idEvento);
+
+        Suscripcion suscripcion = query.getSingleResult();
+        return suscripcion;
     }
 }

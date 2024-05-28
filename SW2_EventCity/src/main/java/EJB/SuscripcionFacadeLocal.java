@@ -33,4 +33,8 @@ public interface SuscripcionFacadeLocal {
     
     List<Suscripcion> findSuscripcionesByIdSuscriptor(Integer idSuscriptor, Integer idCategoria, Date fecha);
     
+    boolean existeSuscripcion(Integer idSuscriptor, Integer idEvento);
+    
+    Suscripcion findByIds(Integer idSuscriptor, Integer idEvento);
+
 }

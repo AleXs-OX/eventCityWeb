@@ -56,6 +56,8 @@ public class suscriptorController implements Serializable{
     private int competicionesTorneos=3;
     private int miscelaneo=4;
     
+    private String estadoSuscripcion ="Acabas de suscribirte al evento ";
+    
     
 
     public suscriptorController(){
@@ -144,17 +146,36 @@ public class suscriptorController implements Serializable{
         System.out.println("Fecha seleccionada: " + formattedDate);
     }
     
-    public void suscribirseAEvento(Evento evento){
+    public String suscribirseAEvento(Evento evento){
         /*Crea la suscripcion a un evento*/
-        Suscripcion suscripcion = new Suscripcion();
+        if(this.suscripcionEJB.existeSuscripcion(this.suscriptorActual.getIdSubscriptor(), evento.getIdEvento())){
+            Suscripcion suscripcion = new Suscripcion();
         
-        suscripcion.setEstado(true);
-        suscripcion.setSuscriptor(this.suscriptorActual);
-        suscripcion.setEvento(evento);
-        suscripcion.setFechaSus(this.diaActual);
-        
-        suscripcionEJB.create(suscripcion);
-        System.out.println("suscrito con exito");
+            suscripcion.setEstado(true);
+            suscripcion.setSuscriptor(this.suscriptorActual);
+            suscripcion.setEvento(evento);
+            suscripcion.setFechaSus(this.diaActual);
+
+            this.suscripcionEJB.create(suscripcion);
+            System.out.println("suscrito con exito");
+            this.estadoSuscripcion = "Acabas de suscribirte al evento ";
+            return "homeUI.xhtml?faces-redirect=true";
+        }
+        else{
+            this.estadoSuscripcion = "Ya estas suscrito al evento ";
+            System.out.println("Ya estas suscrito a este evento");
+            return "";
+        }
+    }
+    
+    public void desuscribirseAEvento(Evento evento){
+        Suscripcion suscripcion = this.suscripcionEJB.findByIds(this.suscriptorActual.getIdSubscriptor(), evento.getIdEvento());
+        this.suscripcionEJB.remove(suscripcion);
+        System.out.println("Suscripcion eliminada con exito");
+    }
+    
+    public String estadoDeSuscripcion(){
+         return this.estadoSuscripcion;
     }
 }
 
