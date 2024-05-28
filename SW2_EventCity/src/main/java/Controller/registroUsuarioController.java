@@ -9,6 +9,8 @@ package Controller;
 import EJB.UsuarioFacadeLocal;
 import modelo.Usuario;
 import java.io.Serializable;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -160,39 +162,49 @@ public class registroUsuarioController implements Serializable {
             return;
         }
 
-        /*Usuario existingUser = usuarioEJB.findByUsername(username);
-        System.out.println("He salido del findByUsername");
-        System.out.println("existingUser.getNombreusuario()" + existingUser.getNombreusuario());
-        if (existingUser.getNombreusuario().equals(username)) {
-            System.out.println("Entro en el else");
+        /*if (usuarioEJB.findByUsername(username)) {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "El nombre de usuario ya existe. Por favor, elija otro.");
             FacesContext.getCurrentInstance().addMessage(null, message);
             PrimeFaces.current().executeScript("PF('usernameDialog').show();");
             return;
-            
         }*/
 
         try {
+            // Encriptar la contraseña usando SHA-256
+            String securePassword = getSecurePassword(password);
+
             Usuario newUser = new Usuario();
             newUser.setNombreusuario(username);
-            newUser.setContrasena(password); // Asegúrate de encriptar la contraseña antes de guardarla
+            newUser.setContrasena(securePassword); // Almacenar la contraseña encriptada
             newUser.setNombre(nombre);
             newUser.setApellidos(apellidos);
             newUser.setTelefono(Integer.parseInt(telefono));
-            
-            System.out.println("Llego aqui");
             newUser.setEmail(email);
+
             usuarioEJB.create(newUser);
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Usuario registrado con éxito.");
             FacesContext.getCurrentInstance().addMessage(null, message);
-            System.out.println("Me he registrado");
         } catch (Exception e) {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Error al registrar el usuario: " + e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
+
+    private String getSecurePassword(String password) {
+        String generatedPassword = null;
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] bytes = md.digest(password.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < bytes.length; i++) {
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            generatedPassword = sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return generatedPassword;
+    }
 }
-
-
 
 
