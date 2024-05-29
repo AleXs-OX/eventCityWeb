@@ -65,10 +65,6 @@ public class suscriptorController implements Serializable{
     private final int talleresClases=2;
     private final int competicionesTorneos=3;
     private final int miscelaneo=4;
-    
-    private String textoResena;
-    private int puntuacionResena = 0;
-
     private String estadoSuscripcion ="Acabas de suscribirte al evento ";
     
     private int puntuacionResena = 0;
@@ -174,14 +170,6 @@ public class suscriptorController implements Serializable{
         
     }
     
-    public void setTextoResena(String textoR){
-        this.textoResena = textoR;
-    }
-    
-    public String getTextoResena(){
-        return this.textoResena;
-    }
-    
     /*public void setDay(SelectEvent<Date> event){
         this.diaSeleccionado = event.getObject();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -255,7 +243,7 @@ public class suscriptorController implements Serializable{
         
         /*Crea la resena*/
         /*Crea la puntuacion*/
-
+    }
     public void creaResenaYPuntuacion(int idEvento){
         /*Comprueba que ese usuario no tiene ni reseña ni puntuacion en ese evento*/
         if(!this.puntuacionEJB.existePuntuacion(this.suscriptorActual.getIdSubscriptor()

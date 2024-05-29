@@ -71,7 +71,7 @@ public class loginUsuarioController implements Serializable{
         if (usuario != null) {
            
             System.out.println("Inicio de sesión exitoso para usuario: " + usuario.getNombreusuario());
-            return "/subscriptor/homeUI?faces-redirect=true"; // Redirige a la página principal o dashboard
+            return "/subscriptor/homeUI.xhtml?faces-redirect=true"; // Redirige a la página principal o dashboard
         } else {
             System.out.println("Error de inicio de sesión para usuario: " + username);
             FacesContext.getCurrentInstance().addMessage(null, 
