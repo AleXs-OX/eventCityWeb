@@ -31,8 +31,11 @@ public interface UsuarioFacadeLocal {
 
     int count();
     
+
     Usuario findByCredentials(String username, String password);
     
     public Usuario findByUsername(String username);
-    
+
+    //Usuario findUsuariorById(Integer idSuscriptor);
+
 }

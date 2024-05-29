@@ -10,7 +10,9 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import modelo.Puntuacion;
+import modelo.Suscripcion;
 
 /**
  *
@@ -42,4 +44,16 @@ public class PuntuacionFacade extends AbstractFacade<Puntuacion> implements Punt
         return null;
      }
    }
+    @Override
+    public boolean existePuntuacion(Integer idSuscriptor, Integer idEvento) {
+        TypedQuery<Puntuacion> query = em.createQuery(
+            "SELECT e FROM Puntuacion e WHERE e.suscriptor.idSubscriptor = :idSuscriptor AND e.evento.idEvento = :idEvento", 
+            Puntuacion.class
+        );
+        query.setParameter("idSuscriptor", idSuscriptor);
+        query.setParameter("idEvento", idEvento);
+
+        List<Puntuacion> suscripciones = query.getResultList();
+        return !suscripciones.isEmpty();
+    }
 }

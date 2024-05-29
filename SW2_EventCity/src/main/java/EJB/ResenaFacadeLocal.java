@@ -28,4 +28,6 @@ public interface ResenaFacadeLocal {
     
     List<Resena> findResenasByIdEvento(Integer idEvento);
     
+    boolean existeResena(Integer idSuscriptor, Integer idEvento);
+    
 }
