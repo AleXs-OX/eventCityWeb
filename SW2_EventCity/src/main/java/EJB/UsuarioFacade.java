@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -39,6 +40,22 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
             System.out.println("Entro en la excepcion");
             return null;
         }
+    }
+    
+    @Override
+    public Usuario findByUsername(String username){
+        System.out.println(username);
+        
+        try{
+            return em.createQuery(
+                "SELECT u FROM Usuario u WHERE u.nombreusuario = :username",
+                Usuario.class
+            ).setParameter("username", username).getSingleResult();
+            
+        }catch(Exception e){
+            return null;
+        }
+        
     }
     
     @Override
