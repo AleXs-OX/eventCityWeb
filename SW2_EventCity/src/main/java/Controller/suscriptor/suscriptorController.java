@@ -55,6 +55,9 @@ public class suscriptorController implements Serializable{
     private final int talleresClases=2;
     private final int competicionesTorneos=3;
     private final int miscelaneo=4;
+    
+    private String textoResena;
+    private int puntuacionResena = 0;
 
     Suscriptor suscriptorActual = new Suscriptor();
     Suscripcion suscripcionesUsuario;
@@ -135,16 +138,19 @@ public class suscriptorController implements Serializable{
         
     }
     
-    public void showResena(SelectEvent<String> event){
-        String prueba = event.toString();
-        System.out.println("prueba");
+    public void setTextoResena(String textoR){
+        this.textoResena = textoR;
     }
     
-    public void setDay(SelectEvent<Date> event){
-        this.diaSeleccionado = event.getObject();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String formattedDate = dateFormat.format(this.diaSeleccionado);
-        System.out.println("Fecha seleccionada: " + formattedDate);
+    public String getTextoResena(){
+        return this.textoResena;
+    }
+    
+    public void setPuntuacionResena(int puntuacionR){
+        this.puntuacionResena = puntuacionR;
+    }
+    public int getPuntuacionResena(){
+        return this.puntuacionResena;
     }
 }
 
