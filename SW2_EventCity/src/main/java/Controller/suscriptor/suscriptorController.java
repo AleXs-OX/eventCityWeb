@@ -228,13 +228,14 @@ public class suscriptorController implements Serializable{
     
     public void creaResenaYPuntuacion(int idEvento){
         /*Comprueba que ese usuario no tiene ni reseña ni puntuacion en ese evento*/
-        if(!this.resenaEJB.existeResena(this.suscriptorActual.getIdSubscriptor()
-                , idEvento) && !this.puntuacionEJB.existePuntuacion(this.suscriptorActual.getIdSubscriptor()
+        if(!this.puntuacionEJB.existePuntuacion(this.suscriptorActual.getIdSubscriptor()
+                , idEvento) && !this.resenaEJB.existeResena(this.suscriptorActual.getIdSubscriptor()
                         , idEvento)){
-            
-        /*Crea la resena*/
-        
-        /*Crea la puntuacion*/
+            /*Crea la resena*/
+            System.out.println("Crearia la reseña");
+            /*Crea la puntuacion*/
+        }else{
+            System.out.println("Ya existe reseña de este usuario en este evento");
         }
        
     }
