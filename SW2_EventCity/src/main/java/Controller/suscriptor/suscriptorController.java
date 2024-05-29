@@ -152,5 +152,12 @@ public class suscriptorController implements Serializable{
     public int getPuntuacionResena(){
         return this.puntuacionResena;
     }
+    
+    public void creaResenaYPuntuacion(int idEvento, int idSuscriptor){
+        /*Comprueba que ese usuario no tiene ni reseña ni puntuacion en ese evento*/
+        
+        /*Crea la resena*/
+        /*Crea la puntuacion*/
+    }
 }
 
