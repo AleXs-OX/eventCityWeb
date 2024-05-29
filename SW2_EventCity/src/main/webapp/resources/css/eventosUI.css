@@ -1,0 +1,62 @@
+.text{
+    text-align: center
+}
+.grid{
+    text-align: left
+}
+.eventos{
+    width: 500px;
+}
+.eventos-container {
+    /*display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    /*align-items: center; /* Centra verticalmente */
+    /*height: 100vh; /* Altura completa de la ventana */
+    
+}
+.grid-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 70%; /* Establece un ancho máximo del 70% de la pantalla */
+    
+}
+
+.data-table {
+    flex: 1; /* Permite que las tablas crezcan uniformemente */
+    min-width: 280px; /* Ancho mínimo de cada tabla */
+    margin-right: 0px;
+    
+}
+.ui-datatable th.ui-state-default {
+    text-align: center; /* Alinea el texto al centro */
+}
+
+.colorTable{
+    /*background-color: #ededf3 !important;*/
+}
+.card_evento {
+    background-color: #e3f0f0 !important;
+}
+.card_resena{
+    background-color: #e4f3fa !important;
+}
+.btn_card{
+    font-size: 15px !important;
+}
+.ui-button{
+}
+.calendar{
+    transform: scale(0.85); /* Reducir el tamaño */
+    position: fixed; /* Para mantener el calendario fijo en la pantalla */
+    top: 125px; /* Posición vertical desde la parte superior */
+    right: -13px; /* Posición horizontal desde la derecha */
+
+}
+.resena_nombre{
+    margin-top: 1em;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+.resena_desc{
+    margin-bottom: 1em;
+}

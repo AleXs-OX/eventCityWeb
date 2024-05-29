@@ -59,9 +59,25 @@
 	<groupId>org.primefaces</groupId>
 	<artifactId>primefaces</artifactId>
 	<version>13.0.7</version>
-</dependency>
+        </dependency>
+        
+        <dependency> 
+            <groupId>org.primefaces.themes</groupId> 
+            <artifactId>all-themes</artifactId> 
+            <version>1.0.10</version> 
+        </dependency>
+        
+        
+
     </dependencies>
-    
+    <repositories>
+    <repository>
+        <id>prime-repo</id>
+        <name>PrimeFaces Maven Repository</name>
+        <url>https://repository.primefaces.org</url>
+    </repository>
+</repositories>
+
      <build>
         <plugins>
             <plugin>

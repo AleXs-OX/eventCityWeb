@@ -1,58 +1,46 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package modelo;
 
 import java.io.Serializable;
-import java.util.Date;
+import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-/**
- *
- * @author Beatriz
- */
 
 @Entity
-@Table(name="usuarios")
+@Table(name = "usuarios")
 public class Usuario implements Serializable{
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //Valor autogenerado
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idUsuario")
     private int idUsuario;
     
-    @Column(name="user")
-    private String usuario;
+    @Column(name = "nombreusuario", nullable = false)
+    private String nombreusuario;
     
-    @Column(name="password")
-    private String password;
+    @Column(name = "contrasena", nullable = false)
+    private String contrasena;
     
-    @Column(name="ultimaConexion")
-    @Temporal(TemporalType.DATE)
-    private Date ultimaConexion;
+    @Column(name = "nombre")
+    private String nombre;
     
-    @Column(name="estado")
-    private boolean estado;
+    @Column(name = "apellidos")
+    private String apellidos;
     
-    @JoinColumn(name="idPersona")
-    @OneToOne
-    private Persona idPersona;
+    @Column(name = "telefono")
+    private int telefono;
     
-    @JoinColumn(name="idRol")
-    @ManyToOne
-    private Rol idRol;
+    @Column(name = "email")
+    private String email;
+
+    @OneToOne(mappedBy = "usuario")
+    private Publicador publicador;
+
+    @OneToOne(mappedBy = "usuario")
+    private Admin admin;
+
+    @OneToMany(mappedBy = "usuario")
+    private List<Suscriptor> suscriptores;
 
     public int getIdUsuario() {
         return idUsuario;
@@ -62,64 +50,95 @@ public class Usuario implements Serializable{
         this.idUsuario = idUsuario;
     }
 
-    public String getUsuario() {
-        return usuario;
+    public String getNombreusuario() {
+        return nombreusuario;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setNombreusuario(String nombreusuario) {
+        this.nombreusuario = nombreusuario;
     }
 
-    public String getPassword() {
-        return password;
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
-    public Date getUltimaConexion() {
-        return ultimaConexion;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setUltimaConexion(Date ultimaConexion) {
-        this.ultimaConexion = ultimaConexion;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public boolean isEstado() {
-        return estado;
+    public String getApellidos() {
+        return apellidos;
     }
 
-    public void setEstado(boolean estado) {
-        this.estado = estado;
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 
-    public Persona getIdPersona() {
-        return idPersona;
+    public int getTelefono() {
+        return telefono;
     }
 
-    public void setIdPersona(Persona idPersona) {
-        this.idPersona = idPersona;
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
     }
 
-    public Rol getIdRol() {
-        return idRol;
+    public String getEmail() {
+        return email;
     }
 
-    public void setIdRol(Rol idRol) {
-        this.idRol = idRol;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Publicador getPublicador() {
+        return publicador;
+    }
+
+    public void setPublicador(Publicador publicador) {
+        this.publicador = publicador;
+    }
+
+    public Admin getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
+    }
+
+    public List<Suscriptor> getSuscriptores() {
+        return suscriptores;
+    }
+
+    public void setSuscriptores(List<Suscriptor> suscriptores) {
+        this.suscriptores = suscriptores;
     }
     
+    public String getNombreCompleto(){
+        return (this.nombre+" "+this.apellidos);
+    }
+
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 59 * hash + this.idUsuario;
-        hash = 59 * hash + Objects.hashCode(this.usuario);
-        hash = 59 * hash + Objects.hashCode(this.password);
-        hash = 59 * hash + Objects.hashCode(this.ultimaConexion);
-        hash = 59 * hash + (this.estado ? 1 : 0);
-        hash = 59 * hash + Objects.hashCode(this.idPersona);
-        hash = 59 * hash + Objects.hashCode(this.idRol);
+        int hash = 5;
+        hash = 43 * hash + this.idUsuario;
+        hash = 43 * hash + Objects.hashCode(this.nombreusuario);
+        hash = 43 * hash + Objects.hashCode(this.contrasena);
+        hash = 43 * hash + Objects.hashCode(this.nombre);
+        hash = 43 * hash + Objects.hashCode(this.apellidos);
+        hash = 43 * hash + this.telefono;
+        hash = 43 * hash + Objects.hashCode(this.email);
+        hash = 43 * hash + Objects.hashCode(this.publicador);
+        hash = 43 * hash + Objects.hashCode(this.admin);
+        hash = 43 * hash + Objects.hashCode(this.suscriptores);
         return hash;
     }
 
@@ -138,26 +157,37 @@ public class Usuario implements Serializable{
         if (this.idUsuario != other.idUsuario) {
             return false;
         }
-        if (this.estado != other.estado) {
+        if (this.telefono != other.telefono) {
             return false;
         }
-        if (!Objects.equals(this.usuario, other.usuario)) {
+        if (!Objects.equals(this.nombreusuario, other.nombreusuario)) {
             return false;
         }
-        if (!Objects.equals(this.password, other.password)) {
+        if (!Objects.equals(this.contrasena, other.contrasena)) {
             return false;
         }
-        if (!Objects.equals(this.ultimaConexion, other.ultimaConexion)) {
+        if (!Objects.equals(this.nombre, other.nombre)) {
             return false;
         }
-        if (!Objects.equals(this.idPersona, other.idPersona)) {
+        if (!Objects.equals(this.apellidos, other.apellidos)) {
             return false;
         }
-        if (!Objects.equals(this.idRol, other.idRol)) {
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+        if (!Objects.equals(this.publicador, other.publicador)) {
+            return false;
+        }
+        if (!Objects.equals(this.admin, other.admin)) {
+            return false;
+        }
+        if (!Objects.equals(this.suscriptores, other.suscriptores)) {
             return false;
         }
         return true;
     }
+    
+    
     
     
 }

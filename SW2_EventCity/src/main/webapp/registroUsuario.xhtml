@@ -1,16 +1,91 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <!-- Definición cambio de idioma a español-->
+    <h:outputScript library="js" name="calendar_es.js" />
+    <h:head>
+        <title>Registro de usuario</title>
+    </h:head>
+    
+    <h:body id="register-page">
+        <h:outputStylesheet library="css" name="registro.css"/>
+    
+        <h:form id="register-form">
+            <div id="register-card" class="register-card-container">
+                <div class="form-section">
+                    <p:fieldset legend="Datos personales" id="personal-data">
+                        <p:panelGrid columns="2">
+                            <p:outputLabel value="Nombre:" for="nombre" />
+                            <p:inputText id="nombre" value="#{registroUsuarioController.nombre}" required="true" />
+
+                            <p:outputLabel value="Apellidos:" />
+                            <p:inputText id="apellidos" value="#{registroUsuarioController.apellidos}" required="true" />
+
+                            <p:outputLabel value="Prefijo:" for="prefijo" />
+                            <p:selectOneMenu id="prefijo" value="#{registroUsuarioController.prefijo}" required="true">
+                                <f:selectItem itemLabel="Seleccione" itemValue="" />
+                                <f:selectItem itemLabel="+34 España" itemValue="+34" />
+                                <f:selectItem itemLabel="+1 USA" itemValue="+1" />
+                                <f:selectItem itemLabel="+44 UK" itemValue="+44" />
+                                <!-- Añadir más prefijos según sea necesario -->
+                            </p:selectOneMenu>
+
+                            <p:outputLabel value="Telefono:" for="telefono" />
+                            <p:inputText id="telefono" value="#{registroUsuarioController.telefono}" required="true" />
+
+                            <p:outputLabel value="Email:" />
+                            <p:inputText id="email" value="#{registroUsuarioController.email}" required="true" />
+
+                            <p:outputLabel value="Fecha de nacimiento:" for="fechaNacimiento" />
+                            <p:calendar id="fechaNacimiento" value="#{registroUsuarioController.fechaNacimiento}" locale="es" navigator="true"
+                                        showOn="button" pattern="dd/MM/yyyy" required="true" />
+                        </p:panelGrid>
+                    </p:fieldset>
+                </div>
+                <div class="form-section">
+                    <p:fieldset legend="Datos de acceso" class="form-section" id="access-data">
+                        <p:panelGrid columns="2">
+                            <p:outputLabel value="Nombre de usuario:" for="username" />
+                            <p:inputText id="username" value="#{registroUsuarioController.username}" required="true" />
+
+                            <p:outputLabel value="Contraseña:" for="pwd1" />
+                            <p:password id="pwd1" value="#{registroUsuarioController.password}" feedback="true" promptLabel="Contraseña"
+                                        weakLabel="Débil" goodLabel="Buena" strongLabel="Fuerte" required="true" />
+
+                            <p:outputLabel value="Repite la contraseña:" for="pwd2" />
+                            <p:password id="pwd2" value="#{registroUsuarioController.confirmPassword}" required="true" />
+                        </p:panelGrid>
+                    </p:fieldset>
+                </div>
+            </div>
+            <p:commandButton value="Registrar" action="#{registroUsuarioController.registro}" styleClass="registerButton" />
+        </h:form>
+
+        <!-- Dialogo para mensaje de error de fecha de nacimiento -->
+        <p:dialog header="Error" widgetVar="fechaNacimientoDialog" modal="true" closable="false" resizable="false">
+            <h:outputText value="La fecha de nacimiento debe ser anterior a la fecha actual." />
+            <p:commandButton value="Aceptar" onclick="PF('fechaNacimientoDialog').hide();" type="button" />
+        </p:dialog>
+
+        <!-- Dialogo para mensaje de error de teléfono -->
+        <p:dialog header="Error" widgetVar="telefonoDialog" modal="true" closable="false" resizable="false">
+            <h:outputText value="El número de teléfono debe tener 9 dígitos y solo contener números." />
+            <p:commandButton value="Aceptar" onclick="PF('telefonoDialog').hide();" type="button" />
+        </p:dialog>
+
+        <!-- Dialogo para mensaje de error de nombre de usuario -->
+        <p:dialog header="Error" widgetVar="usernameDialog" modal="true" closable="false" resizable="false">
+            <h:outputText value="El nombre de usuario ya existe. Por favor, elija otro." />
+            <p:commandButton value="Aceptar" onclick="PF('usernameDialog').hide();" type="button" />
+        </p:dialog>
+
+        <!-- Dialogo para mensaje de error de contraseñas -->
+        <p:dialog header="Error" widgetVar="passwordDialog" modal="true" closable="false" resizable="false">
+            <h:outputText value="La contraseña debe tener al menos 8 caracteres, contener al menos un número y coincidir con la confirmación." />
+            <p:commandButton value="Aceptar" onclick="PF('passwordDialog').hide();" type="button" />
+        </p:dialog>
+    </h:body>
 </html>

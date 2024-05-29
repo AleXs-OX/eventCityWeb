@@ -7,26 +7,26 @@ package EJB;
 
 import java.util.List;
 import javax.ejb.Local;
-import modelo.Categoria;
+import modelo.Publicador;
 
 /**
  *
  * @author Beatriz
  */
 @Local
-public interface CategoriaFacadeLocal {
+public interface PublicadorFacadeLocal {
 
-    void create(Categoria categoria);
+    void create(Publicador publicador);
 
-    void edit(Categoria categoria);
+    void edit(Publicador publicador);
 
-    void remove(Categoria categoria);
+    void remove(Publicador publicador);
 
-    Categoria find(Object id);
+    Publicador find(Object id);
 
-    List<Categoria> findAll();
+    List<Publicador> findAll();
 
-    List<Categoria> findRange(int[] range);
+    List<Publicador> findRange(int[] range);
 
     int count();
     

@@ -7,26 +7,26 @@ package EJB;
 
 import java.util.List;
 import javax.ejb.Local;
-import modelo.Categoria;
+import modelo.Admin;
 
 /**
  *
  * @author Beatriz
  */
 @Local
-public interface CategoriaFacadeLocal {
+public interface AdminFacadeLocal {
 
-    void create(Categoria categoria);
+    void create(Admin admin);
 
-    void edit(Categoria categoria);
+    void edit(Admin admin);
 
-    void remove(Categoria categoria);
+    void remove(Admin admin);
 
-    Categoria find(Object id);
+    Admin find(Object id);
 
-    List<Categoria> findAll();
+    List<Admin> findAll();
 
-    List<Categoria> findRange(int[] range);
+    List<Admin> findRange(int[] range);
 
     int count();
     

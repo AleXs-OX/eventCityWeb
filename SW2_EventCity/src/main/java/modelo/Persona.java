@@ -16,10 +16,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-/**
- *
- * @author Beatriz
- */
 @Entity
 @Table(name="personas")
 public class Persona implements Serializable {
