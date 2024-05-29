@@ -71,6 +71,7 @@
                     </p:dataTable>
 
                     <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_eventos2" value="#{suscriptorController.getEventoTalleresyClases()}" var="evento">
+                        <p:remoteCommand name="remoteReloadEventos" update=":t_eventos2"/>
                         <p:column headerText="Talleres y Clases">
                             <p:card class="card_evento" style="width: 16.6em">
                                     <f:facet name="title">
@@ -120,6 +121,7 @@
                     </p:dataTable>
 
                     <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_eventos3" value="#{suscriptorController.getEventoCompeticionesyTorneos()}" var="evento">
+                        <p:remoteCommand name="remoteReloadEventos" update=":t_eventos3"/>
                         <p:column headerText="Competiciones y Torneos">
                             <p:card class="card_evento" style="width: 16.6em">
                                     <f:facet name="title">
@@ -168,6 +170,7 @@
                         <!-- más columnas -->
                     </p:dataTable>
                     <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" var="evento" id="t_eventos4" value="#{suscriptorController.getEventoMiscelaneo()}" >
+                        <p:remoteCommand name="remoteReloadEventos" update=":t_eventos4"/>
                         <p:column headerText="Misceláneo">
                             <p:column headerText="Conciertos">
                                 <p:card class="card_evento" style="width: 16.6em">
