@@ -59,7 +59,8 @@ public class suscriptorController implements Serializable{
     
     private String estadoSuscripcion ="Acabas de suscribirte al evento ";
     
-    
+    private int puntuacionResena = 0;
+    private String textoResena = "";
 
     public suscriptorController(){
         this.diaActual = new Date();
@@ -134,7 +135,10 @@ public class suscriptorController implements Serializable{
     }
     
     public void doTest(){
-        System.out.println("estoy detectando el boton");
+        System.out.println("Puntuacion");
+        System.out.println(this.puntuacionResena);
+        System.out.println("Resena");
+        System.out.println(this.textoResena);
     }
    
     public List<Resena> getResenasByEvento(int idEvento){
@@ -204,6 +208,35 @@ public class suscriptorController implements Serializable{
             return "ui-button-raised ui-button-success btn_card";
         }
         return "ui-button-raised btn_card";
+    }
+    
+        
+    public void setTextoResena(String textoR){
+        this.textoResena = textoR;
+    }
+    
+    public String getTextoResena(){
+        return this.textoResena;
+    }
+    
+    public void setPuntuacionResena(int puntuacionR){
+        this.puntuacionResena = puntuacionR;
+    }
+    public int getPuntuacionResena(){
+        return this.puntuacionResena;
+    }
+    
+    public void creaResenaYPuntuacion(int idEvento){
+        /*Comprueba que ese usuario no tiene ni reseña ni puntuacion en ese evento*/
+        if(!this.resenaEJB.existeResena(this.suscriptorActual.getIdSubscriptor()
+                , idEvento) && !this.puntuacionEJB.existePuntuacion(this.suscriptorActual.getIdSubscriptor()
+                        , idEvento)){
+            
+        /*Crea la resena*/
+        
+        /*Crea la puntuacion*/
+        }
+       
     }
 }
 

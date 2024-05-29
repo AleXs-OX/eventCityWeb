@@ -38,7 +38,7 @@
                                             <p>Acabas de suscribirte al evento #{evento.evento.titulo}</p>
                                         </p:overlayPanel>
                                         <p:commandButton id="btn-info_1" icon="pi pi-star-fill" value="Información" styleClass="ui-button-raised ui-button-secondary btn_card" style="margin-left: .5em"/>
-                                        <p:overlayPanel for="btn-info_1" showCloseIcon="true">
+                                        <p:overlayPanel  for="btn-info_1" showCloseIcon="true">
                                             <p:card class="card_resena">
                                                 <f:facet name="title">
                                                     <p style ="text-align: center">¿Localización y día?</p>                                   
@@ -53,14 +53,14 @@
                                                 <p>Precio: #{evento.evento.precio}€</p>
                                                 <div style="display: flex; align-items: center; margin-top: 3em;">
                                                     <div style="position: relative;">               
-                                                        <p:rating readonly="false" value="3"/>
-                                                        <p:inputTextarea  style="margin-top: 1em;" rows="4" cols="27" maxlength="100" autoResize="true"/>
+                                                        <p:rating readonly="false" value="#{suscriptorController.puntuacionResena}"/>
+                                                        <p:inputTextarea  style="margin-top: 1em;" rows="4" value="#{suscriptorController.textoResena}" cols="27" maxlength="100" autoResize="true"/>
                                                         <p:commandButton id="btn-resena" icon="pi pi-star-fill" value="Reseñar" styleClass="ui-button-raised ui-button-secondary btn_card" 
-                                                                         style="margin-left: 1em; margin-top: 2.5em" action="#{suscriptorController.doTest()}"/>   
+                                                                         style="margin-left: 1em; margin-top: 2.5em" action="#{suscriptorController.doTest()}" update="panel_resenas"/>   
                                                     </div>
                                                 </div>
                                                 <p></p>
-                                                <p:dataList value="#{suscriptorController.getResenasByEvento(evento.evento.idEvento)}" var="resena" type="definition">  
+                                                <p:dataList id="panel_resenas" value="#{suscriptorController.getResenasByEvento(evento.evento.idEvento)}" var="resena" type="definition">  
                                                         <div class="resena_image">
                                                             <div class="resena_lista">
                                                                 <div class="resena_nombre">#{resena.suscriptor.usuario.nombreCompleto}</div>

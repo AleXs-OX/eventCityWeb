@@ -31,5 +31,5 @@ public interface PuntuacionFacadeLocal {
     int count();
     
     Puntuacion findPuntuacionByIdSuscriptorAndIdEvento(Integer idSuscriptor, Integer idEvento);
-    
+    boolean existePuntuacion(Integer idSuscriptor, Integer idEvento);
 }
