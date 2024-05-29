@@ -79,11 +79,13 @@
                                     <f:facet name="subtitle">
                                         <p>#{evento.descripcion}</p>
                                         <p style="font-style: italic; color: black">Hora #{evento.horaEvento}</p>
+                                        <p style="font-style: italic; color: black">Dia #{evento.fechaEvento}</p>
                                     </f:facet>
                                     <f:facet name="footer">
-                                        <p:commandButton id="btn_asistir_3" icon="pi pi-check" value="Asistir" styleClass="ui-button-raised btn_card"/>
+                                        <p:commandButton id="btn_asistir_3" icon="pi pi-check" value="Asistir" action="#{suscriptorController.suscribirseAEvento(evento)}" 
+                                                         onclick="remoteReloadSus()" update="t_eventos2" styleClass="#{suscriptorController.compruebaColorBotonEventos(evento)}"></p:commandButton>    
                                         <p:overlayPanel for="btn_asistir_3">
-                                            <p>Acabas de suscribirte al evento #{evento.titulo}</p>
+                                            <p>#{suscriptorController.estadoDeSuscripcion()}</p>
                                         </p:overlayPanel>
                                         <p:commandButton id="btn-info_4" icon="pi pi-star-fill" value="Información" styleClass="ui-button-raised ui-button-secondary btn_card" style="margin-left: .5em"/>
                                         <p:overlayPanel for="btn-info_4" showCloseIcon="true">
@@ -95,6 +97,7 @@
                                                     <p style="font-weight: bold; font-style: italic; color: gray;">
                                                         El evento #{evento.titulo} tendrá lugar en:<br></br>
                                                         #{evento.localizacion.idLocalizacion} el día: #{evento.fechaEvento}</p>
+                                                        
                                                 </f:facet>
                                                 <p>Hora: #{evento.horaEvento}</p>
                                                 <p>Precio: #{evento.precio}€</p>
@@ -125,11 +128,13 @@
                                     <f:facet name="subtitle">
                                         <p>#{evento.descripcion}</p>
                                         <p style="font-style: italic; color: black">Hora #{evento.horaEvento}</p>
+                                        <p style="font-style: italic; color: black">Dia #{evento.fechaEvento}</p>
                                     </f:facet>
                                     <f:facet name="footer">
-                                        <p:commandButton id="btn_asistir_5" icon="pi pi-check" value="Asistir" styleClass="ui-button-raised btn_card"/>
+                                        <p:commandButton id="btn_asistir_5" icon="pi pi-check" value="Asistir" action="#{suscriptorController.suscribirseAEvento(evento)}" 
+                                                         onclick="remoteReloadSus()" update="t_eventos3" styleClass="#{suscriptorController.compruebaColorBotonEventos(evento)}"></p:commandButton>    
                                         <p:overlayPanel for="btn_asistir_5">
-                                            <p>Acabas de suscribirte al evento #{evento.titulo}</p>
+                                            <p>#{suscriptorController.estadoDeSuscripcion()}</p>
                                         </p:overlayPanel>
                                         <p:commandButton id="btn-info_6" icon="pi pi-star-fill" value="Información" styleClass="ui-button-raised ui-button-secondary btn_card" style="margin-left: .5em"/>
                                         <p:overlayPanel for="btn-info_6" showCloseIcon="true">
@@ -141,11 +146,10 @@
                                                     <p style="font-weight: bold; font-style: italic; color: gray;">
                                                         El evento #{evento.titulo} tendrá lugar en:<br></br>
                                                         #{evento.localizacion.idLocalizacion} el día: #{evento.fechaEvento}</p>
+                                                        
                                                 </f:facet>
                                                 <p>Hora: #{evento.horaEvento}</p>
                                                 <p>Precio: #{evento.precio}€</p>
-                                                <div style="display: flex; align-items: center; margin-top: 3em;">
-                                                </div>
                                                 <p></p>
                                                 <p:dataList value="#{suscriptorController.getResenasByEvento(evento.idEvento)}" var="resena" type="definition">  
                                                         <div class="resena_image">
@@ -173,11 +177,13 @@
                                     <f:facet name="subtitle">
                                         <p>#{evento.descripcion}</p>
                                         <p style="font-style: italic; color: black">Hora #{evento.horaEvento}</p>
+                                        <p style="font-style: italic; color: black">Dia #{evento.fechaEvento}</p>
                                     </f:facet>
                                     <f:facet name="footer">
-                                        <p:commandButton id="btn_asistir_7" icon="pi pi-check" value="Asistir" styleClass="ui-button-raised btn_card"/>
+                                        <p:commandButton id="btn_asistir_7" icon="pi pi-check" value="Asistir" action="#{suscriptorController.suscribirseAEvento(evento)}" 
+                                                         onclick="remoteReloadSus()" update="t_eventos4" styleClass="#{suscriptorController.compruebaColorBotonEventos(evento)}"></p:commandButton>    
                                         <p:overlayPanel for="btn_asistir_7">
-                                            <p>Acabas de suscribirte al evento #{evento.titulo}</p>
+                                            <p>#{suscriptorController.estadoDeSuscripcion()}</p>
                                         </p:overlayPanel>
                                         <p:commandButton id="btn-info_8" icon="pi pi-star-fill" value="Información" styleClass="ui-button-raised ui-button-secondary btn_card" style="margin-left: .5em"/>
                                         <p:overlayPanel for="btn-info_8" showCloseIcon="true">
@@ -189,6 +195,7 @@
                                                     <p style="font-weight: bold; font-style: italic; color: gray;">
                                                         El evento #{evento.titulo} tendrá lugar en:<br></br>
                                                         #{evento.localizacion.idLocalizacion} el día: #{evento.fechaEvento}</p>
+                                                        
                                                 </f:facet>
                                                 <p>Hora: #{evento.horaEvento}</p>
                                                 <p>Precio: #{evento.precio}€</p>
