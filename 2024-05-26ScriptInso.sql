@@ -338,12 +338,12 @@ CREATE TABLE IF NOT EXISTS `suscriptores` (
 
 -- Volcando datos para la tabla publicaciones.suscriptores: ~6 rows (aproximadamente)
 INSERT INTO `suscriptores` (`idSuscriptor`, `idUsuario`, `numSuscripciones`, `direccion`, `ciudad`, `pais`) VALUES
-  (1, 5, '5', 'Calle Mayor, 10', 'Madrid', 'España'),
-  (2, 6, '3', 'Carrer de Provença, 20', 'Barcelona', 'España'),
-  (3, 7, '7', 'Avenida de la Constitución, 15', 'Sevilla', 'España'),
-  (4, 8, '4', 'Calle Real, 5', 'Valencia', 'España'),
-  (5, 9, '4', 'Calle Real, 5', 'Valencia', 'España'),
-  (6, 10, '4', 'Calle Real, 5', 'Valencia', 'España');
+  (5, 5, '5', 'Calle Mayor, 10', 'Madrid', 'España'),
+  (6, 6, '3', 'Carrer de Provença, 20', 'Barcelona', 'España'),
+  (7, 7, '7', 'Avenida de la Constitución, 15', 'Sevilla', 'España'),
+  (8, 8, '4', 'Calle Real, 5', 'Valencia', 'España'),
+  (9, 9, '4', 'Calle Real, 5', 'Valencia', 'España'),
+  (10, 10, '4', 'Calle Real, 5', 'Valencia', 'España');
 
 -- Volcando estructura para tabla publicaciones.usuarios
 CREATE TABLE IF NOT EXISTS `usuarios` (
