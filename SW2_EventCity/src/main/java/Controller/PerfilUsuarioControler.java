@@ -6,7 +6,9 @@
 package Controller;
 
 import modelo.Usuario;
+import EJB.UsuarioFacadeLocal;
 import java.io.Serializable;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -18,6 +20,10 @@ import javax.inject.Named;
 @ViewScoped
 
 public class PerfilUsuarioControler implements Serializable{
+
+    @EJB
+    private UsuarioFacadeLocal usuarioEJB;
+    
     
     private int idUser;
     
@@ -29,6 +35,17 @@ public class PerfilUsuarioControler implements Serializable{
     
     private Usuario usuario;
     
+    @PostConstruct
+    public void init(){
+        usuario = usuarioEJB.find(idUser);
+        
+        username = usuario.getUsuario();
+        nombre = usuario.getNombre();
+        apellidos = usuario.getApellidos();
+        numero = usuario.getNumero();
+        correo = usuario.getCorreo();
+    }
+
     /**
      * Guarda los cambios realizados en el perfil en la base de datos
      */
