@@ -25,73 +25,61 @@ public class PerfilUsuarioControler implements Serializable{
     private UsuarioFacadeLocal usuarioEJB;
     
     
-    private int idUser;
-    
-    private String username;
-    private String nombre;
-    private String apellidos;
-    private String numero;
-    private String correo;
+    private int idUser = 1;
     
     private Usuario usuario;
     
     @PostConstruct
     public void init(){
         usuario = usuarioEJB.find(idUser);
-        
-        username = usuario.getUsuario();
-        nombre = usuario.getNombre();
-        apellidos = usuario.getApellidos();
-        numero = usuario.getNumero();
-        correo = usuario.getCorreo();
     }
 
     /**
      * Guarda los cambios realizados en el perfil en la base de datos
      */
     public boolean saveChanges(){
-        
+        usuarioEJB.edit(usuario);
         return true;
     }
     
     public void setUsername(String username){
-        this.username = username;
+        usuario.setNombreusuario(username);
     }
     
     public void setName(String name){
-        this.nombre = name;
+        usuario.setNombre(name);
     }
     
     public void setSurname(String surname){
-        this.apellidos = surname;
+        usuario.setApellidos(surname);
     }
     
-    public void setNumber(String number){
-        this.numero = number;
+    public void setNumber(int number){
+        usuario.setTelefono(number);
     }
     
     public void setEmail(String email){
-        this.correo = email;
+        usuario.setEmail(email);
     }
     
     public String getUsername(){
-        return username;
+        return usuario.getNombreusuario();
     }
     
     public String getName(){
-        return nombre;
+        return usuario.getNombre();
     }
     
     public String getSurname(){
-        return apellidos;
+        return usuario.getApellidos();
     }
     
-    public String getNumber(){
-        return numero;
+    public int getNumber(){
+        return usuario.getTelefono();
     }
     
     public String getEmail(){
-        return correo;
+        return usuario.getEmail();
     }
     
 }
