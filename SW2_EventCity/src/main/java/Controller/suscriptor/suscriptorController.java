@@ -8,6 +8,8 @@ import EJB.EventoFacadeLocal;
 import EJB.PuntuacionFacadeLocal;
 import EJB.ResenaFacadeLocal;
 import EJB.SuscripcionFacadeLocal;
+import EJB.SuscriptorFacadeLocal;
+import EJB.UsuarioFacadeLocal;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -45,6 +47,12 @@ public class suscriptorController implements Serializable{
     
     @EJB
     private SuscripcionFacadeLocal suscripcionEJB;
+    
+    @EJB
+    private SuscriptorFacadeLocal suscriptorEJB;
+    
+    @EJB
+    private UsuarioFacadeLocal usuarioEJB;
     
     private Date diaSeleccionadoEventos;
     private Date diaSeleccionadoSus;
@@ -232,8 +240,25 @@ public class suscriptorController implements Serializable{
                 , idEvento) && !this.resenaEJB.existeResena(this.suscriptorActual.getIdSubscriptor()
                         , idEvento)){
             /*Crea la resena*/
-            System.out.println("Crearia la reseña");
+            System.out.println("Creando reseña");
+            /*Resena nuevaResena = new Resena();
+            nuevaResena.setComentario(this.textoResena);
+            java.sql.Date sqlDate = new java.sql.Date(this.diaSeleccionadoSus.getTime());
+            nuevaResena.setFecha(sqlDate);
+            nuevaResena.setEvento(this.eventoEJB.findEventoById(idEvento));
+            nuevaResena.setSuscriptor(this.suscriptorEJB.findSuscriptorById(this.suscriptorActual.getIdSubscriptor()));*/
+            
+            /*Carga la resena creada en la bdd*/
+            //resenaEJB.create(nuevaResena);
+            
             /*Crea la puntuacion*/
+            /*Puntuacion nuevaPuntuacion = new Puntuacion();
+            nuevaPuntuacion.setEvento(this.eventoEJB.findEventoById(idEvento));
+            nuevaPuntuacion.setSuscriptor(this.suscriptorEJB.findSuscriptorById(this.suscriptorActual.getIdSubscriptor()));
+            //nuevaPuntuacion.setUsuario(this.usuarioEJB.findUsuariorById(this.suscriptorActual.getIdSubscriptor()));
+            nuevaPuntuacion.setPuntuacion(this.puntuacionResena);
+            
+            puntuacionEJB.create(nuevaPuntuacion);*/
         }else{
             System.out.println("Ya existe reseña de este usuario en este evento");
         }

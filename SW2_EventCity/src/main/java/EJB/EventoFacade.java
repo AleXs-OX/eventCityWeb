@@ -44,4 +44,10 @@ public class EventoFacade extends AbstractFacade<Evento> implements EventoFacade
                  .getResultList();
     }
     
+    @Override
+    public Evento findEventoById(Integer idEvento){
+        return em.createQuery("SELECT e FROM Evento e WHERE e.idEvento = :idEvento", Evento.class)
+                 .setParameter("idEvento", idEvento)
+                 .getSingleResult();
+    }
 }
