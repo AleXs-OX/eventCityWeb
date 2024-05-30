@@ -1,27 +1,25 @@
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controller;
 
 import EJB.UsuarioFacadeLocal;
+import EJB.AdminFacadeLocal;
+import EJB.PublicadorFacadeLocal;
+import EJB.SuscriptorFacadeLocal;
 import modelo.Usuario;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import org.primefaces.PrimeFaces;
 
-/**
- * Controlador para el inicio de sesión de usuarios.
- */
 @Named
-@SessionScoped
+@ViewScoped
 public class loginUsuarioController implements Serializable {
 
     private String username;
@@ -31,48 +29,70 @@ public class loginUsuarioController implements Serializable {
     @EJB
     private UsuarioFacadeLocal usuarioEJB;
 
+    @EJB
+    private AdminFacadeLocal adminEJB;
+
+    @EJB
+    private PublicadorFacadeLocal publicadorEJB;
+
+    @EJB
+    private SuscriptorFacadeLocal suscriptorEJB;
+
     @PostConstruct
     public void init() {
         // Inicialización si es necesario
     }
 
-    
     public String login() {
-        System.out.println("Intentando iniciar sesión con: " + username + " / " + password);
-        usuario = usuarioEJB.findByCredentials(username, password);
-        if (usuario != null) {
-            // Guardar el usuario en la sesión
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", usuario);
-            System.out.println("Inicio de sesión exitoso para usuario: " + usuario.getNombreusuario());
-            return "/subscriptor/homeUI?faces-redirect=true"; // Redirige a la página principal o dashboard
+    System.out.println("Intentando iniciar sesión con: " + username + " / " + password);
+    //String encryptedPassword = getSecurePassword(password);
+    usuario = usuarioEJB.findByCredentials(username, password);
+    if (usuario != null) {
+        // Guardar el usuario en la sesión
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", usuario);
+        System.out.println("Inicio de sesión exitoso para usuario: " + usuario.getNombreusuario());
+            //return "registroUsuario?faces-redirect=true";
+            
+        
+        // Redirigir según el tipo de usuario
+        if (adminEJB.isAdmin(usuario.getIdUsuario())) {
+            return "/admin/adminUI?faces-redirect=true";
+        } else if (publicadorEJB.isPublicador(usuario.getIdUsuario())) {
+            return "/publicador/publicadorUI?faces-redirect=true";
+        } else if (suscriptorEJB.isSuscriptor(usuario.getIdUsuario())) {
+            return "/subscriptor/homeUI?faces-redirect=true";
         } else {
-            System.out.println("Error de inicio de sesión para usuario: " + username);
             FacesContext.getCurrentInstance().addMessage(null, 
-                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario o contraseña incorrectos", null));
+                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Tipo de usuario desconocido", null));
             return "login";
         }
+    } else {
+        System.out.println("Error de inicio de sesión para usuario: " + username);
+        FacesContext.getCurrentInstance().addMessage(null, 
+            new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario o contraseña incorrectos", null));
+        return "login";
     }
+}
 
-    public String logout() {
-        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "loginUsuario?faces-redirect=true";
+
+/*private String getSecurePassword(String password) {
+    String generatedPassword = null;
+    try {
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        byte[] bytes = md.digest(password.getBytes());
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < bytes.length; i++) {
+            sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+        }
+        generatedPassword = sb.toString();
+    } catch (NoSuchAlgorithmException e) {
+        e.printStackTrace();
     }
+    return generatedPassword;
+}
+*/
 
-    public String irRegistro() {
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-        return "registroUsuario?faces-redirect=true";
-    }
-
-    // Getters y setters
-
-    public UsuarioFacadeLocal getUsuarioEJB() {
-        return usuarioEJB;
-    }
-
-    public void setUsuarioEJB(UsuarioFacadeLocal usuarioEJB) {
-        this.usuarioEJB = usuarioEJB;
-    }
-
+    // Getters y setters para las propiedades
     public String getUsername() {
         return username;
     }
@@ -88,4 +108,14 @@ public class loginUsuarioController implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 }
+
+

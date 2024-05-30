@@ -30,4 +30,7 @@ public interface AdminFacadeLocal {
 
     int count();
     
+    boolean isAdmin(int userId);
+    
+    
 }

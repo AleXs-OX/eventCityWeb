@@ -33,14 +33,14 @@ public class Usuario implements Serializable{
     @Column(name = "email")
     private String email;
 
-    @OneToOne(mappedBy = "usuario")
+    @OneToOne(mappedBy = "usuario", fetch = FetchType.LAZY)
     private Publicador publicador;
 
-    @OneToOne(mappedBy = "usuario")
+    @OneToOne(mappedBy = "usuario", fetch = FetchType.LAZY)
     private Admin admin;
 
-    @OneToMany(mappedBy = "usuario")
-    private List<Suscriptor> suscriptores;
+    @OneToOne(mappedBy = "usuario", fetch = FetchType.LAZY)
+    private Suscriptor suscriptor;
 
     public int getIdUsuario() {
         return idUsuario;
@@ -114,13 +114,6 @@ public class Usuario implements Serializable{
         this.admin = admin;
     }
 
-    public List<Suscriptor> getSuscriptores() {
-        return suscriptores;
-    }
-
-    public void setSuscriptores(List<Suscriptor> suscriptores) {
-        this.suscriptores = suscriptores;
-    }
     
     public String getNombreCompleto(){
         return (this.nombre+" "+this.apellidos);
@@ -138,7 +131,6 @@ public class Usuario implements Serializable{
         hash = 43 * hash + Objects.hashCode(this.email);
         hash = 43 * hash + Objects.hashCode(this.publicador);
         hash = 43 * hash + Objects.hashCode(this.admin);
-        hash = 43 * hash + Objects.hashCode(this.suscriptores);
         return hash;
     }
 
@@ -179,9 +171,6 @@ public class Usuario implements Serializable{
             return false;
         }
         if (!Objects.equals(this.admin, other.admin)) {
-            return false;
-        }
-        if (!Objects.equals(this.suscriptores, other.suscriptores)) {
             return false;
         }
         return true;

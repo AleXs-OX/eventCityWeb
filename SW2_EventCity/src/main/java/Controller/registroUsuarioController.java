@@ -6,6 +6,7 @@
 
 package Controller;
 
+import EJB.SuscriptorFacadeLocal;
 import EJB.UsuarioFacadeLocal;
 import modelo.Usuario;
 import java.io.Serializable;
@@ -18,6 +19,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import modelo.Suscriptor;
 import org.primefaces.PrimeFaces;
 
 /**
@@ -36,7 +38,12 @@ public class registroUsuarioController implements Serializable {
     private String telefono;
     private String email;
     private Date fechaNacimiento;
+    
+    private Suscriptor suscriptor;
 
+    @EJB
+    private SuscriptorFacadeLocal suscriptorEJB;
+    
     @EJB
     private UsuarioFacadeLocal usuarioEJB;
 
@@ -120,98 +127,102 @@ public class registroUsuarioController implements Serializable {
     }
 
     public void registro() {
-        if (password == null || password.isEmpty()) {
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "La contraseña no puede estar vacía.");
-            FacesContext.getCurrentInstance().addMessage(null, message);
-            return;
-        }
-
-        if (!password.equals(confirmPassword)) {
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Las contraseñas no coinciden.");
-            FacesContext.getCurrentInstance().addMessage(null, message);
-            PrimeFaces.current().executeScript("PF('passwordDialog').show();");
-            return;
-        }
-
-        if (password.length() < 8) {
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "La contraseña debe tener al menos 8 caracteres.");
-            FacesContext.getCurrentInstance().addMessage(null, message);
-            PrimeFaces.current().executeScript("PF('passwordDialog').show();");
-            return;
-        }
-
-        if (!password.matches(".*\\d.*")) {
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "La contraseña debe contener al menos un número.");
-            FacesContext.getCurrentInstance().addMessage(null, message);
-            PrimeFaces.current().executeScript("PF('passwordDialog').show();");
-            return;
-        }
-
-        if (fechaNacimiento == null || fechaNacimiento.after(new Date())) {
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "La fecha de nacimiento debe ser anterior a la fecha actual.");
-            FacesContext.getCurrentInstance().addMessage(null, message);
-            PrimeFaces.current().ajax().update("register-form");
-            PrimeFaces.current().executeScript("PF('fechaNacimientoDialog').show();");
-            return;
-        }
-
-        if (telefono == null || telefono.length() != 9 || !telefono.matches("\\d{9}")) {
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "El número de teléfono debe tener 9 dígitos y solo contener números.");
-            FacesContext.getCurrentInstance().addMessage(null, message);
-            PrimeFaces.current().executeScript("PF('telefonoDialog').show();");
-            return;
-        }
-
-        if (!usuarioEJB.findByUsername(username)) {
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "El nombre de usuario ya existe. Por favor, elija otro.");
-            FacesContext.getCurrentInstance().addMessage(null, message);
-            PrimeFaces.current().executeScript("PF('usernameDialog').show();");
-            return;
-        }
-
-        try {
-            // Encriptar la contraseña usando SHA-256
-            String securePassword = getSecurePassword(password);
-
-            Usuario newUser = new Usuario();
-            newUser.setNombreusuario(username);
-            newUser.setContrasena(securePassword); // Almacenar la contraseña encriptada
-            newUser.setNombre(nombre);
-            newUser.setApellidos(apellidos);
-            newUser.setTelefono(Integer.parseInt(telefono));
-            newUser.setEmail(email);
-
-            usuarioEJB.create(newUser);
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Usuario registrado con éxito.");
-            FacesContext.getCurrentInstance().addMessage(null, message);
-            //Vuelve al login
-            volverLogin();
-            
-            
-        } catch (Exception e) {
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Error al registrar el usuario: " + e.getMessage());
-            FacesContext.getCurrentInstance().addMessage(null, message);
-        }
+    if (password == null || password.isEmpty()) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "La contraseña no puede estar vacía.");
+        FacesContext.getCurrentInstance().addMessage(null, message);
+        return;
     }
+
+    if (!password.equals(confirmPassword)) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Las contraseñas no coinciden.");
+        FacesContext.getCurrentInstance().addMessage(null, message);
+        PrimeFaces.current().executeScript("PF('passwordDialog').show();");
+        return;
+    }
+
+    if (password.length() < 8) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "La contraseña debe tener al menos 8 caracteres.");
+        FacesContext.getCurrentInstance().addMessage(null, message);
+        PrimeFaces.current().executeScript("PF('passwordDialog').show();");
+        return;
+    }
+
+    if (!password.matches(".*\\d.*")) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "La contraseña debe contener al menos un número.");
+        FacesContext.getCurrentInstance().addMessage(null, message);
+        PrimeFaces.current().executeScript("PF('passwordDialog').show();");
+        return;
+    }
+
+    if (fechaNacimiento == null || fechaNacimiento.after(new Date())) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "La fecha de nacimiento debe ser anterior a la fecha actual.");
+        FacesContext.getCurrentInstance().addMessage(null, message);
+        PrimeFaces.current().ajax().update("register-form");
+        PrimeFaces.current().executeScript("PF('fechaNacimientoDialog').show();");
+        return;
+    }
+
+    if (telefono == null || telefono.length() != 9 || !telefono.matches("\\d{9}")) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "El número de teléfono debe tener 9 dígitos y solo contener números.");
+        FacesContext.getCurrentInstance().addMessage(null, message);
+        PrimeFaces.current().executeScript("PF('telefonoDialog').show();");
+        return;
+    }
+
+    if (!usuarioEJB.findByUsername(username)) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "El nombre de usuario ya existe. Por favor, elija otro.");
+        FacesContext.getCurrentInstance().addMessage(null, message);
+        PrimeFaces.current().executeScript("PF('usernameDialog').show();");
+        return;
+    }
+
+    try {
+        // Encriptar la contraseña usando SHA-256
+        String securePassword = getSecurePassword(password);
+
+        Usuario newUser = new Usuario();
+        newUser.setNombreusuario(username);
+        newUser.setContrasena(securePassword); // Almacenar la contraseña encriptada
+        newUser.setNombre(nombre);
+        newUser.setApellidos(apellidos);
+        newUser.setTelefono(Integer.parseInt(telefono));
+        newUser.setEmail(email);
+
+        usuarioEJB.create(newUser);
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Usuario registrado con éxito.");
+        FacesContext.getCurrentInstance().addMessage(null, message);
+        // Redirigir al login
+        volverLogin();
+
+    } catch (Exception e) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Error al registrar el usuario: " + e.getMessage());
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+}
+
+
+private String getSecurePassword(String password) {
+    String generatedPassword = null;
+    try {
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        byte[] bytes = md.digest(password.getBytes());
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < bytes.length; i++) {
+            sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+        }
+        generatedPassword = sb.toString();
+    } catch (NoSuchAlgorithmException e) {
+        e.printStackTrace();
+    }
+    return generatedPassword;
+}
+
+    
+    
     public String volverLogin() {
         return "loginUsuario.xhtml?faces-redirect=true";
     }
-
-    private String getSecurePassword(String password) {
-        String generatedPassword = null;
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] bytes = md.digest(password.getBytes());
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < bytes.length; i++) {
-                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-            }
-            generatedPassword = sb.toString();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return generatedPassword;
-    }
+    
 }
 
 

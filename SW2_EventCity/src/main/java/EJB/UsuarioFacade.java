@@ -37,10 +37,16 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
                 Usuario.class
             );
             query.setParameter("username", username);
-            query.setParameter("password", encryptedPassword); // Usar la contraseña encriptada
+            query.setParameter("password", password); // Usar la contraseña encriptada
             System.out.println(username + " - Imprimo username");
             System.out.println(encryptedPassword + " - Imprimo password");
-            return query.getSingleResult();
+            
+            List<Usuario> results = query.getResultList();
+            if (!results.isEmpty()) {
+                return results.get(0);
+            } else {
+                return null;
+            }
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Entro en la excepcion");
@@ -64,8 +70,6 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
         return generatedPassword;
     }
 
-    
-   
     @Override
     public boolean findByUsername(String username) {
         System.out.println(username);
@@ -80,8 +84,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
         System.out.println(usuarios.isEmpty());
         return usuarios.isEmpty();
     }
-    
-    
+
     @Override
     protected EntityManager getEntityManager() {
         return em;
@@ -90,5 +93,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
     public UsuarioFacade() {
         super(Usuario.class);
     }
-    
 }
+
+
+

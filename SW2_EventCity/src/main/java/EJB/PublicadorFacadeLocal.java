@@ -30,4 +30,6 @@ public interface PublicadorFacadeLocal {
 
     int count();
     
+    boolean isPublicador(int userId);
+    
 }

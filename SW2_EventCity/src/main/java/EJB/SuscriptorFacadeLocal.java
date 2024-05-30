@@ -30,4 +30,6 @@ public interface SuscriptorFacadeLocal {
 
     int count();
     
+    boolean isSuscriptor(int userId);
+    
 }

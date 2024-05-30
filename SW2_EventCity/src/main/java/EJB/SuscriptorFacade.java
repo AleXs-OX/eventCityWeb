@@ -8,6 +8,7 @@ package EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import modelo.Suscriptor;
 
 /**
@@ -19,6 +20,17 @@ public class SuscriptorFacade extends AbstractFacade<Suscriptor> implements Susc
 
     @PersistenceContext(unitName = "PublicacionesPU")
     private EntityManager em;
+    
+    @Override
+    public boolean isSuscriptor(int idUsuario) {
+        TypedQuery<Suscriptor> query = em.createQuery(
+            "SELECT s FROM Suscriptor s WHERE s.usuario.idUsuario = :idUsuario", 
+            Suscriptor.class
+        );
+        query.setParameter("idUsuario", idUsuario);
+        return !query.getResultList().isEmpty();
+    }
+    
 
     @Override
     protected EntityManager getEntityManager() {
