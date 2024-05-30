@@ -47,21 +47,21 @@ public class publicadorController implements Serializable{
     
     
     public publicadorController(){
-        this.publicadorActual.setIdUsuario(1);
+        this.publicadorActual.setIdPublicador(3);
         this.diaSeleccionadoEventos = new Date();
     }
     
     public List<Evento> getEventoConciertos(){
-        return this.publicadorActual.getEventos();
+        return this.eventoEJB.findEventosByCategoriaAndFechaAndId(this.concierto, this.diaSeleccionadoEventos, this.publicadorActual.getIdPublicador());
     }
     public List<Evento> getEventoTalleresyClases(){
-        return this.publicadorActual.getEventos();
+        return this.eventoEJB.findEventosByCategoriaAndFechaAndId(this.talleresClases, this.diaSeleccionadoEventos, this.publicadorActual.getIdPublicador());
     }
     public List<Evento> getEventoCompeticionesyTorneos(){
-        return this.publicadorActual.getEventos();
+        return this.eventoEJB.findEventosByCategoriaAndFechaAndId(this.competicionesTorneos, this.diaSeleccionadoEventos, this.publicadorActual.getIdPublicador());
     }
     public List<Evento> getEventoMiscelaneo(){
-        return this.publicadorActual.getEventos();
+        return this.eventoEJB.findEventosByCategoriaAndFechaAndId(this.miscelaneo, this.diaSeleccionadoEventos, this.publicadorActual.getIdPublicador());
     }
     
     public void setDateSeleccionada(Date date){
@@ -87,6 +87,11 @@ public class publicadorController implements Serializable{
         return puntuacion.getPuntuacion();
         
     }    
+    
+    public void test(){
+        List<Evento> eventos = this.eventoEJB.findEventosByIdPublicador(this.publicadorActual.getIdPublicador());
+        System.out.println(eventos);
+    }
         
 
 }

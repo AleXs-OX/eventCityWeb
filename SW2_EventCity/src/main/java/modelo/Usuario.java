@@ -128,66 +128,21 @@ public class Usuario implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 43 * hash + this.idUsuario;
-        hash = 43 * hash + Objects.hashCode(this.nombreusuario);
-        hash = 43 * hash + Objects.hashCode(this.contrasena);
-        hash = 43 * hash + Objects.hashCode(this.nombre);
-        hash = 43 * hash + Objects.hashCode(this.apellidos);
-        hash = 43 * hash + this.telefono;
-        hash = 43 * hash + Objects.hashCode(this.email);
-        hash = 43 * hash + Objects.hashCode(this.publicador);
-        hash = 43 * hash + Objects.hashCode(this.admin);
-        hash = 43 * hash + Objects.hashCode(this.suscriptores);
-        return hash;
+        return Objects.hash(idUsuario, nombreusuario, contrasena, nombre, apellidos, telefono, email);
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Usuario other = (Usuario) obj;
-        if (this.idUsuario != other.idUsuario) {
-            return false;
-        }
-        if (this.telefono != other.telefono) {
-            return false;
-        }
-        if (!Objects.equals(this.nombreusuario, other.nombreusuario)) {
-            return false;
-        }
-        if (!Objects.equals(this.contrasena, other.contrasena)) {
-            return false;
-        }
-        if (!Objects.equals(this.nombre, other.nombre)) {
-            return false;
-        }
-        if (!Objects.equals(this.apellidos, other.apellidos)) {
-            return false;
-        }
-        if (!Objects.equals(this.email, other.email)) {
-            return false;
-        }
-        if (!Objects.equals(this.publicador, other.publicador)) {
-            return false;
-        }
-        if (!Objects.equals(this.admin, other.admin)) {
-            return false;
-        }
-        if (!Objects.equals(this.suscriptores, other.suscriptores)) {
-            return false;
-        }
-        return true;
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Usuario other = (Usuario) obj;
+        return idUsuario == other.idUsuario &&
+               telefono == other.telefono &&
+               Objects.equals(nombreusuario, other.nombreusuario) &&
+               Objects.equals(contrasena, other.contrasena) &&
+               Objects.equals(nombre, other.nombre) &&
+               Objects.equals(apellidos, other.apellidos) &&
+               Objects.equals(email, other.email);
     }
-    
-    
-    
     
 }

@@ -21,7 +21,6 @@
                     <!--<h:form>-->
                     
                     <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_publicaciones1" value="#{publicadorController.eventoConciertos}" var="evento">
-                        <p:remoteCommand name="remoteReloadEventos" update=":t_publicaciones1"/>
                         <p:column headerText="Conciertos">
                                 <p:card class="card_evento" style="width: 16.6em">
                                     <f:facet name="title">
@@ -64,6 +63,135 @@
                             </p:column>
                         <!-- más columnas -->
                     </p:dataTable>
+                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_publicaciones2" value="#{publicadorController.eventoTalleresyClases}" var="evento">
+                        <p:column headerText="Talleres y Clases">
+                            <p:card class="card_evento" style="width: 16.6em">
+                                    <f:facet name="title">
+                                        <p> #{evento.titulo}</p>
+                                    </f:facet>
+                                    <f:facet name="subtitle">
+                                        <p>#{evento.descripcion}</p>
+                                        <p style="font-style: italic; color: black">Hora #{evento.horaEvento}</p>
+                                        <p style="font-style: italic; color: black">Dia #{evento.fechaEvento}</p>
+                                    </f:facet>
+                                    <f:facet name="footer">
+                                        <p:commandButton id="btn-info_2" icon="pi pi-star-fill" value="Información" styleClass="ui-button-raised ui-button-secondary btn_card" style="margin-left: .5em"/>
+                                        <p:overlayPanel for="btn-info_2" showCloseIcon="true">
+                                            <p:card class="card_resena">
+                                                <f:facet name="title">
+                                                    <p style ="text-align: center">¿Localización y día?</p>                                   
+                                                </f:facet>
+                                                <f:facet name="subtitle">
+                                                    <p style="font-weight: bold; font-style: italic; color: gray;">
+                                                        El evento #{evento.titulo} tendrá lugar en:<br></br>
+                                                        #{evento.localizacion.idLocalizacion} el día: #{evento.fechaEvento}</p>
+                                                        
+                                                </f:facet>
+                                                <p>Hora: #{evento.horaEvento}</p>
+                                                <p>Precio: #{evento.precio}€</p>
+                                                <p></p>
+                                                <p:dataList value="#{publicadorController.getResenasByEvento(evento.idEvento)}" var="resena" type="definition">  
+                                                        <div class="resena_image">
+                                                            <div class="resena_lista">
+                                                                <div class="resena_nombre">#{resena.suscriptor.usuario.nombreCompleto}</div>
+                                                                <div class="resena_desc">#{resena.comentario}</div>
+                                                                <p:rating readonly="true" value="#{publicadorController.getPuntuacionByIdSuscriptorAndIdEvento(resena.suscriptor.idSubscriptor, evento.idEvento)}"/>
+                                                            </div>
+                                                        </div>                           
+                                                </p:dataList>
+                                            </p:card>
+                                        </p:overlayPanel>
+                                    </f:facet>
+                                </p:card>
+                        </p:column>
+                        <!-- más columnas -->
+                    </p:dataTable>
+                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_publicaciones3" value="#{publicadorController.eventoCompeticionesyTorneos}" var="evento">
+                        <p:column headerText="Talleres y Clases">
+                            <p:card class="card_evento" style="width: 16.6em">
+                                    <f:facet name="title">
+                                        <p> #{evento.titulo}</p>
+                                    </f:facet>
+                                    <f:facet name="subtitle">
+                                        <p>#{evento.descripcion}</p>
+                                        <p style="font-style: italic; color: black">Hora #{evento.horaEvento}</p>
+                                        <p style="font-style: italic; color: black">Dia #{evento.fechaEvento}</p>
+                                    </f:facet>
+                                    <f:facet name="footer">
+                                        <p:commandButton id="btn-info_2" icon="pi pi-star-fill" value="Información" styleClass="ui-button-raised ui-button-secondary btn_card" style="margin-left: .5em"/>
+                                        <p:overlayPanel for="btn-info_2" showCloseIcon="true">
+                                            <p:card class="card_resena">
+                                                <f:facet name="title">
+                                                    <p style ="text-align: center">¿Localización y día?</p>                                   
+                                                </f:facet>
+                                                <f:facet name="subtitle">
+                                                    <p style="font-weight: bold; font-style: italic; color: gray;">
+                                                        El evento #{evento.titulo} tendrá lugar en:<br></br>
+                                                        #{evento.localizacion.idLocalizacion} el día: #{evento.fechaEvento}</p>
+                                                        
+                                                </f:facet>
+                                                <p>Hora: #{evento.horaEvento}</p>
+                                                <p>Precio: #{evento.precio}€</p>
+                                                <p></p>
+                                                <p:dataList value="#{publicadorController.getResenasByEvento(evento.idEvento)}" var="resena" type="definition">  
+                                                        <div class="resena_image">
+                                                            <div class="resena_lista">
+                                                                <div class="resena_nombre">#{resena.suscriptor.usuario.nombreCompleto}</div>
+                                                                <div class="resena_desc">#{resena.comentario}</div>
+                                                                <p:rating readonly="true" value="#{publicadorController.getPuntuacionByIdSuscriptorAndIdEvento(resena.suscriptor.idSubscriptor, evento.idEvento)}"/>
+                                                            </div>
+                                                        </div>                           
+                                                </p:dataList>
+                                            </p:card>
+                                        </p:overlayPanel>
+                                    </f:facet>
+                                </p:card>
+                        </p:column>
+                        <!-- más columnas -->
+                    </p:dataTable>
+                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_publicaciones4" value="#{publicadorController.eventoMiscelaneo}" var="evento">
+                        <p:column headerText="Talleres y Clases">
+                            <p:card class="card_evento" style="width: 16.6em">
+                                    <f:facet name="title">
+                                        <p> #{evento.titulo}</p>
+                                    </f:facet>
+                                    <f:facet name="subtitle">
+                                        <p>#{evento.descripcion}</p>
+                                        <p style="font-style: italic; color: black">Hora #{evento.horaEvento}</p>
+                                        <p style="font-style: italic; color: black">Dia #{evento.fechaEvento}</p>
+                                    </f:facet>
+                                    <f:facet name="footer">
+                                        <p:commandButton id="btn-info_2" icon="pi pi-star-fill" value="Información" styleClass="ui-button-raised ui-button-secondary btn_card" style="margin-left: .5em"/>
+                                        <p:overlayPanel for="btn-info_2" showCloseIcon="true">
+                                            <p:card class="card_resena">
+                                                <f:facet name="title">
+                                                    <p style ="text-align: center">¿Localización y día?</p>                                   
+                                                </f:facet>
+                                                <f:facet name="subtitle">
+                                                    <p style="font-weight: bold; font-style: italic; color: gray;">
+                                                        El evento #{evento.titulo} tendrá lugar en:<br></br>
+                                                        #{evento.localizacion.idLocalizacion} el día: #{evento.fechaEvento}</p>
+                                                        
+                                                </f:facet>
+                                                <p>Hora: #{evento.horaEvento}</p>
+                                                <p>Precio: #{evento.precio}€</p>
+                                                <p></p>
+                                                <p:dataList value="#{publicadorController.getResenasByEvento(evento.idEvento)}" var="resena" type="definition">  
+                                                        <div class="resena_image">
+                                                            <div class="resena_lista">
+                                                                <div class="resena_nombre">#{resena.suscriptor.usuario.nombreCompleto}</div>
+                                                                <div class="resena_desc">#{resena.comentario}</div>
+                                                                <p:rating readonly="true" value="#{publicadorController.getPuntuacionByIdSuscriptorAndIdEvento(resena.suscriptor.idSubscriptor, evento.idEvento)}"/>
+                                                            </div>
+                                                        </div>                           
+                                                </p:dataList>
+                                            </p:card>
+                                        </p:overlayPanel>
+                                    </f:facet>
+                                </p:card>
+                        </p:column>
+                        <!-- más columnas -->
+                    </p:dataTable>
 
                     
                 
@@ -71,7 +199,7 @@
                     <h:form id="formCalendar">
                     <div class="calendar">
                         <p:calendar mode="inline" id="calendario" value="#{publicadorController.dateSeleccionada}" locale = "es" navigator ="true" showOn="button" pattern="dd/MM/yyyy">
-                            <p:ajax event="dateSelect" update="t_publicaciones1"
+                            <p:ajax event="dateSelect" update="t_publicaciones1 t_publicaciones2 t_publicaciones3"
                                     />
                         </p:calendar>
                     </div> 

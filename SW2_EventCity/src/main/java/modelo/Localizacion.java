@@ -95,7 +95,7 @@ public class Localizacion {
 
     
     
-    @Override
+    /*@Override
     public int hashCode() {
         int hash = 7;
         hash = 67 * hash + this.idLocalizacion;
@@ -142,7 +142,7 @@ public class Localizacion {
             return false;
         }
         return true;
-    }
+    }*/
     
     
     
