@@ -32,8 +32,8 @@ public class PublicadorFacade extends AbstractFacade<Publicador> implements Publ
     
     @Override
     public Publicador findByUser(Usuario usuario) {
-        return em.createQuery("SELECT e FROM Publicador e WHERE e.idUsuario = :idUsuario", Publicador.class)
-                .setParameter("idusuario", usuario.getIdUsuario())
+        return em.createQuery("SELECT e FROM Publicador e WHERE e.usuario.idUsuario = :usuario", Publicador.class)
+                .setParameter("usuario", usuario.getIdUsuario())
                 .getSingleResult();
     }
 }

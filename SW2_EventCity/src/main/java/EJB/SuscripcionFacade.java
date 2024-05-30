@@ -59,10 +59,10 @@ public class SuscripcionFacade extends AbstractFacade<Suscripcion> implements Su
     @Override
     public Suscripcion findByIds(Integer idSuscriptor, Integer idEvento){
         TypedQuery<Suscripcion> query = em.createQuery(
-            "SELECT e FROM Suscripcion e WHERE e.suscriptor.idSubscriptor = :idSuscriptor AND e.evento.idEvento = :idEvento", 
+            "SELECT e FROM Suscripcion e WHERE e.suscriptor.idSubscriptor = :idSubscriptor AND e.evento.idEvento = :idEvento", 
             Suscripcion.class
         );
-        query.setParameter("idSuscriptor", idSuscriptor);
+        query.setParameter("idSubscriptor", idSuscriptor);
         query.setParameter("idEvento", idEvento);
 
         Suscripcion suscripcion = query.getSingleResult();

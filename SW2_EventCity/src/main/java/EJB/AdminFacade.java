@@ -32,8 +32,8 @@ public class AdminFacade extends AbstractFacade<Admin> implements AdminFacadeLoc
 
     @Override
     public Admin findByUser(Usuario usuario) {
-        return em.createQuery("SELECT e FROM Admin e WHERE e.idUsuario = :idUsuario", Admin.class)
-                .setParameter("idusuario", usuario.getIdUsuario())
+        return em.createQuery("SELECT e FROM Admin e WHERE e.usuario.idUsuario = :usuario", Admin.class)
+                .setParameter("usuario", usuario.getIdUsuario())
                 .getSingleResult();}
     
 }

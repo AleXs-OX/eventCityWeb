@@ -42,7 +42,7 @@ public class perfilUsuarioController implements Serializable{
     @EJB
     private AdminFacadeLocal adminEJB;
 
-    private int idUser = 1;
+    private final int idUser = 1;
     
     private Usuario usuario;
     private Publicador publicador;
@@ -58,7 +58,7 @@ public class perfilUsuarioController implements Serializable{
     public void init(){
         System.out.println("HOLA ESTOY FUNCIONANDO");
 	ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-        usuario = usuarioEJB.find(idUser);
+        usuario = (Usuario) FacesContext.getCurrentInstance().getAttributes().get("usuario");
         if (usuario == null){
 		System.out.println("El usuario indicado no existe. Se procede a redirigir al login");
             try {
@@ -69,16 +69,17 @@ public class perfilUsuarioController implements Serializable{
 	}
 	else{
 		suscriptor = suscriptorEJB.findByUser(usuario);
-		publicador = publicadorEJB.findByUser(usuario);
-		admin = adminEJB.findByUser(usuario);
-		if (suscriptor != null) userType = 1;
-                else if (publicador != null) userType = 2;
-                else if (admin != null) userType = 3;
+		//publicador = publicadorEJB.findByUser(usuario);
+		//admin = adminEJB.findByUser(usuario);
+		//if (suscriptor != null) userType = 1;
+                //else if (publicador != null) userType = 2;
+                //else if (admin != null) userType = 3;
 	}
     }
 
     /**
      * Muestra la información del usuario como Suscriptor, Publicador o Administrador
+     * @return 
      */
     
     public String displayExtraInformartion(){
