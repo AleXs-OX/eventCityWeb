@@ -137,7 +137,7 @@ public class suscriptorController implements Serializable{
         System.out.println("Date Susc");
         System.out.println(new java.sql.Date(this.diaSeleccionadoSus.getTime()));
         System.out.println("");
-    }
+                }
     
     public Date getDateSeleccionadaSus(){
         return this.diaSeleccionadoSus;
@@ -249,6 +249,8 @@ public class suscriptorController implements Serializable{
             /*Crea la puntuacion*/
             int idUsuario = this.suscriptorEJB.findSuscriptorById(this.suscriptorActual.getIdSubscriptor()).getUsuario().getIdUsuario();
             puntuacionEJB.crearPuntuacion(idUsuario, this.suscriptorActual.getIdSubscriptor(), idEvento, this.puntuacionResena);
+            this.textoResena = null;
+            this.puntuacionResena = 0;
             /*Resena nuevaResena = new Resena();
             nuevaResena.setComentario(this.textoResena);
             java.sql.Date sqlDate = new java.sql.Date(this.diaSeleccionadoSus.getTime());
@@ -270,7 +272,11 @@ public class suscriptorController implements Serializable{
         }else{
             System.out.println("Ya existe reseña de este usuario en este evento");
         }
-       
+              
+    }
+    public void clearData(){
+        this.textoResena = ".";
+        this.puntuacionResena = 0;
     }
 }
 
