@@ -24,10 +24,11 @@ public class PublicadorFacade extends AbstractFacade<Publicador> implements Publ
     @Override
     public boolean isPublicador(int userId) {
         TypedQuery<Publicador> query = em.createQuery(
-            "SELECT p FROM Publicador p WHERE p.idUsuario = :idUsuario", Publicador.class);
+            "SELECT p FROM Publicador p WHERE p.usuario.idUsuario = :idUsuario", Publicador.class);
         query.setParameter("idUsuario", userId);
         return !query.getResultList().isEmpty();
     }
+    
     
     
     @Override

@@ -4,6 +4,7 @@ import EJB.UsuarioFacadeLocal;
 import EJB.AdminFacadeLocal;
 import EJB.PublicadorFacadeLocal;
 import EJB.SuscriptorFacadeLocal;
+import java.io.IOException;
 import modelo.Usuario;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
@@ -57,10 +58,11 @@ public class loginUsuarioController implements Serializable {
         // Redirigir según el tipo de usuario
         if (adminEJB.isAdmin(usuario.getIdUsuario())) {
             return "/admin/adminUI?faces-redirect=true";
-        } else if (publicadorEJB.isPublicador(usuario.getIdUsuario())) {
-            return "/publicador/publicadorUI?faces-redirect=true";
         } else if (suscriptorEJB.isSuscriptor(usuario.getIdUsuario())) {
+            System.out.println("****************************************************************");
             return "/subscriptor/homeUI?faces-redirect=true";
+        } else if (publicadorEJB.isPublicador(usuario.getIdUsuario())) {
+            return "/admin/adminUI?faces-redirect=true";
         } else {
             FacesContext.getCurrentInstance().addMessage(null, 
                 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Tipo de usuario desconocido", null));
@@ -91,7 +93,19 @@ public class loginUsuarioController implements Serializable {
     return generatedPassword;
 }
 */
+    public void volverLogin() {
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("loginUsuario.xhtml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    
+    public String irRegistro(){
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        return "registroUsuario?faces-redirect=true";
+    }
     // Getters y setters para las propiedades
     public String getUsername() {
         return username;

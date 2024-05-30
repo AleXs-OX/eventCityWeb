@@ -87,5 +87,11 @@
             <h:outputText value="La contraseña debe tener al menos 8 caracteres, contener al menos un número y coincidir con la confirmación." />
             <p:commandButton value="Aceptar" onclick="PF('passwordDialog').hide();" type="button" />
         </p:dialog>
+        
+        <p:dialog header="Éxito" widgetVar="successDialog" modal="true" closable="false" resizable="false">
+            <h:outputText value="Usuario registrado con éxito." />
+            <p:commandButton value="Volver al login" action="#{registroUsuarioController.volverLogin}" immediate="true" />
+        </p:dialog>
+        
     </h:body>
 </html>

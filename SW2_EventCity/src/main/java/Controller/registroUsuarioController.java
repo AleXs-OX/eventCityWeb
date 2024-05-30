@@ -178,11 +178,11 @@ public class registroUsuarioController implements Serializable {
 
     try {
         // Encriptar la contraseña usando SHA-256
-        String securePassword = getSecurePassword(password);
+        //String securePassword = getSecurePassword(password);
 
         Usuario newUser = new Usuario();
         newUser.setNombreusuario(username);
-        newUser.setContrasena(securePassword); // Almacenar la contraseña encriptada
+        newUser.setContrasena(password); // Almacenar la contraseña encriptada
         newUser.setNombre(nombre);
         newUser.setApellidos(apellidos);
         newUser.setTelefono(Integer.parseInt(telefono));
@@ -191,6 +191,7 @@ public class registroUsuarioController implements Serializable {
         usuarioEJB.create(newUser);
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Usuario registrado con éxito.");
         FacesContext.getCurrentInstance().addMessage(null, message);
+        PrimeFaces.current().executeScript("PF('successDialog').show();"); // Mostrar diálogo de éxito
         // Redirigir al login
         volverLogin();
 
@@ -199,6 +200,7 @@ public class registroUsuarioController implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 }
+
 
 
 private String getSecurePassword(String password) {
