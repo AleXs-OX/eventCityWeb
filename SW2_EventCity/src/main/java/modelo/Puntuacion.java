@@ -10,7 +10,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "puntuaciones")
-public class Puntuacion{
+public class Puntuacion implements Serializable{
     
     @EmbeddedId
     private PuntuacionId id;
@@ -18,17 +18,17 @@ public class Puntuacion{
     @ManyToOne
     @MapsId("idSuscriptor")
     @JoinColumn(name = "idSuscriptor")
-    private Suscriptor suscriptor;
+    private int idSuscriptor;
 
     @ManyToOne
     @MapsId("idUsuario")
     @JoinColumn(name = "idUsuario")
-    private Usuario usuario;
+    private int idUsuario;
 
     @ManyToOne
     @MapsId("idEvento")
     @JoinColumn(name = "idEvento")
-    private Evento evento;
+    private int idEvento;
     
     @Column(name = "puntuacion")
     private int puntuacion;
@@ -41,28 +41,28 @@ public class Puntuacion{
         this.id = id;
     }
 
-    public Suscriptor getSuscriptor() {
-        return suscriptor;
+    public int getIdSuscriptor() {
+        return this.idSuscriptor;
     }
 
-    public void setSuscriptor(Suscriptor suscriptor) {
-        this.suscriptor = suscriptor;
+    public void setIdSuscriptor(int idSuscriptor) {
+        this.idSuscriptor = idSuscriptor;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public int getIdUsuario() {
+        return this.idUsuario;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-    public Evento getEvento() {
-        return evento;
+    public int getIdEvento() {
+        return this.idEvento;
     }
 
-    public void setEvento(Evento evento) {
-        this.evento = evento;
+    public void setEvento(int idEvento) {
+        this.idEvento = idEvento;
     }
 
     public int getPuntuacion() {
