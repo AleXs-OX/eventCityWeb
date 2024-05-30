@@ -12,12 +12,14 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.Evento;
 import modelo.Publicador;
 import modelo.Puntuacion;
 import modelo.Resena;
+import modelo.Usuario;
 
 /**
  *
@@ -26,8 +28,6 @@ import modelo.Resena;
 @Named //Porque es una clase que se va a enlazar con una vista
 @ViewScoped
 public class publicadorController implements Serializable{
-    
-    Publicador publicadorActual = new Publicador();
     
     @EJB
     private EventoFacadeLocal eventoEJB;
@@ -45,10 +45,15 @@ public class publicadorController implements Serializable{
     private int competicionesTorneos=3;
     private int miscelaneo=4;
     
+    /*Session*/
+    Usuario usuarioActual = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+    Publicador publicadorActual;
     
     public publicadorController(){
-        this.publicadorActual.setIdPublicador(3);
         this.diaSeleccionadoEventos = new Date();
+        //this.publicadorActual = this.usuarioActual.getPublicador();
+        this.publicadorActual = new Publicador();
+        this.publicadorActual.setIdPublicador(3);
     }
     
     public List<Evento> getEventoConciertos(){
