@@ -177,9 +177,6 @@ public class registroUsuarioController implements Serializable {
     }
 
     try {
-        // Encriptar la contraseña usando SHA-256
-        //String securePassword = getSecurePassword(password);
-
         Usuario newUser = new Usuario();
         newUser.setNombreusuario(username);
         newUser.setContrasena(password); // Almacenar la contraseña encriptada
@@ -189,17 +186,31 @@ public class registroUsuarioController implements Serializable {
         newUser.setEmail(email);
 
         usuarioEJB.create(newUser);
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Usuario registrado con éxito.");
+
+        // Crear y persistir el suscriptor asociado
+        Suscriptor newSuscriptor = new Suscriptor();
+        newSuscriptor.setUsuario(newUser);
+        newSuscriptor.setNumSuscripciones("0"); // Configurar otras propiedades del suscriptor si es necesario
+        newSuscriptor.setCiudad("");
+        newSuscriptor.setDireccion("");
+        newSuscriptor.setPais("");
+        newSuscriptor.setIdSubscriptor(newUser.getIdUsuario());
+        
+        suscriptorEJB.create(newSuscriptor);
+
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Usuario y suscriptor registrados con éxito.");
         FacesContext.getCurrentInstance().addMessage(null, message);
         PrimeFaces.current().executeScript("PF('successDialog').show();"); // Mostrar diálogo de éxito
         // Redirigir al login
         volverLogin();
 
     } catch (Exception e) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Error al registrar el usuario: " + e.getMessage());
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Error al registrar el usuario y el suscriptor: " + e.getMessage());
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 }
+
+
 
 
 

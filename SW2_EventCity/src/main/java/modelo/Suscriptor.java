@@ -15,12 +15,11 @@ import java.util.Objects;
 public class Suscriptor implements Serializable{
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idSuscriptor")
     private int idSubscriptor;
     
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "idUsuario")
+    @MapsId
     private Usuario usuario;
     
     @Column(name = "numSuscripciones")
@@ -48,6 +47,8 @@ public class Suscriptor implements Serializable{
     public void setIdSubscriptor(int idSubscriptor) {
         this.idSubscriptor = idSubscriptor;
     }
+
+    
 
     public Usuario getUsuario() {
         return usuario;
@@ -105,10 +106,10 @@ public class Suscriptor implements Serializable{
         this.resenas = resenas;
     }
 
-    @Override
+    /*@Override
     public int hashCode() {
         int hash = 7;
-        hash = 53 * hash + this.idSubscriptor;
+        hash = 53 * hash + this.idSuscriptor;
         hash = 53 * hash + Objects.hashCode(this.usuario);
         hash = 53 * hash + Objects.hashCode(this.numSuscripciones);
         hash = 53 * hash + Objects.hashCode(this.direccion);
@@ -156,6 +157,6 @@ public class Suscriptor implements Serializable{
             return false;
         }
         return true;
-    }
+    } */
     
 }
