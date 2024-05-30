@@ -5,13 +5,16 @@
  */
 package EJB;
 
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import modelo.Puntuacion;
+import modelo.Evento;
+import modelo.ResenaId;
 import modelo.Resena;
+import modelo.Suscriptor;
 
 @Stateless
 public class ResenaFacade extends AbstractFacade<Resena> implements ResenaFacadeLocal {
@@ -45,5 +48,37 @@ public class ResenaFacade extends AbstractFacade<Resena> implements ResenaFacade
 
         List<Resena> suscripciones = query.getResultList();
         return !suscripciones.isEmpty();
+    }
+    
+    @Override
+    public void crearResena(Integer idSuscriptor, Integer idEvento, String comentario, Date fecha) {
+        
+        // Obtener Suscriptor y Evento existentes
+        Suscriptor suscriptor = em.find(Suscriptor.class, idSuscriptor);
+        Evento evento = em.find(Evento.class, idEvento);
+
+        if (suscriptor == null || evento == null) {
+            throw new IllegalArgumentException("Suscriptor o Evento no encontrados");
+        }
+
+        // Crear el objeto ResenaID
+        java.sql.Date sqlDate = new java.sql.Date(fecha.getTime());
+        
+        ResenaId resenaId = new ResenaId();
+        resenaId.setIdSuscriptor(suscriptor.getIdSubscriptor());
+        resenaId.setIdEvento(evento.getIdEvento());
+        
+        // Crear el objeto Resena
+        Resena resena = new Resena();
+        resena.setId(resenaId);
+        resena.setSuscriptor(suscriptor);
+        resena.setEvento(evento);
+        resena.setComentario(comentario);
+        resena.setFecha(sqlDate);
+
+        // Usar el método create de AbstractFacade para persistir la Resena
+        super.create(resena);
+        
+        System.out.println("Reseña creada con exito");
     }
 }

@@ -5,6 +5,7 @@
  */
 package EJB;
 
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 import modelo.Resena;
@@ -29,5 +30,7 @@ public interface ResenaFacadeLocal {
     List<Resena> findResenasByIdEvento(Integer idEvento);
     
     boolean existeResena(Integer idSuscriptor, Integer idEvento);
+    
+    void crearResena(Integer idSuscriptor, Integer idEvento, String comentario, Date fecha);
     
 }

@@ -84,6 +84,7 @@ public class suscriptorController implements Serializable{
         /*Setea al suscriptor de prueba un id ya creado en bdd*/
         
         this.suscriptorActual.setIdSubscriptor(5);
+        System.out.println("Cargo clase");
         
         //System.out.println(new java.sql.Date(this.diaSeleccionado.getTime()));
     }
@@ -143,13 +144,14 @@ public class suscriptorController implements Serializable{
         System.out.println("Date Susc");
         System.out.println(new java.sql.Date(this.diaSeleccionadoSus.getTime()));
         System.out.println("");
-    }
+                }
     
     public Date getDateSeleccionadaSus(){
         return this.diaSeleccionadoSus;
     }
     
     public void doTest(){
+        System.out.println("----------");
         System.out.println("Puntuacion");
         System.out.println(this.puntuacionResena);
         System.out.println("Resena");
@@ -169,7 +171,6 @@ public class suscriptorController implements Serializable{
         return puntuacion.getPuntuacion();
         
     }
-    
     /*public void setDay(SelectEvent<Date> event){
         this.diaSeleccionado = event.getObject();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -177,6 +178,7 @@ public class suscriptorController implements Serializable{
         System.out.println("Fecha seleccionada: " + formattedDate);
     }*/
     
+
     public String suscribirseAEvento(Evento evento){
         /*Crea la suscripcion a un evento*/
         if(this.suscripcionEJB.existeSuscripcion(this.suscriptorActual.getIdSubscriptor(), evento.getIdEvento())){
@@ -222,7 +224,15 @@ public class suscriptorController implements Serializable{
     
         
     public void setTextoResena(String textoR){
-        this.textoResena = textoR;
+        if(textoR.isEmpty()){
+            
+        }else{
+            this.textoResena = textoR;
+            System.out.println("Texto de la reseña");
+            System.out.println(textoR);
+            System.out.println("---------");
+        }
+        
     }
     
     public String getTextoResena(){
@@ -249,8 +259,20 @@ public class suscriptorController implements Serializable{
         if(!this.puntuacionEJB.existePuntuacion(this.suscriptorActual.getIdSubscriptor()
                 , idEvento) && !this.resenaEJB.existeResena(this.suscriptorActual.getIdSubscriptor()
                         , idEvento)){
+            
             /*Crea la resena*/
-            System.out.println("Creando reseña");
+            System.out.println("---------------------------");
+            System.out.println(this.textoResena);
+            System.out.println(this.puntuacionResena);
+            System.out.println("Creando reseña y puntuacion ...");
+            
+            resenaEJB.crearResena(this.suscriptorActual.getIdSubscriptor(), idEvento, this.textoResena, this.diaSeleccionadoSus);
+            
+            /*Crea la puntuacion*/
+            int idUsuario = this.suscriptorEJB.findSuscriptorById(this.suscriptorActual.getIdSubscriptor()).getUsuario().getIdUsuario();
+            puntuacionEJB.crearPuntuacion(idUsuario, this.suscriptorActual.getIdSubscriptor(), idEvento, this.puntuacionResena);
+            this.textoResena = null;
+            this.puntuacionResena = 0;
             /*Resena nuevaResena = new Resena();
             nuevaResena.setComentario(this.textoResena);
             java.sql.Date sqlDate = new java.sql.Date(this.diaSeleccionadoSus.getTime());
@@ -272,7 +294,11 @@ public class suscriptorController implements Serializable{
         }else{
             System.out.println("Ya existe reseña de este usuario en este evento");
         }
-       
+              
+    }
+    public void clearData(){
+        this.textoResena = ".";
+        this.puntuacionResena = 0;
     }
 }
 
