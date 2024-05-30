@@ -29,10 +29,4 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
         super(Usuario.class);
     }
     
-    /*@Override
-    public Usuario findUsuariorById(Integer idSuscriptor){
-        return em.createQuery("SELECT e FROM Usuario e WHERE e.admin = :idSuscriptor", Usuario.class)
-                 .setParameter("idSuscriptor", idSuscriptor)
-                 .getSingleResult();
-    }*/
 }

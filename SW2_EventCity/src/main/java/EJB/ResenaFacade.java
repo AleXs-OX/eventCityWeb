@@ -61,13 +61,14 @@ public class ResenaFacade extends AbstractFacade<Resena> implements ResenaFacade
             throw new IllegalArgumentException("Suscriptor o Evento no encontrados");
         }
 
-        // Crear el objeto Resena
+        // Crear el objeto ResenaID
         java.sql.Date sqlDate = new java.sql.Date(fecha.getTime());
         
         ResenaId resenaId = new ResenaId();
         resenaId.setIdSuscriptor(suscriptor.getIdSubscriptor());
         resenaId.setIdEvento(evento.getIdEvento());
-
+        
+        // Crear el objeto Resena
         Resena resena = new Resena();
         resena.setId(resenaId);
         resena.setSuscriptor(suscriptor);
