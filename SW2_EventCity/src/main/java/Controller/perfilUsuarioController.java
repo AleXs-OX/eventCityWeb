@@ -31,7 +31,7 @@ import javax.inject.Named;
  */
 @Named
 @SessionScoped
-public class PerfilUsuarioControler implements Serializable{
+public class perfilUsuarioController implements Serializable{
 
     @EJB
     private UsuarioFacadeLocal usuarioEJB;
@@ -42,7 +42,7 @@ public class PerfilUsuarioControler implements Serializable{
     @EJB
     private AdminFacadeLocal adminEJB;
 
-    private int idUser = 0;
+    private int idUser = 1;
     
     private Usuario usuario;
     private Publicador publicador;
@@ -56,6 +56,7 @@ public class PerfilUsuarioControler implements Serializable{
 
     @PostConstruct
     public void init(){
+        System.out.println("HOLA ESTOY FUNCIONANDO");
 	ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         usuario = usuarioEJB.find(idUser);
         if (usuario == null){
@@ -63,7 +64,7 @@ public class PerfilUsuarioControler implements Serializable{
             try {
                 ec.redirect(ec.getRequestContextPath() + "/loginUsuario.xhtml");
             } catch (IOException ex) {
-                Logger.getLogger(PerfilUsuarioControler.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(perfilUsuarioController.class.getName()).log(Level.SEVERE, null, ex);
             }
 	}
 	else{
@@ -76,6 +77,24 @@ public class PerfilUsuarioControler implements Serializable{
 	}
     }
 
+    /**
+     * Muestra la información del usuario como Suscriptor, Publicador o Administrador
+     */
+    
+    public String displayExtraInformartion(){
+    
+        switch (userType){
+            case 1:
+                return createSubPanel();
+            case 2:
+                return createPubPanel();
+            case 3:
+                return createAdminPanel();
+            default:
+                return "";
+        }
+    }
+    
     /**
      * Guarda los cambios realizados en el perfil en la base de datos
      */
@@ -144,6 +163,7 @@ public class PerfilUsuarioControler implements Serializable{
     public void setUsuarioEJB(UsuarioFacadeLocal usuarioEJB) {
         this.usuarioEJB = usuarioEJB;
     }
+    
     // Getters y Setters exclusivos de suscriptores
 
     public String getNumSuscripciones(){
@@ -206,5 +226,17 @@ public class PerfilUsuarioControler implements Serializable{
 
     public void setRol(String rol){
 	if (userType == 3) admin.setRol(rol); 
+    }
+
+    private String createSubPanel() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private String createPubPanel() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private String createAdminPanel() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -59,6 +59,18 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
     }
     
     @Override
+    public Usuario find(Object id){
+    
+        try{
+            return em.find(Usuario.class, id);
+            
+        }catch(Exception e){
+            return null;
+        }
+        
+    }
+    
+    @Override
     protected EntityManager getEntityManager() {
         return em;
     }

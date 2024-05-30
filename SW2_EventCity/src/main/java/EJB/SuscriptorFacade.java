@@ -46,7 +46,7 @@ public class SuscriptorFacade extends AbstractFacade<Suscriptor> implements Susc
 
     @Override
     public Suscriptor findByUser(Usuario usuario) {
-        return em.createQuery("SLECT e FROM SUSCRIPTOR e WHERE e.idUsuario = :idUsuario", Suscriptor.class)
+        return em.createQuery("SELECT e FROM SUSCRIPTOR e WHERE e.idUsuario = :idUsuario", Suscriptor.class)
                 .setParameter("idusuario", usuario.getIdUsuario())
                 .getSingleResult();
     }

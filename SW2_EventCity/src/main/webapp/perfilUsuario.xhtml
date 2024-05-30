@@ -10,11 +10,15 @@
     </h:head>
     <h:body>
         <div class="card">
-            <h3>#{perfilUsuarioController.getNombreusuario()}</h3>
-            <h4>#{perfilUsuarioController.getNombre()} #{PerfilUsuarioController.getApellidos()}</h4>
+            <h1>#{perfilUsuarioController.getUsername()}</h1>
+            <h2>#{perfilUsuarioController.getName()} #{perfilUsuarioController.getSurname()}</h2>
 
-            <h5>Left Icon</h5>
-            <span class="ui-input-icon-left">
+            <div class="conatiner contacto">
+                <h3>Contacto: </h3>
+                <p>Número: <span>#{perfilUsuarioController.getNumber()}</span></p>
+                <p>Email: <span>#{perfilUsuarioController.getEmail()}</span></p>
+            </div>
+            <!--<span class="ui-input-icon-left">
                 <i class="pi pi-search" />
                 <p:inputText placeholder="Search" />
             </span>
@@ -37,7 +41,7 @@
                 <p:outputLabel for="username2" styleClass="block">Username</p:outputLabel>
                 <p:inputText id="username2" styleClass="block ui-state-error"/>
                 <small class="block ui-state-error">Username is not available.</small>
-            </div>
+            </div>-->
 
         </div>
     </h:body>
