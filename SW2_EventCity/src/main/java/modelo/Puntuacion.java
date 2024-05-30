@@ -18,17 +18,17 @@ public class Puntuacion implements Serializable{
     @ManyToOne
     @MapsId("idSuscriptor")
     @JoinColumn(name = "idSuscriptor")
-    private int idSuscriptor;
+    private Suscriptor suscriptor;
 
     @ManyToOne
     @MapsId("idUsuario")
     @JoinColumn(name = "idUsuario")
-    private int idUsuario;
+    private Usuario usuario;
 
     @ManyToOne
     @MapsId("idEvento")
     @JoinColumn(name = "idEvento")
-    private int idEvento;
+    private Evento evento;
     
     @Column(name = "puntuacion")
     private int puntuacion;
@@ -41,28 +41,28 @@ public class Puntuacion implements Serializable{
         this.id = id;
     }
 
-    public int getIdSuscriptor() {
-        return this.idSuscriptor;
+    public Suscriptor getSuscriptor() {
+        return suscriptor;
     }
 
-    public void setIdSuscriptor(int idSuscriptor) {
-        this.idSuscriptor = idSuscriptor;
+    public void setSuscriptor(Suscriptor suscriptor) {
+        this.suscriptor = suscriptor;
     }
 
-    public int getIdUsuario() {
-        return this.idUsuario;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public int getIdEvento() {
-        return this.idEvento;
+    public Evento getEvento() {
+        return evento;
     }
 
-    public void setEvento(int idEvento) {
-        this.idEvento = idEvento;
+    public void setEvento(Evento evento) {
+        this.evento = evento;
     }
 
     public int getPuntuacion() {

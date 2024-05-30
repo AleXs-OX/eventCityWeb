@@ -36,7 +36,7 @@ public class PuntuacionFacade extends AbstractFacade<Puntuacion> implements Punt
     @Override
     public Puntuacion findPuntuacionByIdSuscriptorAndIdEvento(Integer idSuscriptor, Integer idEvento) {
     try{
-        return em.createQuery("SELECT e FROM Puntuacion e WHERE e.idSuscriptor = :idSuscriptor AND e.idEvento = :idEvento", Puntuacion.class)
+        return em.createQuery("SELECT e FROM Puntuacion e WHERE e.suscriptor.idSubscriptor = :idSuscriptor AND e.evento.idEvento = :idEvento", Puntuacion.class)
                      .setParameter("idSuscriptor", idSuscriptor)
                      .setParameter("idEvento", idEvento)
                      .getSingleResult();
@@ -47,7 +47,7 @@ public class PuntuacionFacade extends AbstractFacade<Puntuacion> implements Punt
     @Override
     public boolean existePuntuacion(Integer idSuscriptor, Integer idEvento) {
         TypedQuery<Puntuacion> query = em.createQuery(
-            "SELECT e FROM Puntuacion e WHERE e.idSuscriptor = :idSuscriptor AND e.idEvento = :idEvento", 
+            "SELECT e FROM Puntuacion e WHERE e.suscriptor.idSubscriptor = :idSuscriptor AND e.evento.idEvento = :idEvento", 
             Puntuacion.class
         );
         query.setParameter("idSuscriptor", idSuscriptor);
