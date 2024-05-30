@@ -57,7 +57,9 @@
                                                         
                                                         <p:inputTextarea  style="margin-top: 1em;" rows="4" value="#{suscriptorController.textoResena}" cols="27" maxlength="100" autoResize="true"/>
                                                         <p:commandButton id="btn-resena" icon="pi pi-star-fill" value="Reseñar" styleClass="ui-button-raised ui-button-secondary btn_card" 
-                                                                         style="margin-left: 1em; margin-top: 2.5em" action="#{suscriptorController.creaResenaYPuntuacion(evento.evento.idEvento)}" />                                                       
+                                                                         style="margin-left: 1em; margin-top: 2.5em" action="#{suscriptorController.creaResenaYPuntuacion(evento.evento.idEvento)}"
+                                                                         update="panel_resenas"/>                                                       
+                                                    
                                                         
                                                     </div>
                                                 </div>

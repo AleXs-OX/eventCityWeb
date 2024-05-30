@@ -79,6 +79,7 @@ public class suscriptorController implements Serializable{
         /*Setea al suscriptor de prueba un id ya creado en bdd*/
         
         this.suscriptorActual.setIdSubscriptor(5);
+        System.out.println("Cargo clase");
         
         //System.out.println(new java.sql.Date(this.diaSeleccionado.getTime()));
     }
@@ -143,6 +144,7 @@ public class suscriptorController implements Serializable{
     }
     
     public void doTest(){
+        System.out.println("----------");
         System.out.println("Puntuacion");
         System.out.println(this.puntuacionResena);
         System.out.println("Resena");
@@ -208,10 +210,15 @@ public class suscriptorController implements Serializable{
     
         
     public void setTextoResena(String textoR){
-        System.out.println("Texto de la reseña");
-        System.out.println(textoR);
-        this.textoResena = textoR;
-        System.out.println("---------");
+        if(textoR.isEmpty()){
+            
+        }else{
+            this.textoResena = textoR;
+            System.out.println("Texto de la reseña");
+            System.out.println(textoR);
+            System.out.println("---------");
+        }
+        
     }
     
     public String getTextoResena(){
@@ -232,12 +239,16 @@ public class suscriptorController implements Serializable{
                         , idEvento)){
             
             /*Crea la resena*/
+            System.out.println("---------------------------");
+            System.out.println(this.textoResena);
+            System.out.println(this.puntuacionResena);
             System.out.println("Creando reseña y puntuacion ...");
+            
             resenaEJB.crearResena(this.suscriptorActual.getIdSubscriptor(), idEvento, this.textoResena, this.diaSeleccionadoSus);
             
             /*Crea la puntuacion*/
-            //int idUsuario = this.suscriptorEJB.findSuscriptorById(this.suscriptorActual.getIdSubscriptor()).getUsuario().getIdUsuario();
-            //puntuacionEJB.crearPuntuacion(idUsuario, this.suscriptorActual.getIdSubscriptor(), idEvento, this.puntuacionResena);
+            int idUsuario = this.suscriptorEJB.findSuscriptorById(this.suscriptorActual.getIdSubscriptor()).getUsuario().getIdUsuario();
+            puntuacionEJB.crearPuntuacion(idUsuario, this.suscriptorActual.getIdSubscriptor(), idEvento, this.puntuacionResena);
             /*Resena nuevaResena = new Resena();
             nuevaResena.setComentario(this.textoResena);
             java.sql.Date sqlDate = new java.sql.Date(this.diaSeleccionadoSus.getTime());
