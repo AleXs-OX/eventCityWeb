@@ -10,6 +10,7 @@ import EJB.UsuarioFacadeLocal;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 /**
@@ -17,8 +18,7 @@ import javax.inject.Named;
  * @author Pablo González Santamarta
  */
 @Named
-@ViewScoped
-
+@SessionScoped
 public class PerfilUsuarioControler implements Serializable{
 
     @EJB
@@ -82,4 +82,11 @@ public class PerfilUsuarioControler implements Serializable{
         return usuario.getEmail();
     }
     
+    public UsuarioFacadeLocal getUsuarioEJB() {
+        return usuarioEJB;
+    }
+
+    public void setUsuarioEJB(UsuarioFacadeLocal usuarioEJB) {
+        this.usuarioEJB = usuarioEJB;
+    }
 }
