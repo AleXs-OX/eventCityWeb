@@ -7,7 +7,7 @@ import java.sql.Date;
 
 @Entity
 @Table(name = "resenas")
-public class Resena {
+public class Resena implements Serializable{
     
     @EmbeddedId
     private ResenaId id;
@@ -15,12 +15,12 @@ public class Resena {
     @ManyToOne
     @MapsId("idSuscriptor")
     @JoinColumn(name = "idSuscriptor")
-    private Suscriptor suscriptor;
+    private int idSuscriptor;
 
     @ManyToOne
     @MapsId("idEvento")
     @JoinColumn(name = "idEvento")
-    private Evento evento;
+    private int idEvento;
 
     @Column(name = "comentario")
     private String comentario;
@@ -37,20 +37,20 @@ public class Resena {
         this.id = id;
     }
 
-    public Suscriptor getSuscriptor() {
-        return suscriptor;
+    public int getIdSuscriptor() {
+        return this.idSuscriptor;
     }
 
-    public void setSuscriptor(Suscriptor suscriptor) {
-        this.suscriptor = suscriptor;
+    public void setIdSuscriptor(int idSuscriptor) {
+        this.idSuscriptor = idSuscriptor;
     }
 
-    public Evento getEvento() {
-        return evento;
+    public int getIdEvento() {
+        return this.idEvento;
     }
 
-    public void setEvento(Evento evento) {
-        this.evento = evento;
+    public void setEvento(int idEvento) {
+        this.idEvento = idEvento;
     }
 
     public String getComentario() {
