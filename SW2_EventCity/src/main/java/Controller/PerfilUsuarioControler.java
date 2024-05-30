@@ -42,7 +42,7 @@ public class PerfilUsuarioControler implements Serializable{
     @EJB
     private AdminFacadeLocal adminEJB;
 
-    private int idUser = 1;
+    private int idUser = 0;
     
     private Usuario usuario;
     private Publicador publicador;
@@ -67,9 +67,9 @@ public class PerfilUsuarioControler implements Serializable{
             }
 	}
 	else{
-		suscriptor = suscriptorEJB.find(idUser);
-		publicador = publicadorEJB.find(idUser);
-		admin = adminEJB.find(idUser);
+		suscriptor = suscriptorEJB.findByUser(usuario);
+		publicador = publicadorEJB.findByUser(usuario);
+		admin = adminEJB.findByUser(usuario);
 		if (suscriptor != null) userType = 1;
                 else if (publicador != null) userType = 2;
                 else if (admin != null) userType = 3;

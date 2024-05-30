@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import modelo.Admin;
+import modelo.Usuario;
 
 /**
  *
@@ -28,5 +29,11 @@ public class AdminFacade extends AbstractFacade<Admin> implements AdminFacadeLoc
     public AdminFacade() {
         super(Admin.class);
     }
+
+    @Override
+    public Admin findByUser(Usuario usuario) {
+        return em.createQuery("SELECT e FROM Admin e WHERE e.idUsuario = :idUsuario", Admin.class)
+                .setParameter("idusuario", usuario.getIdUsuario())
+                .getSingleResult();}
     
 }

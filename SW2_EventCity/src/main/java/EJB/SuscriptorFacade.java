@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import modelo.Suscriptor;
+import modelo.Usuario;
 
 /**
  *
@@ -42,4 +43,11 @@ public class SuscriptorFacade extends AbstractFacade<Suscriptor> implements Susc
                  .setParameter("idSuscriptor", idSuscriptor)
                  .getSingleResult();
     }*/
+
+    @Override
+    public Suscriptor findByUser(Usuario usuario) {
+        return em.createQuery("SLECT e FROM SUSCRIPTOR e WHERE e.idUsuario = :idUsuario", Suscriptor.class)
+                .setParameter("idusuario", usuario.getIdUsuario())
+                .getSingleResult();
+    }
 }

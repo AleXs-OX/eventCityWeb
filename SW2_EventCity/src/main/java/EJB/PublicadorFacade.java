@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import modelo.Publicador;
+import modelo.Usuario;
 
 /**
  *
@@ -29,4 +30,10 @@ public class PublicadorFacade extends AbstractFacade<Publicador> implements Publ
         super(Publicador.class);
     }
     
+    @Override
+    public Publicador findByUser(Usuario usuario) {
+        return em.createQuery("SELECT e FROM Publicador e WHERE e.idUsuario = :idUsuario", Publicador.class)
+                .setParameter("idusuario", usuario.getIdUsuario())
+                .getSingleResult();
+    }
 }
