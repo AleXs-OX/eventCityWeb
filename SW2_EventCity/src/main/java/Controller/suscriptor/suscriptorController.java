@@ -162,19 +162,7 @@ public class suscriptorController implements Serializable{
         return puntuacion.getPuntuacion();
         
     }
-    
-    public void showResena(SelectEvent<String> event){
-        String prueba = event.toString();
-        System.out.println("prueba");
-    }
-    
-    /*public void setDay(SelectEvent<Date> event){
-        this.diaSeleccionado = event.getObject();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String formattedDate = dateFormat.format(this.diaSeleccionado);
-        System.out.println("Fecha seleccionada: " + formattedDate);
-    }*/
-    
+       
     public String suscribirseAEvento(Evento evento){
         /*Crea la suscripcion a un evento*/
         if(this.suscripcionEJB.existeSuscripcion(this.suscriptorActual.getIdSubscriptor(), evento.getIdEvento())){
@@ -241,6 +229,8 @@ public class suscriptorController implements Serializable{
                         , idEvento)){
             /*Crea la resena*/
             System.out.println("Creando reseña");
+            resenaEJB.crearResena(this.suscriptorActual.getIdSubscriptor(), idEvento, this.textoResena, this.diaSeleccionadoSus);
+            
             /*Resena nuevaResena = new Resena();
             nuevaResena.setComentario(this.textoResena);
             java.sql.Date sqlDate = new java.sql.Date(this.diaSeleccionadoSus.getTime());
