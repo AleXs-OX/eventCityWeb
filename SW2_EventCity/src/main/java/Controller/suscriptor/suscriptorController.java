@@ -307,5 +307,17 @@ public class suscriptorController implements Serializable{
         this.textoResena = ".";
         this.puntuacionResena = 0;
     }
+    
+    public void logout() {
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("usuario");
+            //FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("admin");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/SW2_EventCity/");
+            System.out.println("Saliendo de la sesion....");
+        } catch (Exception e) {
+            System.err.println("Ocurrio un error inesperado durante el cierre de sesion.");
+            System.err.println("[ERROR]: " + e.getCause() + " (" + e.getMessage() + ").");
+        }
+    }
 }
 
