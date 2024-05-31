@@ -56,7 +56,7 @@ public class ResenaFacade extends AbstractFacade<Resena> implements ResenaFacade
         // Obtener Suscriptor y Evento existentes
         Suscriptor suscriptor = em.find(Suscriptor.class, idSuscriptor);
         Evento evento = em.find(Evento.class, idEvento);
-
+        
         if (suscriptor == null || evento == null) {
             throw new IllegalArgumentException("Suscriptor o Evento no encontrados");
         }

@@ -44,6 +44,7 @@ public class loginUsuarioController implements Serializable{
     @EJB
     private UsuarioFacadeLocal usuarioEJB;
     
+    
     @PostConstruct //Dice que es el primer metodo que se ejecuta
     public void init(){
         
@@ -69,9 +70,17 @@ public class loginUsuarioController implements Serializable{
         System.out.println("Intentando iniciar sesión con: " + username + " / " + password);
         usuario = usuarioEJB.findByCredentials(username, password);
         if (usuario != null) {
-           
-            System.out.println("Inicio de sesión exitoso para usuario: " + usuario.getNombreusuario());
-            return "/subscriptor/homeUI.xhtml?faces-redirect=true"; // Redirige a la página principal o dashboard
+
+            if(usuarioEJB.isSuscriptor(usuario.getIdUsuario())){
+                System.out.println("Logeo de un suscriptor correcto: "+ usuario.getNombreusuario());
+                /*Es suscriptor*/ // Redirige a la página principal o dashboard
+                return "/subscriptor/homeUI.xhtml?faces-redirect=true";
+            }else{
+                /*Es publicador*/ // Redirige a la página principal o dashboard
+                System.out.println("Logeo de un publicador correcto: "+ usuario.getNombreusuario());
+                return "/publicador/publicadorUI.xhtml?faces-redirect=true";
+            }
+             // Redirige a la página principal o dashboard
         } else {
             System.out.println("Error de inicio de sesión para usuario: " + username);
             FacesContext.getCurrentInstance().addMessage(null, 

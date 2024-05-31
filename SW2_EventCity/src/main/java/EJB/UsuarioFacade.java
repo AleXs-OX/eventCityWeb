@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import modelo.Suscriptor;
 import modelo.Usuario;
 
 /**
@@ -65,6 +66,13 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
 
     public UsuarioFacade() {
         super(Usuario.class);
+    }
+    
+    @Override
+    public boolean isSuscriptor(Integer idSuscriptor){
+        Suscriptor suscriptor = em.find(Suscriptor.class, idSuscriptor);
+        return !(suscriptor==null);
+        /*True si existe, false si no existe*/
     }
     
 }

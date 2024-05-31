@@ -8,6 +8,7 @@ package EJB;
 
 import java.util.List;
 import javax.ejb.Local;
+import javax.persistence.EntityManager;
 import modelo.Usuario;
 
 /**
@@ -37,5 +38,7 @@ public interface UsuarioFacadeLocal {
     public Usuario findByUsername(String username);
 
     //Usuario findUsuariorById(Integer idSuscriptor);
-
+    
+    boolean isSuscriptor(Integer idSuscriptor);
+    
 }
