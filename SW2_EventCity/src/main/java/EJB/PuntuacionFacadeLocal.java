@@ -32,4 +32,7 @@ public interface PuntuacionFacadeLocal {
     
     Puntuacion findPuntuacionByIdSuscriptorAndIdEvento(Integer idSuscriptor, Integer idEvento);
     
+    boolean existePuntuacion(Integer idSuscriptor, Integer idEvento);
+    
+    void crearPuntuacion(Integer idUsuario, Integer idSuscriptor, Integer idEvento, Integer puntuacion);
 }

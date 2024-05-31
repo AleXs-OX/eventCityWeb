@@ -10,6 +10,7 @@ import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -44,38 +45,41 @@ public class loginUsuarioController implements Serializable {
         // Inicialización si es necesario
     }
 
-    public String login() {
-    System.out.println("Intentando iniciar sesión con: " + username + " / " + password);
-    //String encryptedPassword = getSecurePassword(password);
-    usuario = usuarioEJB.findByCredentials(username, password);
-    if (usuario != null) {
-        // Guardar el usuario en la sesión
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", usuario);
-        System.out.println("Inicio de sesión exitoso para usuario: " + usuario.getNombreusuario());
-            //return "registroUsuario?faces-redirect=true";
-            
-        
-        // Redirigir según el tipo de usuario
-        if (adminEJB.isAdmin(usuario.getIdUsuario())) {
-            return "/admin/adminUI?faces-redirect=true";
-        } else if (suscriptorEJB.isSuscriptor(usuario.getIdUsuario())) {
-            System.out.println("****************************************************************");
-            return "/subscriptor/homeUI?faces-redirect=true";
-        } else if (publicadorEJB.isPublicador(usuario.getIdUsuario())) {
-            return "/admin/adminUI?faces-redirect=true";
+    
+    public String login() throws IOException {
+        System.out.println("Intentando iniciar sesión con: " + username + " / " + password);
+        usuario = usuarioEJB.findByCredentials(this.username, this.password);
+        if (usuario != null) {
+
+            if(usuarioEJB.isSuscriptor(this.usuario.getIdUsuario())){
+                System.out.println("Logeo de un suscriptor correcto: "+ this.usuario.getNombreusuario());
+                /*Es suscriptor*/ // Redirige a la página principal o dashboard
+                ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+                ec.getSessionMap().put("usuario", this.usuario);
+                ec.redirect(ec.getRequestContextPath() + "/faces/subscriptor/homeUI.xhtml");
+                //return "/subscriptor/homeUI.xhtml?faces-redirect=true";
+                return "";
+            }else{
+                /*Es publicador*/ // Redirige a la página principal o dashboard
+                System.out.println("Logeo de un publicador correcto: "+ this.usuario.getNombreusuario());
+                ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+                ec.getSessionMap().put("usuario", this.usuario);
+                ec.redirect(ec.getRequestContextPath() + "/faces/publicador/publicadorUI.xhtml");
+                //return "/publicador/publicadorUI.xhtml?faces-redirect=true";
+                return"";
+            }
+             // Redirige a la página principal o dashboard
         } else {
             FacesContext.getCurrentInstance().addMessage(null, 
                 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Tipo de usuario desconocido", null));
             return "login";
         }
-    } else {
-        System.out.println("Error de inicio de sesión para usuario: " + username);
-        FacesContext.getCurrentInstance().addMessage(null, 
-            new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario o contraseña incorrectos", null));
-        return "login";
+    } 
+    
+    public String irRegistro(){
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        return "registroUsuario?faces-redirect=true";
     }
-}
-
 
 /*private String getSecurePassword(String password) {
     String generatedPassword = null;
@@ -102,10 +106,7 @@ public class loginUsuarioController implements Serializable {
     }
 
     
-    public String irRegistro(){
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-        return "registroUsuario?faces-redirect=true";
-    }
+    
     // Getters y setters para las propiedades
     public String getUsername() {
         return username;

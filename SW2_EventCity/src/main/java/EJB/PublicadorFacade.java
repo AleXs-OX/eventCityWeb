@@ -40,4 +40,9 @@ public class PublicadorFacade extends AbstractFacade<Publicador> implements Publ
         super(Publicador.class);
     }
     
+    @Override
+    public Publicador getPublicadorById(Integer idPublicador){
+        Publicador publicador = em.find(Publicador.class, idPublicador);
+        return publicador;
+    }
 }

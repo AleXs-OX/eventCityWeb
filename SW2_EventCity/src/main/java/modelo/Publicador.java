@@ -31,47 +31,14 @@ public class Publicador implements Serializable {
     
     @OneToMany(mappedBy = "publicador")
     private List<Evento> eventos;
-
-
-    /*@Override
-    public int hashCode() {
-    int hash = 7;
-    hash = 79 * hash + Objects.hashCode(this.fechaAlta);
-    hash = 79 * hash + this.numEventos;
-    hash = 79 * hash + Objects.hashCode(this.descripcion);
-    hash = 79 * hash + Objects.hashCode(this.usuario);
-    hash = 79 * hash + Objects.hashCode(this.eventos);
-    return hash;
-    }
+    
     @Override
-    public boolean equals(Object obj) {
-    if (this == obj) {
-    return true;
+    public int hashCode() {
+        return Objects.hash(idPublicador);
     }
-    if (obj == null) {
-    return false;
-    }
-    if (getClass() != obj.getClass()) {
-    return false;
-    }
-    final Publicador other = (Publicador) obj;
-    if (this.numEventos != other.numEventos) {
-    return false;
-    }
-    if (!Objects.equals(this.descripcion, other.descripcion)) {
-    return false;
-    }
-    if (!Objects.equals(this.fechaAlta, other.fechaAlta)) {
-    return false;
-    }
-    if (!Objects.equals(this.usuario, other.usuario)) {
-    return false;
-    }
-    if (!Objects.equals(this.eventos, other.eventos)) {
-    return false;
-    }
-    return true;
-    } */
+
+
+    
     public int getIdPublicador() {
         return idPublicador;
     }

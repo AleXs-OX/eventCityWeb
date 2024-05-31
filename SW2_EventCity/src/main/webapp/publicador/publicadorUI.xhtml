@@ -16,12 +16,11 @@
     </h:head>
 
     <h:body>
-        <div class="eventos">   
+        <div class="publicaciones">   
                 <div class="grid-container">
                     <!--<h:form>-->
                     
-                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_eventos1" value="#{suscriptorController.getEventoConciertos()}" var="evento">
-                        <p:remoteCommand name="remoteReloadEventos" update=":t_eventos1"/>
+                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_publicaciones1" value="#{publicadorController.eventoConciertos}" var="evento">
                         <p:column headerText="Conciertos">
                                 <p:card class="card_evento" style="width: 16.6em">
                                     <f:facet name="title">
@@ -33,11 +32,6 @@
                                         <p style="font-style: italic; color: black">Dia #{evento.fechaEvento}</p>
                                     </f:facet>
                                     <f:facet name="footer">
-                                        <p:commandButton id="btn_asistir_1" icon="pi pi-check" value="Asistir" action="#{suscriptorController.suscribirseAEvento(evento)}" 
-                                                         onclick="remoteReloadSus()" update="t_eventos1" styleClass="#{suscriptorController.compruebaColorBotonEventos(evento)}"></p:commandButton>    
-                                        <p:overlayPanel for="btn_asistir_1">
-                                            <p>#{suscriptorController.estadoDeSuscripcion()}</p>
-                                        </p:overlayPanel>
                                         <p:commandButton id="btn-info_1" icon="pi pi-star-fill" value="Información" styleClass="ui-button-raised ui-button-secondary btn_card" style="margin-left: .5em"/>
                                         <p:overlayPanel for="btn-info_1" showCloseIcon="true">
                                             <p:card class="card_resena">
@@ -53,12 +47,12 @@
                                                 <p>Hora: #{evento.horaEvento}</p>
                                                 <p>Precio: #{evento.precio}€</p>
                                                 <p></p>
-                                                <p:dataList value="#{suscriptorController.getResenasByEvento(evento.idEvento)}" var="resena" type="definition">  
+                                                <p:dataList value="#{publicadorController.getResenasByEvento(evento.idEvento)}" var="resena" type="definition">  
                                                         <div class="resena_image">
                                                             <div class="resena_lista">
                                                                 <div class="resena_nombre">#{resena.suscriptor.usuario.nombreCompleto}</div>
                                                                 <div class="resena_desc">#{resena.comentario}</div>
-                                                                <p:rating readonly="true" value="#{suscriptorController.getPuntuacionByIdSuscriptorAndIdEvento(resena.suscriptor.idSubscriptor, evento.idEvento)}"/>
+                                                                <p:rating readonly="true" value="#{publicadorController.getPuntuacionByIdSuscriptorAndIdEvento(resena.suscriptor.idSubscriptor, evento.idEvento)}"/>
                                                             </div>
                                                         </div>                           
                                                 </p:dataList>
@@ -69,9 +63,7 @@
                             </p:column>
                         <!-- más columnas -->
                     </p:dataTable>
-
-                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_eventos2" value="#{suscriptorController.getEventoTalleresyClases()}" var="evento">
-                        <p:remoteCommand name="remoteReloadEventos" update=":t_eventos2"/>
+                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_publicaciones2" value="#{publicadorController.eventoTalleresyClases}" var="evento">
                         <p:column headerText="Talleres y Clases">
                             <p:card class="card_evento" style="width: 16.6em">
                                     <f:facet name="title">
@@ -83,13 +75,8 @@
                                         <p style="font-style: italic; color: black">Dia #{evento.fechaEvento}</p>
                                     </f:facet>
                                     <f:facet name="footer">
-                                        <p:commandButton id="btn_asistir_3" icon="pi pi-check" value="Asistir" action="#{suscriptorController.suscribirseAEvento(evento)}" 
-                                                         onclick="remoteReloadSus()" update="t_eventos2" styleClass="#{suscriptorController.compruebaColorBotonEventos(evento)}"></p:commandButton>    
-                                        <p:overlayPanel for="btn_asistir_3">
-                                            <p>#{suscriptorController.estadoDeSuscripcion()}</p>
-                                        </p:overlayPanel>
-                                        <p:commandButton id="btn-info_4" icon="pi pi-star-fill" value="Información" styleClass="ui-button-raised ui-button-secondary btn_card" style="margin-left: .5em"/>
-                                        <p:overlayPanel for="btn-info_4" showCloseIcon="true">
+                                        <p:commandButton id="btn-info_2" icon="pi pi-star-fill" value="Información" styleClass="ui-button-raised ui-button-secondary btn_card" style="margin-left: .5em"/>
+                                        <p:overlayPanel for="btn-info_2" showCloseIcon="true">
                                             <p:card class="card_resena">
                                                 <f:facet name="title">
                                                     <p style ="text-align: center">¿Localización y día?</p>                                   
@@ -103,12 +90,12 @@
                                                 <p>Hora: #{evento.horaEvento}</p>
                                                 <p>Precio: #{evento.precio}€</p>
                                                 <p></p>
-                                                <p:dataList value="#{suscriptorController.getResenasByEvento(evento.idEvento)}" var="resena" type="definition">  
+                                                <p:dataList value="#{publicadorController.getResenasByEvento(evento.idEvento)}" var="resena" type="definition">  
                                                         <div class="resena_image">
                                                             <div class="resena_lista">
                                                                 <div class="resena_nombre">#{resena.suscriptor.usuario.nombreCompleto}</div>
                                                                 <div class="resena_desc">#{resena.comentario}</div>
-                                                                <p:rating readonly="true" value="#{suscriptorController.getPuntuacionByIdSuscriptorAndIdEvento(resena.suscriptor.idSubscriptor, evento.idEvento)}"/>
+                                                                <p:rating readonly="true" value="#{publicadorController.getPuntuacionByIdSuscriptorAndIdEvento(resena.suscriptor.idSubscriptor, evento.idEvento)}"/>
                                                             </div>
                                                         </div>                           
                                                 </p:dataList>
@@ -119,10 +106,8 @@
                         </p:column>
                         <!-- más columnas -->
                     </p:dataTable>
-
-                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_eventos3" value="#{suscriptorController.getEventoCompeticionesyTorneos()}" var="evento">
-                        <p:remoteCommand name="remoteReloadEventos" update=":t_eventos3"/>
-                        <p:column headerText="Competiciones y Torneos">
+                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_publicaciones3" value="#{publicadorController.eventoCompeticionesyTorneos}" var="evento">
+                        <p:column headerText="Talleres y Clases">
                             <p:card class="card_evento" style="width: 16.6em">
                                     <f:facet name="title">
                                         <p> #{evento.titulo}</p>
@@ -133,13 +118,8 @@
                                         <p style="font-style: italic; color: black">Dia #{evento.fechaEvento}</p>
                                     </f:facet>
                                     <f:facet name="footer">
-                                        <p:commandButton id="btn_asistir_5" icon="pi pi-check" value="Asistir" action="#{suscriptorController.suscribirseAEvento(evento)}" 
-                                                         onclick="remoteReloadSus()" update="t_eventos3" styleClass="#{suscriptorController.compruebaColorBotonEventos(evento)}"></p:commandButton>    
-                                        <p:overlayPanel for="btn_asistir_5">
-                                            <p>#{suscriptorController.estadoDeSuscripcion()}</p>
-                                        </p:overlayPanel>
-                                        <p:commandButton id="btn-info_6" icon="pi pi-star-fill" value="Información" styleClass="ui-button-raised ui-button-secondary btn_card" style="margin-left: .5em"/>
-                                        <p:overlayPanel for="btn-info_6" showCloseIcon="true">
+                                        <p:commandButton id="btn-info_2" icon="pi pi-star-fill" value="Información" styleClass="ui-button-raised ui-button-secondary btn_card" style="margin-left: .5em"/>
+                                        <p:overlayPanel for="btn-info_2" showCloseIcon="true">
                                             <p:card class="card_resena">
                                                 <f:facet name="title">
                                                     <p style ="text-align: center">¿Localización y día?</p>                                   
@@ -153,12 +133,12 @@
                                                 <p>Hora: #{evento.horaEvento}</p>
                                                 <p>Precio: #{evento.precio}€</p>
                                                 <p></p>
-                                                <p:dataList value="#{suscriptorController.getResenasByEvento(evento.idEvento)}" var="resena" type="definition">  
+                                                <p:dataList value="#{publicadorController.getResenasByEvento(evento.idEvento)}" var="resena" type="definition">  
                                                         <div class="resena_image">
                                                             <div class="resena_lista">
                                                                 <div class="resena_nombre">#{resena.suscriptor.usuario.nombreCompleto}</div>
                                                                 <div class="resena_desc">#{resena.comentario}</div>
-                                                                <p:rating readonly="true" value="#{suscriptorController.getPuntuacionByIdSuscriptorAndIdEvento(resena.suscriptor.idSubscriptor, evento.idEvento)}"/>
+                                                                <p:rating readonly="true" value="#{publicadorController.getPuntuacionByIdSuscriptorAndIdEvento(resena.suscriptor.idSubscriptor, evento.idEvento)}"/>
                                                             </div>
                                                         </div>                           
                                                 </p:dataList>
@@ -169,11 +149,9 @@
                         </p:column>
                         <!-- más columnas -->
                     </p:dataTable>
-                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" var="evento" id="t_eventos4" value="#{suscriptorController.getEventoMiscelaneo()}" >
-                        <p:remoteCommand name="remoteReloadEventos" update=":t_eventos4"/>
-                        <p:column headerText="Misceláneo">
-                            <p:column headerText="Conciertos">
-                                <p:card class="card_evento" style="width: 16.6em">
+                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_publicaciones4" value="#{publicadorController.eventoMiscelaneo}" var="evento">
+                        <p:column headerText="Talleres y Clases">
+                            <p:card class="card_evento" style="width: 16.6em">
                                     <f:facet name="title">
                                         <p> #{evento.titulo}</p>
                                     </f:facet>
@@ -183,13 +161,8 @@
                                         <p style="font-style: italic; color: black">Dia #{evento.fechaEvento}</p>
                                     </f:facet>
                                     <f:facet name="footer">
-                                        <p:commandButton id="btn_asistir_7" icon="pi pi-check" value="Asistir" action="#{suscriptorController.suscribirseAEvento(evento)}" 
-                                                         onclick="remoteReloadSus()" update="t_eventos4" styleClass="#{suscriptorController.compruebaColorBotonEventos(evento)}"></p:commandButton>    
-                                        <p:overlayPanel for="btn_asistir_7">
-                                            <p>#{suscriptorController.estadoDeSuscripcion()}</p>
-                                        </p:overlayPanel>
-                                        <p:commandButton id="btn-info_8" icon="pi pi-star-fill" value="Información" styleClass="ui-button-raised ui-button-secondary btn_card" style="margin-left: .5em"/>
-                                        <p:overlayPanel for="btn-info_8" showCloseIcon="true">
+                                        <p:commandButton id="btn-info_2" icon="pi pi-star-fill" value="Información" styleClass="ui-button-raised ui-button-secondary btn_card" style="margin-left: .5em"/>
+                                        <p:overlayPanel for="btn-info_2" showCloseIcon="true">
                                             <p:card class="card_resena">
                                                 <f:facet name="title">
                                                     <p style ="text-align: center">¿Localización y día?</p>                                   
@@ -203,12 +176,12 @@
                                                 <p>Hora: #{evento.horaEvento}</p>
                                                 <p>Precio: #{evento.precio}€</p>
                                                 <p></p>
-                                                <p:dataList value="#{suscriptorController.getResenasByEvento(evento.idEvento)}" var="resena" type="definition">  
+                                                <p:dataList value="#{publicadorController.getResenasByEvento(evento.idEvento)}" var="resena" type="definition">  
                                                         <div class="resena_image">
                                                             <div class="resena_lista">
                                                                 <div class="resena_nombre">#{resena.suscriptor.usuario.nombreCompleto}</div>
                                                                 <div class="resena_desc">#{resena.comentario}</div>
-                                                                <p:rating readonly="true" value="#{suscriptorController.getPuntuacionByIdSuscriptorAndIdEvento(resena.suscriptor.idSubscriptor, evento.idEvento)}"/>
+                                                                <p:rating readonly="true" value="#{publicadorController.getPuntuacionByIdSuscriptorAndIdEvento(resena.suscriptor.idSubscriptor, evento.idEvento)}"/>
                                                             </div>
                                                         </div>                           
                                                 </p:dataList>
@@ -216,20 +189,26 @@
                                         </p:overlayPanel>
                                     </f:facet>
                                 </p:card>
-                            </p:column>
                         </p:column>
-                        <!-- update=":eventosUI:t_eventos1 :eventosUI:t_eventos2 :eventosUI:t_eventos3 :eventosUI:t_eventos4" -->
+                        <!-- más columnas -->
                     </p:dataTable>
-                
                     <!--</h:form>-->
-                    
+                    <h:form id="formCalendar">
                     <div class="calendar">
-                        <p:calendar mode="inline" id="calendario" value="#{suscriptorController.dateSeleccionadaEventos}" locale = "es" navigator ="true" showOn="button" pattern="dd/MM/yyyy">
-                            <p:ajax event="dateSelect" update="t_eventos1 t_eventos2 t_eventos3 t_eventos4"
+                        <p:calendar mode="inline" id="calendario" value="#{publicadorController.dateSeleccionada}" locale = "es" navigator ="true" showOn="button" pattern="dd/MM/yyyy">
+                            <p:ajax event="dateSelect" update="t_publicaciones1 t_publicaciones2 t_publicaciones3"
                                     />
                         </p:calendar>
                     </div> 
-                    
+                    </h:form>
+                        <h:form>  
+                        <div class="botones">
+                            <p:commandButton value="Perfil" style="position: fixed; top: 10.5%; right: 0; margin-top: 0.5%; margin-right: 12.5%; font-size: 1em;" />
+                            <p:commandButton value="Cerrar sesión" styleClass="ui-button-info" action="#{publicadorController.logout()}" style="position: fixed; top: 10.5%; right: 0; margin-top: 0.5%; margin-right: 3.5%; font-size: 1em;" />
+                            <p:commandButton value="Crear Evento" styleClass="ui-button-raised ui-button-success" style="position: fixed; top: 70%; right: 0; margin-top: 0.5%; margin-right: 8%; font-size: 1em;" />
+                            <p:outputLabel class="labelNombre" value="#{suscriptorController.nombreCompleto}" style="position: fixed; top: 5.5%; right: 0; margin-top: 0.5%; margin-right: 3.6%" />
+                        </div>
+                    </h:form>
                 </div>
         </div>
     </h:body>

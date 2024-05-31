@@ -50,43 +50,4 @@ public class Lugar implements Serializable {
     public void setLocalizaciones(List<Localizacion> localizaciones) {
         this.localizaciones = localizaciones;
     }
-
-    
-    
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 47 * hash + this.idLugar;
-        hash = 47 * hash + Objects.hashCode(this.tipo);
-        hash = 47 * hash + Objects.hashCode(this.localizaciones);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Lugar other = (Lugar) obj;
-        if (this.idLugar != other.idLugar) {
-            return false;
-        }
-        if (!Objects.equals(this.tipo, other.tipo)) {
-            return false;
-        }
-        if (!Objects.equals(this.localizaciones, other.localizaciones)) {
-            return false;
-        }
-        return true;
-    }
-    
-    
-    
-    
 }

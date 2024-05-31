@@ -31,5 +31,11 @@ public interface EventoFacadeLocal {
    List<Evento> findEventoByCategoria(Integer idCategoria);
    
    List<Evento> findEventosByCategoriaAndFecha(Integer idCategoria,Date fecha);
+   
+   Evento findEventoById(Integer idEvento);
+   
+   List<Evento> findEventosByCategoriaAndFechaAndId(Integer idCategoria, Date fecha, Integer idPublicador);
+   
+   public List<Evento> findEventosByIdPublicador(Integer idPublicador);
     
 }

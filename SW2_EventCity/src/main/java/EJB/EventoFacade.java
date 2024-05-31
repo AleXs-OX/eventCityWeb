@@ -44,4 +44,27 @@ public class EventoFacade extends AbstractFacade<Evento> implements EventoFacade
                  .getResultList();
     }
     
+    @Override
+    public Evento findEventoById(Integer idEvento){
+        return em.createQuery("SELECT e FROM Evento e WHERE e.idEvento = :idEvento", Evento.class)
+                 .setParameter("idEvento", idEvento)
+                 .getSingleResult();
+    }
+    
+    @Override
+    public List<Evento> findEventosByCategoriaAndFechaAndId(Integer idCategoria, Date fecha, Integer idPublicador) {
+        java.sql.Date sqlDate = new java.sql.Date(fecha.getTime());
+        return em.createQuery("SELECT e FROM Evento e WHERE e.categoria.idCategoria = :idCategoria AND e.fechaEvento = :fechaEvento AND e.publicador.idPublicador =:idPublicador", Evento.class)
+                 .setParameter("idCategoria", idCategoria)
+                 .setParameter("fechaEvento", sqlDate)
+                 .setParameter("idPublicador", idPublicador)
+                 .getResultList();
+    }
+    
+    @Override
+    public List<Evento> findEventosByIdPublicador(Integer idPublicador){
+        return em.createQuery("SELECT e FROM Evento e WHERE e.publicador.idPublicador = :idPublicador", Evento.class)
+                 .setParameter("idPublicador", idPublicador)
+                 .getResultList();
+    }
 }

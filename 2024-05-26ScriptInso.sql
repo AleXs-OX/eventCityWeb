@@ -14,7 +14,6 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-
 -- Volcando estructura de base de datos para publicaciones
 CREATE DATABASE IF NOT EXISTS `publicaciones` /*!40100 DEFAULT CHARACTER SET utf8mb3 */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `publicaciones`;
@@ -66,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `eventos` (
   KEY `fk_eventos_localizaciones` (`idLocalizacion`),
   CONSTRAINT `fk_eventos_categorias` FOREIGN KEY (`idCategoria`) REFERENCES `categorias` (`idCategoria`),
   CONSTRAINT `fk_eventos_localizaciones` FOREIGN KEY (`idLocalizacion`) REFERENCES `localizaciones` (`idLocalizacion`),
-  CONSTRAINT `fk_eventos_publicadores` FOREIGN KEY (`idPublicador`) REFERENCES `publicadores` (`idUsuario`)
+  CONSTRAINT `fk_eventos_publicadores` FOREIGN KEY (`idPublicador`) REFERENCES `publicadores` (`idPublicador`)
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Volcando datos para la tabla publicaciones.eventos: ~30 rows (aproximadamente)
@@ -111,6 +110,7 @@ INSERT INTO `eventos` (`idEvento`, `titulo`, `descripcion`, `fechaAlta`, `fechaE
 (38, 'Taller de Macramé', 'Taller de macramé para principiantes', '2024-05-27', '2024-05-27', '10:00', 1, 25, 3, 2, 2, 15),
 (39, 'Torneo de Fútbol', 'Competición de fútbol entre equipos locales', '2024-05-27', '2024-05-27', '14:00', 1, 10, 1, 3, 3, 60),
 (40, 'Feria de Antigüedades', 'Venta y exhibición de antigüedades', '2024-05-27', '2024-05-27', '09:00', 1, 0, 4, 4, 4, 200);
+
 -- Volcando estructura para tabla publicaciones.localizaciones
 CREATE TABLE IF NOT EXISTS `localizaciones` (
   `idLocalizacion` int NOT NULL AUTO_INCREMENT,
@@ -141,20 +141,22 @@ INSERT INTO `lugares` (`idLugar`, `tipo`) VALUES
 
 -- Volcando estructura para tabla publicaciones.publicadores
 CREATE TABLE IF NOT EXISTS `publicadores` (
+  `idPublicador` int NOT NULL AUTO_INCREMENT,
   `idUsuario` int NOT NULL,
   `fechaAlta` date DEFAULT NULL,
   `numEventos` int DEFAULT NULL,
   `descripcion` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`idUsuario`),
+  PRIMARY KEY (`idPublicador`),
+  KEY `fk_publicadores_usuarios` (`idUsuario`),
   CONSTRAINT `fk_publicadores_usuarios` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`idUsuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Volcando datos para la tabla publicaciones.publicadores: ~4 rows (aproximadamente)
-INSERT INTO `publicadores` (`idUsuario`, `fechaAlta`, `numEventos`, `descripcion`) VALUES
-  (1, '2023-01-01', 5, 'Descripción del publicador 1'),
-  (2, '2023-01-02', 3, 'Descripción del publicador 2'),
-  (3, '2023-01-02', 3, 'Descripción del publicador 2'),
-  (4, '2023-01-02', 3, 'Descripción del publicador 2');
+INSERT INTO `publicadores` (`idPublicador`, `idUsuario`, `fechaAlta`, `numEventos`, `descripcion`) VALUES
+  (1, 1, '2023-01-01', 5, 'Descripción del publicador 1'),
+  (2, 2, '2023-01-02', 3, 'Descripción del publicador 2'),
+  (3, 3, '2023-01-02', 3, 'Descripción del publicador 2'),
+  (4, 4, '2023-01-02', 3, 'Descripción del publicador 2');
 
 -- Volcando estructura para tabla publicaciones.puntuaciones
 CREATE TABLE IF NOT EXISTS `puntuaciones` (
@@ -338,12 +340,12 @@ CREATE TABLE IF NOT EXISTS `suscriptores` (
 
 -- Volcando datos para la tabla publicaciones.suscriptores: ~6 rows (aproximadamente)
 INSERT INTO `suscriptores` (`idSuscriptor`, `idUsuario`, `numSuscripciones`, `direccion`, `ciudad`, `pais`) VALUES
-  (1, 5, '5', 'Calle Mayor, 10', 'Madrid', 'España'),
-  (2, 6, '3', 'Carrer de Provença, 20', 'Barcelona', 'España'),
-  (3, 7, '7', 'Avenida de la Constitución, 15', 'Sevilla', 'España'),
-  (4, 8, '4', 'Calle Real, 5', 'Valencia', 'España'),
-  (5, 9, '4', 'Calle Real, 5', 'Valencia', 'España'),
-  (6, 10, '4', 'Calle Real, 5', 'Valencia', 'España');
+  (5, 5, '5', 'Calle Mayor, 10', 'Madrid', 'España'),
+  (6, 6, '3', 'Carrer de Provença, 20', 'Barcelona', 'España'),
+  (7, 7, '7', 'Avenida de la Constitución, 15', 'Sevilla', 'España'),
+  (8, 8, '4', 'Calle Real, 5', 'Valencia', 'España'),
+  (9, 9, '4', 'Calle Real, 5', 'Valencia', 'España'),
+  (10, 10, '4', 'Calle Real, 5', 'Valencia', 'España');
 
 -- Volcando estructura para tabla publicaciones.usuarios
 CREATE TABLE IF NOT EXISTS `usuarios` (

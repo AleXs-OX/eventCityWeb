@@ -41,4 +41,17 @@ public class SuscriptorFacade extends AbstractFacade<Suscriptor> implements Susc
         super(Suscriptor.class);
     }
     
+    @Override
+    public Suscriptor findSuscriptorById(Integer idSuscriptor){
+        return em.createQuery("SELECT e FROM Suscriptor e WHERE e.idSubscriptor = :idSuscriptor", Suscriptor.class)
+                 .setParameter("idSuscriptor", idSuscriptor)
+                 .getSingleResult();
+    }
+    
+    /*@Override
+    public Suscriptor findSuscriptorById(Integer idSuscriptor){
+        return em.createQuery("SELECT e FROM Suscriptor e WHERE e.idSubscriptor = :idSuscriptor", Suscriptor.class)
+                 .setParameter("idSuscriptor", idSuscriptor)
+                 .getSingleResult();
+    }*/
 }
