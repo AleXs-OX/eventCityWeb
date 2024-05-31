@@ -26,21 +26,29 @@
                 <p:inputTextarea id="descripcion" value="#{publicadorController.descripcionEvento}" required="true" />
             </p>
             <p>
+                <p:outputLabel value="Categoría" for="categoria" />
+                <p:selectOneMenu id="categoria" value="#{publicadorController.categoriaEventoId}" required = "true">
+                    <f:selectItem itemLabel="Seleccione una categoría" itemValue="" />
+                    <f:selectItems value="#{publicadorController.categorias}" var="categoria" itemLabel="#{categoria.nombre}" itemValue="#{categoria.idCategoria}"/>
+                </p:selectOneMenu>
+            </p>
+            
+            <p>
                 <p:outputLabel value="Fecha del Evento:" for="fechaEvento" />
                 <p:calendar id="fechaEvento" locale="es" navigator="true" value="#{publicadorController.fechaEvento}"
                             showOn="button" pattern="dd/MM/yyyy" required="true" />
             </p>
             <p>
                 <p:outputLabel value="Hora del Evento:" for="horaEvento" />
-                <p:calendar id="horaEvento" locale="es" timeOnly="true" pattern="HH:mm" value="#{publicadorController.horaEvento}" required="true" />
+                <p:datePicker id="horaEvento" locale="es" timeOnly="true" pattern="HH:mm" value="#{publicadorController.horaEvento}" required="true" />
             </p>
             <p>
-                <p:outputLabel value="Precio (EUR):" for="precio" />
-                <p:inputNumber id="precio" value="#{publicadorController.precioEvento}" minValue="0" maxValue="1000" required="true" />
+                <p:outputLabel value="Precio (EUR):" for="timeonly" />
+                <p:inputNumber id="timeonly" value="#{publicadorController.precioEvento}" minValue="0" maxValue="1000" required="true" />
             </p>
             <p>
                 <p:outputLabel value="Nº de personas:" for="capacidad" />
-                <p:inputNumber id="capacidad" value="#{publicadorController.ca}" minValue="0" maxValue="1000" required="true" />
+                <p:inputNumber id="capacidad" value="#{publicadorController.capacidadActualEvento}" minValue="0" maxValue="1000" required="true" />
             </p>
             <p>
                 <p:commandButton value="Crear Evento" action="#{publicadorController.creaNuevoEvento}" styleClass="eventButton"
