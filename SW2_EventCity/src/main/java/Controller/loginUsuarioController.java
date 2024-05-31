@@ -71,13 +71,17 @@ public class loginUsuarioController implements Serializable{
         usuario = usuarioEJB.findByCredentials(username, password);
         if (usuario != null) {
 
-            if(usuarioEJB.isSuscriptor(usuario.getIdUsuario())){
-                System.out.println("Logeo de un suscriptor correcto: "+ usuario.getNombreusuario());
+            if(usuarioEJB.isSuscriptor(this.usuario.getIdUsuario())){
+                System.out.println("Logeo de un suscriptor correcto: "+ this.usuario.getNombreusuario());
                 /*Es suscriptor*/ // Redirige a la página principal o dashboard
+                ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+                ec.getSessionMap().put("usuario", this.usuario);
                 return "/subscriptor/homeUI.xhtml?faces-redirect=true";
             }else{
                 /*Es publicador*/ // Redirige a la página principal o dashboard
-                System.out.println("Logeo de un publicador correcto: "+ usuario.getNombreusuario());
+                System.out.println("Logeo de un publicador correcto: "+ this.usuario.getNombreusuario());
+                ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+                ec.getSessionMap().put("usuario", this.usuario);
                 return "/publicador/publicadorUI.xhtml?faces-redirect=true";
             }
              // Redirige a la página principal o dashboard

@@ -30,4 +30,6 @@ public interface PublicadorFacadeLocal {
 
     int count();
     
+    Publicador getPublicadorById(Integer idPublicador);
+    
 }

@@ -6,11 +6,13 @@
 package Controller.publicador;
 
 import EJB.EventoFacadeLocal;
+import EJB.PublicadorFacadeLocal;
 import EJB.PuntuacionFacadeLocal;
 import EJB.ResenaFacadeLocal;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
@@ -38,6 +40,9 @@ public class publicadorController implements Serializable{
     @EJB
     private PuntuacionFacadeLocal puntuacionEJB;
     
+    @EJB
+    private PublicadorFacadeLocal publicadorEJB;
+    
     private Date diaSeleccionadoEventos;
     
     private int concierto=1;
@@ -51,9 +56,15 @@ public class publicadorController implements Serializable{
     
     public publicadorController(){
         this.diaSeleccionadoEventos = new Date();
-        //this.publicadorActual = this.usuarioActual.getPublicador();
-        this.publicadorActual = new Publicador();
-        this.publicadorActual.setIdPublicador(3);
+    }
+    
+    @PostConstruct
+    public void init(){
+        /*Obtiene el session del usuario logeado*/
+        usuarioActual = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+        System.out.println("El usuario logeado en controller publicador es "+this.usuarioActual.getNombre());
+        /*Obtiene el suscriptor correspondiente a ese Usuario*/
+        this.publicadorActual = publicadorEJB.getPublicadorById(this.usuarioActual.getIdUsuario());
     }
     
     public List<Evento> getEventoConciertos(){
@@ -96,6 +107,18 @@ public class publicadorController implements Serializable{
     public void test(){
         List<Evento> eventos = this.eventoEJB.findEventosByIdPublicador(this.publicadorActual.getIdPublicador());
         System.out.println(eventos);
+    }
+    
+    public void logout() {
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("usuario");
+            //FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("admin");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/SW2_EventCity/");
+            System.out.println("Saliendo de la sesion....");
+        } catch (Exception e) {
+            System.err.println("Ocurrio un error inesperado durante el cierre de sesion.");
+            System.err.println("[ERROR]: " + e.getCause() + " (" + e.getMessage() + ").");
+        }
     }
         
 

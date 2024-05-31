@@ -15,7 +15,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.Evento;
@@ -23,6 +25,7 @@ import modelo.Puntuacion;
 import modelo.Resena;
 import modelo.Suscripcion;
 import modelo.Suscriptor;
+import modelo.Usuario;
 import org.primefaces.event.SelectEvent;
 
 /*Hara falta dos metodos uno que guarde y devuelva una lista con todos los eventos que hay y otro metodo
@@ -57,9 +60,7 @@ public class suscriptorController implements Serializable{
     private Date diaSeleccionadoEventos;
     private Date diaSeleccionadoSus;
     private Date diaActual;
-
-    private int usuarioActual = 1;
-    
+  
 
     private final int concierto=1;
     private final int talleresClases=2;
@@ -71,8 +72,10 @@ public class suscriptorController implements Serializable{
     private String textoResena = "";
 
 
-    Suscriptor suscriptorActual = new Suscriptor();
+    Suscriptor suscriptorActual;
     Suscripcion suscripcionesUsuario;
+    
+    Usuario usuarioActual;
 
     
     public suscriptorController(){
@@ -80,13 +83,17 @@ public class suscriptorController implements Serializable{
         
         this.diaSeleccionadoEventos = new Date();
         this.diaSeleccionadoSus  = new Date();
-        
-        /*Setea al suscriptor de prueba un id ya creado en bdd*/
-        
-        this.suscriptorActual.setIdSubscriptor(5);
-        System.out.println("Cargo clase");
-        
         //System.out.println(new java.sql.Date(this.diaSeleccionado.getTime()));
+         System.out.println("Cargo clase suscriptor");
+    }
+    
+    @PostConstruct
+    public void init(){
+        /*Obtiene el session del usuario logeado*/
+        usuarioActual = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+        System.out.println("El usuario logeado en controller suscriptor es "+this.usuarioActual.getNombre());
+        /*Obtiene el suscriptor correspondiente a ese Usuario*/
+        this.suscriptorActual = suscriptorEJB.findSuscriptorById(usuarioActual.getIdUsuario());
     }
     
     
