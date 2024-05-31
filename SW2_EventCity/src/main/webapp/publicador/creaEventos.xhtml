@@ -11,39 +11,42 @@
     <h:body id="event-page">
         <h:outputStylesheet library="css" name="eventos.css"/>
         <h:form id="event-form">
+            <p:growl id="messages" showDetail="true" life="3000" />
+            
+            <p:dialog header="Errores en el formulario" widgetVar="dlg" modal="true" closable="false">
+                <h:messages id="form-messages" showDetail="true" style="color: red;" />
+            </p:dialog>
+
             <p>
                 <p:outputLabel value="Título del Evento:" for="titulo" />
-                <p:inputText id="titulo"  required="true" />
+                <p:inputText id="titulo" value="#{publicadorController.tituloEvento}" required="true" />
             </p>
             <p>
                 <p:outputLabel value="Descripción:" for="descripcion" />
-                <p:inputTextarea id="descripcion"  required="true" />
-            </p>
-            <p>
-                <p:outputLabel value="Fecha de Alta:" for="fechaAlta" />
-                <p:calendar id="fechaAlta"  locale="es" navigator="true"
-                            showOn="button" pattern="dd/MM/yyyy" required="true" />
+                <p:inputTextarea id="descripcion" value="#{publicadorController.descripcionEvento}" required="true" />
             </p>
             <p>
                 <p:outputLabel value="Fecha del Evento:" for="fechaEvento" />
-                <p:calendar id="fechaEvento"  locale="es" navigator="true"
+                <p:calendar id="fechaEvento" locale="es" navigator="true" value="#{publicadorController.fechaEvento}"
                             showOn="button" pattern="dd/MM/yyyy" required="true" />
             </p>
             <p>
                 <p:outputLabel value="Hora del Evento:" for="horaEvento" />
-                <p:inputText id="horaEvento" required="true" />
-            </p>
-            <p>
-                <p:outputLabel value="Activo:" for="activo" />
-                <p:selectBooleanCheckbox id="activo"  />
+                <p:calendar id="horaEvento" locale="es" timeOnly="true" pattern="HH:mm" value="#{publicadorController.horaEvento}" required="true" />
             </p>
             <p>
                 <p:outputLabel value="Precio (EUR):" for="precio" />
-                <p:inputNumber id="precio" minValue="0" maxValue="1000" required="true" />
+                <p:inputNumber id="precio" value="#{publicadorController.precioEvento}" minValue="0" maxValue="1000" required="true" />
             </p>
             <p>
-                <p:commandButton value="Crear Evento"  styleClass="eventButton" />
+                <p:outputLabel value="Nº de personas:" for="capacidad" />
+                <p:inputNumber id="capacidad" value="#{publicadorController.ca}" minValue="0" maxValue="1000" required="true" />
+            </p>
+            <p>
+                <p:commandButton value="Crear Evento" action="#{publicadorController.creaNuevoEvento}" styleClass="eventButton"
+                                 update="messages form-messages" oncomplete="if (!args.validationFailed) PF('dlg').hide();" />
             </p>
         </h:form>
     </h:body>
 </html>
+

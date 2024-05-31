@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -26,6 +27,7 @@ import modelo.Publicador;
 import modelo.Puntuacion;
 import modelo.Resena;
 import modelo.Usuario;
+import org.primefaces.PrimeFaces;
 
 /**
  *
@@ -257,19 +259,66 @@ public class publicadorController implements Serializable{
     public void setLocalizacionEvento(Localizacion localizacionEvento) {
         this.localizacionEvento = localizacionEvento;
     }
+
+    public String getTituloEvento() {
+        return tituloEvento;
+    }
+
+    public void setTituloEvento(String tituloEvento) {
+        this.tituloEvento = tituloEvento;
+    }
+    
     
     /*Crea un nuevo evento*/
-    public void creaNuevoEvento(){
+    public void creaNuevoEvento() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        
+        if (this.tituloEvento == null || this.tituloEvento.isEmpty()) {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "El título del evento es obligatorio."));
+        }
+        
+        if (this.descripcionEvento == null || this.descripcionEvento.isEmpty()) {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "La descripción del evento es obligatoria."));
+        }
+        
+        if (this.fechaEvento == null) {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "La fecha del evento es obligatoria."));
+        }
+        
+        if (this.horaEvento == null) {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "La hora del evento es obligatoria."));
+        }
+        
+        if (this.capacidadActualEvento < 0) {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "La capacidad del evento es obligatoria."));
+        }
+        
+        /*if (this.precioEvento == null || this.precioEvento < 0) {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "El precio del evento debe ser un valor positivo."));
+        }*/
+        
+        if (!context.getMessageList().isEmpty()) {
+            PrimeFaces.current().executeScript("PF('dlg').show()");
+            return;
+        }
+        
         Evento nuevoEvento = new Evento();
         nuevoEvento.setTitulo(this.tituloEvento);
         nuevoEvento.setDescripcion(this.descripcionEvento);
-        nuevoEvento.setFechaAlta(new java.sql.Date(this.fechaAltaEvento.getTime()));
+        nuevoEvento.setFechaAlta(new java.sql.Date(new Date().getTime()));
         nuevoEvento.setFechaEvento(new java.sql.Date(this.fechaEvento.getTime()));
         nuevoEvento.setHoraEvento(new java.sql.Time(this.horaEvento.getTime()));
         nuevoEvento.setActivo(this.activoEvento);
         nuevoEvento.setPrecio(this.precioEvento);
         nuevoEvento.setCapacidadActual(this.capacidadActualEvento);
+        nuevoEvento.setLocalizacion(null);
         
-        //eventoEJB.creaEvento();
+        eventoEJB.create(nuevoEvento);
+        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Evento creado exitosamente."));
+    }
+    public String irCreaEvento(){
+        System.out.println("****************");
+        return "creaEventos.xhtml?faces-redirect=true";
+      
     }
 }
