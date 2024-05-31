@@ -186,18 +186,18 @@ public class registroUsuarioController implements Serializable {
         newUser.setEmail(email);
 
         usuarioEJB.create(newUser);
-
-        // Crear y persistir el suscriptor asociado
         Suscriptor newSuscriptor = new Suscriptor();
         newSuscriptor.setUsuario(newUser);
         newSuscriptor.setNumSuscripciones("0"); // Configurar otras propiedades del suscriptor si es necesario
         newSuscriptor.setCiudad("");
         newSuscriptor.setDireccion("");
         newSuscriptor.setPais("");
-        newSuscriptor.setIdSubscriptor(newUser.getIdUsuario());
+        
         
         suscriptorEJB.create(newSuscriptor);
 
+
+        
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Usuario y suscriptor registrados con éxito.");
         FacesContext.getCurrentInstance().addMessage(null, message);
         PrimeFaces.current().executeScript("PF('successDialog').show();"); // Mostrar diálogo de éxito
