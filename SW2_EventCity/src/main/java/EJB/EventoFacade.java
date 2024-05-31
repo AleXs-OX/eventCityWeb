@@ -76,16 +76,15 @@ public class EventoFacade extends AbstractFacade<Evento> implements EventoFacade
         Publicador publicador = em.find(Publicador.class, idPublicador);
         Categoria categoria = em.find(Categoria.class, idCategoria);
         //Localizacion localizacion = em.find(Localizacion.class, idLocalizacion);
-        Localizacion localizacion = new Localizacion();
+     
         
-        if (publicador == null || categoria == null || localizacion == null) {
+        if (publicador == null || categoria == null) {
             throw new IllegalArgumentException("Publicador o Categoria o Localizacion no encontrado"
                     + "creando Evento en EventoFacade");
         }
         
         nuevoEvento.setPublicador(publicador);
         nuevoEvento.setCategoria(categoria);
-        nuevoEvento.setLocalizacion(localizacion);
         
         super.create(nuevoEvento);
     }

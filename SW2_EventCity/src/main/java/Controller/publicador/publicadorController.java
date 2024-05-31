@@ -5,6 +5,7 @@
  */
 package Controller.publicador;
 
+import EJB.CategoriaFacadeLocal;
 import EJB.EventoFacadeLocal;
 import EJB.PublicadorFacadeLocal;
 import EJB.PuntuacionFacadeLocal;
@@ -52,6 +53,9 @@ public class publicadorController implements Serializable{
     @EJB
     private UsuarioFacadeLocal usuarioEJB;
     
+    @EJB
+    private CategoriaFacadeLocal categoriaEJB;
+    
     private Date diaSeleccionadoEventos;
     
     private int concierto=1;
@@ -77,7 +81,8 @@ public class publicadorController implements Serializable{
     private Categoria categoriaEvento;
     private Localizacion localizacionEvento;
     
-    
+    private List<Categoria> categorias;
+    private String categoriaEventoId;
     
     public publicadorController(){
         this.diaSeleccionadoEventos = new Date();
@@ -86,6 +91,7 @@ public class publicadorController implements Serializable{
     
     @PostConstruct
     public void init(){
+        categorias = categoriaEJB.findAll();
         FacesContext.getCurrentInstance().getExternalContext().getSession(true);
         try{
             /*Obtiene el session del usuario logeado*/
@@ -166,6 +172,9 @@ public class publicadorController implements Serializable{
             System.err.println("No se pudo redirigir al usuario al Login");
             System.err.println("[ERROR]: " + e.getCause() + " (" + e.getMessage() + ").");
         }
+    }
+    public Categoria findCategoriaById(String id) {
+        return categoriaEJB.find(Integer.parseInt(id));
     }
     public void btnCreaEvento() throws IOException{
         FacesContext.getCurrentInstance().getExternalContext().redirect("/SW2_EventCity/faces/publicador/publicadorUI.xhtml");
@@ -267,10 +276,27 @@ public class publicadorController implements Serializable{
     public void setTituloEvento(String tituloEvento) {
         this.tituloEvento = tituloEvento;
     }
+
+    public List<Categoria> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(List<Categoria> categorias) {
+        this.categorias = categorias;
+    }
+
+    public String getCategoriaEventoId() {
+        return categoriaEventoId;
+    }
+
+    public void setCategoriaEventoId(String categoriaEventoId) {
+        this.categoriaEventoId = categoriaEventoId;
+    }
+    
     
     
     /*Crea un nuevo evento*/
-    public void creaNuevoEvento() {
+    public void creaNuevoEvento() throws IOException {
         FacesContext context = FacesContext.getCurrentInstance();
         
         if (this.tituloEvento == null || this.tituloEvento.isEmpty()) {
@@ -293,9 +319,12 @@ public class publicadorController implements Serializable{
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "La capacidad del evento es obligatoria."));
         }
         
-        /*if (this.precioEvento == null || this.precioEvento < 0) {
+        if ( this.precioEvento < 0) {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "El precio del evento debe ser un valor positivo."));
-        }*/
+        }
+        if ( this.categoriaEventoId==null) {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Debe seleccionar una categoria"));
+        }
         
         if (!context.getMessageList().isEmpty()) {
             PrimeFaces.current().executeScript("PF('dlg').show()");
@@ -308,16 +337,18 @@ public class publicadorController implements Serializable{
         nuevoEvento.setFechaAlta(new java.sql.Date(new Date().getTime()));
         nuevoEvento.setFechaEvento(new java.sql.Date(this.fechaEvento.getTime()));
         nuevoEvento.setHoraEvento(new java.sql.Time(this.horaEvento.getTime()));
-        nuevoEvento.setActivo(this.activoEvento);
+        nuevoEvento.setActivo(true);
         nuevoEvento.setPrecio(this.precioEvento);
         nuevoEvento.setCapacidadActual(this.capacidadActualEvento);
         nuevoEvento.setLocalizacion(null);
-        
-        eventoEJB.create(nuevoEvento);
+       
+         Categoria categoriaSeleccionada = findCategoriaById(this.categoriaEventoId);
+        eventoEJB.creaEvento(nuevoEvento, this.publicadorActual.getIdPublicador(), categoriaSeleccionada.getIdCategoria(), null);
         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Evento creado exitosamente."));
+        
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/SW2_EventCity/faces/publicador/publicadorUI.xhtml");
     }
     public String irCreaEvento(){
-        System.out.println("****************");
         return "creaEventos.xhtml?faces-redirect=true";
       
     }
