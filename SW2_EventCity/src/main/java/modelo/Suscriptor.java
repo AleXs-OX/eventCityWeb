@@ -36,9 +36,6 @@ public class Suscriptor implements Serializable{
     private String pais;
 
     @OneToMany(mappedBy = "suscriptor")
-    private List<Suscripcion> suscripciones;
-
-    @OneToMany(mappedBy = "suscriptor")
     private List<Puntuacion> puntuaciones;
 
     @OneToMany(mappedBy = "suscriptor")
@@ -92,14 +89,6 @@ public class Suscriptor implements Serializable{
         this.pais = pais;
     }
 
-    public List<Suscripcion> getSuscripciones() {
-        return suscripciones;
-    }
-
-    public void setSuscripciones(List<Suscripcion> suscripciones) {
-        this.suscripciones = suscripciones;
-    }
-
     public List<Puntuacion> getPuntuaciones() {
         return puntuaciones;
     }
@@ -125,7 +114,6 @@ public class Suscriptor implements Serializable{
         hash = 53 * hash + Objects.hashCode(this.direccion);
         hash = 53 * hash + Objects.hashCode(this.ciudad);
         hash = 53 * hash + Objects.hashCode(this.pais);
-        hash = 53 * hash + Objects.hashCode(this.suscripciones);
         hash = 53 * hash + Objects.hashCode(this.puntuaciones);
         hash = 53 * hash + Objects.hashCode(this.resenas);
         return hash;
@@ -159,9 +147,6 @@ public class Suscriptor implements Serializable{
             return false;
         }
         if (!Objects.equals(this.usuario, other.usuario)) {
-            return false;
-        }
-        if (!Objects.equals(this.suscripciones, other.suscripciones)) {
             return false;
         }
         if (!Objects.equals(this.puntuaciones, other.puntuaciones)) {

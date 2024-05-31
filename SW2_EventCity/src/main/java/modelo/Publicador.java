@@ -31,26 +31,14 @@ public class Publicador implements Serializable {
     
     @OneToMany(mappedBy = "publicador")
     private List<Evento> eventos;
-
-    // Constructors, getters, and setters
     
     @Override
     public int hashCode() {
         return Objects.hash(idPublicador);
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        final Publicador other = (Publicador) obj;
-        return idPublicador == other.idPublicador;
-    }
 
+    
     public int getIdPublicador() {
         return idPublicador;
     }

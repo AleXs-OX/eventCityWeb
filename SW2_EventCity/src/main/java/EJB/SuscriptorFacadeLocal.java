@@ -29,7 +29,10 @@ public interface SuscriptorFacadeLocal {
     List<Suscriptor> findRange(int[] range);
 
     int count();
-    
+
+    boolean isSuscriptor(int userId);
+
     Suscriptor findSuscriptorById(Integer idSuscriptor);
+
     
 }
