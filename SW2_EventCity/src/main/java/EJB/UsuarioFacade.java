@@ -71,7 +71,8 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
     @Override
     public boolean isSuscriptor(Integer idSuscriptor){
         Suscriptor suscriptor = em.find(Suscriptor.class, idSuscriptor);
-        return !(suscriptor==null);
+        //System.out.println("El suscriptor encontrado es "+suscriptor.getIdSubscriptor());
+        return (suscriptor!=null);
         /*True si existe, false si no existe*/
     }
     

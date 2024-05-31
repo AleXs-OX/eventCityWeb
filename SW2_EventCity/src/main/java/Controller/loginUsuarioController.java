@@ -66,9 +66,9 @@ public class loginUsuarioController implements Serializable{
         FacesContext.getCurrentInstance().getExternalContext().redirect(url);*/
     } 
     
-    public String login() {
+    public String login() throws IOException {
         System.out.println("Intentando iniciar sesión con: " + username + " / " + password);
-        usuario = usuarioEJB.findByCredentials(username, password);
+        usuario = usuarioEJB.findByCredentials(this.username, this.password);
         if (usuario != null) {
 
             if(usuarioEJB.isSuscriptor(this.usuario.getIdUsuario())){
@@ -76,13 +76,17 @@ public class loginUsuarioController implements Serializable{
                 /*Es suscriptor*/ // Redirige a la página principal o dashboard
                 ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
                 ec.getSessionMap().put("usuario", this.usuario);
-                return "/subscriptor/homeUI.xhtml?faces-redirect=true";
+                ec.redirect(ec.getRequestContextPath() + "/faces/subscriptor/homeUI.xhtml");
+                //return "/subscriptor/homeUI.xhtml?faces-redirect=true";
+                return "";
             }else{
                 /*Es publicador*/ // Redirige a la página principal o dashboard
                 System.out.println("Logeo de un publicador correcto: "+ this.usuario.getNombreusuario());
                 ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
                 ec.getSessionMap().put("usuario", this.usuario);
-                return "/publicador/publicadorUI.xhtml?faces-redirect=true";
+                ec.redirect(ec.getRequestContextPath() + "/faces/publicador/publicadorUI.xhtml");
+                //return "/publicador/publicadorUI.xhtml?faces-redirect=true";
+                return"";
             }
              // Redirige a la página principal o dashboard
         } else {

@@ -10,6 +10,7 @@ import EJB.ResenaFacadeLocal;
 import EJB.SuscripcionFacadeLocal;
 import EJB.SuscriptorFacadeLocal;
 import EJB.UsuarioFacadeLocal;
+import java.io.IOException;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -84,16 +85,30 @@ public class suscriptorController implements Serializable{
         this.diaSeleccionadoEventos = new Date();
         this.diaSeleccionadoSus  = new Date();
         //System.out.println(new java.sql.Date(this.diaSeleccionado.getTime()));
-         System.out.println("Cargo clase suscriptor");
+        
     }
     
     @PostConstruct
     public void init(){
         /*Obtiene el session del usuario logeado*/
-        usuarioActual = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
-        System.out.println("El usuario logeado en controller suscriptor es "+this.usuarioActual.getNombre());
-        /*Obtiene el suscriptor correspondiente a ese Usuario*/
-        this.suscriptorActual = suscriptorEJB.findSuscriptorById(usuarioActual.getIdUsuario());
+        FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        
+        try{
+            this.usuarioActual = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+            if(this.usuarioEJB.isSuscriptor(this.usuarioActual.getIdUsuario())){
+                System.out.println("=============================================================================");
+                System.out.println("El usuario logeado en controller suscriptor es "+this.usuarioActual.getNombre());
+                /*Obtiene el suscriptor correspondiente a ese Usuario*/
+                this.suscriptorActual = suscriptorEJB.findSuscriptorById(usuarioActual.getIdUsuario());
+                System.out.println("Cargo clase suscriptor");
+            }
+        }catch(Exception e){
+            System.err.println("Se va a echar al usuario debido a un fallo durante su verificación de Affiliate (" + e.getMessage() + ").");
+            kickUser();
+        }
+        
+        //usuarioActual = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+        
     }
     
     
@@ -316,6 +331,21 @@ public class suscriptorController implements Serializable{
             System.out.println("Saliendo de la sesion....");
         } catch (Exception e) {
             System.err.println("Ocurrio un error inesperado durante el cierre de sesion.");
+            System.err.println("[ERROR]: " + e.getCause() + " (" + e.getMessage() + ").");
+        }
+    }
+    
+    public String getNombreCompleto(){
+        return this.usuarioActual.getNombreCompleto();
+    }
+    
+    public void kickUser() {
+        try {
+            // Se limpia la sesion por precaucion
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("usuario");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/SW2_EventCity/");
+        } catch (IOException e) {
+            System.err.println("No se pudo redirigir al usuario al Login");
             System.err.println("[ERROR]: " + e.getCause() + " (" + e.getMessage() + ").");
         }
     }

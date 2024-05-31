@@ -21,3 +21,9 @@
     margin-top: 100px;
 
 }
+.labelNombre{
+    font-family: "Open Sans", sans-serif !important;
+    font-size: 18px !important;
+    color: #006666;
+    font-weight: bold;
+}
