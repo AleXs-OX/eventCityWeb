@@ -14,12 +14,16 @@ import EJB.UsuarioFacadeLocal;
 import EJB.SuscriptorFacadeLocal;
 import EJB.PublicadorFacadeLocal;
 import EJB.AdminFacadeLocal;
+import EJB.EventoFacadeLocal;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.ejb.EJBException;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -41,7 +45,9 @@ public class perfilUsuarioController implements Serializable{
     private PublicadorFacadeLocal publicadorEJB;
     @EJB
     private AdminFacadeLocal adminEJB;
-
+    @EJB
+    private EventoFacadeLocal eventoEJB;
+    
     private final int idUser = 1;
     
     private Usuario usuario;
@@ -58,7 +64,8 @@ public class perfilUsuarioController implements Serializable{
     public void init(){
         System.out.println("HOLA ESTOY FUNCIONANDO");
 	ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-        usuario = (Usuario) FacesContext.getCurrentInstance().getAttributes().get("usuario");
+        //usuario = (Usuario) FacesContext.getCurrentInstance().getAttributes().get("usuario");
+        usuario = usuarioEJB.findByUsername("lauragarcia");
         if (usuario == null){
 		System.out.println("El usuario indicado no existe. Se procede a redirigir al login");
             try {
@@ -68,15 +75,29 @@ public class perfilUsuarioController implements Serializable{
             }
 	}
 	else{
-		suscriptor = suscriptorEJB.findByUser(usuario);
-		//publicador = publicadorEJB.findByUser(usuario);
-		//admin = adminEJB.findByUser(usuario);
-		//if (suscriptor != null) userType = 1;
-                //else if (publicador != null) userType = 2;
-                //else if (admin != null) userType = 3;
+                try{
+                    suscriptor = suscriptorEJB.findByUser(usuario);
+                    userType = 1;
+                }
+                catch(EJBException e1){
+                    try{
+                        publicador = publicadorEJB.findByUser(usuario);
+                        userType = 2;
+                    }
+                    catch(EJBException e2){
+                        try {
+                            admin = adminEJB.findByUser(usuario);
+                            userType = 3;
+                        }
+                        catch(EJBException e3){
+                            System.out.print("Este usuario no tiene ninguna especialización");
+                        }
+                    }
+                }
+		
 	}
     }
-
+    
     /**
      * Muestra la información del usuario como Suscriptor, Publicador o Administrador
      * @return 
@@ -98,6 +119,7 @@ public class perfilUsuarioController implements Serializable{
     
     /**
      * Guarda los cambios realizados en el perfil en la base de datos
+     * @return 
      */
     public boolean saveChanges(){
         usuarioEJB.edit(usuario);
@@ -113,6 +135,12 @@ public class perfilUsuarioController implements Serializable{
 			break;
 	}
         return true;
+    }
+    
+    // Getter del tipo de usuario
+    
+    public int getUserType(){
+        return userType;
     }
     
     // Getters y Setters comunes a todos los usuarios
@@ -205,7 +233,7 @@ public class perfilUsuarioController implements Serializable{
 	if (userType == 2) return publicador.getDescripcion();
         return "";
     }   
-     
+
     public void setFechaAlta(Date fecha){
 	if (userType == 2) publicador.setFechaAlta(fecha);
     }
