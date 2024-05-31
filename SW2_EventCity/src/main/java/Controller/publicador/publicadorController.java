@@ -19,7 +19,9 @@ import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import modelo.Categoria;
 import modelo.Evento;
+import modelo.Localizacion;
 import modelo.Publicador;
 import modelo.Puntuacion;
 import modelo.Resena;
@@ -59,8 +61,25 @@ public class publicadorController implements Serializable{
     Usuario usuarioActual;
     Publicador publicadorActual;
     
+    /*Creacion de un nuevo evento*/
+    private int idEvento;
+    private String tituloEvento;
+    private String descripcionEvento;
+    private Date fechaAltaEvento;
+    private Date fechaEvento;
+    private Date horaEvento;
+    private boolean activoEvento;
+    private int precioEvento;
+    private int capacidadActualEvento;
+    private Publicador publicadorEvento;
+    private Categoria categoriaEvento;
+    private Localizacion localizacionEvento;
+    
+    
+    
     public publicadorController(){
         this.diaSeleccionadoEventos = new Date();
+        this.fechaAltaEvento = new Date();
     }
     
     @PostConstruct
@@ -146,6 +165,111 @@ public class publicadorController implements Serializable{
             System.err.println("[ERROR]: " + e.getCause() + " (" + e.getMessage() + ").");
         }
     }
-        
+    public void btnCreaEvento() throws IOException{
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/SW2_EventCity/faces/publicador/publicadorUI.xhtml");
+    }
+    
+    /*Setters y getters para crear un nuevo evento*/
+    public Date getDiaSeleccionadoEventos() {
+        return diaSeleccionadoEventos;
+    }
 
+    public void setDiaSeleccionadoEventos(Date diaSeleccionadoEventos) {
+        this.diaSeleccionadoEventos = diaSeleccionadoEventos;
+    }
+
+    public String getDescripcionEvento() {
+        return descripcionEvento;
+    }
+
+    public void setDescripcionEvento(String descripcionEvento) {
+        this.descripcionEvento = descripcionEvento;
+    }
+
+    public Date getFechaAltaEvento() {
+        return fechaAltaEvento;
+    }
+
+    public void setFechaAltaEvento(Date fechaAltaEvento) {
+        this.fechaAltaEvento = fechaAltaEvento;
+    }
+
+    public Date getFechaEvento() {
+        return fechaEvento;
+    }
+
+    public void setFechaEvento(Date fechaEvento) {
+        this.fechaEvento = fechaEvento;
+    }
+
+    public Date getHoraEvento() {
+        return horaEvento;
+    }
+
+    public void setHoraEvento(Date horaEvento) {
+        this.horaEvento = horaEvento;
+    }
+
+    public boolean getActivoEvento() {
+        return activoEvento;
+    }
+
+    public void setActivoEvento(boolean activoEvento) {
+        this.activoEvento = activoEvento;
+    }
+
+    public int getPrecioEvento() {
+        return precioEvento;
+    }
+
+    public void setPrecioEvento(int precioEvento) {
+        this.precioEvento = precioEvento;
+    }
+
+    public int getCapacidadActualEvento() {
+        return capacidadActualEvento;
+    }
+
+    public void setCapacidadActualEvento(int capacidadActualEvento) {
+        this.capacidadActualEvento = capacidadActualEvento;
+    }
+
+    public Publicador getPublicadorEvento() {
+        return publicadorEvento;
+    }
+
+    public void setPublicadorEvento(Publicador publicadorEvento) {
+        this.publicadorEvento = publicadorEvento;
+    }
+
+    public Categoria getCategoriaEvento() {
+        return categoriaEvento;
+    }
+
+    public void setCategoriaEvento(Categoria categoriaEvento) {
+        this.categoriaEvento = categoriaEvento;
+    }
+
+    public Localizacion getLocalizacionEvento() {
+        return localizacionEvento;
+    }
+
+    public void setLocalizacionEvento(Localizacion localizacionEvento) {
+        this.localizacionEvento = localizacionEvento;
+    }
+    
+    /*Crea un nuevo evento*/
+    public void creaNuevoEvento(){
+        Evento nuevoEvento = new Evento();
+        nuevoEvento.setTitulo(this.tituloEvento);
+        nuevoEvento.setDescripcion(this.descripcionEvento);
+        nuevoEvento.setFechaAlta(new java.sql.Date(this.fechaAltaEvento.getTime()));
+        nuevoEvento.setFechaEvento(new java.sql.Date(this.fechaEvento.getTime()));
+        nuevoEvento.setHoraEvento(new java.sql.Time(this.horaEvento.getTime()));
+        nuevoEvento.setActivo(this.activoEvento);
+        nuevoEvento.setPrecio(this.precioEvento);
+        nuevoEvento.setCapacidadActual(this.capacidadActualEvento);
+        
+        //eventoEJB.creaEvento();
+    }
 }

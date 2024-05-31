@@ -37,5 +37,8 @@ public interface EventoFacadeLocal {
    List<Evento> findEventosByCategoriaAndFechaAndId(Integer idCategoria, Date fecha, Integer idPublicador);
    
    public List<Evento> findEventosByIdPublicador(Integer idPublicador);
+   
+   void creaEvento(Evento nuevoEvento, Integer idPublicador, Integer idCategoria, Integer idLocalizacion);
+   
     
 }
