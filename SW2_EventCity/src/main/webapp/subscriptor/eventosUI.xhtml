@@ -29,8 +29,10 @@
                                     </f:facet>
                                     <f:facet name="subtitle">
                                         <p>#{evento.descripcion}</p>
-                                        <p style="font-style: italic; color: black">Hora #{evento.horaEvento}</p>
-                                        <p style="font-style: italic; color: black">Dia #{evento.fechaEvento}</p>
+                                        <p style="font-style: italic; color: black">
+                                        Hora #{evento.horaEvento}<br></br>
+                                        Dia #{evento.fechaEvento}<br></br></p>
+                                        <p style="font-style: italic; color: black">#{evento.localizacion.nombre}</p>
                                     </f:facet>
                                     <f:facet name="footer">
                                         <p:commandButton id="btn_asistir_1" icon="pi pi-check" value="Asistir" action="#{suscriptorController.suscribirseAEvento(evento)}" 
@@ -46,9 +48,8 @@
                                                 </f:facet>
                                                 <f:facet name="subtitle">
                                                     <p style="font-weight: bold; font-style: italic; color: gray;">
-                                                        El evento #{evento.titulo} tendrá lugar en:<br></br>
-                                                        #{evento.localizacion.idLocalizacion} el día: #{evento.fechaEvento}</p>
-                                                        
+                                                        <br></br>El evento #{evento.titulo} tendrá lugar en:<br></br>
+                                                        #{evento.localizacion.direccion}. <br></br><br></br> El día: #{evento.fechaEvento}</p>                                                       
                                                 </f:facet>
                                                 <p>Hora: #{evento.horaEvento}</p>
                                                 <p>Precio: #{evento.precio}€</p>
@@ -79,8 +80,10 @@
                                     </f:facet>
                                     <f:facet name="subtitle">
                                         <p>#{evento.descripcion}</p>
-                                        <p style="font-style: italic; color: black">Hora #{evento.horaEvento}</p>
-                                        <p style="font-style: italic; color: black">Dia #{evento.fechaEvento}</p>
+                                        <p style="font-style: italic; color: black">
+                                        Hora #{evento.horaEvento}<br></br>
+                                        Dia #{evento.fechaEvento}<br></br></p>
+                                        <p style="font-style: italic; color: black">#{evento.localizacion.nombre}</p>
                                     </f:facet>
                                     <f:facet name="footer">
                                         <p:commandButton id="btn_asistir_3" icon="pi pi-check" value="Asistir" action="#{suscriptorController.suscribirseAEvento(evento)}" 
@@ -96,9 +99,8 @@
                                                 </f:facet>
                                                 <f:facet name="subtitle">
                                                     <p style="font-weight: bold; font-style: italic; color: gray;">
-                                                        El evento #{evento.titulo} tendrá lugar en:<br></br>
-                                                        #{evento.localizacion.idLocalizacion} el día: #{evento.fechaEvento}</p>
-                                                        
+                                                        <br></br>El evento #{evento.titulo} tendrá lugar en:<br></br>
+                                                        #{evento.localizacion.direccion}. <br></br><br></br> El día: #{evento.fechaEvento}</p>  
                                                 </f:facet>
                                                 <p>Hora: #{evento.horaEvento}</p>
                                                 <p>Precio: #{evento.precio}€</p>
@@ -129,8 +131,10 @@
                                     </f:facet>
                                     <f:facet name="subtitle">
                                         <p>#{evento.descripcion}</p>
-                                        <p style="font-style: italic; color: black">Hora #{evento.horaEvento}</p>
-                                        <p style="font-style: italic; color: black">Dia #{evento.fechaEvento}</p>
+                                        <p style="font-style: italic; color: black">
+                                        Hora #{evento.horaEvento}<br></br>
+                                        Dia #{evento.fechaEvento}<br></br></p>
+                                        <p style="font-style: italic; color: black">#{evento.localizacion.nombre}</p>
                                     </f:facet>
                                     <f:facet name="footer">
                                         <p:commandButton id="btn_asistir_5" icon="pi pi-check" value="Asistir" action="#{suscriptorController.suscribirseAEvento(evento)}" 
@@ -145,10 +149,9 @@
                                                     <p style ="text-align: center">¿Localización y día?</p>                                   
                                                 </f:facet>
                                                 <f:facet name="subtitle">
-                                                    <p style="font-weight: bold; font-style: italic; color: gray;">
-                                                        El evento #{evento.titulo} tendrá lugar en:<br></br>
-                                                        #{evento.localizacion.idLocalizacion} el día: #{evento.fechaEvento}</p>
-                                                        
+                                                   <p style="font-weight: bold; font-style: italic; color: gray;">
+                                                        <br></br>El evento #{evento.titulo} tendrá lugar en:<br></br>
+                                                        #{evento.localizacion.direccion}. <br></br><br></br> El día: #{evento.fechaEvento}</p>    
                                                 </f:facet>
                                                 <p>Hora: #{evento.horaEvento}</p>
                                                 <p>Precio: #{evento.precio}€</p>
@@ -179,8 +182,10 @@
                                     </f:facet>
                                     <f:facet name="subtitle">
                                         <p>#{evento.descripcion}</p>
-                                        <p style="font-style: italic; color: black">Hora #{evento.horaEvento}</p>
-                                        <p style="font-style: italic; color: black">Dia #{evento.fechaEvento}</p>
+                                        <p style="font-style: italic; color: black">
+                                        Hora #{evento.horaEvento}<br></br>
+                                        Dia #{evento.fechaEvento}<br></br></p>
+                                        <p style="font-style: italic; color: black">#{evento.localizacion.nombre}</p>
                                     </f:facet>
                                     <f:facet name="footer">
                                         <p:commandButton id="btn_asistir_7" icon="pi pi-check" value="Asistir" action="#{suscriptorController.suscribirseAEvento(evento)}" 
@@ -196,9 +201,8 @@
                                                 </f:facet>
                                                 <f:facet name="subtitle">
                                                     <p style="font-weight: bold; font-style: italic; color: gray;">
-                                                        El evento #{evento.titulo} tendrá lugar en:<br></br>
-                                                        #{evento.localizacion.idLocalizacion} el día: #{evento.fechaEvento}</p>
-                                                        
+                                                        <br></br>El evento #{evento.titulo} tendrá lugar en:<br></br>
+                                                        #{evento.localizacion.direccion}. <br></br><br></br> El día: #{evento.fechaEvento}</p>  
                                                 </f:facet>
                                                 <p>Hora: #{evento.horaEvento}</p>
                                                 <p>Precio: #{evento.precio}€</p>

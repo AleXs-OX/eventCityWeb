@@ -82,7 +82,7 @@ public class EventoFacade extends AbstractFacade<Evento> implements EventoFacade
             throw new IllegalArgumentException("Publicador o Categoria o Localizacion no encontrado"
                     + "creando Evento en EventoFacade");
         }
-        
+//        
         nuevoEvento.setPublicador(publicador);
         nuevoEvento.setCategoria(categoria);
         nuevoEvento.setLocalizacion(localizacion);

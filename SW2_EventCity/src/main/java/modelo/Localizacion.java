@@ -21,8 +21,8 @@ public class Localizacion {
     @Column(name = "direccion")
     private String direccion;
     
-    @Column(name = "ciudad")
-    private String ciudad;
+    @Column(name = "nombre")
+    private String nombre;
     
     @Column(name = "pais")
     private String pais;
@@ -53,12 +53,12 @@ public class Localizacion {
         this.direccion = direccion;
     }
 
-    public String getCiudad() {
-        return ciudad;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
+    public void setNombre(String ciudad) {
+        this.nombre = ciudad;
     }
 
     public String getPais() {
