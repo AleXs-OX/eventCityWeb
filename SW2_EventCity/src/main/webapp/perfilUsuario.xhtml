@@ -3,14 +3,29 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+          
+      xmlns:f="http://xmlns.jcp.org/jsf/core" >
     <h:head>
-
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>EventCityWeb</title>
     </h:head>
     <h:body>
         <h:outputStylesheet library="css" name="perfilUsuario.css"/>
+        <div class="flex-container">
+        <p:tabMenu class = "sidemenu" activeIndex="#{param.i}" style="width:15rem" orientation="left">
+            <p:menuitem value="Home" outcome="/faces/index.xhtml" icon="pi pi-fw pi-home">
+            </p:menuitem>
+            <p:menuitem value="Calendar" outcome="/faces/loginUsuario.xhtml" icon="pi pi-fw pi-calendar">
+            </p:menuitem>
+            <p:menuitem value="Edit" outcome="" icon="pi pi-fw pi-pencil"
+                        disabled="true">
+            </p:menuitem>
+            <p:menuitem value="Documentation" outcome="" icon="pi pi-fw pi-file">
+            </p:menuitem>
+            <p:menuitem value="Settings" outcome="" icon="pi pi-fw pi-cog">
+            </p:menuitem>
+        </p:tabMenu>
+            <main>
         <p:panel class="card">
             <h1>#{perfilUsuarioController.username}</h1>
             <h2>#{perfilUsuarioController.name} #{perfilUsuarioController.surname}</h2>
@@ -20,12 +35,12 @@
                 <p>Email: <span>#{perfilUsuarioController.email}</span></p>
             </p:panel>
         </p:panel>
-        <p:panel class= "container suscriptor-info" rendered="#{perfilUsuarioController.userType == 1}">
+        <p:panel class= "container card suscriptor-info" rendered="#{perfilUsuarioController.userType == 1}">
                 <h1>Información como suscriptor</h1>
                 <h2> Número de suscripciones: <span>#{perfilUsuarioController.numSuscripciones}</span></h2>
                 <p> Dirección: <span>#{perfilUsuarioController.location}</span></p>
         </p:panel>
-        <p:panel class="container publicador-info" rendered="#{perfilUsuarioController.userType == 2}">
+        <p:panel class="container card publicador-info" rendered="#{perfilUsuarioController.userType == 2}">
             <h1>Información como publicador</h1>
             <h2> Número de eventos creados: <span>#{perfilUsuarioController.numEventos}</span></h2>
             <p:panel class="container descripcion">
@@ -34,10 +49,12 @@
                 <p> Fecha de alta: <span>#{perfilUsuarioController.fechaAlta}</span></p>
             </p:panel>
         </p:panel>
-        <p:panel class="container admin-info" rendered="#{perfilUsuarioController.userType == 3}">
+        <p:panel class="container card admin-info" rendered="#{perfilUsuarioController.userType == 3}">
             <h1>Información como admin</h1>
             <h2> Rol: <span>#{perfilUsuarioController.rol}</span></h2>
         </p:panel>
+                </main>
+        </div>
     </h:body>
 </html>
 
