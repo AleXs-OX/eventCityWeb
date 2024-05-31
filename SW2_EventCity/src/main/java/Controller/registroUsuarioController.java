@@ -34,10 +34,12 @@ public class registroUsuarioController implements Serializable {
     private String confirmPassword;
     private String nombre;
     private String apellidos;
-    private String prefijo;
     private String telefono;
     private String email;
     private Date fechaNacimiento;
+    private String direccion;
+    private String ciudad;
+    private String pais;
     
     private Suscriptor suscriptor;
 
@@ -94,14 +96,6 @@ public class registroUsuarioController implements Serializable {
         this.apellidos = apellidos;
     }
 
-    public String getPrefijo() {
-        return prefijo;
-    }
-
-    public void setPrefijo(String prefijo) {
-        this.prefijo = prefijo;
-    }
-
     public String getTelefono() {
         return telefono;
     }
@@ -125,6 +119,32 @@ public class registroUsuarioController implements Serializable {
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+
+    public String getPais() {
+        return pais;
+    }
+
+    public void setPais(String pais) {
+        this.pais = pais;
+    }
+    
+    
 
     public void registro() {
     if (password == null || password.isEmpty()) {
@@ -189,9 +209,9 @@ public class registroUsuarioController implements Serializable {
         Suscriptor newSuscriptor = new Suscriptor();
         newSuscriptor.setUsuario(newUser);
         newSuscriptor.setNumSuscripciones("0"); // Configurar otras propiedades del suscriptor si es necesario
-        newSuscriptor.setCiudad("");
-        newSuscriptor.setDireccion("");
-        newSuscriptor.setPais("");
+        newSuscriptor.setCiudad(ciudad);
+        newSuscriptor.setDireccion(direccion);
+        newSuscriptor.setPais(pais);
         
         
         suscriptorEJB.create(newSuscriptor);

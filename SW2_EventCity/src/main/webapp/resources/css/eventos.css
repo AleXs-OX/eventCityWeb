@@ -1,0 +1,65 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url("#{resource['images/fondoPastel.jpg']}");
+    background-size: cover;
+}
+
+#event-page {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Alinea al inicio de la página */
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8); /* Fondo semitransparente */
+    padding: 60px 20px 20px 20px; /* Añadir margen superior */
+    box-sizing: border-box;
+}
+
+#event-form {
+    background: #ffffff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    width: 100%;
+    max-width: 500px;
+    box-sizing: border-box;
+}
+
+#event-form p {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+#event-form p label {
+    margin-bottom: 5px;
+}
+
+#event-form p input, 
+#event-form p textarea, 
+#event-form p .ui-selectbooleancheckbox, 
+#event-form p .ui-inputnumber {
+    width: 100%;
+}
+
+#event-form p .ui-calendar {
+    width: calc(100% - 40px);
+}
+
+.eventButton {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 16px;
+}
+
+.eventButton:hover {
+    background-color: #45a049;
+}

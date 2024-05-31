@@ -24,15 +24,6 @@
                             <p:outputLabel value="Apellidos:" />
                             <p:inputText id="apellidos" value="#{registroUsuarioController.apellidos}" required="true" />
 
-                            <p:outputLabel value="Prefijo:" for="prefijo" />
-                            <p:selectOneMenu id="prefijo" value="#{registroUsuarioController.prefijo}" required="true">
-                                <f:selectItem itemLabel="Seleccione" itemValue="" />
-                                <f:selectItem itemLabel="+34 España" itemValue="+34" />
-                                <f:selectItem itemLabel="+1 USA" itemValue="+1" />
-                                <f:selectItem itemLabel="+44 UK" itemValue="+44" />
-                                <!-- Añadir más prefijos según sea necesario -->
-                            </p:selectOneMenu>
-
                             <p:outputLabel value="Telefono:" for="telefono" />
                             <p:inputText id="telefono" value="#{registroUsuarioController.telefono}" required="true" />
 
@@ -42,6 +33,17 @@
                             <p:outputLabel value="Fecha de nacimiento:" for="fechaNacimiento" />
                             <p:calendar id="fechaNacimiento" value="#{registroUsuarioController.fechaNacimiento}" locale="es" navigator="true"
                                         showOn="button" pattern="dd/MM/yyyy" required="true" />
+                            
+                            <p:outputLabel value="País: " />
+                            <p:inputText id="pais" value="#{registroUsuarioController.pais}" required="true" />
+                            
+                            <p:outputLabel value="Ciudad" />
+                            <p:inputText id="ciudad" value="#{registroUsuarioController.ciudad}" required="true" />
+                            
+                            <p:outputLabel value="Dirección:" />
+                            <p:inputText id="direccion" value="#{registroUsuarioController.direccion}" required="true" />
+                            
+                            
                         </p:panelGrid>
                     </p:fieldset>
                 </div>
