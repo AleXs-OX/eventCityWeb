@@ -115,7 +115,7 @@ INSERT INTO `eventos` (`idEvento`, `titulo`, `descripcion`, `fechaAlta`, `fechaE
 CREATE TABLE IF NOT EXISTS `localizaciones` (
   `idLocalizacion` int NOT NULL AUTO_INCREMENT,
   `direccion` varchar(100) DEFAULT NULL,
-  `ciudad` varchar(100) DEFAULT NULL,
+  `nombre` varchar(100) DEFAULT NULL,
   `pais` varchar(100) DEFAULT NULL,
   `capacidadTotal` int DEFAULT NULL,
   `idLugar` int DEFAULT NULL,
@@ -123,9 +123,23 @@ CREATE TABLE IF NOT EXISTS `localizaciones` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Volcando datos para la tabla publicaciones.localizaciones: ~2 rows (aproximadamente)
-INSERT INTO `localizaciones` (`idLocalizacion`, `direccion`, `ciudad`, `pais`, `capacidadTotal`, `idLugar`) VALUES
-  (1, 'Calle 1', 'Ciudad 1', 'País 1', 100, 1),
-  (2, 'Calle 2', 'Ciudad 2', 'País 2', 200, 2);
+INSERT INTO `localizaciones` (`idLocalizacion`, `direccion`, `nombre`, `pais`, `capacidadTotal`, `idLugar`) VALUES
+(1, 'Av. de la Paz 123, Parque Central', 'Parque Central', 'España', 300, 1),
+(2, 'Calle Mayor 45, Centro Comunitario', 'Centro Comunitario', 'España', 100, 2),
+(3, 'Calle del Deporte 10, Club Deportivo', 'Club Deportivo', 'España', 150, 3),
+(4, 'Plaza Mayor, s/n', 'Plaza Mayor', 'España', 500, 4),
+(5, 'Calle del Teatro 22, Auditorio Municipal', 'Auditorio Municipal', 'España', 400, 5),
+(6, 'Calle de las Artes 3, Centro Cultural', 'Centro Cultural', 'España', 200, 6),
+(7, 'Av. Olímpica 98, Piscina Olímpica', 'Piscina Olímpica', 'España', 150, 7),
+(8, 'Calle del Arte 5, Galería de Arte', 'Galería de Arte', 'España', 100, 8),
+(9, 'Paseo Marítimo 25, Playa Principal', 'Playa Principal', 'España', 350, 9),
+(10, 'Calle de la Música 7, Bar Cultural', 'Bar Cultural', 'España', 100, 10),
+(11, 'Calle del Ejercicio 15, Gimnasio', 'Gimnasio', 'España', 50, 11),
+(12, 'Av. Gastronómica 30, Food Court', 'Food Court', 'España', 300, 12),
+(13, 'Calle del Saber 12, Biblioteca Pública', 'Biblioteca Pública', 'España', 200, 13),
+(14, 'Calle de los Poetas 8, Café Literario', 'Café Literario', 'España', 50, 14),
+(15, 'Calle de las Estrellas 17, Teatro Principal', 'Teatro Principal', 'España', 150, 15),
+(16, 'Av. de las Exposiciones 45, Centro de Exposiciones', 'Centro de Exposiciones', 'España', 400, 16);
 
 -- Volcando estructura para tabla publicaciones.lugares
 CREATE TABLE IF NOT EXISTS `lugares` (
@@ -133,11 +147,6 @@ CREATE TABLE IF NOT EXISTS `lugares` (
   `tipo` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`idLugar`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- Volcando datos para la tabla publicaciones.lugares: ~2 rows (aproximadamente)
-INSERT INTO `lugares` (`idLugar`, `tipo`) VALUES
-  (1, 'Tipo 1'),
-  (2, 'Tipo 2');
 
 -- Volcando estructura para tabla publicaciones.publicadores
 CREATE TABLE IF NOT EXISTS `publicadores` (
