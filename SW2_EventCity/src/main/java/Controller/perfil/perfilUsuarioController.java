@@ -57,14 +57,18 @@ public class perfilUsuarioController implements Serializable{
      * Indica el tipo de usuario para control de errores
      */
     private int userType = 0;
-
+    
+    public perfilUsuarioController(){
+        //this.usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+    }
+    
     @PostConstruct
     public void init(){
-        System.out.println("HOLA ESTOY FUNCIONANDO");
-        FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        //FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 	//ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         this.usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
-        //usuario = usuarioEJB.findUserByUsername("lauragarcia");
+        
+        System.out.println("->> Estoy cargando el usuario"+this.usuario.getNombre());
         if (usuario == null){
 		System.out.println("El usuario indicado no existe. Se procede a redirigir al login");
             /*try {
@@ -78,9 +82,11 @@ public class perfilUsuarioController implements Serializable{
                 if(this.suscriptorEJB.isSuscriptor(this.usuario.getIdUsuario())){
                     suscriptor = suscriptorEJB.findByUser(usuario);
                     userType = 1;
+                    System.out.println("Typed 1");
                 } else if(this.publicadorEJB.isPublicador(this.usuario.getIdUsuario())){
                     publicador = publicadorEJB.findByUser(usuario);
                     userType = 2;
+                    System.out.println("Typed 2");
                 }else{
                     System.out.println("No se encontro el usuario en perfilUsuarioController");
                 }
@@ -258,15 +264,22 @@ public class perfilUsuarioController implements Serializable{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    public void volverAtras() throws IOException{
+    public String volverAtras() throws IOException{
+        System.out.println("aaaa"+this.userType);
         if(this.userType == 1){
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/SW2_EventCity/faces/subscriptor/homeUI.xhtml");
+            //FacesContext.getCurrentInstance().getExternalContext().redirect("/SW2_EventCity/faces/subscriptor/homeUI.xhtml");
+            ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+            ec.redirect(ec.getRequestContextPath() + "/faces/subscriptor/homeUI.xhtml");
+            return"";
         }else if(this.userType == 2){
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/SW2_EventCity/faces/publicador/publicadorUI.xhtml");
-            
+            //FacesContext.getCurrentInstance().getExternalContext().redirect("/SW2_EventCity/faces/publicador/publicadorUI.xhtml");
+            ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+            ec.redirect(ec.getRequestContextPath() + "/faces/publicador/publicadorUI.xhtml");
+            return"";
         }else{
             /*Type3*/
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/SW2_EventCity/faces/publicador/publicadorUI.xhtml");
+            //FacesContext.getCurrentInstance().getExternalContext().redirect("/SW2_EventCity/faces/publicador/publicadorUI.xhtml");
+            return "publicadorUI.xhtml?faces-redirect=true";
         }
     }
 }

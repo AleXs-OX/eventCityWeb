@@ -155,6 +155,7 @@ public class publicadorController implements Serializable{
         try {
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("usuario");
             //FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("admin");
+            FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
             FacesContext.getCurrentInstance().getExternalContext().redirect("/SW2_EventCity/");
             System.out.println("Saliendo de la sesion....");
         } catch (Exception e) {

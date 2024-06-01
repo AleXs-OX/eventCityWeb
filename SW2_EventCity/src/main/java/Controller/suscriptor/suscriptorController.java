@@ -326,6 +326,7 @@ public class suscriptorController implements Serializable{
     public void logout() {
         try {
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("usuario");
+            FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
             //FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("admin");
             FacesContext.getCurrentInstance().getExternalContext().redirect("/SW2_EventCity/");
             System.out.println("Saliendo de la sesion....");
