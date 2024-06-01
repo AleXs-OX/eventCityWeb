@@ -26,6 +26,16 @@
                 <p:inputTextarea id="descripcion" value="#{publicadorController.descripcionEvento}" required="true" />
             </p>
             <p>
+                <p:outputLabel value="Dirección" for="direccion" />
+                <p:inputTextarea id="direccion" value="#{publicadorController.direccion}" required="true" />
+            </p>
+            
+            <p>
+                <p:outputLabel value="Alias dirección: " for="alias" />
+                <p:inputTextarea id="alias" value="#{publicadorController.nombreDireccion}" required="true" />
+            </p>
+            
+            <p>
                 <p:outputLabel value="Categoría" for="categoria" />
                 <p:selectOneMenu id="categoria" value="#{publicadorController.categoriaEventoId}" required = "true">
                     <f:selectItem itemLabel="Seleccione una categoría" itemValue="" />

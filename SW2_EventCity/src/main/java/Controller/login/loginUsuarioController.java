@@ -1,4 +1,4 @@
-package Controller;
+package Controller.login;
 
 import EJB.UsuarioFacadeLocal;
 import EJB.AdminFacadeLocal;
@@ -72,8 +72,12 @@ public class loginUsuarioController implements Serializable {
         } else {
             FacesContext.getCurrentInstance().addMessage(null, 
                 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Tipo de usuario desconocido", null));
+            PrimeFaces.current().executeScript("PF('loginDialog').show();");
             return "login";
         }
+        
+        
+    
     } 
     
     public String irRegistro(){

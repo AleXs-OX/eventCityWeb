@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package Controller;
+package Controller.login;
 
 import EJB.SuscriptorFacadeLocal;
 import EJB.UsuarioFacadeLocal;

@@ -34,5 +34,9 @@
             </h:form>
         </div>
     </div>
+    <p:dialog header="Error" widgetVar="loginDialog" modal="true" closable="false" resizable="false">
+            <h:outputText value="Usuario o contraseña incorrectos, por favor vuelva a intentarlo" />
+            <p:commandButton value="Aceptar" onclick="PF('loginDialog').hide();" type="button" />
+    </p:dialog>
 </h:body>
 </html>

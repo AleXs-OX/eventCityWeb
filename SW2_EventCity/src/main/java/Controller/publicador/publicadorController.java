@@ -7,12 +7,15 @@ package Controller.publicador;
 
 import EJB.CategoriaFacadeLocal;
 import EJB.EventoFacadeLocal;
+import EJB.LocalizacionFacadeLocal;
 import EJB.PublicadorFacadeLocal;
 import EJB.PuntuacionFacadeLocal;
 import EJB.ResenaFacadeLocal;
 import EJB.UsuarioFacadeLocal;
 import java.io.IOException;
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -56,6 +59,9 @@ public class publicadorController implements Serializable{
     @EJB
     private CategoriaFacadeLocal categoriaEJB;
     
+    @EJB
+    private LocalizacionFacadeLocal localizacionEJB;
+    
     private Date diaSeleccionadoEventos;
     
     private int concierto=1;
@@ -66,6 +72,7 @@ public class publicadorController implements Serializable{
     /*Session*/
     Usuario usuarioActual;
     Publicador publicadorActual;
+    Localizacion localizacion;
     
     /*Creacion de un nuevo evento*/
     private int idEvento;
@@ -80,9 +87,13 @@ public class publicadorController implements Serializable{
     private Publicador publicadorEvento;
     private Categoria categoriaEvento;
     private Localizacion localizacionEvento;
+    private String direccion;
+    private String nombreDireccion;
+    
     
     private List<Categoria> categorias;
     private String categoriaEventoId;
+    
     
     public publicadorController(){
         this.diaSeleccionadoEventos = new Date();
@@ -292,45 +303,78 @@ public class publicadorController implements Serializable{
     public void setCategoriaEventoId(String categoriaEventoId) {
         this.categoriaEventoId = categoriaEventoId;
     }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getNombreDireccion() {
+        return nombreDireccion;
+    }
+
+    public void setNombreDireccion(String nombreDireccion) {
+        this.nombreDireccion = nombreDireccion;
+    }
+    
     
     
     
     /*Crea un nuevo evento*/
-    public void creaNuevoEvento() throws IOException {
-        FacesContext context = FacesContext.getCurrentInstance();
-        
-        if (this.tituloEvento == null || this.tituloEvento.isEmpty()) {
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "El título del evento es obligatorio."));
+   public void creaNuevoEvento() throws IOException {
+    FacesContext context = FacesContext.getCurrentInstance();
+
+    if (this.tituloEvento == null || this.tituloEvento.isEmpty()) {
+        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "El título del evento es obligatorio."));
+    }
+
+    if (this.descripcionEvento == null || this.descripcionEvento.isEmpty()) {
+        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "La descripción del evento es obligatoria."));
+    }
+
+    if (this.fechaEvento == null) {
+        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "La fecha del evento es obligatoria."));
+    } else {
+        LocalDateTime fechaEvento = this.fechaEvento.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+        LocalDateTime horaActual = LocalDateTime.now();
+        if (fechaEvento.isBefore(horaActual)) {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "La fecha del evento debe ser posterior a la fecha y hora actual."));
         }
-        
-        if (this.descripcionEvento == null || this.descripcionEvento.isEmpty()) {
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "La descripción del evento es obligatoria."));
-        }
-        
-        if (this.fechaEvento == null) {
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "La fecha del evento es obligatoria."));
-        }
-        
-        if (this.horaEvento == null) {
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "La hora del evento es obligatoria."));
-        }
-        
-        if (this.capacidadActualEvento < 0) {
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "La capacidad del evento es obligatoria."));
-        }
-        
-        if ( this.precioEvento < 0) {
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "El precio del evento debe ser un valor positivo."));
-        }
-        if ( this.categoriaEventoId==null) {
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Debe seleccionar una categoria"));
-        }
-        
-        if (!context.getMessageList().isEmpty()) {
-            PrimeFaces.current().executeScript("PF('dlg').show()");
-            return;
-        }
-        
+    }
+
+    if (this.horaEvento == null) {
+        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "La hora del evento es obligatoria."));
+    }
+
+    if (this.capacidadActualEvento < 0) {
+        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "La capacidad del evento es obligatoria."));
+    }
+
+    if (this.precioEvento < 0) {
+        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "El precio del evento debe ser un valor positivo."));
+    }
+
+    if (this.categoriaEventoId == null) {
+        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Debe seleccionar una categoria"));
+    }
+
+    if (!context.getMessageList().isEmpty()) {
+        PrimeFaces.current().executeScript("PF('dlg').show()");
+        return;
+    }
+
+    try {
+        // Crear la localización
+        Localizacion localizacion = new Localizacion();
+        localizacion.setDireccion(this.direccion);
+        localizacion.setNombre(this.nombreDireccion);
+        localizacion.setCapacidadTotal(this.capacidadActualEvento);
+        localizacionEJB.create(localizacion);
+
+        // Crear el evento
         Evento nuevoEvento = new Evento();
         nuevoEvento.setTitulo(this.tituloEvento);
         nuevoEvento.setDescripcion(this.descripcionEvento);
@@ -340,14 +384,19 @@ public class publicadorController implements Serializable{
         nuevoEvento.setActivo(true);
         nuevoEvento.setPrecio(this.precioEvento);
         nuevoEvento.setCapacidadActual(this.capacidadActualEvento);
-        nuevoEvento.setLocalizacion(null);
-       
-         Categoria categoriaSeleccionada = findCategoriaById(this.categoriaEventoId);
-        eventoEJB.creaEvento(nuevoEvento, this.publicadorActual.getIdPublicador(), categoriaSeleccionada.getIdCategoria(), null);
+        nuevoEvento.setLocalizacion(localizacion); // Asignar la localización al evento
+
+        Categoria categoriaSeleccionada = findCategoriaById(this.categoriaEventoId);
+        eventoEJB.creaEvento(nuevoEvento, this.publicadorActual.getIdPublicador(), categoriaSeleccionada.getIdCategoria(), localizacion.getIdLocalizacion());
+
         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Success", "Evento creado exitosamente."));
-        
         FacesContext.getCurrentInstance().getExternalContext().redirect("/SW2_EventCity/faces/publicador/publicadorUI.xhtml");
+
+    } catch (Exception e) {
+        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Ocurrió un error al crear el evento."));
+        e.printStackTrace(); 
     }
+}
     public String irCreaEvento(){
         return "creaEventos.xhtml?faces-redirect=true";
       
