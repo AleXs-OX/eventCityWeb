@@ -66,3 +66,7 @@
     color: #006666;
     font-weight: bold;
 }
+body, html {
+    background: url("#{resource['images/fondoPastel.jpg']}");
+    background-size: cover;
+}
