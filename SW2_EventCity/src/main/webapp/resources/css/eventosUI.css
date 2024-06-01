@@ -67,6 +67,6 @@
     font-weight: bold;
 }
 body, html {
-    background: url("#{resource['images/fondoPastel.jpg']}");
-    background-size: cover;
+    /*background: url("#{resource['images/fondoPastel.jpg']}");*/
+    /*background-size: cover;*/
 }

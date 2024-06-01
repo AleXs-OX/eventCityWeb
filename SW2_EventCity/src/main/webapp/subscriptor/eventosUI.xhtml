@@ -37,9 +37,7 @@
                                     <f:facet name="footer">
                                         <p:commandButton id="btn_asistir_1" icon="pi pi-check" value="Asistir" action="#{suscriptorController.suscribirseAEvento(evento)}" 
                                                          onclick="remoteReloadSus()" update="t_eventos1" styleClass="#{suscriptorController.compruebaColorBotonEventos(evento)}"></p:commandButton>    
-                                        <p:overlayPanel for="btn_asistir_1">
-                                            <p>#{suscriptorController.estadoDeSuscripcion()}</p>
-                                        </p:overlayPanel>
+                                        
                                         <p:commandButton id="btn-info_1" icon="pi pi-star-fill" value="Información" styleClass="ui-button-raised ui-button-secondary btn_card" style="margin-left: .5em"/>
                                         <p:overlayPanel for="btn-info_1" showCloseIcon="true">
                                             <p:card class="card_resena">
@@ -88,9 +86,7 @@
                                     <f:facet name="footer">
                                         <p:commandButton id="btn_asistir_3" icon="pi pi-check" value="Asistir" action="#{suscriptorController.suscribirseAEvento(evento)}" 
                                                          onclick="remoteReloadSus()" update="t_eventos2" styleClass="#{suscriptorController.compruebaColorBotonEventos(evento)}"></p:commandButton>    
-                                        <p:overlayPanel for="btn_asistir_3">
-                                            <p>#{suscriptorController.estadoDeSuscripcion()}</p>
-                                        </p:overlayPanel>
+                                        
                                         <p:commandButton id="btn-info_4" icon="pi pi-star-fill" value="Información" styleClass="ui-button-raised ui-button-secondary btn_card" style="margin-left: .5em"/>
                                         <p:overlayPanel for="btn-info_4" showCloseIcon="true">
                                             <p:card class="card_resena">
@@ -139,9 +135,7 @@
                                     <f:facet name="footer">
                                         <p:commandButton id="btn_asistir_5" icon="pi pi-check" value="Asistir" action="#{suscriptorController.suscribirseAEvento(evento)}" 
                                                          onclick="remoteReloadSus()" update="t_eventos3" styleClass="#{suscriptorController.compruebaColorBotonEventos(evento)}"></p:commandButton>    
-                                        <p:overlayPanel for="btn_asistir_5">
-                                            <p>#{suscriptorController.estadoDeSuscripcion()}</p>
-                                        </p:overlayPanel>
+                                        
                                         <p:commandButton id="btn-info_6" icon="pi pi-star-fill" value="Información" styleClass="ui-button-raised ui-button-secondary btn_card" style="margin-left: .5em"/>
                                         <p:overlayPanel for="btn-info_6" showCloseIcon="true">
                                             <p:card class="card_resena">
@@ -174,7 +168,7 @@
                     </p:dataTable>
                     <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" var="evento" id="t_eventos4" value="#{suscriptorController.getEventoMiscelaneo()}" >
                         <p:remoteCommand name="remoteReloadEventos" update=":t_eventos4"/>
-                        <p:column headerText="Misceláneo............................">
+                        <p:column headerText="Misceláneo">
                             <p:column headerText="Conciertos">
                                 <p:card class="card_evento" style="width: 16.6em">
                                     <f:facet name="title">
@@ -190,9 +184,7 @@
                                     <f:facet name="footer">
                                         <p:commandButton id="btn_asistir_7" icon="pi pi-check" value="Asistir" action="#{suscriptorController.suscribirseAEvento(evento)}" 
                                                          onclick="remoteReloadSus()" update="t_eventos4" styleClass="#{suscriptorController.compruebaColorBotonEventos(evento)}"></p:commandButton>    
-                                        <p:overlayPanel for="btn_asistir_7">
-                                            <p>#{suscriptorController.estadoDeSuscripcion()}</p>
-                                        </p:overlayPanel>
+                                        
                                         <p:commandButton id="btn-info_8" icon="pi pi-star-fill" value="Información" styleClass="ui-button-raised ui-button-secondary btn_card" style="margin-left: .5em"/>
                                         <p:overlayPanel for="btn-info_8" showCloseIcon="true">
                                             <p:card class="card_resena">

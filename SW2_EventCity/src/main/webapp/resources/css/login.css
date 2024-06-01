@@ -4,7 +4,7 @@
     flex-direction: column;  /* Crea espacio entre elementos verticalmente */
     justify-content: center;  /* Centra horizontalmente */
     align-items: center;  /* Centra verticalmente */
-    background-image: url("#{resource['images/fondoLogin.jpg']}");
+    background-image: url("#{resource['images/fondoEventCity.jpg']}");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -13,16 +13,24 @@
 }
 
 #login-card {
-    background: rgba(255, 255, 255, 0.8);  /* Fondo blanco con transparencia */
+    /*background: rgba(255, 255, 255, 0.8);*/  /* Fondo blanco con transparencia */
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    /*border-radius: 10px;*/
+    /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);*/
     width: 300px;
     display: flex;  /* Usamos Flexbox para centrar el contenido */
     flex-direction: column;  /* Alineamos verticalmente */
     justify-content: center;  /* Centra el contenido verticalmente */
     align-items: center;  /* Centra el contenido horizontalmente */
     text-align: center;  /* Centra texto y elementos inline */
+    
+    /* From https://css.glass */
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(1.4px);
+    -webkit-backdrop-filter: blur(1.4px);
+    border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .loginButton {
