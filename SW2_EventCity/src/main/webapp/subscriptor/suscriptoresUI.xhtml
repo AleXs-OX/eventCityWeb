@@ -129,7 +129,6 @@
                                                         <div class="resena_image">
                                                             <div class="resena_lista">
                                                                 <div class="resena_nombre">#{resena.suscriptor.usuario.nombreCompleto}</div>
-                                                                <div class="resena_desc">#{resena.comentario}</div>
                                                                 <p:rating readonly="true" value="#{suscriptorController.getPuntuacionByIdSuscriptorAndIdEvento(resena.suscriptor.idSubscriptor, evento.evento.idEvento)}"/>
                                                             </div>
                                                         </div>                           
@@ -200,7 +199,7 @@
                         </p:column>
                         <!-- más columnas -->
                     </p:dataTable>
-                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" var="evento" id="t_eventosSus4" value="#{suscriptorController.suscripcionesMiscelaneo}" >
+                    <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" var="evento" id="t_eventosSus4" value="#{suscriptorController.suscripcionesMiscelaneo}"  style="width: 50px">
                         <p:remoteCommand name="remoteReloadSus" update=":t_eventosSus4"/>
                         <p:column headerText="Misceláneo">
                             <p:card class="card_evento" style="width: 16.6em">

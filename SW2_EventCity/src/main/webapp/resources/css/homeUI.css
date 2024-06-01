@@ -1,7 +1,7 @@
 .container {
     display: flex;
     /*height: 100vh; /* Altura completa de la ventana */
-    padding: 10px;
+    padding: 0px;
     box-sizing: border-box;
 }
 /* Sección del tabView */

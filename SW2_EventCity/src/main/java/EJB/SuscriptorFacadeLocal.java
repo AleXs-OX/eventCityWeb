@@ -36,6 +36,8 @@ public interface SuscriptorFacadeLocal {
     Suscriptor findSuscriptorById(Integer idSuscriptor);
     
     Suscriptor findByUser(Usuario usuario);
+    
+    public Suscriptor findSuscriptorByIdUsuario(Integer idUsuario);
 
     
 }

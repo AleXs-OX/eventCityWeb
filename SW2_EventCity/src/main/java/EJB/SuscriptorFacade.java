@@ -50,6 +50,14 @@ public class SuscriptorFacade extends AbstractFacade<Suscriptor> implements Susc
                  .getSingleResult();
     }
     
+    
+    @Override
+    public Suscriptor findSuscriptorByIdUsuario(Integer idUsuario){
+        return em.createQuery("SELECT e FROM Suscriptor e WHERE e.usuario.idUsuario = :idUsuario", Suscriptor.class)
+                 .setParameter("idUsuario", idUsuario)
+                 .getSingleResult();
+    }
+    
     /*@Override
     public Suscriptor findSuscriptorById(Integer idSuscriptor){
         return em.createQuery("SELECT e FROM Suscriptor e WHERE e.idSubscriptor = :idSuscriptor", Suscriptor.class)

@@ -38,7 +38,7 @@ public interface UsuarioFacadeLocal {
     public boolean findByUsername(String username);
 
     //public Usuario findByUsername(String username);
-    boolean isSuscriptor(Integer idSuscriptor);
+    boolean isSuscriptor(int idUsuario);
     
     Usuario findUserByUsername(String username);
 

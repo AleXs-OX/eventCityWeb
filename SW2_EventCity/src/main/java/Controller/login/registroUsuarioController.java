@@ -188,6 +188,12 @@ public class registroUsuarioController implements Serializable {
         PrimeFaces.current().executeScript("PF('telefonoDialog').show();");
         return;
     }
+    if (nombre == "" || apellidos == "") {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Se debe rellenar los datos personales");
+        FacesContext.getCurrentInstance().addMessage(null, message);
+        PrimeFaces.current().executeScript("PF('nombreApellidosDialog').show();");
+        return;
+    }
 
     if (!usuarioEJB.findByUsername(username)) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "El nombre de usuario ya existe. Por favor, elija otro.");
