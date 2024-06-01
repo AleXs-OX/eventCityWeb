@@ -99,8 +99,13 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
     public boolean isSuscriptor(Integer idSuscriptor){
         Suscriptor suscriptor = em.find(Suscriptor.class, idSuscriptor);
         //System.out.println("El suscriptor encontrado es "+suscriptor.getIdSubscriptor());
-        return (suscriptor!=null);
-        /*True si existe, false si no existe*/
+        boolean var = (suscriptor==null);
+        System.out.println("************************");
+        System.out.println(var);
+        return (suscriptor==null);
+        //Devuelve false porque no esta vacio y lo encontro
+        //Devuelve true porque
+        
     }
    
     @Override
