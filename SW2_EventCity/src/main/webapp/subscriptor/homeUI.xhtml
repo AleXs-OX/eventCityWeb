@@ -32,7 +32,7 @@
         
             <h:form>  
                 <div class="botones">
-                <p:commandButton value="Perfil" style="position: fixed; top: 10.5%; right: 0; margin-top: 0.5%; margin-right: 12.5%; font-size: 1em;" />
+                    <p:commandButton value="Perfil" action="#{suscriptorController.visualizarPerfil()}" style="position: fixed; top: 10.5%; right: 0; margin-top: 0.5%; margin-right: 12.5%; font-size: 1em;" />
                 <p:commandButton value="Cerrar sesión" styleClass="ui-button-info" action="#{suscriptorController.logout()}" style="position: fixed; top: 10.5%; right: 0; margin-top: 0.5%; margin-right: 3.5%; font-size: 1em;" />
                 <p:outputLabel class="labelNombre" value="#{suscriptorController.nombreCompleto}" style="position: fixed; top: 5.5%; right: 0; margin-top: 0.5%; margin-right: 5.6%" />
                 </div>

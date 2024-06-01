@@ -352,4 +352,8 @@ public class publicadorController implements Serializable{
         return "creaEventos.xhtml?faces-redirect=true";
       
     }
+    
+    public void visualizarPerfil() throws IOException{
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/SW2_EventCity/faces/perfil/perfilUsuario.xhtml");
+    }
 }

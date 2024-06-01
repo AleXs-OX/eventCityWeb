@@ -8,6 +8,7 @@ package EJB;
 import java.util.List;
 import javax.ejb.Local;
 import modelo.Admin;
+import modelo.Usuario;
 
 /**
  *
@@ -31,6 +32,8 @@ public interface AdminFacadeLocal {
     int count();
     
     boolean isAdmin(int userId);
+    
+    Admin findByUser(Usuario usuario);
     
     
 }

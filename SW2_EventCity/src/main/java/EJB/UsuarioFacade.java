@@ -103,6 +103,21 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
         /*True si existe, false si no existe*/
     }
    
+    @Override
+    public Usuario findUserByUsername(String username){
+        System.out.println(username);
+        
+        try{
+            return em.createQuery(
+                "SELECT u FROM Usuario u WHERE u.nombreusuario = :username",
+                Usuario.class
+            ).setParameter("username", username).getSingleResult();
+            
+        }catch(Exception e){
+            return null;
+        }
+        
+    }
 }
 
 

@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import modelo.Admin;
+import modelo.Usuario;
 
 /**
  *
@@ -41,5 +42,12 @@ public class AdminFacade extends AbstractFacade<Admin> implements AdminFacadeLoc
         System.out.println(hola);
         return !hola;
     }
+    @Override
+    public Admin findByUser(Usuario usuario) {
+        return em.createQuery("SELECT e FROM Admin e WHERE e.usuario.idUsuario = :idUsuario", Admin.class)
+                .setParameter("idUsuario", usuario.getIdUsuario())
+                .getSingleResult();
+    }
+    
     
 }

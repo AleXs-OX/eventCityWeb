@@ -349,5 +349,8 @@ public class suscriptorController implements Serializable{
             System.err.println("[ERROR]: " + e.getCause() + " (" + e.getMessage() + ").");
         }
     }
+    public void visualizarPerfil() throws IOException{
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/SW2_EventCity/faces/perfil/perfilUsuario.xhtml");
+    }
 }
 

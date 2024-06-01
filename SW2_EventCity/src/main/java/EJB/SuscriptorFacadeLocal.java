@@ -8,6 +8,7 @@ package EJB;
 import java.util.List;
 import javax.ejb.Local;
 import modelo.Suscriptor;
+import modelo.Usuario;
 
 /**
  *
@@ -33,6 +34,8 @@ public interface SuscriptorFacadeLocal {
     boolean isSuscriptor(int userId);
 
     Suscriptor findSuscriptorById(Integer idSuscriptor);
+    
+    Suscriptor findByUser(Usuario usuario);
 
     
 }

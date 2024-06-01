@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import modelo.Suscriptor;
+import modelo.Usuario;
 
 /**
  *
@@ -54,4 +55,11 @@ public class SuscriptorFacade extends AbstractFacade<Suscriptor> implements Susc
                  .setParameter("idSuscriptor", idSuscriptor)
                  .getSingleResult();
     }*/
+    
+    @Override
+    public Suscriptor findByUser(Usuario usuario) {
+        return em.createQuery("SELECT e FROM Suscriptor e WHERE e.usuario.idUsuario = :idUsuario", Suscriptor.class)
+                .setParameter("idUsuario", usuario.getIdUsuario())
+                .getSingleResult();
+    }
 }
