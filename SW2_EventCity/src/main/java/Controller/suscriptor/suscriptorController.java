@@ -71,7 +71,7 @@ public class suscriptorController implements Serializable{
     private String textoResena = "";
 
 
-    Suscriptor suscriptorActual = new Suscriptor();
+        Suscriptor suscriptorActual = new Suscriptor();
     Suscripcion suscripcionesUsuario;
 
     
