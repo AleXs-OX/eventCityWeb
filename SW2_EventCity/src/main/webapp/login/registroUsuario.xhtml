@@ -66,6 +66,11 @@
             <p:commandButton value="Registrar" action="#{registroUsuarioController.registro}" styleClass="registerButton" />
         </h:form>
 
+        <!-- Dialogo para mensaje de error de nombre y apellidos -->
+        <p:dialog header="Error" widgetVar="nombreApellidosDialog" modal="true" closable="false" resizable="false">
+            <h:outputText value="Debe rellenar sus datos personales" />
+            <p:commandButton value="Aceptar" onclick="PF('nombreApellidosDialog').hide();" type="button" />
+        </p:dialog>
         <!-- Dialogo para mensaje de error de fecha de nacimiento -->
         <p:dialog header="Error" widgetVar="fechaNacimientoDialog" modal="true" closable="false" resizable="false">
             <h:outputText value="La fecha de nacimiento debe ser anterior a la fecha actual." />
