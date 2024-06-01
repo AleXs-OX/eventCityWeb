@@ -47,9 +47,7 @@ public class perfilUsuarioController implements Serializable{
     private AdminFacadeLocal adminEJB;
     @EJB
     private EventoFacadeLocal eventoEJB;
-    
-    private final int idUser = 1;
-    
+        
     private Usuario usuario;
     private Publicador publicador;
     private Suscriptor suscriptor;
@@ -65,7 +63,7 @@ public class perfilUsuarioController implements Serializable{
         System.out.println("HOLA ESTOY FUNCIONANDO");
         FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 	//ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-        this.usuario = (Usuario) (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+        this.usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
         //usuario = usuarioEJB.findUserByUsername("lauragarcia");
         if (usuario == null){
 		System.out.println("El usuario indicado no existe. Se procede a redirigir al login");
@@ -76,27 +74,16 @@ public class perfilUsuarioController implements Serializable{
             }*/
 	}
 	else{
-                try{
+
+                if(this.suscriptorEJB.isSuscriptor(this.usuario.getIdUsuario())){
                     suscriptor = suscriptorEJB.findByUser(usuario);
                     userType = 1;
+                } else if(this.publicadorEJB.isPublicador(this.usuario.getIdUsuario())){
+                    publicador = publicadorEJB.findByUser(usuario);
+                    userType = 2;
+                }else{
+                    System.out.println("No se encontro el usuario en perfilUsuarioController");
                 }
-                catch(EJBException e1){
-                    try{
-                        publicador = publicadorEJB.findByUser(usuario);
-                        userType = 2;
-                        System.out.println("Entro aqui");
-                    }
-                    catch(EJBException e2){
-                        try {
-                            admin = adminEJB.findByUser(usuario);
-                            userType = 3;
-                        }
-                        catch(EJBException e3){
-                            System.out.print("Este usuario no tiene ninguna especialización");
-                        }
-                    }
-                }
-		
 	}
     }
     
@@ -269,5 +256,17 @@ public class perfilUsuarioController implements Serializable{
 
     private String createAdminPanel() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public void volverAtras() throws IOException{
+        if(this.userType == 1){
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/SW2_EventCity/faces/subscriptor/homeUI.xhtml");
+        }else if(this.userType == 2){
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/SW2_EventCity/faces/publicador/publicadorUI.xhtml");
+            
+        }else{
+            /*Type3*/
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/SW2_EventCity/faces/publicador/publicadorUI.xhtml");
+        }
     }
 }

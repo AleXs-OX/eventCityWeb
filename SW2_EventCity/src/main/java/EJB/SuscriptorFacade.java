@@ -7,6 +7,7 @@ package EJB;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import modelo.Suscriptor;
@@ -58,8 +59,13 @@ public class SuscriptorFacade extends AbstractFacade<Suscriptor> implements Susc
     
     @Override
     public Suscriptor findByUser(Usuario usuario) {
+       try{
         return em.createQuery("SELECT e FROM Suscriptor e WHERE e.usuario.idUsuario = :idUsuario", Suscriptor.class)
                 .setParameter("idUsuario", usuario.getIdUsuario())
                 .getSingleResult();
+        
+       }catch(NoResultException e){
+           return null;
+       }
     }
 }
