@@ -99,7 +99,7 @@ public class suscriptorController implements Serializable{
                 System.out.println("=============================================================================");
                 System.out.println("El usuario logeado en controller suscriptor es "+this.usuarioActual.getNombre());
                 /*Obtiene el suscriptor correspondiente a ese Usuario*/
-                this.suscriptorActual = suscriptorEJB.findSuscriptorById(usuarioActual.getIdUsuario());
+                this.suscriptorActual = suscriptorEJB.findSuscriptorByIdUsuario(usuarioActual.getIdUsuario());
                 System.out.println("Cargo clase suscriptor");
             }
         }catch(Exception e){
