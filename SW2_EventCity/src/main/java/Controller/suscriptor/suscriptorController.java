@@ -10,12 +10,15 @@ import EJB.ResenaFacadeLocal;
 import EJB.SuscripcionFacadeLocal;
 import EJB.SuscriptorFacadeLocal;
 import EJB.UsuarioFacadeLocal;
+import java.io.IOException;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.Evento;
@@ -23,6 +26,7 @@ import modelo.Puntuacion;
 import modelo.Resena;
 import modelo.Suscripcion;
 import modelo.Suscriptor;
+import modelo.Usuario;
 import org.primefaces.event.SelectEvent;
 
 /*Hara falta dos metodos uno que guarde y devuelva una lista con todos los eventos que hay y otro metodo
@@ -57,9 +61,7 @@ public class suscriptorController implements Serializable{
     private Date diaSeleccionadoEventos;
     private Date diaSeleccionadoSus;
     private Date diaActual;
-
-    private int usuarioActual = 1;
-    
+  
 
     private final int concierto=1;
     private final int talleresClases=2;
@@ -70,9 +72,10 @@ public class suscriptorController implements Serializable{
     private int puntuacionResena = 0;
     private String textoResena = "";
 
-
-        Suscriptor suscriptorActual = new Suscriptor();
+    Suscriptor suscriptorActual;
     Suscripcion suscripcionesUsuario;
+    
+    Usuario usuarioActual;
 
     
     public suscriptorController(){
@@ -80,12 +83,31 @@ public class suscriptorController implements Serializable{
         
         this.diaSeleccionadoEventos = new Date();
         this.diaSeleccionadoSus  = new Date();
-        
-        /*Setea al suscriptor de prueba un id ya creado en bdd*/
-        
-        this.suscriptorActual.setIdSubscriptor(5);
-        
         //System.out.println(new java.sql.Date(this.diaSeleccionado.getTime()));
+        
+    }
+    
+    @PostConstruct
+    public void init(){
+        /*Obtiene el session del usuario logeado*/
+        FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        
+        try{
+            this.usuarioActual = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+            if(this.usuarioEJB.isSuscriptor(this.usuarioActual.getIdUsuario())){
+                System.out.println("=============================================================================");
+                System.out.println("El usuario logeado en controller suscriptor es "+this.usuarioActual.getNombre());
+                /*Obtiene el suscriptor correspondiente a ese Usuario*/
+                this.suscriptorActual = suscriptorEJB.findSuscriptorById(usuarioActual.getIdUsuario());
+                System.out.println("Cargo clase suscriptor");
+            }
+        }catch(Exception e){
+            System.err.println("Se va a echar al usuario debido a un fallo durante su verificación de Affiliate (" + e.getMessage() + ").");
+            kickUser();
+        }
+        
+        //usuarioActual = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+        
     }
     
     
@@ -143,13 +165,14 @@ public class suscriptorController implements Serializable{
         System.out.println("Date Susc");
         System.out.println(new java.sql.Date(this.diaSeleccionadoSus.getTime()));
         System.out.println("");
-    }
+                }
     
     public Date getDateSeleccionadaSus(){
         return this.diaSeleccionadoSus;
     }
     
     public void doTest(){
+        System.out.println("----------");
         System.out.println("Puntuacion");
         System.out.println(this.puntuacionResena);
         System.out.println("Resena");
@@ -169,7 +192,6 @@ public class suscriptorController implements Serializable{
         return puntuacion.getPuntuacion();
         
     }
-    
     /*public void setDay(SelectEvent<Date> event){
         this.diaSeleccionado = event.getObject();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -177,6 +199,7 @@ public class suscriptorController implements Serializable{
         System.out.println("Fecha seleccionada: " + formattedDate);
     }*/
     
+
     public String suscribirseAEvento(Evento evento){
         /*Crea la suscripcion a un evento*/
         if(this.suscripcionEJB.existeSuscripcion(this.suscriptorActual.getIdSubscriptor(), evento.getIdEvento())){
@@ -222,7 +245,15 @@ public class suscriptorController implements Serializable{
     
         
     public void setTextoResena(String textoR){
-        this.textoResena = textoR;
+        if(textoR.isEmpty()){
+            
+        }else{
+            this.textoResena = textoR;
+            System.out.println("Texto de la reseña");
+            System.out.println(textoR);
+            System.out.println("---------");
+        }
+        
     }
     
     public String getTextoResena(){
@@ -249,8 +280,20 @@ public class suscriptorController implements Serializable{
         if(!this.puntuacionEJB.existePuntuacion(this.suscriptorActual.getIdSubscriptor()
                 , idEvento) && !this.resenaEJB.existeResena(this.suscriptorActual.getIdSubscriptor()
                         , idEvento)){
+            
             /*Crea la resena*/
-            System.out.println("Creando reseña");
+            System.out.println("---------------------------");
+            System.out.println(this.textoResena);
+            System.out.println(this.puntuacionResena);
+            System.out.println("Creando reseña y puntuacion ...");
+            
+            resenaEJB.crearResena(this.suscriptorActual.getIdSubscriptor(), idEvento, this.textoResena, this.diaSeleccionadoSus);
+            
+            /*Crea la puntuacion*/
+            int idUsuario = this.suscriptorEJB.findSuscriptorById(this.suscriptorActual.getIdSubscriptor()).getUsuario().getIdUsuario();
+            puntuacionEJB.crearPuntuacion(idUsuario, this.suscriptorActual.getIdSubscriptor(), idEvento, this.puntuacionResena);
+            this.textoResena = null;
+            this.puntuacionResena = 0;
             /*Resena nuevaResena = new Resena();
             nuevaResena.setComentario(this.textoResena);
             java.sql.Date sqlDate = new java.sql.Date(this.diaSeleccionadoSus.getTime());
@@ -272,7 +315,42 @@ public class suscriptorController implements Serializable{
         }else{
             System.out.println("Ya existe reseña de este usuario en este evento");
         }
-       
+              
+    }
+    public void clearData(){
+        this.textoResena = ".";
+        this.puntuacionResena = 0;
+    }
+    
+    public void logout() {
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("usuario");
+            FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+            //FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("admin");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/SW2_EventCity/");
+            System.out.println("Saliendo de la sesion....");
+        } catch (Exception e) {
+            System.err.println("Ocurrio un error inesperado durante el cierre de sesion.");
+            System.err.println("[ERROR]: " + e.getCause() + " (" + e.getMessage() + ").");
+        }
+    }
+    
+    public String getNombreCompleto(){
+        return this.usuarioActual.getNombreCompleto();
+    }
+    
+    public void kickUser() {
+        try {
+            // Se limpia la sesion por precaucion
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("usuario");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/SW2_EventCity/");
+        } catch (IOException e) {
+            System.err.println("No se pudo redirigir al usuario al Login");
+            System.err.println("[ERROR]: " + e.getCause() + " (" + e.getMessage() + ").");
+        }
+    }
+    public void visualizarPerfil() throws IOException{
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/SW2_EventCity/faces/perfil/perfilUsuario.xhtml");
     }
 }
 

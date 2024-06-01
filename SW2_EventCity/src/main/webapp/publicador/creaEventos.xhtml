@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Crear Evento</title>
+    </h:head>
+    
+    <h:body id="event-page">
+        <h:outputStylesheet library="css" name="eventos.css"/>
+        <h:form id="event-form">
+            <p:growl id="messages" showDetail="true" life="3000" />
+            
+            <p:dialog header="Errores en el formulario" widgetVar="dlg" modal="true" closable="false">
+                <h:messages id="form-messages" showDetail="true" style="color: red;" />
+            </p:dialog>
+
+            <p>
+                <p:outputLabel value="Título del Evento:" for="titulo" />
+                <p:inputText id="titulo" value="#{publicadorController.tituloEvento}" required="true" />
+            </p>
+            <p>
+                <p:outputLabel value="Descripción:" for="descripcion" />
+                <p:inputTextarea id="descripcion" value="#{publicadorController.descripcionEvento}" required="true" />
+            </p>
+            <p>
+                <p:outputLabel value="Categoría" for="categoria" />
+                <p:selectOneMenu id="categoria" value="#{publicadorController.categoriaEventoId}" required = "true">
+                    <f:selectItem itemLabel="Seleccione una categoría" itemValue="" />
+                    <f:selectItems value="#{publicadorController.categorias}" var="categoria" itemLabel="#{categoria.nombre}" itemValue="#{categoria.idCategoria}"/>
+                </p:selectOneMenu>
+            </p>
+            
+            <p>
+                <p:outputLabel value="Fecha del Evento:" for="fechaEvento" />
+                <p:calendar id="fechaEvento" locale="es" navigator="true" value="#{publicadorController.fechaEvento}"
+                            showOn="button" pattern="dd/MM/yyyy" required="true" />
+            </p>
+            <p>
+                <p:outputLabel value="Hora del Evento:" for="horaEvento" />
+                <p:datePicker id="horaEvento" locale="es" timeOnly="true" pattern="HH:mm" value="#{publicadorController.horaEvento}" required="true" />
+            </p>
+            <p>
+                <p:outputLabel value="Precio (EUR):" for="timeonly" />
+                <p:inputNumber id="timeonly" value="#{publicadorController.precioEvento}" minValue="0" maxValue="1000" required="true" />
+            </p>
+            <p>
+                <p:outputLabel value="Nº de personas:" for="capacidad" />
+                <p:inputNumber id="capacidad" value="#{publicadorController.capacidadActualEvento}" minValue="0" maxValue="1000" required="true" />
+            </p>
+            <p>
+                <p:commandButton value="Crear Evento" action="#{publicadorController.creaNuevoEvento}" styleClass="eventButton"
+                                 update="messages form-messages" oncomplete="if (!args.validationFailed) PF('dlg').hide();" />
+            </p>
+        </h:form>
+    </h:body>
+</html>
+

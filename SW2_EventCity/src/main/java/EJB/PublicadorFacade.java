@@ -8,7 +8,9 @@ package EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import modelo.Publicador;
+import modelo.Usuario;
 
 /**
  *
@@ -21,6 +23,14 @@ public class PublicadorFacade extends AbstractFacade<Publicador> implements Publ
     private EntityManager em;
 
     @Override
+    public boolean isPublicador(int userId) {
+        TypedQuery<Publicador> query = em.createQuery(
+            "SELECT p FROM Publicador p WHERE p.usuario.idUsuario = :idUsuario", Publicador.class);
+        query.setParameter("idUsuario", userId);
+        return !query.getResultList().isEmpty();
+    }
+
+    @Override
     protected EntityManager getEntityManager() {
         return em;
     }
@@ -29,4 +39,16 @@ public class PublicadorFacade extends AbstractFacade<Publicador> implements Publ
         super(Publicador.class);
     }
     
+    @Override
+    public Publicador getPublicadorById(Integer idPublicador){
+        Publicador publicador = em.find(Publicador.class, idPublicador);
+        return publicador;
+    }
+    
+    @Override
+    public Publicador findByUser(Usuario usuario) {
+        return em.createQuery("SELECT e FROM Publicador e WHERE e.usuario.idUsuario = :idUsuario", Publicador.class)
+                .setParameter("idUsuario", usuario.getIdUsuario())
+                .getSingleResult();
+    }
 }

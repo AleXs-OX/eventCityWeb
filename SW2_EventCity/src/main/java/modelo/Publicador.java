@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package modelo;
 
 import java.io.Serializable;
@@ -11,19 +5,17 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-/**
- *
- * @author Beatriz
- */
 
 @Entity
 @Table(name = "publicadores")
-public class Publicador implements Serializable{
+public class Publicador implements Serializable {
     
     @Id
-    @Column(name = "idUsuario")
-    private int idUsuario;
-    
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idPublicador")
+    private int idPublicador;
+
+    @Temporal(TemporalType.DATE)
     @Column(name = "fechaAlta")
     private Date fechaAlta;
     
@@ -32,68 +24,27 @@ public class Publicador implements Serializable{
     
     @Column(name = "descripcion")
     private String descripcion;
-    
+
     @OneToOne
-    @MapsId
     @JoinColumn(name = "idUsuario")
     private Usuario usuario;
     
     @OneToMany(mappedBy = "publicador")
     private List<Evento> eventos;
-
+    
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 79 * hash + this.idUsuario;
-        hash = 79 * hash + Objects.hashCode(this.fechaAlta);
-        hash = 79 * hash + this.numEventos;
-        hash = 79 * hash + Objects.hashCode(this.descripcion);
-        hash = 79 * hash + Objects.hashCode(this.usuario);
-        hash = 79 * hash + Objects.hashCode(this.eventos);
-        return hash;
+        return Objects.hash(idPublicador);
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Publicador other = (Publicador) obj;
-        if (this.idUsuario != other.idUsuario) {
-            return false;
-        }
-        if (this.numEventos != other.numEventos) {
-            return false;
-        }
-        if (!Objects.equals(this.descripcion, other.descripcion)) {
-            return false;
-        }
-        if (!Objects.equals(this.fechaAlta, other.fechaAlta)) {
-            return false;
-        }
-        if (!Objects.equals(this.usuario, other.usuario)) {
-            return false;
-        }
-        if (!Objects.equals(this.eventos, other.eventos)) {
-            return false;
-        }
-        return true;
-    }
 
     
-    
-    public int getIdUsuario() {
-        return idUsuario;
+    public int getIdPublicador() {
+        return idPublicador;
     }
 
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setIdPublicador(int idPublicador) {
+        this.idPublicador = idPublicador;
     }
 
     public Date getFechaAlta() {
@@ -135,6 +86,4 @@ public class Publicador implements Serializable{
     public void setEventos(List<Evento> eventos) {
         this.eventos = eventos;
     }
-    
-    
 }

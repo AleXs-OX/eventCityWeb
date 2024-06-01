@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+          
+      xmlns:f="http://xmlns.jcp.org/jsf/core" >
+    <h:head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>EventCityWeb</title>
+    </h:head>
+    <h:body>
+        <h:outputStylesheet library="css" name="perfilUsuario.css"/>
+        <div class="flex-container">
+        <p:tabMenu class = "sidemenu" activeIndex="#{param.i}" style="width:15rem" orientation="left">
+            <p:menuitem value="Home" outcome="" icon="pi pi-fw pi-home">
+            </p:menuitem>
+         </p:tabMenu>
+            <main>
+        <p:panel class="card">
+            <h1>#{perfilUsuarioController.username}</h1>
+            <h2>#{perfilUsuarioController.name} #{perfilUsuarioController.surname}</h2>
+            <p:panel class="container contacto">
+                <h3>Contacto: </h3>
+                <p>Número: <span>#{perfilUsuarioController.number}</span></p>
+                <p>Email: <span>#{perfilUsuarioController.email}</span></p>
+            </p:panel>
+        </p:panel>
+        <p:panel class= "container card suscriptor-info" rendered="#{perfilUsuarioController.userType == 1}">
+                <h1>Información como suscriptor</h1>
+                <h2> Número de suscripciones: <span>#{perfilUsuarioController.numSuscripciones}</span></h2>
+                <p> Dirección: <span>#{perfilUsuarioController.location}</span></p>
+        </p:panel>
+        <p:panel class="container card publicador-info" rendered="#{perfilUsuarioController.userType == 2}">
+            <h1>Información como publicador</h1>
+            <h2> Número de eventos creados: <span>#{perfilUsuarioController.numEventos}</span></h2>
+            <p:panel class="container descripcion">
+                <h3> Descripción : </h3>
+                <p>#{perfilUsuarioController.descripcion}</p>
+                <p> Fecha de alta: <span>#{perfilUsuarioController.fechaAlta}</span></p>
+            </p:panel>
+        </p:panel>
+        <p:panel class="container card admin-info" rendered="#{perfilUsuarioController.userType == 3}">
+            <h1>Información como admin</h1>
+            <h2> Rol: <span>#{perfilUsuarioController.rol}</span></h2>
+        </p:panel>
+                </main>
+            <h:form>
+                <p:commandButton value="Volver" styleClass="ui-button-info" action="#{perfilUsuarioController.volverAtras()}" style="position: fixed; top: 10.5%; right: 0; margin-top: 0.5%; margin-right: 5.5%; font-size: 1em;" />
+            </h:form>
+        </div>
+    </h:body>
+</html>
+

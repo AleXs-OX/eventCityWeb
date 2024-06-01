@@ -9,7 +9,6 @@ import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 import modelo.Suscripcion;
-
 /**
  *
  * @author Beatriz
@@ -36,5 +35,5 @@ public interface SuscripcionFacadeLocal {
     boolean existeSuscripcion(Integer idSuscriptor, Integer idEvento);
     
     Suscripcion findByIds(Integer idSuscriptor, Integer idEvento);
-
+    
 }

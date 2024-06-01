@@ -33,14 +33,14 @@ public class Usuario implements Serializable{
     @Column(name = "email")
     private String email;
 
-    @OneToOne(mappedBy = "usuario")
+    @OneToOne(mappedBy = "usuario", fetch = FetchType.LAZY)
     private Publicador publicador;
 
-    @OneToOne(mappedBy = "usuario")
+    @OneToOne(mappedBy = "usuario", fetch = FetchType.LAZY)
     private Admin admin;
 
-    @OneToMany(mappedBy = "usuario")
-    private List<Suscriptor> suscriptores;
+    @OneToOne(mappedBy = "usuario", fetch = FetchType.LAZY)
+    private Suscriptor suscriptor;
 
     public int getIdUsuario() {
         return idUsuario;
@@ -114,80 +114,8 @@ public class Usuario implements Serializable{
         this.admin = admin;
     }
 
-    public List<Suscriptor> getSuscriptores() {
-        return suscriptores;
-    }
-
-    public void setSuscriptores(List<Suscriptor> suscriptores) {
-        this.suscriptores = suscriptores;
-    }
     
     public String getNombreCompleto(){
         return (this.nombre+" "+this.apellidos);
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 43 * hash + this.idUsuario;
-        hash = 43 * hash + Objects.hashCode(this.nombreusuario);
-        hash = 43 * hash + Objects.hashCode(this.contrasena);
-        hash = 43 * hash + Objects.hashCode(this.nombre);
-        hash = 43 * hash + Objects.hashCode(this.apellidos);
-        hash = 43 * hash + this.telefono;
-        hash = 43 * hash + Objects.hashCode(this.email);
-        hash = 43 * hash + Objects.hashCode(this.publicador);
-        hash = 43 * hash + Objects.hashCode(this.admin);
-        hash = 43 * hash + Objects.hashCode(this.suscriptores);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Usuario other = (Usuario) obj;
-        if (this.idUsuario != other.idUsuario) {
-            return false;
-        }
-        if (this.telefono != other.telefono) {
-            return false;
-        }
-        if (!Objects.equals(this.nombreusuario, other.nombreusuario)) {
-            return false;
-        }
-        if (!Objects.equals(this.contrasena, other.contrasena)) {
-            return false;
-        }
-        if (!Objects.equals(this.nombre, other.nombre)) {
-            return false;
-        }
-        if (!Objects.equals(this.apellidos, other.apellidos)) {
-            return false;
-        }
-        if (!Objects.equals(this.email, other.email)) {
-            return false;
-        }
-        if (!Objects.equals(this.publicador, other.publicador)) {
-            return false;
-        }
-        if (!Objects.equals(this.admin, other.admin)) {
-            return false;
-        }
-        if (!Objects.equals(this.suscriptores, other.suscriptores)) {
-            return false;
-        }
-        return true;
-    }
-    
-    
-    
-    
 }

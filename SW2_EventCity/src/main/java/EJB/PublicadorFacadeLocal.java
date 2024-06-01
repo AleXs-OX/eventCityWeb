@@ -8,6 +8,7 @@ package EJB;
 import java.util.List;
 import javax.ejb.Local;
 import modelo.Publicador;
+import modelo.Usuario;
 
 /**
  *
@@ -29,5 +30,12 @@ public interface PublicadorFacadeLocal {
     List<Publicador> findRange(int[] range);
 
     int count();
+
+    boolean isPublicador(int userId);
+
+    Publicador getPublicadorById(Integer idPublicador);
+    
+    Publicador findByUser(Usuario usuario);
+
     
 }
