@@ -109,7 +109,7 @@
                         <!-- más columnas -->
                     </p:dataTable>
                     <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_publicaciones3" value="#{publicadorController.eventoCompeticionesyTorneos}" var="evento">
-                        <p:column headerText="Talleres y Clases">
+                        <p:column headerText="Competiciones y Torneos">
                             <p:card class="card_evento" style="width: 16.6em">
                                     <f:facet name="title">
                                         <p> #{evento.titulo}</p>
@@ -153,7 +153,7 @@
                         <!-- más columnas -->
                     </p:dataTable>
                     <p:dataTable  rowStyleClass="colorTable" styleClass="data-table" id="t_publicaciones4" value="#{publicadorController.eventoMiscelaneo}" var="evento">
-                        <p:column headerText="Talleres y Clases">
+                        <p:column headerText="Misceláneo">
                             <p:card class="card_evento" style="width: 16.6em">
                                     <f:facet name="title">
                                         <p> #{evento.titulo}</p>
@@ -200,7 +200,7 @@
                     <h:form id="formCalendar">
                     <div class="calendar">
                         <p:calendar mode="inline" id="calendario" value="#{publicadorController.dateSeleccionada}" locale = "es" navigator ="true" showOn="button" pattern="dd/MM/yyyy">
-                            <p:ajax event="dateSelect" update="t_publicaciones1 t_publicaciones2 t_publicaciones3"
+                            <p:ajax event="dateSelect" update="t_publicaciones1 t_publicaciones2 t_publicaciones3 t_publicaciones4"
                                     />
                         </p:calendar>
                     </div> 
